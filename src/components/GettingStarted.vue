@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <h1 class="label">Что такое Donatelo?</h1>
+    <p class="flow-text">Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.</p>
+    <p class="flow-text">Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно сделать динамическую обложку для своей группы или паблика.</p>
+    <p class="flow-text">Описание особенностей с картиночками.</p>
     <a :href="'https://vk.com/add_community_app.php?aid=' + api.api_id" class="btn vk-color">Подключить приложение</a>
-    <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </template>
 
@@ -15,5 +17,8 @@
 <style scoped>
   .container {
     margin-top: 10%;
+  }
+  h1, p {
+    color: #3d5977;
   }
 </style>

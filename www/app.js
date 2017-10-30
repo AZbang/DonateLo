@@ -13700,7 +13700,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-315fb7fe] {\n  margin-top: 10%;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-315fb7fe] {\n  margin-top: 10%;\n}\nh1[data-v-315fb7fe], p[data-v-315fb7fe] {\n  color: #3d5977;\n}")
 ;(function(){
 
 
@@ -13711,7 +13711,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"href":'https://vk.com/add_community_app.php?aid=' + _vm.api.api_id}},[_vm._v("Подключить приложение")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно сделать динамическую обложку для своей группы или паблика.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Описание особенностей с картиночками.")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"href":'https://vk.com/add_community_app.php?aid=' + _vm.api.api_id}},[_vm._v("Подключить приложение")])])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-315fb7fe"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
