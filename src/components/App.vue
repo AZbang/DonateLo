@@ -13,9 +13,22 @@
         api: {}
       }
     },
+    methods: {
+      getApiData() {
+       let query = window.location.search.substring(1);
+       let vars = query.split("&");
+       let api = {};
+
+       for(let i = 0; i < vars.length; i++) {
+         let pair = vars[i].split("=");
+         api[pair[0]] = pair[1];
+       }
+       return api;
+      }
+    },
     mounted() {
-      this.api = this.$route.query;
-      if(this.api.viewer_type > 2 && this.api.group_id != null) this.$router.push('/admin');
+      this.api = this.getApiData();
+      if(+this.api.viewer_type > 2 && this.api.group_id != null) this.$router.push('/admin');
       else this.$router.push('/getting_started');
     }
   }

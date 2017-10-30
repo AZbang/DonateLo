@@ -13658,9 +13658,27 @@ var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n
 
 
 module.exports = {
+  data() {
+    return {
+      api: {}
+    };
+  },
+  methods: {
+    getApiData() {
+      let query = window.location.search.substring(1);
+      let vars = query.split("&");
+      let api = {};
+
+      for (let i = 0; i < vars.length; i++) {
+        let pair = vars[i].split("=");
+        api[pair[0]] = pair[1];
+      }
+      return api;
+    }
+  },
   mounted() {
-    let api = this.$route.query;
-    if (api.viewer_type > 2) this.$router.push('/admin');else this.$router.push('/getting_started');
+    this.api = this.getApiData();
+    if (+this.api.viewer_type > 2 && this.api.group_id != null) this.$router.push('/admin');else this.$router.push('/getting_started');
   }
 };
 })()
@@ -13677,7 +13695,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-43463f26", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-43463f26", __vue__options__)
+    hotAPI.reload("data-v-43463f26", __vue__options__)
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
