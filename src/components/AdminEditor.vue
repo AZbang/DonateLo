@@ -1,12 +1,46 @@
 <template>
   <div id="admin">
     <div id="edit_bg" style="{backgroundImage: 'url(' + originBg + ');'}">
-      <i class="material-icons add-photo-icon">add_a_photo</i>
-      <br>
+      <i class="material-icons add-photo-icon">add_a_photo</i><br>
       <p class="flow-text">Загрузите обложку группы</p>
     </div>
-    <div class="container">
-      <p class="label">Donatelo | Динамические обложки</p>
+
+    <div id="menu">
+      <p class="flow-text">Добавить виджеты:</p>
+      <div class="row">
+        <div class="col s3">
+          <div class="card-panel hoverable">
+            <div class="wrap-card-content">
+              <i class="material-icons">text_format</i>
+              <p>Добавить текст</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s3">
+          <div class="card-panel hoverable">
+            <div class="wrap-card-content">
+              <i class="material-icons">format_align_left</i>
+              <p>Линейный бар</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s3">
+          <div class="card-panel hoverable">
+            <div class="wrap-card-content">
+              <i class="material-icons">extension</i>
+              <p>Радиальный бар</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s3">
+          <div class="card-panel hoverable">
+            <div class="wrap-card-content">
+              <i class="material-icons">extension</i>
+              <p>Картинка</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +53,6 @@
       }
     },
     methods: {
-
     }
   }
 </script>
@@ -44,6 +77,39 @@
     text-align: center;
   }
   .add-photo-icon {
+    font-size: 3em;
+  }
+
+  #menu {
+    padding: 50px;
+  }
+  #menu > p {
+    margin: 5px;
+    color: #6e7bab;
+  }
+  .col {
+    padding: 0 5px;
+    border-radius: 10px;
+  }
+  .card-panel {
+    position: relative;
+  }
+  .wrap-card-content {
+    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .card-panel {
+    border-radius: 7px;
+    cursor: pointer;
+    height: 150px;
+    text-align: center;
+    background: #fff;
+  }
+  .card-panel i {
+    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 3em;
   }
 </style>
