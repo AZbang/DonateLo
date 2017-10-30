@@ -8,9 +8,14 @@
 
 <script>
   module.exports = {
+    data() {
+      return {
+        api: {}
+      }
+    },
     mounted() {
-      let api = this.$route.query;
-      if(api.viewer_type > 2) this.$router.push('/admin');
+      this.api = this.$route.query;
+      if(this.api.viewer_type > 2 && this.api.group_id != null) this.$router.push('/admin');
       else this.$router.push('/getting_started');
     }
   }
