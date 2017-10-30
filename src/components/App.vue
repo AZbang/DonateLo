@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="slide">
-      <router-view></router-view>
+      <router-view :api="api"></router-view>
     </transition>
   </div>
 </template>
@@ -35,14 +35,12 @@
 </script>
 
 <style>
-  body {
-    background: #dfe3e6;
-  }
   .vk-color {
+    box-shadow: none;
     background: #5e81a8 !important;
   }
   .label {
-    font-weight: 200;
+    font-weight: 300;
     margin-top: 10px;
   }
 

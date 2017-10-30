@@ -13623,7 +13623,7 @@ exports.insert = function (css) {
 }
 
 },{}],6:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#edit_bg {\n  width: 100vw;\n  height: 400px;\n  background-size: cover;\n  background-position: center;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".label[data-v-76e8d668] {\n  font-size: 3rem;\n  margin-top: 20px;\n}\n#edit_bg[data-v-76e8d668] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#edit_bg i[data-v-76e8d668], #edit_bg p[data-v-76e8d668] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n.add-photo-icon[data-v-76e8d668] {\n  font-size: 3em;\n}")
 ;(function(){
 
 
@@ -13640,7 +13640,8 @@ if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticStyle:{"{backgroundImage":"'url(' + originBg + ')"},attrs:{"id":"edit_bg"}}),_vm._v(" "),_c('div',{staticClass:"container"},[_c('h1',[_vm._v("Donatelo")])])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticStyle:{"{backgroundImage":"'url(' + originBg + ')"},attrs:{"id":"edit_bg"}},[_c('i',{staticClass:"material-icons add-photo-icon"},[_vm._v("add_a_photo")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_c('div',{staticClass:"container"},[_c('p',{staticClass:"label"},[_vm._v("Donatelo | Динамические обложки")])])])}]
+__vue__options__._scopeId = "data-v-76e8d668"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -13653,7 +13654,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 200;\n  margin-top: 10px;\n}\n\n\n.slide-leave-active,\n.slide-enter-active {\n  transition: .4s;\n}\n.slide-enter {\n  transform: translate(100%, 0);\n}\n.slide-leave-to {\n  transform: translate(-100%, 0);\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}\n\n\n.slide-leave-active,\n.slide-enter-active {\n  transition: .4s;\n}\n.slide-enter {\n  transform: translate(100%, 0);\n}\n.slide-leave-to {\n  transform: translate(-100%, 0);\n}")
 ;(function(){
 
 
@@ -13685,7 +13686,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('transition',{attrs:{"name":"slide"}},[_c('router-view')],1)],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('transition',{attrs:{"name":"slide"}},[_c('router-view',{attrs:{"api":_vm.api}})],1)],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -13695,31 +13696,36 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-43463f26", __vue__options__)
   } else {
-    hotAPI.reload("data-v-43463f26", __vue__options__)
+    hotAPI.rerender("data-v-43463f26", __vue__options__)
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-315fb7fe] {\n  margin-top: 10%;\n}")
 ;(function(){
 
 
-module.exports = {};
+module.exports = {
+  props: ['api']
+};
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"card-panel"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"href":'https://vk.com/add_community_app.php?aid=' + _vm.api.api_id}},[_vm._v("Подключить приложение")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-315fb7fe"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-315fb7fe", __vue__options__)
   } else {
     hotAPI.rerender("data-v-315fb7fe", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2}],9:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],9:[function(require,module,exports){
 'use strict';
 
 var Vue = require('vue');
