@@ -8,7 +8,11 @@
 
 <script>
   module.exports = {
-    
+    mounted() {
+      let api = this.$route.query;
+      if(api.viewer_type > 2) this.$router.push('/admin');
+      else this.$router.push('/getting_started');
+    }
   }
 </script>
 
@@ -19,6 +23,12 @@
   .vk-color {
     background: #5e81a8 !important;
   }
+  .label {
+    font-weight: 200;
+    margin-top: 10px;
+  }
+
+
   .slide-leave-active,
   .slide-enter-active {
     transition: .4s;

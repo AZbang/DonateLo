@@ -13653,11 +13653,16 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}\n.slide-leave-active,\n.slide-enter-active {\n  transition: .4s;\n}\n.slide-enter {\n  transform: translate(100%, 0);\n}\n.slide-leave-to {\n  transform: translate(-100%, 0);\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 200;\n  margin-top: 10px;\n}\n\n\n.slide-leave-active,\n.slide-enter-active {\n  transition: .4s;\n}\n.slide-enter {\n  transform: translate(100%, 0);\n}\n.slide-leave-to {\n  transform: translate(-100%, 0);\n}")
 ;(function(){
 
 
-module.exports = {};
+module.exports = {
+  mounted() {
+    let api = this.$route.query;
+    if (api.viewer_type > 2) this.$router.push('/admin');else this.$router.push('/getting_started');
+  }
+};
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
@@ -13676,6 +13681,27 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
+;(function(){
+
+
+module.exports = {};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"card-panel"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")])])])}]
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-315fb7fe", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-315fb7fe", __vue__options__)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],9:[function(require,module,exports){
 'use strict';
 
 var Vue = require('vue');
@@ -13683,10 +13709,11 @@ var VueRouter = require('vue-router');
 
 var App = require('./components/App.vue');
 var AdminEditor = require('./components/AdminEditor.vue');
+var GettingStarted = require('./components/GettingStarted.vue');
 
 Vue.use(VueRouter);
 var router = new VueRouter({
-	routes: [{ path: '/admin', component: AdminEditor }]
+	routes: [{ path: '/admin', component: AdminEditor }, { path: '/getting_started', component: GettingStarted }]
 });
 
 new Vue({
@@ -13697,4 +13724,4 @@ new Vue({
 	router: router
 });
 
-},{"./components/AdminEditor.vue":6,"./components/App.vue":7,"vue":4,"vue-router":3}]},{},[8]);
+},{"./components/AdminEditor.vue":6,"./components/App.vue":7,"./components/GettingStarted.vue":8,"vue":4,"vue-router":3}]},{},[9]);
