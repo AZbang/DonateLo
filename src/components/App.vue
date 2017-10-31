@@ -28,6 +28,8 @@
     },
     mounted() {
       this.api = this.getApiData();
+      this.api.api_result = JSON.parse(decodeURIComponent(this.api.api_result));
+      console.log(this.api);
       if(+this.api.viewer_type > 2 && this.api.group_id != null) this.$router.push('/admin');
       else this.$router.push('/getting_started');
     }

@@ -47,12 +47,15 @@
 
 <script>
   module.exports = {
+    props: ['api'],
     data() {
       return {
         originBg: ''
       }
     },
-    methods: {
+    mounted() {
+      let covers = api.api_result.response[0].cover.images;
+      if(covers.length) this.originBg = covers[covers.length-1].url;
     }
   }
 </script>
