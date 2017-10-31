@@ -1,14 +1,16 @@
 <template>
   <div id="admin">
-    <div id="edit_bg" style="{backgroundImage: 'url(' + originBg + ');'}">
+    <div id="upload-bg" v-show="!originBg">
       <i class="material-icons add-photo-icon">add_a_photo</i><br>
       <p class="flow-text">Загрузите обложку группы</p>
     </div>
 
+    <canvas id="playground" v-show="originBg"></canvas>
+
     <div id="menu">
       <p class="flow-text">Добавить виджеты:</p>
       <div class="row">
-        <div class="col s3">
+        <div class="col s6 m3">
           <div class="card-panel hoverable">
             <div class="wrap-card-content">
               <i class="material-icons">text_format</i>
@@ -16,7 +18,7 @@
             </div>
           </div>
         </div>
-        <div class="col s3">
+        <div class="col s6 m3">
           <div class="card-panel hoverable">
             <div class="wrap-card-content">
               <i class="material-icons">format_align_left</i>
@@ -24,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="col s3">
+        <div class="col s6 m3">
           <div class="card-panel hoverable">
             <div class="wrap-card-content">
               <i class="material-icons">extension</i>
@@ -32,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="col s3">
+        <div class="col s6 m3">
           <div class="card-panel hoverable">
             <div class="wrap-card-content">
               <i class="material-icons">extension</i>
@@ -54,8 +56,21 @@
       }
     },
     mounted() {
+      window.canvas = new fabric.Canvas('playground');
+      canvas.setWidth(window.innerWidth);
+
+      // Get cover
       let covers = this.api.api_result.response[0].cover.images;
-      if(covers.length) this.originBg = covers[covers.length-1].url;
+      if(covers.length) {
+        this.originBg = covers[covers.length-1].url;
+        fabric.Image.fromURL(this.originBg, (img) => {
+          img.set('selectable', false);
+          this.scale = window.innerWidth/img.getWidth();
+          img.scale(this.scale);
+          canvas.setHeight(img.getHeight());
+          canvas.add(img);
+        });
+      }
     }
   }
 </script>
@@ -65,7 +80,7 @@
     font-size: 3rem;
     margin-top: 20px;
   }
-  #edit_bg {
+  #upload-bg {
     height: 300px;
     border: 5px dashed #7a9ee0;
     width: 100%;
@@ -74,7 +89,7 @@
     position: relative;
     box-sizing: border-box;
   }
-  #edit_bg i, #edit_bg p {
+  #upload-bg i, #upload-bg p {
     color: #7a9ee0;
     margin-top: 0;
     text-align: center;
