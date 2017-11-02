@@ -10998,40 +10998,57 @@ var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".control
 ;(function(){
 
 
-const UploadImage = require('./UploadImage.vue');
+const CoverControl = require('./CoverControl.vue');
 const WidgetsControl = require('./WidgetsControl.vue');
 const ServicesControl = require('./ServicesControl.vue');
 
 module.exports = {
   components: {
-    UploadImage,
+    CoverControl,
     WidgetsControl,
     ServicesControl
   },
   data() {
     return {
-      originBg: null,
+      coverImage: null,
       api: this.$root.api
     };
   },
   methods: {
+    resizeCoverToHeight() {
+      this.scale = 300 / this.originCoverHeight;
+      this.coverImage.scale(this.scale);
+      this.coverImage.left = window.innerWidth / 2 - this.coverImage.getWidth() / 2;
+      canvas.setHeight(300);
+    },
+    resizeCoverToWidth() {
+      this.scale = window.innerWidth / this.originCoverWidth;
+      this.coverImage.left = 0;
+      this.coverImage.scale(this.scale);
+      canvas.setHeight(this.coverImage.getHeight());
+    },
+    toggleSize(isFull) {
+      if (isFull) this.resizeCoverToWidth();else this.resizeCoverToHeight();
+    },
     uploadImage(src) {
-      canvas.getItemsByAttr('id', 'cover').forEach(i => i.remove());
-      this.originBg = src;
+      this.coverImage && this.coverImage.remove();
 
       fabric.Image.fromURL(src, cover => {
-        cover.id = 'cover';
-        cover.set('selectable', false);
-        this.scale = window.innerWidth / cover.getWidth();
-        cover.scale(this.scale);
-        canvas.setHeight(cover.getHeight());
-        canvas.add(cover);
+        this.coverImage = cover;
+        this.originCoverWidth = cover.getWidth();
+        this.originCoverHeight = cover.getHeight();
+        this.resizeCoverToHeight();
+
+        this.coverImage.id = 'cover';
+        this.coverImage.set('selectable', false);
+        canvas.add(this.coverImage);
       });
     }
   },
   mounted() {
     window.canvas = new fabric.Canvas('playground');
     canvas.setWidth(window.innerWidth);
+    $('.canvas-container, canvas').css('transition', 'all 0.5s');
 
     let covers = this.api.api_result.response[0].cover.images;
     if (covers.length) this.uploadImage(covers[covers.length - 1].url);
@@ -11041,7 +11058,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('upload-image',{directives:[{name:"show",rawName:"v-show",value:(!_vm.originBg),expression:"!originBg"}],on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.originBg),expression:"originBg"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control')],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('cover-control',{attrs:{"isCoverEmpty":!!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control')],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)],1)}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-d1f082f0"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -11055,7 +11072,55 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-d1f082f0", __vue__options__)
   }
 })()}
-},{"./ServicesControl.vue":7,"./UploadImage.vue":8,"./WidgetsControl.vue":9,"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],6:[function(require,module,exports){
+},{"./CoverControl.vue":6,"./ServicesControl.vue":8,"./WidgetsControl.vue":10,"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],6:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-1699b76a] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-1699b76a], #first-upload-bg p[data-v-1699b76a] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-1699b76a] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-1699b76a] {\n  z-index: 10000;\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-1699b76a] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+;(function(){
+
+
+const UploadImage = require('./UploadImage.vue');
+
+module.exports = {
+  components: {
+    UploadImage
+  },
+  props: ['isCoverEmpty'],
+  data() {
+    return {
+      isFullCover: false
+    };
+  },
+  methods: {
+    toggleBtnActions(toggle) {
+      if (toggle) $('.btn-cover').show();else $('.btn-cover').hide();
+    },
+    toggleSize() {
+      this.isFullCover = !this.isFullCover;
+      this.$emit('toggleSize', this.isFullCover);
+    },
+    uploadImage(src) {
+      this.$emit('uploadImage', src);
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{staticClass:"actions-wrap",on:{"mouseover":function($event){_vm.toggleBtnActions(true)},"mouseout":function($event){_vm.toggleBtnActions(false)}}},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1),_vm._v(" "),_c('div',{staticClass:"btn-cover",attrs:{"id":"resize-cover"},on:{"click":_vm.toggleSize}},[_c('i',{staticClass:"material-icons"},[_vm._v("fullscreen")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-1699b76a"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1699b76a", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-1699b76a", __vue__options__)
+  }
+})()}
+},{"./UploadImage.vue":9,"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],7:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-5812703e] {\n  margin-top: 10%;\n}\nh1[data-v-5812703e], p[data-v-5812703e] {\n  color: #3d5977;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
@@ -11073,12 +11138,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-5812703e", __vue__options__)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],7:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-2641488b] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-2641488b] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n}\n.wrap-card-content[data-v-2641488b] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-2641488b] {\n  font-size: 6em;\n}")
+},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],8:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-2641488b] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-2641488b] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n  margin-bottom: 3px;\n}\n.wrap-card-content[data-v-2641488b] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-2641488b] {\n  font-size: 6em;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable red lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("favorite")]),_vm._v(" "),_c('p',[_vm._v("Благотворительность")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable indigo lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("person")]),_vm._v(" "),_c('p',[_vm._v("ВК Комьюнити")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable green lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("image")]),_vm._v(" "),_c('p',[_vm._v("Google фото")])])])])])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable red lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("favorite")]),_vm._v(" "),_c('p',[_vm._v("Донаты")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable indigo lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("person")]),_vm._v(" "),_c('p',[_vm._v("ВК Комьюнити")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable green lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("photo_camera")]),_vm._v(" "),_c('p',[_vm._v("Google фото")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable orange lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("wb_cloudy")]),_vm._v(" "),_c('p',[_vm._v("Погода, дата, время")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable blue lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("subject")]),_vm._v(" "),_c('p',[_vm._v("Новости")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable teal lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("thumbs_up_down")]),_vm._v(" "),_c('p',[_vm._v("Голосования")])])])])])])}]
 __vue__options__._scopeId = "data-v-2641488b"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11091,13 +11156,32 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-2641488b", __vue__options__)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],8:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#upload-bg[data-v-785899c6] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#upload-bg i[data-v-785899c6], #upload-bg p[data-v-785899c6] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n.add-photo-icon[data-v-785899c6] {\n  font-size: 3em;\n}")
+},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],9:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}")
+;(function(){
+
+
+module.exports = {
+  methods: {
+    uploadImage(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+
+      let reader = new FileReader();
+      reader.onload = e => this.$emit('uploadImage', e.target.result);
+      reader.readAsDataURL(files[0]);
+    }
+  },
+  mounted() {
+    $('.select-image').parent().css('position', 'relative');
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"upload-bg"}},[_c('i',{staticClass:"material-icons add-photo-icon"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])])}]
-__vue__options__._scopeId = "data-v-785899c6"
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',{staticClass:"select-image",attrs:{"type":"file"},on:{"change":_vm.uploadImage}})}
+__vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -11109,12 +11193,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-785899c6", __vue__options__)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],9:[function(require,module,exports){
+},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],10:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-0d9f3672] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-0d9f3672] {\n  position: relative;\n}\n.wrap-card-content[data-v-0d9f3672] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-0d9f3672] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n}\n.card-panel i[data-v-0d9f3672] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Добавить текст")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Линейный бар")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("extension")]),_vm._v(" "),_c('p',[_vm._v("Радиальный бар")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("extension")]),_vm._v(" "),_c('p',[_vm._v("Картинка")])])])])])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Текст")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Линейный бар")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("panorama_fish_eye")]),_vm._v(" "),_c('p',[_vm._v("Радиальный бар")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("image")]),_vm._v(" "),_c('p',[_vm._v("Картинка")])])])])])])}]
 __vue__options__._scopeId = "data-v-0d9f3672"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11127,14 +11211,14 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-0d9f3672", __vue__options__)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],10:[function(require,module,exports){
-"use strict";
+},{"vue":3,"vue-hot-reload-api":2,"vueify/lib/insert-css":4}],11:[function(require,module,exports){
+'use strict';
 
-fabric.Canvas.prototype.getItemsByAttr = function (attr, name) {
+fabric.Canvas.prototype.getItemsByAttr = function () {
   var result = [];
-  var objects = canvas.getObjects();
+  var objects = this.getObjects();
 
-  for (var i = 0, len = canvas.size(); i < len; i++) {
+  for (var i = 0, len = this.size(); i < len; i++) {
     if (objects[i][attr] && objects[i][attr] === name) {
       result.push(object[i]);
     }
@@ -11142,7 +11226,32 @@ fabric.Canvas.prototype.getItemsByAttr = function (attr, name) {
   return result;
 };
 
-},{}],11:[function(require,module,exports){
+fabric.Object.prototype.setOriginToCenter = function () {
+  this._originalOriginX = this.originX;
+  this._originalOriginY = this.originY;
+
+  var center = this.getCenterPoint();
+
+  this.set({
+    originX: 'center',
+    originY: 'center',
+    left: center.x,
+    top: center.y
+  });
+};
+
+fabric.Object.prototype.setCenterToOrigin = function () {
+  var originPoint = this.translateToOriginPoint(this.getCenterPoint(), this._originalOriginX, this._originalOriginY);
+
+  this.set({
+    originX: this._originalOriginX,
+    originY: this._originalOriginY,
+    left: originPoint.x,
+    top: originPoint.y
+  });
+};
+
+},{}],12:[function(require,module,exports){
 'use strict';
 
 require('./fabricExtensions');
@@ -11182,4 +11291,4 @@ new Vue({
 	}
 });
 
-},{"./components/AdminEditor.vue":5,"./components/GettingStarted.vue":6,"./fabricExtensions":10,"vue":3}]},{},[11]);
+},{"./components/AdminEditor.vue":5,"./components/GettingStarted.vue":7,"./fabricExtensions":11,"vue":3}]},{},[12]);

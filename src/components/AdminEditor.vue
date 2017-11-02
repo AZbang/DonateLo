@@ -1,7 +1,8 @@
 <template>
   <div id="admin">
-    <upload-image @uploadImage="uploadImage" v-show="!originBg"></upload-image>
-    <div v-show="originBg">
+    <cover-control @toggleSize="toggleSize" @uploadImage="uploadImage" :isCoverEmpty="!!coverImage"></cover-control>
+
+    <div v-show="coverImage">
       <canvas id="playground"></canvas>
     </div>
 
@@ -18,40 +19,58 @@
 </template>
 
 <script>
-  const UploadImage = require('./UploadImage.vue');
+  const CoverControl = require('./CoverControl.vue');
   const WidgetsControl = require('./WidgetsControl.vue');
   const ServicesControl = require('./ServicesControl.vue');
 
   module.exports = {
     components: {
-       UploadImage,
-       WidgetsControl,
-       ServicesControl
+      CoverControl,
+      WidgetsControl,
+      ServicesControl
     },
     data() {
       return {
-        originBg: null,
+        coverImage: null,
         api: this.$root.api
       }
     },
     methods: {
+      resizeCoverToHeight() {
+        this.scale = 300/this.originCoverHeight;
+        this.coverImage.scale(this.scale);
+        this.coverImage.left = window.innerWidth/2-this.coverImage.getWidth()/2;
+        canvas.setHeight(300);
+      },
+      resizeCoverToWidth() {
+        this.scale = window.innerWidth/this.originCoverWidth;
+        this.coverImage.left = 0;
+        this.coverImage.scale(this.scale);
+        canvas.setHeight(this.coverImage.getHeight());
+      },
+      toggleSize(isFull) {
+        if(isFull) this.resizeCoverToWidth();
+        else this.resizeCoverToHeight();
+      },
       uploadImage(src) {
-        canvas.getItemsByAttr('id', 'cover').forEach((i) => i.remove());
-        this.originBg = src;
+        this.coverImage && this.coverImage.remove();
 
         fabric.Image.fromURL(src, (cover) => {
-          cover.id = 'cover';
-          cover.set('selectable', false);
-          this.scale = window.innerWidth/cover.getWidth();
-          cover.scale(this.scale);
-          canvas.setHeight(cover.getHeight());
-          canvas.add(cover);
+          this.coverImage = cover;
+          this.originCoverWidth = cover.getWidth();
+          this.originCoverHeight = cover.getHeight();
+          this.resizeCoverToHeight();
+
+          this.coverImage.id = 'cover';
+          this.coverImage.set('selectable', false);
+          canvas.add(this.coverImage);
         });
       }
     },
     mounted() {
       window.canvas = new fabric.Canvas('playground');
       canvas.setWidth(window.innerWidth);
+      $('.canvas-container, canvas').css('transition', 'all 0.5s');
 
       // Get cover
       let covers = this.api.api_result.response[0].cover.images;

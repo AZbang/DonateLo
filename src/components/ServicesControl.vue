@@ -5,7 +5,7 @@
         <div class="card-panel hoverable red lighten-1">
           <div class="wrap-card-content">
             <i class="material-icons">favorite</i>
-            <p>Благотворительность</p>
+            <p>Донаты</p>
           </div>
         </div>
       </div>
@@ -20,8 +20,32 @@
       <div class="col s6 m4">
         <div class="card-panel hoverable green lighten-1">
           <div class="wrap-card-content">
-            <i class="material-icons">image</i>
+            <i class="material-icons">photo_camera</i>
             <p>Google фото</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s6 m4">
+        <div class="card-panel hoverable orange lighten-1">
+          <div class="wrap-card-content">
+            <i class="material-icons">wb_cloudy</i>
+            <p>Погода, дата, время</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s6 m4">
+        <div class="card-panel hoverable blue lighten-1">
+          <div class="wrap-card-content">
+            <i class="material-icons">subject</i>
+            <p>Новости</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s6 m4">
+        <div class="card-panel hoverable teal lighten-1">
+          <div class="wrap-card-content">
+            <i class="material-icons">thumbs_up_down</i>
+            <p>Голосования</p>
           </div>
         </div>
       </div>
@@ -43,6 +67,7 @@
     height: 240px;
     text-align: center;
     color: #fff;
+    margin-bottom: 3px;
   }
   .wrap-card-content {
     margin-top: 35px;

@@ -1,30 +1,35 @@
 <template>
-  <div id="upload-bg">
-    <i class="material-icons add-photo-icon">add_a_photo</i><br>
-    <p class="flow-text">Загрузите обложку группы</p>
-  </div>
+  <input type="file" class="select-image" @change="uploadImage">
 </template>
 
 <script>
+  module.exports = {
+    methods: {
+      uploadImage(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if(!files.length) return;
 
+        let reader = new FileReader();
+        reader.onload = (e) => this.$emit('uploadImage', e.target.result);
+        reader.readAsDataURL(files[0]);
+      }
+    },
+    mounted() {
+      $('.select-image').parent().css('position', 'relative');
+    }
+  }
 </script>
 
-<style scoped>
-  #upload-bg {
-    height: 300px;
-    border: 5px dashed #7a9ee0;
+<style>
+  .select-image {
+    position: absolute;
+    height: 100%;
     width: 100%;
-    text-align: center;
-    padding-top: 110px;
-    position: relative;
-    box-sizing: border-box;
-  }
-  #upload-bg i, #upload-bg p {
-    color: #7a9ee0;
-    margin-top: 0;
-    text-align: center;
-  }
-  .add-photo-icon {
-    font-size: 3em;
+    left: 0;
+    top: 0;
+
+    opacity: 0;
+    z-index: 10000;
+    cursor: pointer;
   }
 </style>

@@ -5,7 +5,7 @@
         <div class="card-panel hoverable">
           <div class="wrap-card-content">
             <i class="material-icons">text_format</i>
-            <p>Добавить текст</p>
+            <p>Текст</p>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
       <div class="col s6 m3">
         <div class="card-panel hoverable">
           <div class="wrap-card-content">
-            <i class="material-icons">extension</i>
+            <i class="material-icons">panorama_fish_eye</i>
             <p>Радиальный бар</p>
           </div>
         </div>
@@ -28,7 +28,7 @@
       <div class="col s6 m3">
         <div class="card-panel hoverable">
           <div class="wrap-card-content">
-            <i class="material-icons">extension</i>
+            <i class="material-icons">image</i>
             <p>Картинка</p>
           </div>
         </div>
