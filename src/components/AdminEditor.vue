@@ -1,6 +1,6 @@
 <template>
   <div id="admin">
-    <cover-control @toggleSize="toggleSize" @uploadImage="uploadImage" :isCoverEmpty="!!coverImage"></cover-control>
+    <cover-control @toggleSize="toggleSize" @uploadImage="uploadImage" :isCoverEmpty="!coverImage"></cover-control>
 
     <div v-show="coverImage">
       <canvas id="playground"></canvas>

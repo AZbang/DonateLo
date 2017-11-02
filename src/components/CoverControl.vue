@@ -1,6 +1,6 @@
 <template>
   <div id="cover-control">
-    <div class="actions-wrap" @mouseover="toggleBtnActions(true)" @mouseout="toggleBtnActions(false)">
+    <div class="actions-wrap" v-show="!isCoverEmpty" @mouseover="toggleBtnActions(true)" @mouseout="toggleBtnActions(false)">
       <div id="new-cover" class="btn-cover">
         <upload-image @uploadImage="uploadImage"></upload-image>
         <i class="material-icons">edit</i>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div id="first-upload-bg" v-show="!isCoverEmpty">
+    <div id="first-upload-bg" v-show="isCoverEmpty">
       <upload-image @uploadImage="uploadImage"></upload-image>
       <i class="material-icons">add_a_photo</i><br>
       <p class="flow-text">Загрузите обложку группы</p>
