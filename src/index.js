@@ -1,5 +1,6 @@
-const Vue = require('vue');
+require('./fabricExtensions');
 
+const Vue = require('vue');
 const AdminEditor = require('./components/AdminEditor.vue');
 const GettingStarted = require('./components/GettingStarted.vue');
 
