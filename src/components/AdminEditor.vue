@@ -5,7 +5,7 @@
       <p class="flow-text">Загрузите обложку группы</p>
     </div>
 
-    <canvas id="playground" v-show="originBg"></canvas>
+    <canvas id="playground" v-show="!!originBg"></canvas>
 
     <div id="menu">
       <p class="flow-text">Добавить виджеты:</p>
@@ -49,10 +49,10 @@
 
 <script>
   module.exports = {
-    props: ['api'],
     data() {
       return {
-        originBg: ''
+        originBg: '',
+        api: this.$root.api
       }
     },
     mounted() {

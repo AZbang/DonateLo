@@ -1,20 +1,34 @@
 const Vue = require('vue');
-const VueRouter = require('vue-router');
 
-const App = require('./components/App.vue');
 const AdminEditor = require('./components/AdminEditor.vue');
 const GettingStarted = require('./components/GettingStarted.vue');
 
-Vue.use(VueRouter);
-var router = new VueRouter({
-	routes: [
-		{path: '/admin', component: AdminEditor},
-		{path: '/getting_started', component: GettingStarted}
-	]
-});
-
 new Vue({
   el: '#app',
-	render: (h) => h(App),
-	router
+	data: {
+		api: {}
+	},
+	methods: {
+		getVKApiData() {
+			let query = window.location.search.substring(1);
+			let vars = query.split("&");
+			let api = {};
+
+			for(let i = 0; i < vars.length; i++) {
+				let pair = vars[i].split("=");
+				api[pair[0]] = pair[1];
+			}
+			api.api_result = JSON.parse(decodeURIComponent(api.api_result));
+			this.api = api;
+		}
+	},
+	computed: {
+		viewComponent() {
+			this.getVKApiData();
+
+			if(+this.api.viewer_type > 2 && this.api.group_id != null) return AdminEditor;
+			else return GettingStarted;
+		}
+	},
+	render(h) { return h(this.viewComponent) }
 });
