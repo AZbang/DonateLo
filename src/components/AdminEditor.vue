@@ -38,31 +38,46 @@
     methods: {
       resizeCoverToHeight() {
         this.scale = 300/this.originCoverHeight;
-        this.coverImage.scale(this.scale);
-        this.coverImage.left = window.innerWidth/2-this.coverImage.getWidth()/2;
-        canvas.setHeight(300);
+        this.coverImage.animate('scaleX', this.scale, this.animateParams);
+        this.coverImage.animate('scaleY', this.scale, this.animateParams);
+        this.coverImage.animate('left', window.innerWidth/2-this.originCoverWidth*this.scale/2, this.animateParams);
+        $('.canvas-container').css('height', '300px');
       },
       resizeCoverToWidth() {
         this.scale = window.innerWidth/this.originCoverWidth;
-        this.coverImage.left = 0;
-        this.coverImage.scale(this.scale);
-        canvas.setHeight(this.coverImage.getHeight());
+        this.coverImage.animate('scaleX', this.scale, this.animateParams);
+        this.coverImage.animate('scaleY', this.scale, this.animateParams);
+        this.coverImage.animate('left', 0, this.animateParams);
+        $('.canvas-container').css('height', this.originCoverHeight*this.scale + 'px');
       },
       toggleSize(isFull) {
         if(isFull) this.resizeCoverToWidth();
         else this.resizeCoverToHeight();
+        // 
+        // let left = -this.coverImage.left;
+        // let top = -this.coverImage.top;
+        // let width = 1590;
+        // let height = 400;
+        //
+        // this.coverImage.clipTo = (ctx) => {
+        //   ctx.rect(-(1590/2)+left, -(400/2)+top, parseInt(width*this.scale), parseInt(this.scale*height));
+        // }
+        // canvas.renderAll();
       },
       uploadImage(src) {
         this.coverImage && this.coverImage.remove();
 
         fabric.Image.fromURL(src, (cover) => {
           this.coverImage = cover;
-          this.originCoverWidth = cover.getWidth();
-          this.originCoverHeight = cover.getHeight();
-          this.resizeCoverToHeight();
-
           this.coverImage.id = 'cover';
           this.coverImage.set('selectable', false);
+          this.coverImage.top = 0;
+          this.coverImage.left = 0;
+
+          this.originCoverWidth = cover.getWidth();
+          this.originCoverHeight = cover.getHeight();
+          this.toggleSize(true);
+
           canvas.add(this.coverImage);
         });
       }
@@ -70,8 +85,14 @@
     mounted() {
       window.canvas = new fabric.Canvas('playground');
       canvas.setWidth(window.innerWidth);
-      $('.canvas-container, canvas').css('transition', 'all 0.5s');
+      canvas.setHeight(300);
 
+      $('.canvas-container').css('transition', 'all 0.5s');
+      this.animateParams = {
+        duration: 500,
+        easing: fabric.util.ease['easeInQuad'],
+        onChange: canvas.renderAll.bind(canvas)
+      }
       // Get cover
       let covers = this.api.api_result.response[0].cover.images;
       if(covers.length) this.uploadImage(covers[covers.length-1].url);
