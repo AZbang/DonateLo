@@ -114,8 +114,8 @@
 
 <style scoped>
   .controls-section {
-    margin-top: 50px;
-    padding: 0 50px;
+    margin-top: 2em;
+    padding: 0 1em;
   }
   .controls-section .label {
     margin: 5px;
