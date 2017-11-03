@@ -10996,7 +10996,7 @@ exports.insert = function (css) {
 },{}],5:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".controls-section[data-v-76e8d668] {\n  margin-top: 50px;\n  padding: 0 50px;\n}\n.controls-section .label[data-v-76e8d668] {\n  margin: 5px;\n  color: #6e7bab;\n}")
 ;(function(){
-
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 const CoverControl = require('./CoverControl.vue');
 const WidgetsControl = require('./WidgetsControl.vue');
@@ -11021,30 +11021,51 @@ module.exports = {
       this.coverImage.animate('scaleY', this.scale, this.animateParams);
       this.coverImage.animate('left', window.innerWidth / 2 - this.originCoverWidth * this.scale / 2, this.animateParams);
       $('.canvas-container').css('height', '300px');
+      canvas.setHeight(300);
     },
     resizeCoverToWidth() {
       this.scale = window.innerWidth / this.originCoverWidth;
       this.coverImage.animate('scaleX', this.scale, this.animateParams);
-      this.coverImage.animate('scaleY', this.scale, this.animateParams);
+      this.coverImage.animate('scaleY', this.scale, _extends({}, this.animateParams, {
+        onComplete: () => {
+          canvas.setHeight(this.originCoverHeight * this.scale);
+        }
+      }));
+
       this.coverImage.animate('left', 0, this.animateParams);
       $('.canvas-container').css('height', this.originCoverHeight * this.scale + 'px');
     },
     toggleSize(isFull) {
       if (isFull) this.resizeCoverToWidth();else this.resizeCoverToHeight();
     },
-    uploadImage(src) {
+    uploadImage(base64) {
+      fabric.Image.fromURL(base64, texture => {
+        texture.setCrossOrigin('anonymous');
+        let scale = 1590 / texture.getWidth();
+        let w = 1590 / scale;
+        let h = 400 / scale;
+
+        let coverSrc = texture.toDataURL({
+          left: texture.getWidth() / 2 - w / 2,
+          top: texture.getHeight() / 2 - h / 2,
+          width: w,
+          height: h
+        });
+
+        this.setCover(coverSrc);
+      });
+    },
+    setCover(src) {
       this.coverImage && this.coverImage.remove();
 
       fabric.Image.fromURL(src, cover => {
         this.coverImage = cover;
         this.coverImage.id = 'cover';
         this.coverImage.set('selectable', false);
-        this.coverImage.top = 0;
-        this.coverImage.left = 0;
 
         this.originCoverWidth = cover.getWidth();
         this.originCoverHeight = cover.getHeight();
-        this.toggleSize(true);
+        this.resizeCoverToHeight();
 
         canvas.add(this.coverImage);
       });
@@ -11063,7 +11084,7 @@ module.exports = {
     };
 
     let covers = this.api.api_result.response[0].cover.images;
-    if (covers.length) this.uploadImage(covers[covers.length - 1].url);
+    if (covers.length) this.setCover(covers[covers.length - 1].url);
   }
 };
 })()
