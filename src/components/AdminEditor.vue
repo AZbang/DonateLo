@@ -6,19 +6,32 @@
       <canvas id="playground"></canvas>
     </div>
 
-    <div class="controls-section">
-      <editors-control :editorType="'text'"></editors-control>
-    </div>
-    
-    <div class="controls" v-show="false">
+    <ul id="menu" class="tabs">
+      <li class="tab col s4"><a href="#add" class="active">Добавить</a></li>
+      <li class="tab col s4"><a href="#edit">Изменить</a></li>
+      <li class="tab col s4"><a href="#settings">Настройки</a></li>
+      <div class="indicator"></div>
+    </ul>
+
+    <div id="add">
       <div class="controls-section">
         <p class="flow-text label">Добавить виджет:</p>
-        <widgets-control</widgets-control>
+        <widgets-control></widgets-control>
       </div>
 
       <div class="controls-section">
         <p class="flow-text label">Добавить сервис:</p>
         <services-control></services-control>
+      </div>
+    </div>
+    <div id="edit">
+      <div class="controls-section">
+        <editors-control :editorType="'image'"></editors-control>
+      </div>
+    </div>
+    <div id="settings">
+      <div class="controls-section">
+        <p class="flow-text label">Настройки</p>
       </div>
     </div>
   </div>
@@ -106,6 +119,8 @@
       canvas.setWidth(window.innerWidth);
       canvas.setHeight(300);
 
+      $('ul.tabs').tabs();
+
       $('.canvas-container').css('transition', 'all 0.5s');
       this.animateParams = {
         duration: 500,
@@ -127,5 +142,17 @@
   .controls-section .label {
     margin: 5px;
     color: #6e7bab;
+  }
+  .tabs {
+    overflow: hidden;
+  }
+  .tab a {
+    color: #6e7bab !important;
+  }
+  .tab a.active {
+    color: #6e7bab !important;
+  }
+  .tabs .indicator {
+    background-color: #6e7bab !important;
   }
 </style>
