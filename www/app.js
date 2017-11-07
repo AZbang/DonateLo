@@ -11004,14 +11004,20 @@ const CoverControl = require('./CoverControl.vue');
 const WidgetsControl = require('./WidgetsControl.vue');
 const ServicesControl = require('./ServicesControl.vue');
 
-const TextWidget = require('./TextWidget.vue');
+const TextEditor = require('./TextEditor.vue');
+const LinearBarEditor = require('./LinearBarEditor.vue');
+const RadialBarEditor = require('./RadialBarEditor.vue');
+const ImageEditor = require('./ImageEditor.vue');
 
 module.exports = {
   components: {
     CoverControl,
     WidgetsControl,
     ServicesControl,
-    TextWidget
+    TextEditor,
+    LinearBarEditor,
+    RadialBarEditor,
+    ImageEditor
   },
   data() {
     return {
@@ -11095,7 +11101,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('cover-control',{attrs:{"isCoverEmpty":!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('text-widget')],1),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(false),expression:"false"}],staticClass:"controls"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('cover-control',{attrs:{"isCoverEmpty":!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('image-editor')],1),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(false),expression:"false"}],staticClass:"controls"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)])],1)}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")])])}]
 __vue__options__._scopeId = "data-v-d1f082f0"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -11109,7 +11115,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-d1f082f0", __vue__options__)
   }
 })()}
-},{"./CoverControl.vue":8,"./ServicesControl.vue":10,"./TextWidget.vue":11,"./WidgetsControl.vue":13,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
+},{"./CoverControl.vue":8,"./ImageEditor.vue":10,"./LinearBarEditor.vue":11,"./RadialBarEditor.vue":12,"./ServicesControl.vue":13,"./TextEditor.vue":14,"./WidgetsControl.vue":16,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".vc-slider {\n  width: 100% !important;\n}")
 ;(function(){
 
@@ -11195,7 +11201,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-1699b76a", __vue__options__)
   }
 })()}
-},{"./UploadImage.vue":12,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],9:[function(require,module,exports){
+},{"./UploadImage.vue":15,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],9:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-5812703e] {\n  margin-top: 10%;\n}\nh1[data-v-5812703e], p[data-v-5812703e] {\n  color: #3d5977;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
@@ -11214,6 +11220,105 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],10:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-45c574d8] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-45c574d8] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-45c574d8] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-45c574d8] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-45c574d8] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-45c574d8]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-45c574d8] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-45c574d8] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-45c574d8] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-45c574d8]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-45c574d8] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-45c574d8] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+;(function(){
+
+
+const ColorPicker = require('./ColorPicker.vue');
+
+module.exports = {
+  components: {
+    ColorPicker
+  },
+  methods: {
+    setColor(color) {}
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Редактировать картинку:")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"https://getimage.com/image"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__._scopeId = "data-v-45c574d8"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-45c574d8", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-45c574d8", __vue__options__)
+  }
+})()}
+},{"./ColorPicker.vue":7,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],11:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-0cfced27] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-0cfced27] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-0cfced27] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-0cfced27] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-0cfced27] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-0cfced27]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-0cfced27] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-0cfced27] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-0cfced27] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-0cfced27]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-0cfced27] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-0cfced27] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+;(function(){
+
+
+const ColorPicker = require('./ColorPicker.vue');
+
+module.exports = {
+  components: {
+    ColorPicker
+  },
+  methods: {
+    setColor(color) {}
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Редактировать линейный бар:")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__._scopeId = "data-v-0cfced27"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0cfced27", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-0cfced27", __vue__options__)
+  }
+})()}
+},{"./ColorPicker.vue":7,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],12:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-62438f26] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-62438f26] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-62438f26] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-62438f26] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-62438f26] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-62438f26]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-62438f26] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-62438f26] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-62438f26] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-62438f26]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-62438f26] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-62438f26] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+;(function(){
+
+
+const ColorPicker = require('./ColorPicker.vue');
+
+module.exports = {
+  components: {
+    ColorPicker
+  },
+  methods: {
+    setColor(color) {}
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Редактировать радиальный бар:")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"0"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__._scopeId = "data-v-62438f26"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-62438f26", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-62438f26", __vue__options__)
+  }
+})()}
+},{"./ColorPicker.vue":7,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],13:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-2641488b] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-2641488b] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n  margin-bottom: 3px;\n}\n.wrap-card-content[data-v-2641488b] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-2641488b] {\n  font-size: 6em;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
@@ -11231,8 +11336,8 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-2641488b", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],11:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".input-field[data-v-71ff1d15] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-71ff1d15] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-71ff1d15] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-71ff1d15] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-71ff1d15]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-71ff1d15] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-71ff1d15] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-71ff1d15] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-71ff1d15]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-71ff1d15] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n}\n.btn[data-v-71ff1d15] {\n  color: #fff;\n  height: 50px;\n  width: 100%;\n}")
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],14:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".input-field[data-v-278a27be] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-278a27be] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-278a27be] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-278a27be] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-278a27be]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-278a27be] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-278a27be] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-278a27be] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-278a27be]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-278a27be] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n}\n.btn[data-v-278a27be] {\n  color: #fff;\n  height: 50px;\n  width: 100%;\n}")
 ;(function(){
 
 
@@ -11252,19 +11357,19 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._m(3),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет текста:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(4)])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Редактировать текст:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('textarea',{staticClass:"input"},[_vm._v("Текст {varible}")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"Bebas Neue"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"46pt"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon active"},[_vm._v("format_align_left")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
-__vue__options__._scopeId = "data-v-71ff1d15"
+__vue__options__._scopeId = "data-v-278a27be"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-71ff1d15", __vue__options__)
+    hotAPI.createRecord("data-v-278a27be", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-71ff1d15", __vue__options__)
+    hotAPI.rerender("data-v-278a27be", __vue__options__)
   }
 })()}
-},{"./ColorPicker.vue":7,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],12:[function(require,module,exports){
+},{"./ColorPicker.vue":7,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],15:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}")
 ;(function(){
 
@@ -11301,7 +11406,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-785899c6", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],13:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],16:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-0d9f3672] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-0d9f3672] {\n  position: relative;\n}\n.wrap-card-content[data-v-0d9f3672] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-0d9f3672] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n}\n.card-panel i[data-v-0d9f3672] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
@@ -11319,7 +11424,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-0d9f3672", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],14:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],17:[function(require,module,exports){
 'use strict';
 
 fabric.Canvas.prototype.getItemsByAttr = function () {
@@ -11359,7 +11464,7 @@ fabric.Object.prototype.setCenterToOrigin = function () {
   });
 };
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 require('./fabricExtensions');
@@ -11399,4 +11504,4 @@ new Vue({
 	}
 });
 
-},{"./components/AdminEditor.vue":6,"./components/GettingStarted.vue":9,"./fabricExtensions":14,"vue":4}]},{},[15]);
+},{"./components/AdminEditor.vue":6,"./components/GettingStarted.vue":9,"./fabricExtensions":17,"vue":4}]},{},[18]);

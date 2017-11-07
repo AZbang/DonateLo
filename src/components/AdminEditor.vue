@@ -6,16 +6,18 @@
       <canvas id="playground"></canvas>
     </div>
 
+    <!-- <div class="controls-section">
+      <text-editor></text-editor>
+    </div> -->
+    <!-- <div class="controls-section">
+      <linear-bar-editor></linear-bar-editor>
+    </div> -->
+    <!-- <div class="controls-section">
+      <radial-bar-editor></radial-bar-editor>
+    </div> -->
     <div class="controls-section">
-      <text-widget></text-widget>
+      <image-editor></image-editor>
     </div>
-
-    <!-- <radial-bar-vidget></radial-bar-vidget>
-    <progress-bar-vidget></progress-bar-vidget>
-    <image-vidget></image-vidget>
-
-    <service></service> -->
-
     <div class="controls" v-show="false">
       <div class="controls-section">
         <p class="flow-text label">Добавить виджет:</p>
@@ -35,14 +37,20 @@
   const WidgetsControl = require('./WidgetsControl.vue');
   const ServicesControl = require('./ServicesControl.vue');
 
-  const TextWidget = require('./TextWidget.vue');
+  const TextEditor = require('./TextEditor.vue');
+  const LinearBarEditor = require('./LinearBarEditor.vue');
+  const RadialBarEditor = require('./RadialBarEditor.vue');
+  const ImageEditor = require('./ImageEditor.vue');
 
   module.exports = {
     components: {
       CoverControl,
       WidgetsControl,
       ServicesControl,
-      TextWidget
+      TextEditor,
+      LinearBarEditor,
+      RadialBarEditor,
+      ImageEditor
     },
     data() {
       return {
