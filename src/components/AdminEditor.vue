@@ -26,7 +26,7 @@
     </div>
     <div id="edit">
       <div class="controls-section">
-        <editors-control :editorType="'image'"></editors-control>
+        <editors-control :editorType="'linear-bar'"></editors-control>
       </div>
     </div>
     <div id="settings">

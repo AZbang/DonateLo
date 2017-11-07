@@ -1,7 +1,5 @@
 <template>
   <div class="row">
-    <p class="flow-text">Редактировать радиальный бар:</p>
-
     <div class="input-field col s4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">

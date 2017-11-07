@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    <p class="flow-text">Редактировать текст:</p>
     <div class="input-field col s12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">

@@ -1,7 +1,5 @@
 <template>
   <div class="row">
-    <p class="flow-text">Редактировать картинку:</p>
-
     <div class="input-field col s6">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
