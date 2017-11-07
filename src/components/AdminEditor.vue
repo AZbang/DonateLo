@@ -7,13 +7,25 @@
     </div>
 
     <div class="controls-section">
-      <p class="flow-text label">Добавить виджет:</p>
-      <widgets-control></widgets-control>
+      <text-widget></text-widget>
     </div>
 
-    <div class="controls-section">
-      <p class="flow-text label">Добавить сервис:</p>
-      <services-control></services-control>
+    <!-- <radial-bar-vidget></radial-bar-vidget>
+    <progress-bar-vidget></progress-bar-vidget>
+    <image-vidget></image-vidget>
+
+    <service></service> -->
+
+    <div class="controls" v-show="false">
+      <div class="controls-section">
+        <p class="flow-text label">Добавить виджет:</p>
+        <widgets-control</widgets-control>
+      </div>
+
+      <div class="controls-section">
+        <p class="flow-text label">Добавить сервис:</p>
+        <services-control></services-control>
+      </div>
     </div>
   </div>
 </template>
@@ -23,11 +35,14 @@
   const WidgetsControl = require('./WidgetsControl.vue');
   const ServicesControl = require('./ServicesControl.vue');
 
+  const TextWidget = require('./TextWidget.vue');
+
   module.exports = {
     components: {
       CoverControl,
       WidgetsControl,
-      ServicesControl
+      ServicesControl,
+      TextWidget
     },
     data() {
       return {
@@ -63,7 +78,6 @@
       },
       uploadImage(base64) {
         fabric.Image.fromURL(base64, (texture) => {
-          texture.setCrossOrigin('anonymous');
           let scale = 1590/texture.getWidth();
           let w = 1590/scale;
           let h = 400/scale;
