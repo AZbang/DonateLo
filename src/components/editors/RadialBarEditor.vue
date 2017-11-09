@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <editor-forms>
     <div class="input-field col s4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
@@ -33,24 +33,17 @@
       <br>
       <color-picker></color-picker>
     </div>
-
-    <div class="fixed-bottom">
-      <div class="col s6">
-        <button class="btn delete-btn waves-effect btn-flat red lighten-1">Удалить</button>
-      </div>
-      <div class="col s6">
-        <button class="btn okey-btn waves-effect btn-flat green lighten-1">Вернуться</button>
-      </div>
-    </div>
-  </div>
+  </editor-forms>
 </template>
 
 <script>
   const ColorPicker = require('../helpers/ColorPicker.vue');
+  const EditorForms = require('../helpers/EditorForms.vue');
 
   module.exports = {
     components: {
-      ColorPicker
+      ColorPicker,
+      EditorForms
     },
     methods: {
       setColor(color) {

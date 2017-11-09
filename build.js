@@ -11046,7 +11046,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-7b75e88d", __vue__options__)
   }
 })()}
-},{"./views/AdminEditor.vue":17,"./views/GettingStarted.vue":18,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
+},{"./views/AdminEditor.vue":18,"./views/GettingStarted.vue":19,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-70870590] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-70870590], #first-upload-bg p[data-v-70870590] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-70870590] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-70870590] {\n  z-index: 10000;\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-70870590] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
@@ -11094,7 +11094,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-70870590", __vue__options__)
   }
 })()}
-},{"../helpers/UploadImage.vue":16,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
+},{"../helpers/UploadImage.vue":17,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
 ;(function(){
 
 
@@ -11170,15 +11170,16 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],11:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-16a94e5e] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-16a94e5e] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-16a94e5e] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-16a94e5e] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-16a94e5e] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-16a94e5e]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-16a94e5e] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-16a94e5e] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-16a94e5e] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-16a94e5e]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-16a94e5e] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-16a94e5e] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
 ;(function(){
 
 
+const EditorForms = require('../helpers/EditorForms.vue');
 const ColorPicker = require('../helpers/ColorPicker.vue');
 
 module.exports = {
   components: {
-    ColorPicker
+    ColorPicker,
+    EditorForms
   },
   methods: {
     setColor(color) {}
@@ -11188,30 +11189,30 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"https://getimage.com/image"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
-__vue__options__._scopeId = "data-v-16a94e5e"
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"https://getimage.com/image"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-16a94e5e", __vue__options__)
   } else {
     hotAPI.reload("data-v-16a94e5e", __vue__options__)
   }
 })()}
-},{"../helpers/ColorPicker.vue":15,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],12:[function(require,module,exports){
+},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3}],12:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-1c6380f1] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-1c6380f1] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-1c6380f1] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: .5em 1em;\n}\n.input[data-v-1c6380f1] {\n  margin: 0;\n  border: none;\n  font-size: 1.5em;\n  font-weight: 300;\n}\ntextarea.input[data-v-1c6380f1] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-1c6380f1]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-1c6380f1] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-1c6380f1] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-1c6380f1] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-1c6380f1]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-1c6380f1] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-1c6380f1] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
 ;(function(){
 
 
+const EditorForms = require('../helpers/EditorForms.vue');
 const ColorPicker = require('../helpers/ColorPicker.vue');
 
 module.exports = {
   components: {
-    ColorPicker
+    ColorPicker,
+    EditorForms
   },
   methods: {
     setColor(color) {}
@@ -11221,8 +11222,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-1c6380f1"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11235,16 +11236,18 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-1c6380f1", __vue__options__)
   }
 })()}
-},{"../helpers/ColorPicker.vue":15,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],13:[function(require,module,exports){
+},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],13:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-43766792] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-43766792] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-43766792] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-43766792] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-43766792] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-43766792]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-43766792] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-43766792] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-43766792] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-43766792]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-43766792] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-43766792] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
 ;(function(){
 
 
 const ColorPicker = require('../helpers/ColorPicker.vue');
+const EditorForms = require('../helpers/EditorForms.vue');
 
 module.exports = {
   components: {
-    ColorPicker
+    ColorPicker,
+    EditorForms
   },
   methods: {
     setColor(color) {}
@@ -11254,8 +11257,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(3)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"0"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"0"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-43766792"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11268,16 +11271,18 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-43766792", __vue__options__)
   }
 })()}
-},{"../helpers/ColorPicker.vue":15,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],14:[function(require,module,exports){
+},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],14:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".input-field[data-v-31564498] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-31564498] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-31564498] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-31564498] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-31564498]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-31564498] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-31564498] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-31564498] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-31564498]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-31564498] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n}\n.btn[data-v-31564498] {\n  color: #fff;\n  height: 50px;\n  width: 100%;\n}")
 ;(function(){
 
 
+const EditorForms = require('../helpers/EditorForms.vue');
 const ColorPicker = require('../helpers/ColorPicker.vue');
 
 module.exports = {
   components: {
-    ColorPicker
+    ColorPicker,
+    EditorForms
   },
   methods: {
     setColor(color) {}
@@ -11287,8 +11292,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._m(3),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет текста:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_vm._m(4)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('textarea',{staticClass:"input"},[_vm._v("Текст {varible}")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s12 m5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"Bebas Neue"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s4 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"46pt"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"input-field col s8 m4"},[_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon active"},[_vm._v("format_align_left")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('textarea',{staticClass:"input"},[_vm._v("Текст {varible}")])])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"Bebas Neue"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s4 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"46pt"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s8 m4"},[_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon"},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon active"},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет текста:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-31564498"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11301,7 +11306,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-31564498", __vue__options__)
   }
 })()}
-},{"../helpers/ColorPicker.vue":15,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],15:[function(require,module,exports){
+},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],15:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".vc-slider {\n  width: 100% !important;\n}\n.colors {\n  overflow: hidden;\n  margin: auto;\n}\n.color {\n  float: left;\n  margin: 0 15px 15px 0;\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  cursor: pointer;\n}\n.color i {\n  font-size: 2.2em;\n  font-weight: 800;\n  color: #fff;\n  margin: 10px;\n}")
 ;(function(){
 
@@ -11341,6 +11346,24 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":4,"vue-color/dist/vue-color.min.js":2,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],16:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-43958552] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-43958552] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-43958552] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-43958552] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-43958552] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-43958552]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-43958552] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-43958552] {\n  font-size: 3rem;\n  margin-top: 38px;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-43958552] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-43958552]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-43958552] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.btn[data-v-43958552] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._t("default"),_vm._v(" "),_vm._m(0)],2)}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
+__vue__options__._scopeId = "data-v-43958552"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-43958552", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-43958552", __vue__options__)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],17:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}")
 ;(function(){
 
@@ -11377,7 +11400,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-d4ca4322", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],17:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],18:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-06d1d21a] {\n  position: fixed;\n  top: 0;\n  z-index: 10000;\n}\n.views-wrap[data-v-06d1d21a] {\n  margin-top: 348px;\n}\n.controls-section[data-v-06d1d21a] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-06d1d21a] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-06d1d21a] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-06d1d21a] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-06d1d21a] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-06d1d21a] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11495,7 +11518,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-06d1d21a", __vue__options__)
   }
 })()}
-},{"../controls/CoverControl.vue":7,"../controls/EditorsControl.vue":8,"../controls/ServicesControl.vue":9,"../controls/WidgetsControl.vue":10,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],18:[function(require,module,exports){
+},{"../controls/CoverControl.vue":7,"../controls/EditorsControl.vue":8,"../controls/ServicesControl.vue":9,"../controls/WidgetsControl.vue":10,"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],19:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-3e5b99e2] {\n  margin-top: 10%;\n}\nh1[data-v-3e5b99e2], p[data-v-3e5b99e2] {\n  color: #3d5977;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
@@ -11513,7 +11536,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-3e5b99e2", __vue__options__)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],19:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":3,"vueify/lib/insert-css":5}],20:[function(require,module,exports){
 'use strict';
 
 fabric.Canvas.prototype.getItemsByAttr = function () {
@@ -11553,7 +11576,7 @@ fabric.Object.prototype.setCenterToOrigin = function () {
   });
 };
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 require('./fabricExtensions');
@@ -11568,4 +11591,4 @@ new Vue({
   }
 });
 
-},{"./components/App.vue":6,"./fabricExtensions":19,"vue":4}]},{},[20]);
+},{"./components/App.vue":6,"./fabricExtensions":20,"vue":4}]},{},[21]);
