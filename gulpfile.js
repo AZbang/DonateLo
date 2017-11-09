@@ -36,8 +36,8 @@ gulp.task('dev', () => {
 		.transform(babelify, { presets: ['es2015'] })
 		.transform(vueify)
 		.bundle()
-		.pipe(source('app.js'))
-		.pipe(gulp.dest('./www'))
+		.pipe(source('build.js'))
+		.pipe(gulp.dest('./'))
 		.pipe(connect.reload());
 });
 

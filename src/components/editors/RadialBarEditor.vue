@@ -1,24 +1,23 @@
 <template>
   <div class="row">
-    <div class="input-field col s12 m6">
+    <div class="input-field col s4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <input class="input" value="100%">
       </div>
     </div>
-    <div class="input-field col s6 m3">
-      <p class="flow-text">Скругление:</p>
+    <div class="input-field col s4">
+      <p class="flow-text">Стартовый угол:</p>
       <div class="input-wrap">
-        <input class="input" value="5%">
+        <input class="input" value="0">
       </div>
     </div>
-    <div class="input-field col s6 m3">
+    <div class="input-field col s4">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <input class="input" value="10px">
       </div>
     </div>
-
     <div class="input-field col s12">
       <p class="flow-text">Цвет прогресс линии:</p>
       <br>
@@ -47,7 +46,7 @@
 </template>
 
 <script>
-  const ColorPicker = require('./ColorPicker.vue');
+  const ColorPicker = require('../helpers/ColorPicker.vue');
 
   module.exports = {
     components: {
@@ -71,13 +70,13 @@
   .input-wrap {
     background-color: #f9f9f9;
     border-radius: 3px;
-    padding: .5em 1em;
+    padding: 15px;
   }
   .input {
     margin: 0;
     border: none;
-    font-size: 1.5em;
-    font-weight: 300;
+    font-size: 2em;
+    font-weight: 200;
   }
   textarea.input {
     resize: vertical;

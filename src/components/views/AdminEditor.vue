@@ -41,10 +41,10 @@
 </template>
 
 <script>
-  const CoverControl = require('./CoverControl.vue');
-  const WidgetsControl = require('./WidgetsControl.vue');
-  const ServicesControl = require('./ServicesControl.vue');
-  const EditorsControl = require('./EditorsControl.vue');
+  const CoverControl = require('../controls/CoverControl.vue');
+  const WidgetsControl = require('../controls/WidgetsControl.vue');
+  const ServicesControl = require('../controls/ServicesControl.vue');
+  const EditorsControl = require('../controls/EditorsControl.vue');
 
   module.exports = {
     components: {
@@ -56,7 +56,7 @@
     data() {
       return {
         coverImage: null,
-        api: this.$root.api
+        api: this.$parent.api
       }
     },
     methods: {

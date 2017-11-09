@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  const UploadImage = require('./UploadImage.vue');
+  const UploadImage = require('../helpers/UploadImage.vue');
 
   module.exports = {
     components: {

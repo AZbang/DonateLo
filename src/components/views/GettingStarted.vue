@@ -4,7 +4,7 @@
     <p class="flow-text">Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.</p>
     <p class="flow-text">Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно сделать динамическую обложку для своей группы или паблика.</p>
     <p class="flow-text">Описание особенностей с картиночками.</p>
-    <a target="_blank" :href="'https://vk.com/add_community_app.php?aid=' + $root.api.api_id" class="btn vk-color">Подключить приложение</a>
+    <a target="_blank" :href="'https://vk.com/add_community_app.php?aid=' + $parent.api.api_id" class="btn vk-color">Подключить приложение</a>
   </div>
 </template>
 

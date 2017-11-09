@@ -3,10 +3,10 @@
 </template>
 
 <script>
-  const TextEditor = require('./TextEditor.vue');
-  const LinearBarEditor = require('./LinearBarEditor.vue');
-  const RadialBarEditor = require('./RadialBarEditor.vue');
-  const ImageEditor = require('./ImageEditor.vue');
+  const TextEditor = require('../editors/TextEditor.vue');
+  const LinearBarEditor = require('../editors/LinearBarEditor.vue');
+  const RadialBarEditor = require('../editors/RadialBarEditor.vue');
+  const ImageEditor = require('../editors/ImageEditor.vue');
 
   module.exports = {
     components: {
