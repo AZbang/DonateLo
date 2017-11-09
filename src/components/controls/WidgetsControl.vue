@@ -2,7 +2,7 @@
   <div id="widgets">
     <div class="row">
       <div class="col s6 m3">
-        <div class="card-panel hoverable">
+        <div class="card-panel hoverable" @click="addWidget('text')">
           <div class="wrap-card-content">
             <i class="material-icons">text_format</i>
             <p>Текст</p>
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="col s6 m3">
-        <div class="card-panel hoverable">
+        <div class="card-panel hoverable" @click="addWidget('linear-bar')">
           <div class="wrap-card-content">
             <i class="material-icons">format_align_left</i>
             <p>Линейный бар</p>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="col s6 m3">
-        <div class="card-panel hoverable">
+        <div class="card-panel hoverable" @click="addWidget('radial-bar')">
           <div class="wrap-card-content">
             <i class="material-icons">panorama_fish_eye</i>
             <p>Радиальный бар</p>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="col s6 m3">
-        <div class="card-panel hoverable">
+        <div class="card-panel hoverable" @click="addWidget('image')">
           <div class="wrap-card-content">
             <i class="material-icons">image</i>
             <p>Картинка</p>
@@ -36,6 +36,16 @@
     </div>
   </div>
 </template>
+
+<script>
+  module.exports = {
+    methods: {
+      addWidget(type) {
+        this.$emit('addWidget', type);
+      }
+    }
+  }
+</script>
 
 
 <style scoped>

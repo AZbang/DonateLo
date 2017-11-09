@@ -3,7 +3,7 @@
     <div class="input-field col s12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <textarea class="input">Текст {varible}</textarea>
+        <textarea class="input" v-model="value" @change="setText"></textarea>
       </div>
     </div>
     <div class="input-field col s12 m5">
@@ -12,16 +12,17 @@
         <input class="input" value="Bebas Neue">
       </div>
     </div>
-    <div class="input-field col s4 m3">
+    <div class="input-field col s6 m3">
       <p class="flow-text">Размер:</p>
       <div class="input-wrap">
-        <input class="input" value="46pt">
+        <input class="input" v-model="fontSize" @change="setFontSize">
       </div>
     </div>
-    <div class="input-field col s8 m4">
-      <i class="material-icons btn-icon">format_align_right</i>
-      <i class="material-icons btn-icon">format_align_center</i>
-      <i class="material-icons btn-icon active">format_align_left</i>
+    <div class="input-field col s6 m4">
+      <p class="flow-text" style="text-align: right;">Выравнивание:</p>
+      <i class="material-icons btn-icon" :class="textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
+      <i class="material-icons btn-icon" :class="textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
+      <i class="material-icons btn-icon" :class="textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Цвет текста:</p>
@@ -40,68 +41,30 @@
       ColorPicker,
       EditorForms
     },
-    methods: {
-      setColor(color) {
-
+    props: ['object'],
+    data() {
+      return {
+        value: this.object.text,
+        fontSize: this.object.fontSize,
+        textAlign: this.object.textAlign
       }
+    },
+    methods: {
+      setText() {
+        this.object.text = this.value;
+      },
+      setFontSize() {
+        this.object.fontSize = this.fontSize;
+      },
+      setTextAlign(type) {
+        this.textAlign = type;
+        this.object.textAlign = type;
+      }
+    },
+    mounted() {
+      this.value = this.object.text;
+      this.fontSize = this.object.fontSize;
+      this.textAlign = this.object.textAlign;
     }
   }
 </script>
-
-<style scoped>
-  .input-field {
-    margin-bottom: 1em;
-  }
-  .input-wrap {
-    background-color: #f9f9f9;
-    border-radius: 3px;
-    padding: 15px;
-  }
-  .input {
-    margin: 0;
-    border: none;
-    font-size: 2em;
-    font-weight: 200;
-  }
-  textarea.input {
-    resize: vertical;
-    min-height: 100px;
-  }
-  .input:focus {
-    border-bottom: none !important;
-    box-shadow: none !important;
-    outline: none;
-  }
-  p {
-    font-size: 1.5em;
-    margin: 0 0 5px;
-    color: #6e7bbe;
-    font-family: Roboto Light;
-  }
-  .btn-icon {
-    font-size: 3rem;
-    margin-top: 38px;
-    background-color: #f9f9f9;
-    padding: 13px 10px;
-    cursor: pointer;
-    color: #6e7bbe;
-    float: right;
-  }
-  .btn-icon.active {
-    color: #9d7bc4;
-  }
-  .btn-icon:hover {
-    color: #9d7bc4;
-  }
-  .fixed-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-  .btn {
-    color: #fff;
-    height: 50px;
-    width: 100%;
-  }
-</style>

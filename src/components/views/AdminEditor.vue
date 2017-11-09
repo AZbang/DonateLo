@@ -18,7 +18,7 @@
       <div id="add">
         <div class="controls-section">
           <p class="flow-text label">Добавить виджет:</p>
-          <widgets-control></widgets-control>
+          <widgets-control @addWidget="addWidget"></widgets-control>
         </div>
 
         <div class="controls-section">
@@ -28,7 +28,7 @@
       </div>
       <div id="edit">
         <div class="controls-section">
-          <editors-control :editorType="'linear-bar'"></editors-control>
+          <editors-control :currentObject="currentObject"></editors-control>
         </div>
       </div>
       <div id="settings">
@@ -56,10 +56,40 @@
     data() {
       return {
         coverImage: null,
+        currentObject: null,
         api: this.$parent.api
       }
     },
     methods: {
+      // Widgets methods
+      addWidget(type) {
+        let obj = this.addText();
+
+        obj.id = '' + Date.now();
+        obj.selectable = true;
+        obj.type = type;
+
+        obj.scale(this.scale);
+        canvas.add(obj);
+
+        obj.on('mousedown', () => {
+          this.currentObject = obj;
+          $('#menu').tabs('select_tab', 'edit');
+        });
+        obj.trigger('mousedown');
+      },
+      addText() {
+        return new fabric.Text('Текст {varible}', {
+          left: 20*this.scale,
+          top: 20*this.scale,
+          fill: '#fff',
+          fontFamily: 'Bebas Neue',
+          fontSize: 42,
+          padding: 7
+        });
+      },
+
+      // Cover methods
       resizeCoverToHeight() {
         this.scale = 300/this.originCoverHeight;
         this.coverImage.animate('scaleX', this.scale, this.animateParams);

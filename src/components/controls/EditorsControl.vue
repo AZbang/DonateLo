@@ -1,5 +1,5 @@
 <template>
-  <div :is="editorComponent"></div>
+  <div :object="currentObject" :is="editorComponent"></div>
 </template>
 
 <script>
@@ -15,10 +15,11 @@
       RadialBarEditor,
       ImageEditor
     },
-    props: ['editorType'],
+    props: ['currentObject'],
     computed: {
       editorComponent() {
-        return this.editorType + '-editor';
+        if(this.currentObject) return this.currentObject.type + '-editor';
+        else '';
       }
     }
   }

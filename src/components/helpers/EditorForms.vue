@@ -48,7 +48,6 @@
   }
   .btn-icon {
     font-size: 3rem;
-    margin-top: 38px;
     background-color: #f9f9f9;
     padding: 13px 10px;
     cursor: pointer;
@@ -70,6 +69,9 @@
     padding: 10px 0;
     background-color: #fff;
     z-index: 1000;
+  }
+  .fixed-bottom .input-field {
+    margin: 0;
   }
   .btn {
     color: #fff;
