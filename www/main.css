@@ -1,6 +1,8 @@
 body {
   overflow-x: hidden;
+  background-color: #edeef0;
 }
+
 .vk-color {
   box-shadow: none;
   background: #5e81a8 !important;

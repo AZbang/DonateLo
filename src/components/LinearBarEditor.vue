@@ -1,18 +1,18 @@
 <template>
   <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s12 m6">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <input class="input" value="100%">
       </div>
     </div>
-    <div class="input-field col s3">
+    <div class="input-field col s6 m3">
       <p class="flow-text">Скругление:</p>
       <div class="input-wrap">
         <input class="input" value="5%">
       </div>
     </div>
-    <div class="input-field col s3">
+    <div class="input-field col s6 m3">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <input class="input" value="10px">
@@ -71,13 +71,13 @@
   .input-wrap {
     background-color: #f9f9f9;
     border-radius: 3px;
-    padding: 15px;
+    padding: .5em 1em;
   }
   .input {
     margin: 0;
     border: none;
-    font-size: 2em;
-    font-weight: 200;
+    font-size: 1.5em;
+    font-weight: 300;
   }
   textarea.input {
     resize: vertical;

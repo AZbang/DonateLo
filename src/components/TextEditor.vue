@@ -6,20 +6,20 @@
         <textarea class="input">Текст {varible}</textarea>
       </div>
     </div>
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
       <p class="flow-text">Шрифт:</p>
       <div class="input-wrap">
         <input class="input" value="Bebas Neue">
       </div>
     </div>
-    <div class="input-field col s3">
+    <div class="input-field col s4 m3">
       <p class="flow-text">Размер:</p>
       <div class="input-wrap">
         <input class="input" value="46pt">
       </div>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s8 m4">
       <i class="material-icons btn-icon">format_align_right</i>
       <i class="material-icons btn-icon">format_align_center</i>
       <i class="material-icons btn-icon active">format_align_left</i>
