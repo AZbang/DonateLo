@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <slot></slot>
+    <slot>Выберите объект для изменений</slot>
 
     <div class="fixed-bottom">
       <div class="input-field col s6">

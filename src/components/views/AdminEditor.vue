@@ -68,6 +68,7 @@
         obj.id = '' + Date.now();
         obj.selectable = true;
         obj.type = type;
+        obj.objectCaching = false;
 
         obj.scale(this.scale);
         canvas.add(obj);

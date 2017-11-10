@@ -27,7 +27,7 @@
     <div class="input-field col s12">
       <p class="flow-text">Цвет текста:</p>
       <br>
-      <color-picker></color-picker>
+      <color-picker @setColor="setColor" :startColor="fill"></color-picker>
     </div>
   </editor-forms>
 </template>
@@ -46,25 +46,37 @@
       return {
         value: this.object.text,
         fontSize: this.object.fontSize,
-        textAlign: this.object.textAlign
+        textAlign: this.object.textAlign,
+        fill: this.object.fill
+      }
+    },
+    watch: {
+      object(val) {
+        if(!val) return;
+        this.value = val.text;
+        this.fontSize = val.fontSize;
+        this.textAlign = val.textAlign;
+        this.fill = val.fill;
       }
     },
     methods: {
       setText() {
         this.object.text = this.value;
+        canvas.renderAll();
       },
       setFontSize() {
         this.object.fontSize = this.fontSize;
+        canvas.renderAll();
       },
       setTextAlign(type) {
         this.textAlign = type;
         this.object.textAlign = type;
+        canvas.renderAll();
+      },
+      setColor(color) {
+        this.object.fill = color;
+        canvas.renderAll();
       }
-    },
-    mounted() {
-      this.value = this.object.text;
-      this.fontSize = this.object.fontSize;
-      this.textAlign = this.object.textAlign;
     }
   }
 </script>

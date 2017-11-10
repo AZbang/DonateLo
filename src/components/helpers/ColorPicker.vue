@@ -1,13 +1,15 @@
 <template>
-  <div class="colors">
-    <div class="color" v-for="(color, index) in colors" :style="{backgroundColor: color}">
-      <i class="material-icons" v-show="selectColor == index">done</i>
+  <div>
+    <div class="colors">
+      <div class="color" v-for="(color, index) in colors" @click="setColor(index)" :style="{backgroundColor: color}">
+        <i class="material-icons" v-show="selectColor == index">done</i>
+      </div>
+      <div class="color" style="background-color: #959ca4;" @click="showPicker = !showPicker">
+        <i class="material-icons">colorize</i>
+      </div>
     </div>
-    <div class="color" style="background-color: #959ca4;">
-      <i class="material-icons">colorize</i>
-    </div>
+    <slider-picker v-model="picker" v-show="showPicker" @input="updateColor"/>
   </div>
-   <!-- <slider-picker v-model="colors" @input="updateColor"/> -->
 </template>
 
 <script>
@@ -17,18 +19,24 @@
     components: {
       SliderPicker
     },
+    props: ['startColor'],
     data() {
       return {
-        colors: ["#ff4836", "#ff8c41", "#fcd900", "#2cca90", "#48dfda", "#5ac4ec", "#456cad", "#707dc3", "#c8cad7"],
-        selectColor: 0
+        colors: [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda", "#5ac4ec", "#456cad", "#707dc3", "#c8cad7"],
+        picker: [],
+        selectColor: 0,
+        showPicker: false
       }
     },
     methods: {
-      updateColor() {
-
+      updateColor(val) {
+        this.$emit('setColor', val.hex);
+        this.colors[this.selectColor] = val.hex;
+      },
+      setColor(index) {
+        this.$emit('setColor', this.colors[index]);
+        this.selectColor = index;
       }
-    },
-    mounted() {
     }
   }
 </script>
