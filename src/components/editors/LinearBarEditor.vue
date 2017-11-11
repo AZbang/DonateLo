@@ -49,12 +49,12 @@
     props: ['object'],
     data() {
       return {
-        value: 300,
-        rounded: 0,
-        maxValue: 300,
-        border: 0,
-        startStandColor: '#fff',
-        startProgressColor: '#fff',
+        value: this.object.value,
+        rounded: this.object.rounded,
+        maxValue: this.object.maxValue,
+        border: this.object.border,
+        startStandColor: this.object.standColor,
+        startProgressColor: this.object.progressColor,
         _saveLastStrokeWidth: 0
       }
     },
@@ -77,7 +77,6 @@
       setStandColor(color) {
         this.object.item(0).filters[0] = new fabric.Image.filters.Tint({color});
         this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
-        this.object.stroke = color;
       },
       setValue() {
         this.object.item(1).width = this.object.width/this.maxValue*this.value;

@@ -11187,21 +11187,57 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 
 const EditorForms = require('../helpers/EditorForms.vue');
 const ColorPicker = require('../helpers/ColorPicker.vue');
+const UploadImage = require('../helpers/UploadImage.vue');
 
 module.exports = {
   components: {
     ColorPicker,
-    EditorForms
+    EditorForms,
+    UploadImage
+  },
+  props: ['object'],
+  data() {
+    return {
+      value: this.object.source,
+      rounded: this.object.rounded,
+      borderWidth: this.object.borderWidth,
+      startBorderColor: this.object.borderColor
+    };
+  },
+  watch: {
+    object(val) {
+      if (!val) return;
+      this.value = val.source;
+      this.rounded = val.rounded;
+      this.borderWidth = val.borderWidth;
+      this.startBorderColor = val.borderColor;
+    }
   },
   methods: {
-    setColor(color) {}
+    setValue(src, obj) {
+      var img = new Image();
+      img.onload = () => {
+        this.object.setElement(img);
+      };
+      this.value = obj.name;
+      img.src = src;
+    },
+    setRounded() {},
+    setBorderWidth() {
+      this.object.strokeWidth = +this.borderWidth;
+      canvas.renderAll();
+    },
+    setBorderColor(color) {
+      this.object.stroke = color;
+      canvas.renderAll();
+    }
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"https://getimage.com/image"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s10 m11"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.value),expression:"value"}],staticClass:"input",domProps:{"value":(_vm.value)},on:{"change":_vm.setValue,"input":function($event){if($event.target.composing){ return; }_vm.value=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s2 m1"},[_c('upload-image',{on:{"uploadImage":_vm.setValue}}),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon active",staticStyle:{"margin-top":"36px","height":"72px"}},[_vm._v("file_upload")])],1),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.rounded),expression:"rounded"}],staticClass:"input",domProps:{"value":(_vm.rounded)},on:{"change":_vm.setRounded,"input":function($event){if($event.target.composing){ return; }_vm.rounded=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.borderWidth),expression:"borderWidth"}],staticClass:"input",domProps:{"value":(_vm.borderWidth)},on:{"change":_vm.setBorderWidth,"input":function($event){if($event.target.composing){ return; }_vm.borderWidth=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.startBorderColor},on:{"setColor":_vm.setBorderColor}})],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11213,7 +11249,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-16a94e5e", __vue__options__)
   }
 })()}
-},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3}],12:[function(require,module,exports){
+},{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"../helpers/UploadImage.vue":17,"vue":4,"vue-hot-reload-api":3}],12:[function(require,module,exports){
 ;(function(){
 
 
@@ -11228,12 +11264,12 @@ module.exports = {
   props: ['object'],
   data() {
     return {
-      value: 300,
-      rounded: 0,
-      maxValue: 300,
-      border: 0,
-      startStandColor: '#fff',
-      startProgressColor: '#fff',
+      value: this.object.value,
+      rounded: this.object.rounded,
+      maxValue: this.object.maxValue,
+      border: this.object.border,
+      startStandColor: this.object.standColor,
+      startProgressColor: this.object.progressColor,
       _saveLastStrokeWidth: 0
     };
   },
@@ -11256,7 +11292,6 @@ module.exports = {
     setStandColor(color) {
       this.object.item(0).filters[0] = new fabric.Image.filters.Tint({ color });
       this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
-      this.object.stroke = color;
     },
     setValue() {
       this.object.item(1).width = this.object.width / this.maxValue * this.value;
@@ -11465,7 +11500,7 @@ module.exports = {
       if (!files.length) return;
 
       let reader = new FileReader();
-      reader.onload = e => this.$emit('uploadImage', e.target.result);
+      reader.onload = e => this.$emit('uploadImage', e.target.result, files[0]);
       reader.readAsDataURL(files[0]);
     }
   },
@@ -11511,12 +11546,18 @@ module.exports = {
     return {
       coverImage: null,
       currentObject: null,
-      api: this.$parent.api
+      api: this.$parent.api,
+      METHODS: {
+        'text': 'addText',
+        'linear-bar': 'addLinearBar',
+        'radial-bar': 'addRadialBar',
+        'image': 'addImage'
+      }
     };
   },
   methods: {
     addWidget(type) {
-      let obj = type === 'text' ? this.addText() : this.addLinearBar();
+      this[this.METHODS[type]]();
     },
     addText() {
       let text = new fabric.Text('Текст {varible}', {
@@ -11528,19 +11569,7 @@ module.exports = {
         padding: 7
       });
 
-      text.objectCaching = false;
-      text.id = '' + Date.now();
-      text.selectable = true;
-      text.type = 'text';
-
-      text.scale(this.scale);
-      canvas.add(text);
-
-      text.on('mousedown', () => {
-        this.currentObject = text;
-        $('#menu').tabs('select_tab', 'edit');
-      });
-      text.trigger('mousedown');
+      this.initObject(text, 'text');
     },
     addLinearBar() {
       let src_stand = 'assets/white_pixel.png';
@@ -11579,21 +11608,54 @@ module.exports = {
           group.standColor = stand_color;
           group.progressColor = progress_color;
 
-          group.objectCaching = false;
-          group.id = '' + Date.now();
-          group.selectable = true;
-          group.type = 'linear-bar';
-
-          group.scale(this.scale);
-          canvas.add(group);
-
-          group.on('mousedown', () => {
-            this.currentObject = group;
-            $('#menu').tabs('select_tab', 'edit');
-          });
-          group.trigger('mousedown');
+          this.initObject(group, 'linear-bar');
         });
       });
+    },
+    addRadialBar() {},
+    addImage() {
+      let source = 'assets/image.png';
+      let w = 200;
+      let h = 200;
+      let x = 100;
+      let y = 100;
+      let angle = 0;
+      let rounded = 0;
+      let borderWidth = 0;
+      let borderColor = '#fff';
+
+      fabric.Image.fromURL(source, img => {
+        img.setHeight(h);
+        img.setWidth(w);
+        img.top = x;
+        img.left = y;
+        img.angle = angle;
+        img.rounded = rounded;
+        img.source = source;
+        img.borderWidth = borderWidth;
+        img.borderColor = borderColor;
+
+        this.initObject(img, 'image');
+      });
+    },
+    initObject(obj, type) {
+      obj.objectCaching = false;
+      obj.id = '' + Date.now();
+      obj.selectable = true;
+      obj.type = type;
+
+      obj.scale(this.scale);
+      canvas.add(obj);
+
+      obj.on('mousedown', () => {
+        this.currentObject = obj;
+        $('#menu').tabs('select_tab', 'edit');
+      });
+      canvas.on('selection:cleared', () => {
+        this.currentObject = null;
+        $('#menu').tabs('select_tab', 'add');
+      });
+      obj.trigger('mousedown');
     },
 
     resizeCoverToHeight() {
@@ -11676,7 +11738,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"isCoverEmpty":!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('editors-control',{attrs:{"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_vm._m(1)])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"isCoverEmpty":!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_vm._m(1)])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#add"}},[_vm._v("Добавить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#settings"}},[_vm._v("Настройки")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"settings"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Настройки")])])])}]
 __vue__options__._scopeId = "data-v-06d1d21a"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")

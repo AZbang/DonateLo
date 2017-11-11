@@ -28,6 +28,7 @@
       </div>
       <div id="edit">
         <div class="controls-section">
+          <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
           <editors-control :currentObject="currentObject"></editors-control>
         </div>
       </div>
@@ -57,15 +58,19 @@
       return {
         coverImage: null,
         currentObject: null,
-        api: this.$parent.api
+        api: this.$parent.api,
+        METHODS: {
+          'text': 'addText',
+          'linear-bar': 'addLinearBar',
+          'radial-bar': 'addRadialBar',
+          'image': 'addImage'
+        }
       }
     },
     methods: {
       // Widgets methods
       addWidget(type) {
-        let obj = type === 'text' ? this.addText() : this.addLinearBar();
-
-
+        this[this.METHODS[type]]();
       },
       addText() {
         let text = new fabric.Text('Текст {varible}', {
@@ -77,19 +82,7 @@
           padding: 7
         });
 
-        text.objectCaching = false;
-        text.id = '' + Date.now();
-        text.selectable = true;
-        text.type = 'text';
-
-        text.scale(this.scale);
-        canvas.add(text);
-
-        text.on('mousedown', () => {
-          this.currentObject = text;
-          $('#menu').tabs('select_tab', 'edit');
-        });
-        text.trigger('mousedown');
+        this.initObject(text, 'text');
       },
       addLinearBar() {
         let src_stand = 'assets/white_pixel.png';
@@ -104,8 +97,6 @@
         let br = 0;
         let progress_color = '#ffff';
         let stand_color = '#ccc'
-
-
 
         fabric.Image.fromURL(src_stand, (stand) => {
           stand.setHeight(h);
@@ -130,21 +121,56 @@
             group.standColor = stand_color;
             group.progressColor = progress_color;
 
-            group.objectCaching = false;
-            group.id = '' + Date.now();
-            group.selectable = true;
-            group.type = 'linear-bar';
-
-            group.scale(this.scale);
-            canvas.add(group);
-
-            group.on('mousedown', () => {
-              this.currentObject = group;
-              $('#menu').tabs('select_tab', 'edit');
-            });
-            group.trigger('mousedown');
+            this.initObject(group, 'linear-bar');
           });
         });
+      },
+      addRadialBar() {
+
+      },
+      addImage() {
+        let source = 'assets/image.png';
+        let w = 200;
+        let h = 200;
+        let x = 100;
+        let y = 100;
+        let angle = 0;
+        let rounded = 0;
+        let borderWidth = 0;
+        let borderColor = '#fff';
+
+        fabric.Image.fromURL(source, (img) => {
+          img.setHeight(h);
+          img.setWidth(w);
+          img.top = x;
+          img.left = y;
+          img.angle = angle;
+          img.rounded = rounded;
+          img.source = source;
+          img.borderWidth = borderWidth;
+          img.borderColor = borderColor;
+
+          this.initObject(img, 'image');
+        });
+      },
+      initObject(obj, type) {
+        obj.objectCaching = false;
+        obj.id = '' + Date.now();
+        obj.selectable = true;
+        obj.type = type;
+
+        obj.scale(this.scale);
+        canvas.add(obj);
+
+        obj.on('mousedown', () => {
+          this.currentObject = obj;
+          $('#menu').tabs('select_tab', 'edit');
+        });
+        canvas.on('selection:cleared', () => {
+          this.currentObject = null;
+          $('#menu').tabs('select_tab', 'add');
+        });
+        obj.trigger('mousedown');
       },
 
       // Cover methods

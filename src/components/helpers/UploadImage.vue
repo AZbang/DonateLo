@@ -10,7 +10,7 @@
         if(!files.length) return;
 
         let reader = new FileReader();
-        reader.onload = (e) => this.$emit('uploadImage', e.target.result);
+        reader.onload = (e) => this.$emit('uploadImage', e.target.result, files[0]);
         reader.readAsDataURL(files[0]);
       }
     },
