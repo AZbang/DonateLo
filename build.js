@@ -11225,15 +11225,59 @@ module.exports = {
     ColorPicker,
     EditorForms
   },
+  props: ['object'],
+  data() {
+    return {
+      value: 300,
+      rounded: 0,
+      maxValue: 300,
+      border: 0,
+      startStandColor: '#fff',
+      startProgressColor: '#fff',
+      _saveLastStrokeWidth: 0
+    };
+  },
+  watch: {
+    object(val) {
+      if (!val) return;
+      this.startProgressColor = val.progressColor;
+      this.startStandColor = val.standColor;
+      this.border = val.border;
+      this.value = val.value;
+      this.maxValue = val.maxValue;
+      this.rounded = val.rounded;
+    }
+  },
   methods: {
-    setColor(color) {}
+    setProgressColor(color) {
+      this.object.item(1).filters[0] = new fabric.Image.filters.Tint({ color });
+      this.object.item(1).applyFilters(canvas.renderAll.bind(canvas));
+    },
+    setStandColor(color) {
+      this.object.item(0).filters[0] = new fabric.Image.filters.Tint({ color });
+      this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
+      this.object.stroke = color;
+    },
+    setValue() {
+      this.object.item(1).width = this.object.width / this.maxValue * this.value;
+      canvas.renderAll();
+    },
+    setRounded() {},
+    setStrokeWidth() {
+      this.object.item(0).setHeight(this.object.height + this.border * 2);
+      this.object.item(0).setWidth(this.object.width + this.border * 2);
+      this.object.item(0).left -= this._saveLastBorder + this.border;
+      this.object.item(0).top -= this._saveLastBorder + this.border;
+      this._saveLastBorder = this.border;
+      canvas.renderAll();
+    }
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Скругление:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"5%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.value),expression:"value"}],staticClass:"input",domProps:{"value":(_vm.value)},on:{"change":_vm.setValue,"input":function($event){if($event.target.composing){ return; }_vm.value=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.maxValue),expression:"maxValue"}],staticClass:"input",domProps:{"value":(_vm.maxValue)},on:{"change":_vm.setValue,"input":function($event){if($event.target.composing){ return; }_vm.maxValue=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.border),expression:"border"}],staticClass:"input",domProps:{"value":(_vm.border)},on:{"change":_vm.setStrokeWidth,"input":function($event){if($event.target.composing){ return; }_vm.border=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.startProgressColor},on:{"setColor":_vm.setProgressColor}})],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.startStandColor},on:{"setColor":_vm.setStandColor}})],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11340,7 +11384,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-31564498", __vue__options__)
   } else {
-    hotAPI.reload("data-v-31564498", __vue__options__)
+    hotAPI.rerender("data-v-31564498", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3}],15:[function(require,module,exports){
@@ -11472,30 +11516,83 @@ module.exports = {
   },
   methods: {
     addWidget(type) {
-      let obj = this.addText();
-
-      obj.id = '' + Date.now();
-      obj.selectable = true;
-      obj.type = type;
-      obj.objectCaching = false;
-
-      obj.scale(this.scale);
-      canvas.add(obj);
-
-      obj.on('mousedown', () => {
-        this.currentObject = obj;
-        $('#menu').tabs('select_tab', 'edit');
-      });
-      obj.trigger('mousedown');
+      let obj = type === 'text' ? this.addText() : this.addLinearBar();
     },
     addText() {
-      return new fabric.Text('Текст {varible}', {
+      let text = new fabric.Text('Текст {varible}', {
         left: 20 * this.scale,
         top: 20 * this.scale,
         fill: '#fff',
         fontFamily: 'Bebas Neue',
         fontSize: 42,
         padding: 7
+      });
+
+      text.objectCaching = false;
+      text.id = '' + Date.now();
+      text.selectable = true;
+      text.type = 'text';
+
+      text.scale(this.scale);
+      canvas.add(text);
+
+      text.on('mousedown', () => {
+        this.currentObject = text;
+        $('#menu').tabs('select_tab', 'edit');
+      });
+      text.trigger('mousedown');
+    },
+    addLinearBar() {
+      let src_stand = 'assets/white_pixel.png';
+      let src_progress = 'assets/white_pixel.png';
+      let angle = 0;
+      let rounded = 0;
+      let value = 300;
+      let w = 300;
+      let h = 50;
+      let x = 200;
+      let y = 200;
+      let br = 0;
+      let progress_color = '#ffff';
+      let stand_color = '#ccc';
+
+      fabric.Image.fromURL(src_stand, stand => {
+        stand.setHeight(h);
+        stand.setWidth(w);
+
+        fabric.Image.fromURL(src_progress, progress => {
+          progress.setHeight(h);
+          progress.setWidth(w);
+
+          let group = new fabric.Group([stand, progress]);
+          group.left = x * this.scale - w * this.scale / 2;
+          group.top = y * this.scale - h * this.scale / 2;
+          group.setOriginToCenter();
+
+          group.value = value;
+          group.maxValue = value;
+          group.progress = src_progress;
+          group.stand = src_stand;
+          group.angle = angle;
+          group.border = br;
+          group.rounded = rounded;
+          group.standColor = stand_color;
+          group.progressColor = progress_color;
+
+          group.objectCaching = false;
+          group.id = '' + Date.now();
+          group.selectable = true;
+          group.type = 'linear-bar';
+
+          group.scale(this.scale);
+          canvas.add(group);
+
+          group.on('mousedown', () => {
+            this.currentObject = group;
+            $('#menu').tabs('select_tab', 'edit');
+          });
+          group.trigger('mousedown');
+        });
       });
     },
 

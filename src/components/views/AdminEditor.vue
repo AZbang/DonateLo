@@ -63,30 +63,87 @@
     methods: {
       // Widgets methods
       addWidget(type) {
-        let obj = this.addText();
+        let obj = type === 'text' ? this.addText() : this.addLinearBar();
 
-        obj.id = '' + Date.now();
-        obj.selectable = true;
-        obj.type = type;
-        obj.objectCaching = false;
 
-        obj.scale(this.scale);
-        canvas.add(obj);
-
-        obj.on('mousedown', () => {
-          this.currentObject = obj;
-          $('#menu').tabs('select_tab', 'edit');
-        });
-        obj.trigger('mousedown');
       },
       addText() {
-        return new fabric.Text('Текст {varible}', {
+        let text = new fabric.Text('Текст {varible}', {
           left: 20*this.scale,
           top: 20*this.scale,
           fill: '#fff',
           fontFamily: 'Bebas Neue',
           fontSize: 42,
           padding: 7
+        });
+
+        text.objectCaching = false;
+        text.id = '' + Date.now();
+        text.selectable = true;
+        text.type = 'text';
+
+        text.scale(this.scale);
+        canvas.add(text);
+
+        text.on('mousedown', () => {
+          this.currentObject = text;
+          $('#menu').tabs('select_tab', 'edit');
+        });
+        text.trigger('mousedown');
+      },
+      addLinearBar() {
+        let src_stand = 'assets/white_pixel.png';
+        let src_progress = 'assets/white_pixel.png';
+        let angle = 0;
+        let rounded = 0;
+        let value = 300;
+        let w = 300;
+        let h = 50;
+        let x = 200;
+        let y = 200;
+        let br = 0;
+        let progress_color = '#ffff';
+        let stand_color = '#ccc'
+
+
+
+        fabric.Image.fromURL(src_stand, (stand) => {
+          stand.setHeight(h);
+          stand.setWidth(w);
+
+          fabric.Image.fromURL(src_progress, (progress) => {
+            progress.setHeight(h);
+            progress.setWidth(w);
+
+            let group = new fabric.Group([stand, progress]);
+            group.left = x*this.scale-w*this.scale/2;
+            group.top = y*this.scale-h*this.scale/2;
+            group.setOriginToCenter();
+
+            group.value = value;
+            group.maxValue = value;
+            group.progress = src_progress;
+            group.stand = src_stand;
+            group.angle = angle;
+            group.border = br;
+            group.rounded = rounded;
+            group.standColor = stand_color;
+            group.progressColor = progress_color;
+
+            group.objectCaching = false;
+            group.id = '' + Date.now();
+            group.selectable = true;
+            group.type = 'linear-bar';
+
+            group.scale(this.scale);
+            canvas.add(group);
+
+            group.on('mousedown', () => {
+              this.currentObject = group;
+              $('#menu').tabs('select_tab', 'edit');
+            });
+            group.trigger('mousedown');
+          });
         });
       },
 
