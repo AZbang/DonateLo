@@ -11328,23 +11328,84 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 ;(function(){
 
 
-const ColorPicker = require('../helpers/ColorPicker.vue');
 const EditorForms = require('../helpers/EditorForms.vue');
+const ColorPicker = require('../helpers/ColorPicker.vue');
 
 module.exports = {
   components: {
     ColorPicker,
     EditorForms
   },
+  props: ['object'],
+  data() {
+    return {
+      value: this.object.value,
+      rounded: this.object.rounded,
+      maxValue: this.object.maxValue,
+      border: this.object.border,
+      startAngle: this.object.startAngle,
+      startStandColor: this.object.standColor,
+      startProgressColor: this.object.progressColor,
+      _saveLastStrokeWidth: 0
+    };
+  },
+  watch: {
+    object(val) {
+      if (!val) return;
+      this.startProgressColor = val.progressColor;
+      this.startStandColor = val.standColor;
+      this.border = val.border;
+      this.value = val.value;
+      this.startAngle = val.startAngle;
+      this.maxValue = val.maxValue;
+      this.rounded = val.rounded;
+    }
+  },
   methods: {
-    setColor(color) {}
+    setProgressColor(color) {
+      this.object.item(1).filters[0] = new fabric.Image.filters.Tint({ color });
+      this.object.item(1).applyFilters(canvas.renderAll.bind(canvas));
+    },
+    setStartAngle() {
+      this.object.item(1).angle = -90 + this.startAngle;
+      canvas.renderAll();
+    },
+    setStandColor(color) {
+      this.object.item(0).filters[0] = new fabric.Image.filters.Tint({ color });
+      this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
+    },
+    setValue() {
+      this.object.item(1).set({
+        clipTo: ctx => {
+          ctx.moveTo(0, 0);
+          ctx.arc(0, 0, this.object.width / 2, 0, Math.PI * 2 / this.maxValue * this.value, false);
+          ctx.lineTo(0, 0);
+          ctx.fill();
+        }
+      });
+      canvas.renderAll();
+    },
+    setBorderColor() {
+      this.object.item(0).setHeight(this.object.height + this.border * 2);
+      this.object.item(0).setWidth(this.object.width + this.border * 2);
+      this.object.item(0).left -= this._saveLastBorder + this.border;
+      this.object.item(0).top -= this._saveLastBorder + this.border;
+      this.object.item(0).set({
+        clipTo: ctx => {
+          ctx.arc(0, 0, this.object.item(0).width / 2, 0, Math.PI * 2, true);
+        }
+      });
+      this._saveLastBorder = this.border;
+
+      canvas.renderAll();
+    }
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"100%"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"0"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",attrs:{"value":"10px"}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет прогресс линии:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker')],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s6 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.value),expression:"value"}],staticClass:"input",domProps:{"value":(_vm.value)},on:{"change":_vm.setValue,"input":function($event){if($event.target.composing){ return; }_vm.value=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.maxValue),expression:"maxValue"}],staticClass:"input",domProps:{"value":(_vm.maxValue)},on:{"change":_vm.setValue,"input":function($event){if($event.target.composing){ return; }_vm.maxValue=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.startAngle),expression:"startAngle"}],staticClass:"input",domProps:{"value":(_vm.startAngle)},on:{"change":_vm.setStartAngle,"input":function($event){if($event.target.composing){ return; }_vm.startAngle=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.border),expression:"border"}],staticClass:"input",domProps:{"value":(_vm.border)},on:{"change":_vm.setBorderColor,"input":function($event){if($event.target.composing){ return; }_vm.border=$event.target.value}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s9"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.startProgressColor},on:{"setColor":_vm.setProgressColor}})],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.startStandColor},on:{"setColor":_vm.setStandColor}})],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -11353,7 +11414,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-43766792", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-43766792", __vue__options__)
+    hotAPI.reload("data-v-43766792", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":15,"../helpers/EditorForms.vue":16,"vue":4,"vue-hot-reload-api":3}],14:[function(require,module,exports){
@@ -11436,7 +11497,7 @@ module.exports = {
   props: ['startColor'],
   data() {
     return {
-      colors: [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda", "#5ac4ec", "#456cad", "#707dc3", "#c8cad7"],
+      colors: [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda"],
       picker: [],
       selectColor: 0,
       showPicker: false
@@ -11612,7 +11673,62 @@ module.exports = {
         });
       });
     },
-    addRadialBar() {},
+    addRadialBar() {
+      let src_stand = 'assets/white_pixel.png';
+      let src_progress = 'assets/white_pixel.png';
+      let angle = 0;
+      let rounded = 0;
+      let value = 300;
+      let w = 200;
+      let h = 200;
+      let x = 200;
+      let y = 200;
+      let br = 0;
+      let progress_color = '#ffff';
+      let stand_color = '#ccc';
+
+      fabric.Image.fromURL(src_stand, stand => {
+        stand.setHeight(h);
+        stand.setWidth(w);
+        stand.set({
+          clipTo: ctx => {
+            ctx.arc(0, 0, 100, 0, Math.PI * 2, true);
+          }
+        });
+
+        fabric.Image.fromURL(src_progress, progress => {
+          progress.setHeight(h);
+          progress.setWidth(w);
+          progress.setOriginToCenter();
+          progress.angle = -90;
+          progress.set({
+            clipTo: ctx => {
+              ctx.moveTo(0, 0);
+              ctx.arc(0, 0, progress.width / 2, 0, Math.PI * 2, false);
+              ctx.lineTo(0, 0);
+              ctx.fill();
+            }
+          });
+
+          let group = new fabric.Group([stand, progress]);
+          group.left = x * this.scale - w * this.scale / 2;
+          group.top = y * this.scale - h * this.scale / 2;
+          group.setOriginToCenter();
+
+          group.value = value;
+          group.maxValue = value;
+          group.progress = src_progress;
+          group.stand = src_stand;
+          group.angle = angle;
+          group.border = br;
+          group.rounded = rounded;
+          group.standColor = stand_color;
+          group.progressColor = progress_color;
+
+          this.initObject(group, 'radial-bar');
+        });
+      });
+    },
     addImage() {
       let source = 'assets/image.png';
       let w = 200;

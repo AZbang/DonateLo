@@ -126,7 +126,60 @@
         });
       },
       addRadialBar() {
+        let src_stand = 'assets/white_pixel.png';
+        let src_progress = 'assets/white_pixel.png';
+        let angle = 0;
+        let rounded = 0;
+        let value = 300;
+        let w = 200;
+        let h = 200;
+        let x = 200;
+        let y = 200;
+        let br = 0;
+        let progress_color = '#ffff';
+        let stand_color = '#ccc'
 
+        fabric.Image.fromURL(src_stand, (stand) => {
+          stand.setHeight(h);
+          stand.setWidth(w);
+          stand.set({
+            clipTo: (ctx) => {
+              ctx.arc(0, 0, 100, 0, Math.PI*2, true);
+            }
+          });
+
+          fabric.Image.fromURL(src_progress, (progress) => {
+            progress.setHeight(h);
+            progress.setWidth(w);
+            progress.setOriginToCenter();
+            progress.angle = -90;
+            progress.set({
+              clipTo: (ctx) => {
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, progress.width/2, 0, Math.PI*2, false);
+                ctx.lineTo(0, 0);
+                ctx.fill();
+              }
+            });
+
+            let group = new fabric.Group([stand, progress]);
+            group.left = x*this.scale-w*this.scale/2;
+            group.top = y*this.scale-h*this.scale/2;
+            group.setOriginToCenter();
+
+            group.value = value;
+            group.maxValue = value;
+            group.progress = src_progress;
+            group.stand = src_stand;
+            group.angle = angle;
+            group.border = br;
+            group.rounded = rounded;
+            group.standColor = stand_color;
+            group.progressColor = progress_color;
+
+            this.initObject(group, 'radial-bar');
+          });
+        });
       },
       addImage() {
         let source = 'assets/image.png';

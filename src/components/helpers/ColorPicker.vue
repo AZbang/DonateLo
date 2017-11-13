@@ -22,7 +22,7 @@
     props: ['startColor'],
     data() {
       return {
-        colors: [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda", "#5ac4ec", "#456cad", "#707dc3", "#c8cad7"],
+        colors: [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda"],
         picker: [],
         selectColor: 0,
         showPicker: false
