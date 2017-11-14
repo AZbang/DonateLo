@@ -38,6 +38,7 @@
         </div>
       </div>
     </div>
+    <a id="uploadData" @click="uploadData" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
   </div>
 </template>
 
@@ -46,6 +47,7 @@
   const WidgetsControl = require('../controls/WidgetsControl.vue');
   const ServicesControl = require('../controls/ServicesControl.vue');
   const EditorsControl = require('../controls/EditorsControl.vue');
+  const axios = require('axios');
 
   module.exports = {
     components: {
@@ -68,138 +70,309 @@
       }
     },
     methods: {
+      convertFileToDataURL(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            callback(reader.result);
+          }
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+      },
+
+      // API METHODS
+      createGroup(url) {
+        this.convertFileToDataURL(url, (base64) => {
+          axios.post('https://app-donatelo.herokuapp.com/create_group', {
+            app_id: this.api.api_id,
+            auth_token: this.api.auth_key,
+            access_token: this.api.access_token,
+            resources: {
+              background: base64,
+            },
+            views: [],
+            group_id: this.api.group_id,
+            viewer_id: this.api.viewer_id
+          }).then((response) => {
+            this.getData();
+          });
+        });
+      },
+      getData() {
+        axios.post('https://app-donatelo.herokuapp.com/get_cover', {
+          app_id: this.api.api_id,
+          auth_token: this.api.auth_key,
+          group_id: this.api.group_id,
+          viewer_id: this.api.viewer_id
+        }).then((response) => {
+          console.log(response);
+        })
+      },
+      uploadData() {
+        let resources = {};
+        let views = [];
+
+        canvas.getItemsByAttr('type', 'radial-bar').forEach((i) => {
+          let data = this.getRadialBarJSON(i);
+          resources = {...resources, ...data.images};
+          views.push(data.data);
+        });
+        canvas.getItemsByAttr('type', 'linear-bar').forEach((i) => {
+          let data = this.getLinearBarJSON(i);
+          resources = {...resources, ...data.images};
+          views.push(data.data);
+        });
+        canvas.getItemsByAttr('type', 'text').forEach((i) => {
+          let data = this.getTextJSON(i);
+          views.push(data);
+        });
+        canvas.getItemsByAttr('type', 'image').forEach((i) => {
+          if(i.id == 'cover') return;
+          let data = this.getImageJSON(i);
+          views.push(data);
+        });
+
+        console.log(resources, views);
+
+        axios.post('https://app-donatelo.herokuapp.com/update_cover', {
+          app_id: this.api.api_id,
+          auth_token: this.api.auth_key,
+          group_id: this.api.group_id,
+          viewer_id: this.api.viewer_id,
+          resources, views
+        }).then((response) => {
+          console.log(response);
+        });
+      },
+      getRadialBarJSON(obj) {
+        return {
+          images: {
+            [obj.id + ':stand']: obj.stand,
+            [obj.id + ':bar']: obj.progress,
+          },
+          data: {
+            id: obj.id,
+            type: "radial",
+            value: '' + obj.value,
+            max_value: obj.maxValue + 0.000001,
+            x: obj.left,
+            y: obj.top,
+            w: obj.width,
+            h: obj.width,
+            angle: obj.angle+ 0.000001,
+            // stand_color: obj.standColor,
+            // bar_color: obj.progressColor,
+            start_angle: obj.startAngle+ 0.000001,
+            direction: +obj.direction,
+            border: +obj.border
+          }
+        }
+      },
+      getLinearBarJSON(obj) {
+        return {
+          images: {
+            [obj.id + ':stand']: obj.stand,
+            [obj.id + ':bar']: obj.progress,
+          },
+          data: {
+            id: obj.id,
+            type: "linear",
+            value: '' + obj.value,
+            max_value: obj.maxValue + 0.000001,
+            x: obj.left,
+            y: obj.top,
+            w: obj.width,
+            h: obj.width,
+            angle: obj.angle + 0.000001,
+            // stand_color: obj.standColor,
+            // bar_color: obj.progressColor,
+            border: +obj.border
+          }
+        }
+      },
+      getTextJSON(obj) {
+        return {
+          id: obj.id,
+          type: "text",
+          value: obj.text,
+          x: obj.left,
+          y: obj.top,
+          angle: obj.angle + 0.000001,
+          font: obj.fontType,
+          size: +obj.fontSize,
+          color: obj.fill,
+          // align: obj.textAlign
+        }
+      },
+      getImageJSON(obj) {
+        return {
+          id: obj.id,
+          type: "image",
+          value: obj.value,
+          x: obj.left,
+          y: obj.top,
+          w: obj.width,
+          h: obj.height,
+          angle: obj.angle + 0.000001,
+          // border_color: obj.borderColor,
+          // border_width: obj.borderWidth
+        }
+      },
+
       // Widgets methods
       addWidget(type) {
         this[this.METHODS[type]]();
       },
-      addText() {
-        let text = new fabric.Text('Текст {varible}', {
-          left: 20*this.scale,
-          top: 20*this.scale,
-          fill: '#fff',
+      addText(data) {
+        let font = data.font || 'BEBAS';
+        let color = data.color || '#fff';
+        let align = data.align || 'left';
+        let size = data.size || 42;
+        let x = data.x || 50;
+        let y = data.y || 50;
+
+        let text = new fabric.Text(data.text || 'Текст {varible}', {
+          left: x*this.scale,
+          top: y*this.scale,
+          fill: color,
           fontFamily: 'Bebas Neue',
-          fontSize: 42,
+          fontSize: size,
           padding: 7
         });
+        text.fontType = font;
+        text.color = color;
+        text.align = align;
+        text.size = size;
 
         this.initObject(text, 'text');
       },
-      addLinearBar() {
-        let src_stand = 'assets/white_pixel.png';
-        let src_progress = 'assets/white_pixel.png';
-        let angle = 0;
-        let rounded = 0;
-        let value = 300;
-        let w = 300;
-        let h = 50;
-        let x = 200;
-        let y = 200;
-        let br = 0;
-        let progress_color = '#ffff';
-        let stand_color = '#ccc'
+      addLinearBar(data) {
+        this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
+          this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
+            let src_stand = stand_base64;
+            let src_progress = bar_base64;
+            let angle = data.angle || 0;
+            let value = data.value || 300;
+            let w = data.w || 300;
+            let h = data.h || 50;
+            let x = data.x || 200;
+            let y = data.y || 200;
+            let br = data.border || 0;
+            let progress_color = '#fff';
+            let stand_color = '#fff'
 
-        fabric.Image.fromURL(src_stand, (stand) => {
-          stand.setHeight(h);
-          stand.setWidth(w);
+            fabric.Image.fromURL(src_stand, (stand) => {
+              stand.setHeight(h);
+              stand.setWidth(w);
 
-          fabric.Image.fromURL(src_progress, (progress) => {
-            progress.setHeight(h);
-            progress.setWidth(w);
+              fabric.Image.fromURL(src_progress, (progress) => {
+                progress.setHeight(h);
+                progress.setWidth(w);
 
-            let group = new fabric.Group([stand, progress]);
-            group.left = x*this.scale-w*this.scale/2;
-            group.top = y*this.scale-h*this.scale/2;
-            group.setOriginToCenter();
+                let group = new fabric.Group([stand, progress]);
+                group.left = x*this.scale-w*this.scale/2;
+                group.top = y*this.scale-h*this.scale/2;
+                group.setOriginToCenter();
 
-            group.value = value;
-            group.maxValue = value;
-            group.progress = src_progress;
-            group.stand = src_stand;
-            group.angle = angle;
-            group.border = br;
-            group.rounded = rounded;
-            group.standColor = stand_color;
-            group.progressColor = progress_color;
+                group.value = value;
+                group.maxValue = value;
+                group.progress = src_progress;
+                group.stand = src_stand;
+                group.angle = angle;
+                group.border = br;
+                group.standColor = stand_color;
+                group.progressColor = progress_color;
 
-            this.initObject(group, 'linear-bar');
-          });
-        });
-      },
-      addRadialBar() {
-        let src_stand = 'assets/white_pixel.png';
-        let src_progress = 'assets/white_pixel.png';
-        let angle = 0;
-        let rounded = 0;
-        let value = 300;
-        let w = 200;
-        let h = 200;
-        let x = 200;
-        let y = 200;
-        let br = 0;
-        let progress_color = '#ffff';
-        let stand_color = '#ccc'
-
-        fabric.Image.fromURL(src_stand, (stand) => {
-          stand.setHeight(h);
-          stand.setWidth(w);
-          stand.set({
-            clipTo: (ctx) => {
-              ctx.arc(0, 0, 100, 0, Math.PI*2, true);
-            }
-          });
-
-          fabric.Image.fromURL(src_progress, (progress) => {
-            progress.setHeight(h);
-            progress.setWidth(w);
-            progress.setOriginToCenter();
-            progress.angle = -90;
-            progress.set({
-              clipTo: (ctx) => {
-                ctx.moveTo(0, 0);
-                ctx.arc(0, 0, progress.width/2, 0, Math.PI*2, false);
-                ctx.lineTo(0, 0);
-                ctx.fill();
-              }
+                this.initObject(group, 'linear-bar');
+              });
             });
+          })
+        })
+      },
+      addRadialBar(data) {
+        this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
+          this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
+            let src_stand = stand_base64;
+            let src_progress = bar_base64;
+            let angle = data.angle || 0;
+            let value = data.value || 300;
+            let w = data.w || 300;
+            let h = data.h || 50;
+            let x = data.x || 200;
+            let y = data.y || 200;
+            let br = data.border || 0;
+            let start_angle = data.start_angle || 0;
+            let direction = data.direction || 0;
+            let progress_color = '#fff';
+            let stand_color = '#fff'
 
-            let group = new fabric.Group([stand, progress]);
-            group.left = x*this.scale-w*this.scale/2;
-            group.top = y*this.scale-h*this.scale/2;
-            group.setOriginToCenter();
+            fabric.Image.fromURL(src_stand, (stand) => {
+              stand.setHeight(h);
+              stand.setWidth(w);
+              stand.set({
+                clipTo: (ctx) => {
+                  ctx.arc(0, 0, 100, 0, Math.PI*2, true);
+                }
+              });
 
-            group.value = value;
-            group.maxValue = value;
-            group.progress = src_progress;
-            group.stand = src_stand;
-            group.angle = angle;
-            group.border = br;
-            group.rounded = rounded;
-            group.standColor = stand_color;
-            group.progressColor = progress_color;
+              fabric.Image.fromURL(src_progress, (progress) => {
+                progress.setHeight(h);
+                progress.setWidth(w);
+                progress.setOriginToCenter();
+                progress.angle = -90;
+                progress.set({
+                  clipTo: (ctx) => {
+                    ctx.moveTo(0, 0);
+                    ctx.arc(0, 0, progress.width/2, 0, Math.PI*2, false);
+                    ctx.lineTo(0, 0);
+                    ctx.fill();
+                  }
+                });
 
-            this.initObject(group, 'radial-bar');
+                let group = new fabric.Group([stand, progress]);
+                group.left = x*this.scale-w*this.scale/2;
+                group.top = y*this.scale-h*this.scale/2;
+                group.setOriginToCenter();
+
+                group.value = value;
+                group.maxValue = value;
+                group.progress = src_progress;
+                group.stand = src_stand;
+                group.angle = angle;
+                group.border = br;
+                group.startAngle = start_angle;
+                group.direction = direction;
+                group.standColor = stand_color;
+                group.progressColor = progress_color;
+
+                this.initObject(group, 'radial-bar');
+              });
+            });
           });
         });
       },
       addImage() {
-        let source = 'assets/image.png';
-        let w = 200;
-        let h = 200;
-        let x = 100;
-        let y = 100;
-        let angle = 0;
-        let rounded = 0;
+        let angle = data.angle || 0;
+        let value = data.value || 'assets/image.png';
+        let w = data.w || 150;
+        let h = data.h || 150;
+        let x = data.x || 200;
+        let y = data.y || 200;
+        let br = data.border || 0;
         let borderWidth = 0;
         let borderColor = '#fff';
 
-        fabric.Image.fromURL(source, (img) => {
+        fabric.Image.fromURL(value, (img) => {
           img.setHeight(h);
           img.setWidth(w);
           img.top = x;
           img.left = y;
           img.angle = angle;
-          img.rounded = rounded;
-          img.source = source;
+          img.value = value;
           img.borderWidth = borderWidth;
           img.borderColor = borderColor;
 
@@ -303,7 +476,10 @@
       }
       // Get cover
       let covers = this.api.api_result.response[0].cover.images;
-      if(covers.length) this.setCover(covers[covers.length-1].url);
+      if(covers.length) {
+        this.setCover(covers[covers.length-1].url);
+        this.createGroup(covers[covers.length-1].url);
+      }
     }
   }
 </script>
@@ -313,6 +489,11 @@
     position: fixed;
     top: 0;
     z-index: 10000;
+  }
+  #uploadData {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
   }
   .views-wrap {
     margin-top: 348px;

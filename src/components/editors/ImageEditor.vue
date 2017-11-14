@@ -53,7 +53,7 @@
     watch: {
       object(val) {
         if(!val) return;
-        this.value = val.source;
+        this.value = val.value;
         this.rounded = val.rounded;
         this.borderWidth = val.borderWidth;
         this.startBorderColor = val.borderColor;

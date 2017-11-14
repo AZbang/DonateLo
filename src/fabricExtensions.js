@@ -1,10 +1,10 @@
-fabric.Canvas.prototype.getItemsByAttr = function() {
+fabric.Canvas.prototype.getItemsByAttr = function(attr, name) {
   let result = [];
   let objects = this.getObjects();
 
   for(let i = 0, len = this.size(); i < len; i++) {
     if(objects[i][attr] && objects[i][attr] === name) {
-      result.push(object[i]);
+      result.push(objects[i]);
     }
   }
   return result;

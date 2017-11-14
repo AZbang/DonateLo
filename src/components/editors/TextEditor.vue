@@ -47,7 +47,8 @@
         value: this.object.text,
         fontSize: this.object.fontSize,
         textAlign: this.object.textAlign,
-        fill: this.object.fill
+        fill: this.object.fill,
+        fontType: this.object.fontType
       }
     },
     watch: {
