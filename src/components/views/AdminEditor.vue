@@ -98,7 +98,7 @@
             group_id: this.api.group_id,
             viewer_id: this.api.viewer_id
           }).then((response) => {
-            this.getData();
+            this.$emit('isLoad', false);
           });
         });
       },
@@ -199,8 +199,8 @@
           id: obj.id,
           type: "text",
           value: obj.text,
-          x: obj.left,
-          y: obj.top,
+          x: Math.floor(obj.left),
+          y: Math.floor(obj.top),
           angle: obj.angle + 0.000001,
           font: obj.fontType,
           size: +obj.fontSize,
@@ -227,7 +227,7 @@
       addWidget(type) {
         this[this.METHODS[type]]();
       },
-      addText(data) {
+      addText(data = {}) {
         let font = data.font || 'BEBAS';
         let color = data.color || '#fff';
         let align = data.align || 'left';
@@ -250,7 +250,7 @@
 
         this.initObject(text, 'text');
       },
-      addLinearBar(data) {
+      addLinearBar(data = {}) {
         this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
           this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
             let src_stand = stand_base64;
@@ -293,7 +293,7 @@
           })
         })
       },
-      addRadialBar(data) {
+      addRadialBar(data = {}) {
         this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
           this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
             let src_stand = stand_base64;
@@ -355,7 +355,7 @@
           });
         });
       },
-      addImage() {
+      addImage(data = {}) {
         let angle = data.angle || 0;
         let value = data.value || 'assets/image.png';
         let w = data.w || 150;
@@ -477,6 +477,7 @@
       // Get cover
       let covers = this.api.api_result.response[0].cover.images;
       if(covers.length) {
+        this.$emit('isLoad', true);
         this.setCover(covers[covers.length-1].url);
         this.createGroup(covers[covers.length-1].url);
       }

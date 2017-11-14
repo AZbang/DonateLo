@@ -1,5 +1,20 @@
 <template>
-  <div :is="viewComponent"></div>
+  <div>
+    <div class="preload" v-show="isLoad">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div :is="viewComponent" @isLoad="setLoad"></div>
+  </div>
 </template>
 
 <script>
@@ -7,8 +22,11 @@
   const GettingStarted = require('./views/GettingStarted.vue');
 
   module.exports = {
-    data: {
-      api: {}
+    data() {
+      return {
+        api: {},
+        isLoad: false
+      }
     },
     methods: {
       getVKApiData() {
@@ -22,6 +40,9 @@
         }
         api.api_result = JSON.parse(decodeURIComponent(api.api_result));
         this.api = api;
+      },
+      setLoad(v) {
+        this.isLoad = v;
       }
     },
     computed: {
@@ -39,6 +60,24 @@
   body {
     overflow-x: hidden;
     background-color: #edeef0;
+  }
+
+  .preload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 10000000;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .preloader-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
   }
 
   .vk-color {

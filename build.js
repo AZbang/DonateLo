@@ -12423,7 +12423,7 @@ exports.insert = function (css) {
 }
 
 },{}],32:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background-color: #edeef0;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background-color: #edeef0;\n}\n\n.preload {\n  position: fixed;\n  top: 0;\n  left: 0;\n  background: #fff;\n  z-index: 10000000;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preloader-wrapper {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -32px;\n  margin-left: -32px;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
 ;(function(){
 
 
@@ -12431,8 +12431,11 @@ const AdminEditor = require('./views/AdminEditor.vue');
 const GettingStarted = require('./views/GettingStarted.vue');
 
 module.exports = {
-  data: {
-    api: {}
+  data() {
+    return {
+      api: {},
+      isLoad: false
+    };
   },
   methods: {
     getVKApiData() {
@@ -12446,6 +12449,9 @@ module.exports = {
       }
       api.api_result = JSON.parse(decodeURIComponent(api.api_result));
       this.api = api;
+    },
+    setLoad(v) {
+      this.isLoad = v;
     }
   },
   computed: {
@@ -12460,8 +12466,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.viewComponent,{tag:"div"})}
-__vue__options__.staticRenderFns = []
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoad),expression:"isLoad"}],staticClass:"preload"},[_vm._m(0)]),_vm._v(" "),_c(_vm.viewComponent,{tag:"div",on:{"isLoad":_vm.setLoad}})])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"preloader-wrapper big active"},[_c('div',{staticClass:"spinner-layer spinner-blue-only"},[_c('div',{staticClass:"circle-clipper left"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"gap-patch"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"circle-clipper right"},[_c('div',{staticClass:"circle"})])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -13078,7 +13084,7 @@ module.exports = {
           group_id: this.api.group_id,
           viewer_id: this.api.viewer_id
         }).then(response => {
-          this.getData();
+          this.$emit('isLoad', false);
         });
       });
     },
@@ -13177,8 +13183,8 @@ module.exports = {
         id: obj.id,
         type: "text",
         value: obj.text,
-        x: obj.left,
-        y: obj.top,
+        x: Math.floor(obj.left),
+        y: Math.floor(obj.top),
         angle: obj.angle + 0.000001,
         font: obj.fontType,
         size: +obj.fontSize,
@@ -13201,7 +13207,7 @@ module.exports = {
     addWidget(type) {
       this[this.METHODS[type]]();
     },
-    addText(data) {
+    addText(data = {}) {
       let font = data.font || 'BEBAS';
       let color = data.color || '#fff';
       let align = data.align || 'left';
@@ -13224,7 +13230,7 @@ module.exports = {
 
       this.initObject(text, 'text');
     },
-    addLinearBar(data) {
+    addLinearBar(data = {}) {
       this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', stand_base64 => {
         this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', bar_base64 => {
           let src_stand = stand_base64;
@@ -13267,7 +13273,7 @@ module.exports = {
         });
       });
     },
-    addRadialBar(data) {
+    addRadialBar(data = {}) {
       this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', stand_base64 => {
         this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', bar_base64 => {
           let src_stand = stand_base64;
@@ -13329,7 +13335,7 @@ module.exports = {
         });
       });
     },
-    addImage() {
+    addImage(data = {}) {
       let angle = data.angle || 0;
       let value = data.value || 'assets/image.png';
       let w = data.w || 150;
@@ -13447,6 +13453,7 @@ module.exports = {
 
     let covers = this.api.api_result.response[0].cover.images;
     if (covers.length) {
+      this.$emit('isLoad', true);
       this.setCover(covers[covers.length - 1].url);
       this.createGroup(covers[covers.length - 1].url);
     }
