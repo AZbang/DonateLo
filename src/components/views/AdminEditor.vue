@@ -56,11 +56,11 @@
       ServicesControl,
       EditorsControl
     },
+    props: ['api'],
     data() {
       return {
         coverImage: null,
         currentObject: null,
-        api: this.$parent.api,
         METHODS: {
           'text': 'addText',
           'linear-bar': 'addLinearBar',
@@ -83,37 +83,23 @@
         xhr.responseType = 'blob';
         xhr.send();
       },
+      loadResources(res) {
+      },
 
       // API METHODS
-      createGroup(url) {
-        this.convertFileToDataURL(url, (base64) => {
-          axios.post('https://app-donatelo.herokuapp.com/create_group', {
-            app_id: this.api.api_id,
-            auth_token: this.api.auth_key,
-            access_token: this.api.access_token,
-            resources: {
-              background: base64,
-            },
-            views: [],
-            group_id: this.api.group_id,
-            viewer_id: this.api.viewer_id
-          }).then((response) => {
-            this.$emit('isLoad', false);
-          });
-        });
-      },
-      getData() {
-        axios.post('https://app-donatelo.herokuapp.com/get_cover', {
+      async loadData() {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_cover', {
           app_id: this.api.api_id,
           auth_token: this.api.auth_key,
           group_id: this.api.group_id,
           viewer_id: this.api.viewer_id
-        }).then((response) => {
-          console.log(response);
-        })
+        });
+        let data = resp.data.result;
+        let res = this.loadResources(data.resources);
+        this.loadViews(data.views, res);
       },
       uploadData() {
-        let resources = {};
+        let resources = {background: this.coverImage.getSrc()};
         let views = [];
 
         canvas.getItemsByAttr('type', 'radial-bar').forEach((i) => {
@@ -136,8 +122,6 @@
           views.push(data);
         });
 
-        console.log(resources, views);
-
         axios.post('https://app-donatelo.herokuapp.com/update_cover', {
           app_id: this.api.api_id,
           auth_token: this.api.auth_key,
@@ -159,8 +143,8 @@
             type: "radial",
             value: '' + obj.value,
             max_value: obj.maxValue + 0.000001,
-            x: obj.left,
-            y: obj.top,
+            x: Math.round(obj.left),
+            y: Math.round(obj.top),
             w: obj.width,
             h: obj.width,
             angle: obj.angle+ 0.000001,
@@ -183,10 +167,10 @@
             type: "linear",
             value: '' + obj.value,
             max_value: obj.maxValue + 0.000001,
-            x: obj.left,
-            y: obj.top,
+            x: Math.round(obj.left),
+            y: Math.round(obj.top),
             w: obj.width,
-            h: obj.width,
+            h: obj.height,
             angle: obj.angle + 0.000001,
             // stand_color: obj.standColor,
             // bar_color: obj.progressColor,
@@ -199,8 +183,8 @@
           id: obj.id,
           type: "text",
           value: obj.text,
-          x: Math.floor(obj.left),
-          y: Math.floor(obj.top),
+          x: Math.round(obj.left),
+          y: Math.round(obj.top),
           angle: obj.angle + 0.000001,
           font: obj.fontType,
           size: +obj.fontSize,
@@ -213,8 +197,8 @@
           id: obj.id,
           type: "image",
           value: obj.value,
-          x: obj.left,
-          y: obj.top,
+          x: Math.round(obj.left),
+          y: Math.round(obj.top),
           w: obj.width,
           h: obj.height,
           angle: obj.angle + 0.000001,
@@ -301,7 +285,7 @@
             let angle = data.angle || 0;
             let value = data.value || 300;
             let w = data.w || 300;
-            let h = data.h || 50;
+            let h = data.h || 300;
             let x = data.x || 200;
             let y = data.y || 200;
             let br = data.border || 0;
@@ -467,19 +451,23 @@
       canvas.setHeight(300);
 
       $('ul.tabs').tabs();
-
       $('.canvas-container').css('transition', 'all 1s');
       this.animateParams = {
         duration: 500,
         easing: fabric.util.ease['easeInQuad'],
         onChange: canvas.renderAll.bind(canvas)
       }
-      // Get cover
-      let covers = this.api.api_result.response[0].cover.images;
-      if(covers.length) {
-        this.$emit('isLoad', true);
-        this.setCover(covers[covers.length-1].url);
-        this.createGroup(covers[covers.length-1].url);
+
+      if(false) {
+        this.loadData();
+      } else {
+        // Get cover
+        let covers = this.api.api_result.response[0].cover.images;
+        if(covers.length) {
+          this.convertFileToDataURL(covers[covers.length-1].url, (base64) => {
+            this.setCover(base64);
+          });
+        }
       }
     }
   }

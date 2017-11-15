@@ -12427,14 +12427,20 @@ var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n
 ;(function(){
 
 
-const AdminEditor = require('./views/AdminEditor.vue');
-const GettingStarted = require('./views/GettingStarted.vue');
+const axios = require('axios');
+const VIEWS = {
+  'admin': require('./views/AdminEditor.vue'),
+  'getting_started': require('./views/GettingStarted.vue'),
+  'register': require('./views/Register.vue')
+};
 
 module.exports = {
   data() {
     return {
       api: {},
-      isLoad: false
+      viewComponent: null,
+      isLoad: false,
+      isExist: true
     };
   },
   methods: {
@@ -12450,23 +12456,55 @@ module.exports = {
       api.api_result = JSON.parse(decodeURIComponent(api.api_result));
       this.api = api;
     },
+    isExistGroup() {
+      var _this = this;
+
+      return Promise.resolve().then(function () {
+        return axios.post('https://app-donatelo.herokuapp.com/group_exist', {
+          app_id: _this.api.api_id,
+          auth_token: _this.api.auth_key,
+          group_id: _this.api.group_id,
+          viewer_id: _this.api.viewer_id
+        });
+      }).then(function (_resp) {
+        let resp = _resp;
+        return resp.data.result;
+      });
+    },
     setLoad(v) {
       this.isLoad = v;
+    },
+    setView(name) {
+      this.viewComponent = VIEWS[name];
     }
   },
-  computed: {
-    viewComponent() {
-      this.getVKApiData();
+  mounted() {
+    var _this2 = this;
 
-      if (+this.api.viewer_type > 2 && this.api.group_id != null) return AdminEditor;else return GettingStarted;
-    }
+    return Promise.resolve().then(function () {
+      _this2.getVKApiData();
+      _this2.setLoad(true);
+      return _this2.isExistGroup();
+    }).then(function (_resp) {
+      _this2.isExist = _resp;
+
+      if (+_this2.api.viewer_type > 2 && _this2.api.group_id != null) {
+        if (_this2.isExist) {
+          _this2.setView('admin');
+        } else {
+          _this2.setView('register');
+        }_this2.setLoad(false);
+      } else {
+        _this2.setView('getting_started');
+      }
+    });
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoad),expression:"isLoad"}],staticClass:"preload"},[_vm._m(0)]),_vm._v(" "),_c(_vm.viewComponent,{tag:"div",on:{"isLoad":_vm.setLoad}})])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isLoad),expression:"isLoad"}],staticClass:"preload"},[_vm._m(0)]),_vm._v(" "),_c(_vm.viewComponent,{tag:"div",attrs:{"api":_vm.api},on:{"setView":_vm.setView,"isLoad":_vm.setLoad}})])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"preloader-wrapper big active"},[_c('div',{staticClass:"spinner-layer spinner-blue-only"},[_c('div',{staticClass:"circle-clipper left"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"gap-patch"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"circle-clipper right"},[_c('div',{staticClass:"circle"})])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12474,13 +12512,13 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2d8ed113", __vue__options__)
+    hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-2d8ed113", __vue__options__)
+    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
   }
 })()}
-},{"./views/AdminEditor.vue":44,"./views/GettingStarted.vue":45,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],33:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-339a903e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-339a903e], #first-upload-bg p[data-v-339a903e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-339a903e] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-339a903e] {\n  z-index: 10000;\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-339a903e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+},{"./views/AdminEditor.vue":44,"./views/GettingStarted.vue":45,"./views/Register.vue":46,"axios":1,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],33:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-24cdd05e] {\n  z-index: 10000;\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
 
@@ -12515,16 +12553,16 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"actions-wrap",on:{"mouseover":function($event){_vm.toggleBtnActions(true)},"mouseout":function($event){_vm.toggleBtnActions(false)}}},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1),_vm._v(" "),_c('div',{staticClass:"btn-cover",attrs:{"id":"resize-cover"},on:{"click":_vm.toggleSize}},[_c('i',{staticClass:"material-icons"},[_vm._v("fullscreen")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-339a903e"
+__vue__options__._scopeId = "data-v-24cdd05e"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-339a903e", __vue__options__)
+    hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-339a903e", __vue__options__)
+    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":43,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],34:[function(require,module,exports){
@@ -12561,31 +12599,31 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-75db7bef", __vue__options__)
+    hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-75db7bef", __vue__options__)
+    hotAPI.rerender("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":37,"../editors/LinearBarEditor.vue":38,"../editors/RadialBarEditor.vue":39,"../editors/TextEditor.vue":40,"vue":30,"vue-hot-reload-api":29}],35:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-4bd1cf37] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-4bd1cf37] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n  margin-bottom: 3px;\n}\n.wrap-card-content[data-v-4bd1cf37] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-4bd1cf37] {\n  font-size: 6em;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-06e51b17] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-06e51b17] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n  margin-bottom: 3px;\n}\n.wrap-card-content[data-v-06e51b17] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-06e51b17] {\n  font-size: 6em;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable red lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("favorite")]),_vm._v(" "),_c('p',[_vm._v("Донаты")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable indigo lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("person")]),_vm._v(" "),_c('p',[_vm._v("ВК Комьюнити")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable green lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("photo_camera")]),_vm._v(" "),_c('p',[_vm._v("Google фото")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable orange lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("wb_cloudy")]),_vm._v(" "),_c('p',[_vm._v("Погода, дата, время")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable blue lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("subject")]),_vm._v(" "),_c('p',[_vm._v("Новости")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable teal lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("thumbs_up_down")]),_vm._v(" "),_c('p',[_vm._v("Голосования")])])])])])])}]
-__vue__options__._scopeId = "data-v-4bd1cf37"
+__vue__options__._scopeId = "data-v-06e51b17"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4bd1cf37", __vue__options__)
+    hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-4bd1cf37", __vue__options__)
+    hotAPI.rerender("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-2465ab74] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-2465ab74] {\n  position: relative;\n}\n.wrap-card-content[data-v-2465ab74] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-2465ab74] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n}\n.card-panel i[data-v-2465ab74] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-5f30e266] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-5f30e266] {\n  position: relative;\n}\n.wrap-card-content[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-5f30e266] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n}\n.card-panel i[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
 ;(function(){
 
 
@@ -12602,16 +12640,16 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('text')}}},[_vm._m(0)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('linear-bar')}}},[_vm._m(1)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('radial-bar')}}},[_vm._m(2)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('image')}}},[_vm._m(3)])])])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Текст")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Линейный бар")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("panorama_fish_eye")]),_vm._v(" "),_c('p',[_vm._v("Радиальный бар")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("image")]),_vm._v(" "),_c('p',[_vm._v("Картинка")])])}]
-__vue__options__._scopeId = "data-v-2465ab74"
+__vue__options__._scopeId = "data-v-5f30e266"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2465ab74", __vue__options__)
+    hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-2465ab74", __vue__options__)
+    hotAPI.rerender("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],37:[function(require,module,exports){
@@ -12677,9 +12715,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7a472a38", __vue__options__)
+    hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7a472a38", __vue__options__)
+    hotAPI.rerender("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":41,"../helpers/EditorForms.vue":42,"../helpers/UploadImage.vue":43,"vue":30,"vue-hot-reload-api":29}],38:[function(require,module,exports){
@@ -12752,9 +12790,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0908ea77", __vue__options__)
+    hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-0908ea77", __vue__options__)
+    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":41,"../helpers/EditorForms.vue":42,"vue":30,"vue-hot-reload-api":29}],39:[function(require,module,exports){
@@ -12850,9 +12888,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a2b9486", __vue__options__)
+    hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6a2b9486", __vue__options__)
+    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":41,"../helpers/EditorForms.vue":42,"vue":30,"vue-hot-reload-api":29}],40:[function(require,module,exports){
@@ -12917,9 +12955,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-05a9186e", __vue__options__)
+    hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-05a9186e", __vue__options__)
+    hotAPI.rerender("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":41,"../helpers/EditorForms.vue":42,"vue":30,"vue-hot-reload-api":29}],41:[function(require,module,exports){
@@ -12965,27 +13003,27 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6403b16c", __vue__options__)
+    hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6403b16c", __vue__options__)
+    hotAPI.rerender("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-color/dist/vue-color.min.js":28,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],42:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-eb2f4c46] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-eb2f4c46] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-eb2f4c46] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-eb2f4c46] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-eb2f4c46] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-eb2f4c46]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-eb2f4c46] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-eb2f4c46] {\n  font-size: 3rem;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-eb2f4c46] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-eb2f4c46]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-eb2f4c46] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.fixed-bottom .input-field[data-v-eb2f4c46] {\n  margin: 0;\n}\n.btn[data-v-eb2f4c46] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-39ad21fd] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-39ad21fd] {\n  margin-bottom: 1em;\n}\n.input-wrap[data-v-39ad21fd] {\n  background-color: #f9f9f9;\n  border-radius: 3px;\n  padding: 15px;\n}\n.input[data-v-39ad21fd] {\n  margin: 0;\n  border: none;\n  font-size: 2em;\n  font-weight: 200;\n}\ntextarea.input[data-v-39ad21fd] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-39ad21fd]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-39ad21fd] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-39ad21fd] {\n  font-size: 3rem;\n  background-color: #f9f9f9;\n  padding: 13px 10px;\n  cursor: pointer;\n  color: #6e7bbe;\n  float: right;\n}\n.btn-icon.active[data-v-39ad21fd] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-39ad21fd]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-39ad21fd] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.fixed-bottom .input-field[data-v-39ad21fd] {\n  margin: 0;\n}\n.btn[data-v-39ad21fd] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._t("default",[_vm._v("Выберите объект для изменений")]),_vm._v(" "),_vm._m(0)],2)}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fixed-bottom"},[_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1"},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1"},[_vm._v("Вернуться")])])])}]
-__vue__options__._scopeId = "data-v-eb2f4c46"
+__vue__options__._scopeId = "data-v-39ad21fd"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-eb2f4c46", __vue__options__)
+    hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-eb2f4c46", __vue__options__)
+    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],43:[function(require,module,exports){
@@ -13020,13 +13058,13 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-41cdfaf5", __vue__options__)
+    hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-41cdfaf5", __vue__options__)
+    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],44:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-100e5820] {\n  position: fixed;\n  top: 0;\n  z-index: 10000;\n}\n#uploadData[data-v-100e5820] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}\n.views-wrap[data-v-100e5820] {\n  margin-top: 348px;\n}\n.controls-section[data-v-100e5820] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-100e5820] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-100e5820] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-100e5820] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-100e5820] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-100e5820] {\n  background-color: #6e7bab !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-6426a840] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -13043,11 +13081,11 @@ module.exports = {
     ServicesControl,
     EditorsControl
   },
+  props: ['api'],
   data() {
     return {
       coverImage: null,
       currentObject: null,
-      api: this.$parent.api,
       METHODS: {
         'text': 'addText',
         'linear-bar': 'addLinearBar',
@@ -13070,36 +13108,27 @@ module.exports = {
       xhr.responseType = 'blob';
       xhr.send();
     },
+    loadResources(res) {},
 
-    createGroup(url) {
-      this.convertFileToDataURL(url, base64 => {
-        axios.post('https://app-donatelo.herokuapp.com/create_group', {
-          app_id: this.api.api_id,
-          auth_token: this.api.auth_key,
-          access_token: this.api.access_token,
-          resources: {
-            background: base64
-          },
-          views: [],
-          group_id: this.api.group_id,
-          viewer_id: this.api.viewer_id
-        }).then(response => {
-          this.$emit('isLoad', false);
+    loadData() {
+      var _this = this;
+
+      return Promise.resolve().then(function () {
+        return axios.post('https://app-donatelo.herokuapp.com/get_cover', {
+          app_id: _this.api.api_id,
+          auth_token: _this.api.auth_key,
+          group_id: _this.api.group_id,
+          viewer_id: _this.api.viewer_id
         });
-      });
-    },
-    getData() {
-      axios.post('https://app-donatelo.herokuapp.com/get_cover', {
-        app_id: this.api.api_id,
-        auth_token: this.api.auth_key,
-        group_id: this.api.group_id,
-        viewer_id: this.api.viewer_id
-      }).then(response => {
-        console.log(response);
+      }).then(function (_resp) {
+        let resp = _resp;
+        let data = resp.data.result;
+        let res = _this.loadResources(data.resources);
+        _this.loadViews(data.views, res);
       });
     },
     uploadData() {
-      let resources = {};
+      let resources = { background: this.coverImage.getSrc() };
       let views = [];
 
       canvas.getItemsByAttr('type', 'radial-bar').forEach(i => {
@@ -13122,8 +13151,6 @@ module.exports = {
         views.push(data);
       });
 
-      console.log(resources, views);
-
       axios.post('https://app-donatelo.herokuapp.com/update_cover', {
         app_id: this.api.api_id,
         auth_token: this.api.auth_key,
@@ -13145,8 +13172,8 @@ module.exports = {
           type: "radial",
           value: '' + obj.value,
           max_value: obj.maxValue + 0.000001,
-          x: obj.left,
-          y: obj.top,
+          x: Math.round(obj.left),
+          y: Math.round(obj.top),
           w: obj.width,
           h: obj.width,
           angle: obj.angle + 0.000001,
@@ -13168,10 +13195,10 @@ module.exports = {
           type: "linear",
           value: '' + obj.value,
           max_value: obj.maxValue + 0.000001,
-          x: obj.left,
-          y: obj.top,
+          x: Math.round(obj.left),
+          y: Math.round(obj.top),
           w: obj.width,
-          h: obj.width,
+          h: obj.height,
           angle: obj.angle + 0.000001,
 
           border: +obj.border
@@ -13183,8 +13210,8 @@ module.exports = {
         id: obj.id,
         type: "text",
         value: obj.text,
-        x: Math.floor(obj.left),
-        y: Math.floor(obj.top),
+        x: Math.round(obj.left),
+        y: Math.round(obj.top),
         angle: obj.angle + 0.000001,
         font: obj.fontType,
         size: +obj.fontSize,
@@ -13196,8 +13223,8 @@ module.exports = {
         id: obj.id,
         type: "image",
         value: obj.value,
-        x: obj.left,
-        y: obj.top,
+        x: Math.round(obj.left),
+        y: Math.round(obj.top),
         w: obj.width,
         h: obj.height,
         angle: obj.angle + 0.000001
@@ -13281,7 +13308,7 @@ module.exports = {
           let angle = data.angle || 0;
           let value = data.value || 300;
           let w = data.w || 300;
-          let h = data.h || 50;
+          let h = data.h || 300;
           let x = data.x || 200;
           let y = data.y || 200;
           let br = data.border || 0;
@@ -13443,7 +13470,6 @@ module.exports = {
     canvas.setHeight(300);
 
     $('ul.tabs').tabs();
-
     $('.canvas-container').css('transition', 'all 1s');
     this.animateParams = {
       duration: 500,
@@ -13451,11 +13477,15 @@ module.exports = {
       onChange: canvas.renderAll.bind(canvas)
     };
 
-    let covers = this.api.api_result.response[0].cover.images;
-    if (covers.length) {
-      this.$emit('isLoad', true);
-      this.setCover(covers[covers.length - 1].url);
-      this.createGroup(covers[covers.length - 1].url);
+    if (false) {
+      this.loadData();
+    } else {
+      let covers = this.api.api_result.response[0].cover.images;
+      if (covers.length) {
+        this.convertFileToDataURL(covers[covers.length - 1].url, base64 => {
+          this.setCover(base64);
+        });
+      }
     }
   }
 };
@@ -13465,37 +13495,95 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"isCoverEmpty":!_vm.coverImage},on:{"toggleSize":_vm.toggleSize,"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.coverImage),expression:"coverImage"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_vm._m(1)]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light blue",attrs:{"id":"uploadData"},on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#add"}},[_vm._v("Добавить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#settings"}},[_vm._v("Настройки")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"settings"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Настройки")])])])}]
-__vue__options__._scopeId = "data-v-100e5820"
+__vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-100e5820", __vue__options__)
+    hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-100e5820", __vue__options__)
+    hotAPI.reload("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../controls/CoverControl.vue":33,"../controls/EditorsControl.vue":34,"../controls/ServicesControl.vue":35,"../controls/WidgetsControl.vue":36,"axios":1,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],45:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-89fab16e] {\n  margin-top: 10%;\n}\nh1[data-v-89fab16e], p[data-v-89fab16e] {\n  color: #3d5977;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin-top: 10%;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно сделать динамическую обложку для своей группы или паблика.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Описание особенностей с картиночками.")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-89fab16e"
+__vue__options__._scopeId = "data-v-175239ae"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-89fab16e", __vue__options__)
+    hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-89fab16e", __vue__options__)
+    hotAPI.rerender("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],46:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".wrap[data-v-0adae92f] {\n  position: absolute;\n  width: 100vw;\n  left: 0;\n  top: 0;\n  height: 100vh;\n  background: #fff;\n}\n.row[data-v-0adae92f] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 600px;\n  margin-left: -300px;\n  margin-top: -150px;\n}\np[data-v-0adae92f] {\n  color: #5e81a8;\n}")
+;(function(){
+
+
+const axios = require('axios');
+
+module.exports = {
+  props: ['api'],
+  data() {
+    return {
+      token: ""
+    };
+  },
+  methods: {
+    submitToken(e) {
+      var _this = this;
+
+      return Promise.resolve().then(function () {
+        _this.$emit('isLoad', true);
+        return axios.post('https://app-donatelo.herokuapp.com/create_group', {
+          app_id: _this.api.api_id,
+          auth_token: _this.api.auth_key,
+          access_token: _this.token,
+          group_id: _this.api.group_id,
+          viewer_id: _this.api.viewer_id
+        });
+      }).then(function (_resp) {
+        let resp = _resp;
+        _this.$emit('isLoad', false);
+        if (resp.data.code == 'ok') {
+          _this.$emit('setView', 'admin');
+        } else {
+          _this.token = '';
+          Materialize.toast('Ошибка! Пожалуйста, проверьте Ваш токен.');
+        }
+      });
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap"},[_c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Введите API токен вашей группы:")]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.token),expression:"token"}],attrs:{"id":"token","type":"text"},domProps:{"value":(_vm.token)},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }_vm.submitToken($event)},"input":function($event){if($event.target.composing){ return; }_vm.token=$event.target.value}}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("API токен")])])])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-0adae92f"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0adae92f", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-0adae92f", __vue__options__)
+  }
+})()}
+},{"axios":1,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],47:[function(require,module,exports){
 'use strict';
 
 fabric.Canvas.prototype.getItemsByAttr = function (attr, name) {
@@ -13535,7 +13623,7 @@ fabric.Object.prototype.setCenterToOrigin = function () {
   });
 };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 
 require('./fabricExtensions');
@@ -13550,4 +13638,4 @@ new Vue({
   }
 });
 
-},{"./components/App.vue":32,"./fabricExtensions":46,"vue":30}]},{},[47]);
+},{"./components/App.vue":32,"./fabricExtensions":47,"vue":30}]},{},[48]);

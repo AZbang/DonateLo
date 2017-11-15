@@ -13,19 +13,25 @@
         </div>
       </div>
     </div>
-    <div :is="viewComponent" @isLoad="setLoad"></div>
+    <div :is="viewComponent" :api="api" @setView="setView" @isLoad="setLoad"></div>
   </div>
 </template>
 
 <script>
-  const AdminEditor = require('./views/AdminEditor.vue');
-  const GettingStarted = require('./views/GettingStarted.vue');
+  const axios = require('axios');
+  const VIEWS = {
+    'admin': require('./views/AdminEditor.vue'),
+    'getting_started': require('./views/GettingStarted.vue'),
+    'register': require('./views/Register.vue')
+  }
 
   module.exports = {
     data() {
       return {
         api: {},
-        isLoad: false
+        viewComponent: null,
+        isLoad: false,
+        isExist: true
       }
     },
     methods: {
@@ -41,17 +47,32 @@
         api.api_result = JSON.parse(decodeURIComponent(api.api_result));
         this.api = api;
       },
+      async isExistGroup() {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/group_exist', {
+          app_id: this.api.api_id,
+          auth_token: this.api.auth_key,
+          group_id: this.api.group_id,
+          viewer_id: this.api.viewer_id
+        });
+        return resp.data.result;
+      },
       setLoad(v) {
         this.isLoad = v;
+      },
+      setView(name) {
+        this.viewComponent = VIEWS[name];
       }
     },
-    computed: {
-      viewComponent() {
-        this.getVKApiData();
+    async mounted() {
+      this.getVKApiData();
+      this.setLoad(true);
+      this.isExist = await this.isExistGroup();
 
-        if(+this.api.viewer_type > 2 && this.api.group_id != null) return AdminEditor;
-        else return GettingStarted;
-      }
+      if(+this.api.viewer_type > 2 && this.api.group_id != null) {
+        if(this.isExist) this.setView('admin');
+        else this.setView('register');
+        this.setLoad(false);
+      } else this.setView('getting_started');
     }
   }
 </script>
