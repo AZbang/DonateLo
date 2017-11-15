@@ -86,6 +86,7 @@
 
       // API METHODS
       async loadData() {
+        this.$emit('isLoad', true);
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_cover', {
           app_id: this.api.api_id,
           auth_token: this.api.auth_key,
@@ -97,6 +98,7 @@
         let self = this;
         this.loadResource(data.resources.background, (bg) => {
           self.setCover(bg);
+          self.$emit('isLoad', false);
         });
         for(let key in data.views) {
           this.addWidget(data.views[key].type, data.views[key], data.resources);
@@ -105,7 +107,7 @@
         // this.loadViews(data.views, res);
       },
       uploadData() {
-        let resources = {background: this.coverImage.getSrc()};
+        let resources = {};
         let views = [];
 
         canvas.getItemsByAttr('type', 'radial-bar').forEach((i) => {
@@ -128,8 +130,7 @@
           views.push(data);
         });
 
-        console.log({resources, views})
-
+        this.$emit('isLoad', true);
         axios.post('https://app-donatelo.herokuapp.com/update_cover', {
           app_id: this.api.api_id,
           auth_token: this.api.auth_key,
@@ -138,7 +139,12 @@
           resources, views
         }).then((response) => {
           console.log(response);
-        });
+          this.$emit('isLoad', false);
+          Materialize.toast('Обложка сохранена!');
+        }).catch(() => {
+          this.$emit('isLoad', false);
+          Materialize.toast('Произошла ошибка :(');
+        })
       },
       getRadialBarJSON(obj) {
         return {
@@ -150,11 +156,11 @@
             id: obj.id,
             type: "radial",
             value: '' + obj.value,
-            max_value: obj.maxValue + 0.000001,
-            x: Math.round(obj.left),
-            y: Math.round(obj.top),
-            w: obj.width,
-            h: obj.width,
+            max_value: +obj.maxValue + 0.000001,
+            x: Math.round(obj.left/this.scale),
+            y: Math.round(obj.top/this.scale),
+            w: Math.round(obj.width*this.scale),
+            h: Math.round(obj.width*this.scale),
             angle: obj.angle+ 0.000001,
             stand_color: obj.standColor,
             bar_color: obj.progressColor,
@@ -249,13 +255,14 @@
             let src_progress = bar_base64;
             let angle = data.angle || 0;
             let value = data.value || 300;
+            let maxValue = data.max_value || 300;
             let w = data.w || 300;
             let h = data.h || 50;
             let x = data.x || 200;
             let y = data.y || 200;
             let br = data.border || 0;
-            let progress_color = '#fff';
-            let stand_color = '#fff'
+            let progress_color = data.bar_color;
+            let stand_color = data.stand_color;
 
             fabric.Image.fromURL(src_stand, (stand) => {
               stand.setHeight(h);
@@ -271,7 +278,7 @@
                 group.setOriginToCenter();
 
                 group.value = value;
-                group.maxValue = value;
+                group.maxValue = maxValue;
                 group.progress = src_progress;
                 group.stand = src_stand;
                 group.angle = angle;
@@ -290,24 +297,25 @@
           this.loadResource(res[data.id + ':bar'] || 'assets/white_pixel.png', (bar_base64) => {
             let src_stand = stand_base64;
             let src_progress = bar_base64;
-            let angle = data.angle || 0;
-            let value = data.value || 300;
-            let w = data.w || 300;
-            let h = data.h || 300;
-            let x = data.x || 200;
-            let y = data.y || 200;
-            let br = data.border || 0;
-            let start_angle = data.start_angle || 0;
-            let direction = data.direction || 0;
-            let progress_color = '#fff';
-            let stand_color = '#fff'
+            let angle = +data.angle || 0;
+            let value = +data.value || 300;
+            let maxValue = +data.max_value || 300;
+            let w = +data.w || 300;
+            let h = +data.h || 300;
+            let x = +data.x || 200;
+            let y = +data.y || 200;
+            let br = +data.border || 0;
+            let start_angle = +data.start_angle || 0;
+            let direction = +data.direction || 0;
+            let progress_color = data.bar_color;
+            let stand_color = data.stand_color;
 
             fabric.Image.fromURL(src_stand, (stand) => {
               stand.setHeight(h);
               stand.setWidth(w);
               stand.set({
                 clipTo: (ctx) => {
-                  ctx.arc(0, 0, 100, 0, Math.PI*2, true);
+                  ctx.arc(0, 0, w/2, 0, Math.PI*2, true);
                 }
               });
 
@@ -319,7 +327,7 @@
                 progress.set({
                   clipTo: (ctx) => {
                     ctx.moveTo(0, 0);
-                    ctx.arc(0, 0, progress.width/2, 0, Math.PI*2, false);
+                    ctx.arc(0, 0, w/2, 0, Math.PI*2, false);
                     ctx.lineTo(0, 0);
                     ctx.fill();
                   }
@@ -331,7 +339,7 @@
                 group.setOriginToCenter();
 
                 group.value = value;
-                group.maxValue = value;
+                group.maxValue = maxValue;
                 group.progress = src_progress;
                 group.stand = src_stand;
                 group.angle = angle;
@@ -373,7 +381,7 @@
       },
       initObject(obj, type) {
         obj.objectCaching = false;
-        obj.id = '' + Date.now();
+        if(!obj.id) obj.id = '' + Date.now();
         obj.selectable = true;
         obj.type = type;
 
