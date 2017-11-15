@@ -1,6 +1,6 @@
 <template>
   <div id="cover-control">
-    <div class="actions-wrap" v-show="!isCoverEmpty" @mouseover="toggleBtnActions(true)" @mouseout="toggleBtnActions(false)">
+    <div class="actions-wrap" v-show="!isCoverEmpty">
       <div id="new-cover" class="btn-cover">
         <upload-image @uploadImage="uploadImage"></upload-image>
         <i class="material-icons">edit</i>
@@ -51,7 +51,7 @@
   #first-upload-bg {
     height: 300px;
     border: 5px dashed #7a9ee0;
-    width: 100%;
+    width: 98vw;
     text-align: center;
     padding-top: 110px;
     position: relative;
@@ -68,8 +68,6 @@
 
   .actions-wrap {
     z-index: 10000;
-    width: 200px;
-    height: 200px;
     position: absolute;
     right: 20px;
     top: 20px;

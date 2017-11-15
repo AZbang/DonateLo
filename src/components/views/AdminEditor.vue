@@ -63,18 +63,18 @@
         currentObject: null,
         METHODS: {
           'text': 'addText',
-          'linear-bar': 'addLinearBar',
-          'radial-bar': 'addRadialBar',
+          'linear': 'addLinearBar',
+          'radial': 'addRadialBar',
           'image': 'addImage'
         }
       }
     },
     methods: {
-      convertFileToDataURL(url, callback) {
+      loadResource(url, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.onload = function() {
+        xhr.onload = () => {
           var reader = new FileReader();
-          reader.onloadend = function() {
+          reader.onloadend = () => {
             callback(reader.result);
           }
           reader.readAsDataURL(xhr.response);
@@ -82,8 +82,6 @@
         xhr.open('GET', url);
         xhr.responseType = 'blob';
         xhr.send();
-      },
-      loadResources(res) {
       },
 
       // API METHODS
@@ -95,8 +93,16 @@
           viewer_id: this.api.viewer_id
         });
         let data = resp.data.result;
-        let res = this.loadResources(data.resources);
-        this.loadViews(data.views, res);
+
+        let self = this;
+        this.loadResource(data.resources.background, (bg) => {
+          self.setCover(bg);
+        });
+        for(let key in data.views) {
+          this.addWidget(data.views[key].type, data.views[key], data.resources);
+        }
+        // let res = this.loadResources(data.resources);
+        // this.loadViews(data.views, res);
       },
       uploadData() {
         let resources = {background: this.coverImage.getSrc()};
@@ -121,6 +127,8 @@
           let data = this.getImageJSON(i);
           views.push(data);
         });
+
+        console.log({resources, views})
 
         axios.post('https://app-donatelo.herokuapp.com/update_cover', {
           app_id: this.api.api_id,
@@ -148,8 +156,8 @@
             w: obj.width,
             h: obj.width,
             angle: obj.angle+ 0.000001,
-            // stand_color: obj.standColor,
-            // bar_color: obj.progressColor,
+            stand_color: obj.standColor,
+            bar_color: obj.progressColor,
             start_angle: obj.startAngle+ 0.000001,
             direction: +obj.direction,
             border: +obj.border
@@ -208,8 +216,8 @@
       },
 
       // Widgets methods
-      addWidget(type) {
-        this[this.METHODS[type]]();
+      addWidget(type, data, res) {
+        this[this.METHODS[type]](data, res);
       },
       addText(data = {}) {
         let font = data.font || 'BEBAS';
@@ -234,9 +242,9 @@
 
         this.initObject(text, 'text');
       },
-      addLinearBar(data = {}) {
-        this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
-          this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
+      addLinearBar(data = {}, res = {}) {
+        this.loadResource(res[data.id + ':stand'] || 'assets/white_pixel.png', (stand_base64) => {
+          this.loadResource(res[data.id + ':bar'] || 'assets/white_pixel.png', (bar_base64) => {
             let src_stand = stand_base64;
             let src_progress = bar_base64;
             let angle = data.angle || 0;
@@ -272,14 +280,14 @@
                 group.progressColor = progress_color;
 
                 this.initObject(group, 'linear-bar');
-              });
-            });
+              }, null, {crossOrigin:'Anonymous'});
+            }, null, {crossOrigin:'Anonymous'});
           })
         })
       },
-      addRadialBar(data = {}) {
-        this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', (stand_base64) => {
-          this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', (bar_base64) => {
+      addRadialBar(data = {}, res = {}) {
+        this.loadResource(res[data.id + ':stand'] || 'assets/white_pixel.png', (stand_base64) => {
+          this.loadResource(res[data.id + ':bar'] || 'assets/white_pixel.png', (bar_base64) => {
             let src_stand = stand_base64;
             let src_progress = bar_base64;
             let angle = data.angle || 0;
@@ -334,12 +342,12 @@
                 group.progressColor = progress_color;
 
                 this.initObject(group, 'radial-bar');
-              });
-            });
+              }, null, {crossOrigin:'Anonymous'});
+            }, null, {crossOrigin:'Anonymous'});
           });
         });
       },
-      addImage(data = {}) {
+      addImage(data = {}, res = {}) {
         let angle = data.angle || 0;
         let value = data.value || 'assets/image.png';
         let w = data.w || 150;
@@ -427,7 +435,7 @@
           });
 
           this.setCover(coverSrc);
-        });
+        }, null, {crossOrigin:'Anonymous'});
       },
       setCover(src) {
         this.coverImage && this.coverImage.remove();
@@ -442,7 +450,7 @@
           this.resizeCoverToHeight();
 
           canvas.add(this.coverImage);
-        });
+        }, null, {crossOrigin:'Anonymous'});
       }
     },
     mounted() {
@@ -458,16 +466,11 @@
         onChange: canvas.renderAll.bind(canvas)
       }
 
-      if(false) {
+      if(this.$parent.isExist) {
         this.loadData();
       } else {
-        // Get cover
         let covers = this.api.api_result.response[0].cover.images;
-        if(covers.length) {
-          this.convertFileToDataURL(covers[covers.length-1].url, (base64) => {
-            this.setCover(base64);
-          });
-        }
+        if(covers.length) this.uploadImage(base64);
       }
     }
   }

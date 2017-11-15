@@ -12518,7 +12518,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./views/AdminEditor.vue":44,"./views/GettingStarted.vue":45,"./views/Register.vue":46,"axios":1,"vue":30,"vue-hot-reload-api":29,"vueify/lib/insert-css":31}],33:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-24cdd05e] {\n  z-index: 10000;\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
 
@@ -12551,7 +12551,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"actions-wrap",on:{"mouseover":function($event){_vm.toggleBtnActions(true)},"mouseout":function($event){_vm.toggleBtnActions(false)}}},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1),_vm._v(" "),_c('div',{staticClass:"btn-cover",attrs:{"id":"resize-cover"},on:{"click":_vm.toggleSize}},[_c('i',{staticClass:"material-icons"},[_vm._v("fullscreen")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"actions-wrap"},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1),_vm._v(" "),_c('div',{staticClass:"btn-cover",attrs:{"id":"resize-cover"},on:{"click":_vm.toggleSize}},[_c('i',{staticClass:"material-icons"},[_vm._v("fullscreen")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-24cdd05e"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -12638,7 +12638,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('text')}}},[_vm._m(0)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('linear-bar')}}},[_vm._m(1)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('radial-bar')}}},[_vm._m(2)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('image')}}},[_vm._m(3)])])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('text')}}},[_vm._m(0)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('linear')}}},[_vm._m(1)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('radial')}}},[_vm._m(2)])]),_vm._v(" "),_c('div',{staticClass:"col s6 m3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":function($event){_vm.addWidget('image')}}},[_vm._m(3)])])])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Текст")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Линейный бар")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("panorama_fish_eye")]),_vm._v(" "),_c('p',[_vm._v("Радиальный бар")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("image")]),_vm._v(" "),_c('p',[_vm._v("Картинка")])])}]
 __vue__options__._scopeId = "data-v-5f30e266"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -13088,18 +13088,18 @@ module.exports = {
       currentObject: null,
       METHODS: {
         'text': 'addText',
-        'linear-bar': 'addLinearBar',
-        'radial-bar': 'addRadialBar',
+        'linear': 'addLinearBar',
+        'radial': 'addRadialBar',
         'image': 'addImage'
       }
     };
   },
   methods: {
-    convertFileToDataURL(url, callback) {
+    loadResource(url, callback) {
       var xhr = new XMLHttpRequest();
-      xhr.onload = function () {
+      xhr.onload = () => {
         var reader = new FileReader();
-        reader.onloadend = function () {
+        reader.onloadend = () => {
           callback(reader.result);
         };
         reader.readAsDataURL(xhr.response);
@@ -13108,7 +13108,6 @@ module.exports = {
       xhr.responseType = 'blob';
       xhr.send();
     },
-    loadResources(res) {},
 
     loadData() {
       var _this = this;
@@ -13123,8 +13122,14 @@ module.exports = {
       }).then(function (_resp) {
         let resp = _resp;
         let data = resp.data.result;
-        let res = _this.loadResources(data.resources);
-        _this.loadViews(data.views, res);
+
+        let self = _this;
+        _this.loadResource(data.resources.background, bg => {
+          self.setCover(bg);
+        });
+        for (let key in data.views) {
+          _this.addWidget(data.views[key].type, data.views[key], data.resources);
+        }
       });
     },
     uploadData() {
@@ -13150,6 +13155,8 @@ module.exports = {
         let data = this.getImageJSON(i);
         views.push(data);
       });
+
+      console.log({ resources, views });
 
       axios.post('https://app-donatelo.herokuapp.com/update_cover', {
         app_id: this.api.api_id,
@@ -13177,7 +13184,8 @@ module.exports = {
           w: obj.width,
           h: obj.width,
           angle: obj.angle + 0.000001,
-
+          stand_color: obj.standColor,
+          bar_color: obj.progressColor,
           start_angle: obj.startAngle + 0.000001,
           direction: +obj.direction,
           border: +obj.border
@@ -13231,8 +13239,8 @@ module.exports = {
       };
     },
 
-    addWidget(type) {
-      this[this.METHODS[type]]();
+    addWidget(type, data, res) {
+      this[this.METHODS[type]](data, res);
     },
     addText(data = {}) {
       let font = data.font || 'BEBAS';
@@ -13257,9 +13265,9 @@ module.exports = {
 
       this.initObject(text, 'text');
     },
-    addLinearBar(data = {}) {
-      this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', stand_base64 => {
-        this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', bar_base64 => {
+    addLinearBar(data = {}, res = {}) {
+      this.loadResource(res[data.id + ':stand'] || 'assets/white_pixel.png', stand_base64 => {
+        this.loadResource(res[data.id + ':bar'] || 'assets/white_pixel.png', bar_base64 => {
           let src_stand = stand_base64;
           let src_progress = bar_base64;
           let angle = data.angle || 0;
@@ -13295,14 +13303,14 @@ module.exports = {
               group.progressColor = progress_color;
 
               this.initObject(group, 'linear-bar');
-            });
-          });
+            }, null, { crossOrigin: 'Anonymous' });
+          }, null, { crossOrigin: 'Anonymous' });
         });
       });
     },
-    addRadialBar(data = {}) {
-      this.convertFileToDataURL(data.stand_src || 'assets/white_pixel.png', stand_base64 => {
-        this.convertFileToDataURL(data.progress_src || 'assets/white_pixel.png', bar_base64 => {
+    addRadialBar(data = {}, res = {}) {
+      this.loadResource(res[data.id + ':stand'] || 'assets/white_pixel.png', stand_base64 => {
+        this.loadResource(res[data.id + ':bar'] || 'assets/white_pixel.png', bar_base64 => {
           let src_stand = stand_base64;
           let src_progress = bar_base64;
           let angle = data.angle || 0;
@@ -13357,12 +13365,12 @@ module.exports = {
               group.progressColor = progress_color;
 
               this.initObject(group, 'radial-bar');
-            });
-          });
+            }, null, { crossOrigin: 'Anonymous' });
+          }, null, { crossOrigin: 'Anonymous' });
         });
       });
     },
-    addImage(data = {}) {
+    addImage(data = {}, res = {}) {
       let angle = data.angle || 0;
       let value = data.value || 'assets/image.png';
       let w = data.w || 150;
@@ -13446,7 +13454,7 @@ module.exports = {
         });
 
         this.setCover(coverSrc);
-      });
+      }, null, { crossOrigin: 'Anonymous' });
     },
     setCover(src) {
       this.coverImage && this.coverImage.remove();
@@ -13461,7 +13469,7 @@ module.exports = {
         this.resizeCoverToHeight();
 
         canvas.add(this.coverImage);
-      });
+      }, null, { crossOrigin: 'Anonymous' });
     }
   },
   mounted() {
@@ -13477,15 +13485,11 @@ module.exports = {
       onChange: canvas.renderAll.bind(canvas)
     };
 
-    if (false) {
+    if (this.$parent.isExist) {
       this.loadData();
     } else {
       let covers = this.api.api_result.response[0].cover.images;
-      if (covers.length) {
-        this.convertFileToDataURL(covers[covers.length - 1].url, base64 => {
-          this.setCover(base64);
-        });
-      }
+      if (covers.length) this.uploadImage(base64);
     }
   }
 };

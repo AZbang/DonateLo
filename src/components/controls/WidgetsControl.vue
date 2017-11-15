@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('linear-bar')">
+        <div class="card-panel hoverable" @click="addWidget('linear')">
           <div class="wrap-card-content">
             <i class="material-icons">format_align_left</i>
             <p>Линейный бар</p>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('radial-bar')">
+        <div class="card-panel hoverable" @click="addWidget('radial')">
           <div class="wrap-card-content">
             <i class="material-icons">panorama_fish_eye</i>
             <p>Радиальный бар</p>
