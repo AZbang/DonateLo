@@ -3,36 +3,36 @@
     <div class="input-field col s6 m4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <input class="input" v-model="value" @change="setValue">
+        <input class="input" :value="object.value" @change="setValue">
       </div>
     </div>
     <div class="input-field col s6 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
-        <input class="input" v-model="maxValue" @change="setValue">
+        <input class="input" :value="object.maxValue" @change="setValue">
       </div>
     </div>
     <div class="input-field col s6 m4">
       <p class="flow-text">Стартовый угол:</p>
       <div class="input-wrap">
-        <input class="input" v-model="startAngle" @change="setStartAngle">
+        <input class="input" :value="object.startAngle" @change="setStartAngle">
       </div>
     </div>
     <div class="input-field col s6 m3">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
-        <input class="input" v-model="border" @change="setBorderWidth">
+        <input class="input" :value="object.border" @change="setBorder">
       </div>
     </div>
     <div class="input-field col s9">
       <p class="flow-text">Цвет:</p>
       <br>
-      <color-picker :startColor="startProgressColor" @setColor="setProgressColor"></color-picker>
+      <color-picker :startColor="object.progressColor" @setColor="setProgressColor"></color-picker>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Задний фон:</p>
       <br>
-      <color-picker :startColor="startStandColor" @setColor="setStandColor"></color-picker>
+      <color-picker :startColor="object.standColor" @setColor="setStandColor"></color-picker>
     </div>
   </editor-forms>
 </template>
@@ -47,72 +47,30 @@
       EditorForms
     },
     props: ['object'],
-    data() {
-      return {
-        value: this.object.value,
-        rounded: this.object.rounded,
-        maxValue: this.object.maxValue,
-        border: this.object.border,
-        startAngle: this.object.startAngle,
-        startStandColor: this.object.standColor,
-        startProgressColor: this.object.progressColor,
-        _saveLastStrokeWidth: 0
-      }
-    },
-    watch: {
-      object(val) {
-        if(!val) return;
-        this.startProgressColor = val.progressColor;
-        this.startStandColor = val.standColor;
-        this.border = val.border;
-        this.value = val.value;
-        this.startAngle = val.startAngle;
-        this.maxValue = val.maxValue;
-        this.rounded = val.rounded;
-      }
-    },
     methods: {
-      setProgressColor(color) {
-        this.object.progressColor = color;
-        this.object.item(1).filters[0] = new fabric.Image.filters.Tint({color});
-        this.object.item(1).applyFilters(canvas.renderAll.bind(canvas));
+      setProgressImage(e) {
+        this.object.setProgressImage(e.target.value);
       },
-      setStartAngle() {
-        this.object.startAngle = +this.startAngle;
-        this.object.item(1).angle = -90+this.startAngle;
-        canvas.renderAll();
+      setStandImage(e) {
+        this.object.setStandImage(e.target.value);
       },
-      setStandColor(color) {
-        this.object.standColor = color;
-        this.object.item(0).filters[0] = new fabric.Image.filters.Tint({color});
-        this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
+      setStartAngle(e) {
+        this.object.setStartAngle(e.target.value);
       },
-      setValue() {
-        this.object.value = +this.value;
-        this.object.item(1).set({
-          clipTo: (ctx) => {
-            ctx.moveTo(0, 0);
-            ctx.arc(0, 0, this.object.width/2, 0, Math.PI*2/this.maxValue*this.value, false);
-            ctx.lineTo(0, 0);
-            ctx.fill();
-          }
-        });
-        canvas.renderAll();
+      setValue(e) {
+        this.object.setValue(e.target.value);
       },
-      setBorderWidth() {
-        this.object.border = +this.border;
-        this.object.item(0).setHeight(this.object.height+this.border*2);
-        this.object.item(0).setWidth(this.object.width+this.border*2);
-        this.object.item(0).left -= this._saveLastBorder+this.border;
-        this.object.item(0).top -= this._saveLastBorder+this.border;
-        this.object.item(0).set({
-          clipTo: (ctx) => {
-            ctx.arc(0, 0, this.object.item(0).width/2, 0, Math.PI*2, true);
-          }
-        });
-        this._saveLastBorder = this.border;
-
-        canvas.renderAll();
+      setMaxValue(e) {
+        this.object.setMaxValue(e.target.value);
+      },
+      setBorder(e) {
+        this.object.setBorder(e.target.value);
+      },
+      setProgressColor(c) {
+        this.object.setProgressColor(c);
+      },
+      setStandColor(c) {
+        this.object.setStandColor(c);
       }
     }
   }

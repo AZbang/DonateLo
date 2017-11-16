@@ -4,15 +4,15 @@
 
 <script>
   const TextEditor = require('../editors/TextEditor.vue');
-  const LinearBarEditor = require('../editors/LinearBarEditor.vue');
-  const RadialBarEditor = require('../editors/RadialBarEditor.vue');
+  const LinearEditor = require('../editors/LinearBarEditor.vue');
+  const RadialEditor = require('../editors/RadialBarEditor.vue');
   const ImageEditor = require('../editors/ImageEditor.vue');
 
   module.exports = {
     components: {
       TextEditor,
-      LinearBarEditor,
-      RadialBarEditor,
+      LinearEditor,
+      RadialEditor,
       ImageEditor
     },
     props: ['currentObject'],

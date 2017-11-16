@@ -3,29 +3,19 @@
     <div class="input-field col s10 m11">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <input class="input" v-model="value" @change="setValue">
-      </div>
-    </div>
-    <div class="input-field col s2 m1">
-      <upload-image @uploadImage="setValue"></upload-image>
-      <i class="material-icons btn-icon active" style="margin-top: 36px; height: 72px;">file_upload</i>
-    </div>
-    <div class="input-field col s6 m6">
-      <p class="flow-text">Скругление:</p>
-      <div class="input-wrap">
-        <input class="input" v-model="rounded" @change="setRounded">
+        <input class="input" :value="object.value" @keyup.enter="setValue">
       </div>
     </div>
     <div class="input-field col s6 m6">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
-        <input class="input" v-model="borderWidth" @change="setBorderWidth">
+        <input class="input" :value="object.borderWidth" @keyup.enter="setBorderWidth">
       </div>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Рамка:</p>
       <br>
-      <color-picker :startColor="startBorderColor" @setColor="setBorderColor"></color-picker>
+      <color-picker :startColor="object.borderColor" @setColor="setBorderColor"></color-picker>
     </div>
   </editor-forms>
 </template>
@@ -42,42 +32,15 @@
       UploadImage
     },
     props: ['object'],
-    data() {
-      return {
-        value: this.object.source,
-        rounded: this.object.rounded,
-        borderWidth: this.object.borderWidth,
-        startBorderColor: this.object.borderColor
-      }
-    },
-    watch: {
-      object(val) {
-        if(!val) return;
-        this.value = val.value;
-        this.rounded = val.rounded;
-        this.borderWidth = val.borderWidth;
-        this.startBorderColor = val.borderColor;
-      }
-    },
     methods: {
-      setValue(src, obj) {
-        var img = new Image();
-        img.onload = () => {
-          this.object.setElement(img);
-        }
-        this.value = obj.name;
-        img.src = src;
+      setValue(e) {
+        this.object.setValue(e.target.value);
       },
-      setRounded() {
-
+      setBorderWidth(c) {
+        this.object.setBorderWidth(c);
       },
-      setBorderWidth() {
-        this.object.strokeWidth = +this.borderWidth;
-        canvas.renderAll();
-      },
-      setBorderColor(color) {
-        this.object.stroke = color;
-        canvas.renderAll();
+      setBorderColor(c) {
+        this.object.setBorderColor(c);
       }
     }
   }

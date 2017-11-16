@@ -1,15 +1,6 @@
 <template>
   <div class="row">
-    <slot>Выберите объект для изменений</slot>
-
-    <div class="fixed-bottom">
-      <div class="input-field col s6">
-        <button class="btn delete-btn waves-effect btn-flat red lighten-1">Удалить</button>
-      </div>
-      <div class="input-field col s6">
-        <button class="btn okey-btn waves-effect btn-flat green lighten-1">Вернуться</button>
-      </div>
-    </div>
+    <slot></slot>
   </div>
 </template>
 

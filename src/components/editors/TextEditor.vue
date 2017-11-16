@@ -3,31 +3,31 @@
     <div class="input-field col s12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <textarea class="input" v-model="value" @change="setText"></textarea>
+        <textarea class="input" :value="object.value" @keyup.enter="setValue"></textarea>
       </div>
     </div>
     <div class="input-field col s12 m5">
       <p class="flow-text">Шрифт:</p>
       <div class="input-wrap">
-        <input class="input" value="Bebas Neue">
+        <input class="input" :value="object.fontType">
       </div>
     </div>
     <div class="input-field col s6 m3">
       <p class="flow-text">Размер:</p>
       <div class="input-wrap">
-        <input class="input" v-model="fontSize" @change="setFontSize">
+        <input class="input" :value="object.size" @keyup.enter="setSize">
       </div>
     </div>
     <div class="input-field col s6 m4">
       <p class="flow-text" style="text-align: right;">Выравнивание:</p>
-      <i class="material-icons btn-icon" :class="textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
-      <i class="material-icons btn-icon" :class="textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
-      <i class="material-icons btn-icon" :class="textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Цвет текста:</p>
       <br>
-      <color-picker @setColor="setColor" :startColor="fill"></color-picker>
+      <color-picker @setColor="setColor" :startColor="object.color"></color-picker>
     </div>
   </editor-forms>
 </template>
@@ -42,42 +42,19 @@
       EditorForms
     },
     props: ['object'],
-    data() {
-      return {
-        value: this.object.text,
-        fontSize: this.object.fontSize,
-        textAlign: this.object.textAlign,
-        fill: this.object.fill,
-        fontType: this.object.fontType
-      }
-    },
-    watch: {
-      object(val) {
-        if(!val) return;
-        this.value = val.text;
-        this.fontSize = val.fontSize;
-        this.textAlign = val.textAlign;
-        this.fill = val.fill;
-      }
-    },
     methods: {
-      setText() {
-        this.object.text = this.value;
-        canvas.renderAll();
+      setFontType(e) {
+        this.object.setFontType(e.target.value);
       },
-      setFontSize() {
-        this.object.fontSize = this.fontSize;
-        canvas.renderAll();
+      setValue(e) {
+        this.object.setValue(e.target.value);
       },
-      setTextAlign(type) {
-        this.textAlign = type;
-        this.object.textAlign = type;
-        canvas.renderAll();
+      setSize(e) {
+        this.object.setSize(e.target.value);
       },
-      setColor(color) {
-        this.object.fill = color;
-        canvas.renderAll();
-      }
+      setColor(c) {
+        this.object.setColor(c);
+      },
     }
   }
 </script>

@@ -9,6 +9,9 @@
         <i class="material-icons">fullscreen</i>
       </div>
     </div>
+    <div v-show="!isCoverEmpty">
+      <canvas id="playground"></canvas>
+    </div>
 
     <div id="first-upload-bg" v-show="isCoverEmpty">
       <upload-image @uploadImage="uploadImage"></upload-image>
@@ -25,23 +28,19 @@
     components: {
       UploadImage
     },
-    props: ['isCoverEmpty'],
+    props: ['renderer', 'isCoverEmpty'],
     data() {
       return {
-        isFullCover: false
+        isFullCover: true
       }
     },
     methods: {
-      toggleBtnActions(toggle) {
-        if(toggle) $('.btn-cover').show();
-        else $('.btn-cover').hide();
-      },
       toggleSize() {
         this.isFullCover = !this.isFullCover;
-        this.$emit('toggleSize', this.isFullCover);
+        this.renderer.toggleSize(this.isFullCover);
       },
       uploadImage(src) {
-        this.$emit('uploadImage', src);
+        this.renderer.uploadImage(src);
       }
     }
   }

@@ -33,7 +33,7 @@ gulp.task('server', () => {
 
 gulp.task('dev', () => {
 	return browserify({ entries: 'src/index.js'})
-		.transform(babelify, { presets: ['es2015'] })
+		.transform(babelify)
 		.transform(vueify)
 		.bundle()
 		.pipe(source('build.js'))

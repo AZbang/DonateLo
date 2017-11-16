@@ -3,36 +3,30 @@
     <div class="input-field col s12 m4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <input class="input" v-model="value" @change="setValue">
+        <input class="input" :value="object.value" @keyup.enter="setValue">
       </div>
     </div>
     <div class="input-field col s12 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
-        <input class="input" v-model="maxValue" @change="setValue">
+        <input class="input" :value="object.maxValue" @keyup.enter="setMaxValue">
       </div>
     </div>
-    <!-- <div class="input-field col s6 m3">
-      <p class="flow-text">Скругление:</p>
-      <div class="input-wrap">
-        <input class="input" v-model="rounded" @change="setRounded">
-      </div>
-    </div> -->
     <div class="input-field col s12 m4">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
-        <input class="input" v-model="border" @change="setStrokeWidth">
+        <input class="input" :value="object.border" @keyup.enter="setBorder">
       </div>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Цвет прогресс линии:</p>
       <br>
-      <color-picker :startColor="startProgressColor" @setColor="setProgressColor"></color-picker>
+      <color-picker :startColor="object.progressColor" @setColor="setProgressColor"></color-picker>
     </div>
     <div class="input-field col s12">
       <p class="flow-text">Задний фон:</p>
       <br>
-      <color-picker :startColor="startStandColor" @setColor="setStandColor"></color-picker>
+      <color-picker :startColor="object.standColor" @setColor="setStandColor"></color-picker>
     </div>
   </editor-forms>
 </template>
@@ -47,51 +41,27 @@
       EditorForms
     },
     props: ['object'],
-    data() {
-      return {
-        value: this.object.value,
-        rounded: this.object.rounded,
-        maxValue: this.object.maxValue,
-        border: this.object.border,
-        startStandColor: this.object.standColor,
-        startProgressColor: this.object.progressColor,
-        _saveLastStrokeWidth: 0
-      }
-    },
-    watch: {
-      object(val) {
-        if(!val) return;
-        this.startProgressColor = val.progressColor;
-        this.startStandColor = val.standColor;
-        this.border = val.border;
-        this.value = val.value;
-        this.maxValue = val.maxValue;
-        this.rounded = val.rounded;
-      }
-    },
     methods: {
-      setProgressColor(color) {
-        this.object.item(1).filters[0] = new fabric.Image.filters.Tint({color});
-        this.object.item(1).applyFilters(canvas.renderAll.bind(canvas));
+      setProgressImage(e) {
+        this.object.setProgressImage(e.target.value);
       },
-      setStandColor(color) {
-        this.object.item(0).filters[0] = new fabric.Image.filters.Tint({color});
-        this.object.item(0).applyFilters(canvas.renderAll.bind(canvas));
+      setStandImage(e) {
+        this.object.setStandImage(e.target.value);
       },
-      setValue() {
-        this.object.item(1).width = this.object.width/this.maxValue*this.value;
-        canvas.renderAll();
+      setValue(e) {
+        this.object.setValue(e.target.value);
       },
-      setRounded() {
-
+      setMaxValue(e) {
+        this.object.setMaxValue(e.target.value);
       },
-      setStrokeWidth() {
-        this.object.item(0).setHeight(this.object.height+this.border*2);
-        this.object.item(0).setWidth(this.object.width+this.border*2);
-        this.object.item(0).left -= this._saveLastBorder+this.border;
-        this.object.item(0).top -= this._saveLastBorder+this.border;
-        this._saveLastBorder = this.border;
-        canvas.renderAll();
+      setProgressColor(c) {
+        this.object.setProgressColor(c);
+      },
+      setStandColor(c) {
+        this.object.setStandColor(c);
+      },
+      setBorder(e) {
+        this.object.setBorder(e.target.value);
       }
     }
   }
