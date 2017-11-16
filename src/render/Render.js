@@ -39,6 +39,14 @@ class Render {
 
     return widget;
   }
+  removeWidget(id) {
+    this.widgets.forEach((w, i) => {
+      if(w.id == id) {
+        this.canvas.remove(w.view);
+        this.widgets.splice(i, 1);
+      }
+    });
+  }
   getJSON() {
     let resources = {};
     let views = [];

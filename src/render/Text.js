@@ -1,5 +1,5 @@
 const FONTS = {
-  "BEBAS_REGULAR": "Bebas Neue Regular",
+  "BEBAS": "Bebas Neue Regular",
   "BEBAS_BOLD": "Bebas Neue Bold",
   "ROBOTO_REGULAR": "Roboto Regular",
   "ROBOTO_BOLD": "Roboto Bold"
@@ -15,7 +15,7 @@ class Text {
     this.render = render;
 
     this.setValue(data.value || 'Здесь ваш текст, йоу');
-    this.setFontType(data.font || 'BEBAS_REGULAR');
+    this.setFontType(data.font || 'BEBAS');
     this.setColor(data.color || '#fff');
     this.setSize(data.size || 42);
     this.setX(data.x || 50);
@@ -36,8 +36,8 @@ class Text {
         type: "text",
         value: this.value,
         font: this.fontType,
-        size: this.view.fontSize,
-        color: this.view.fill
+        size: this.size,
+        color: this.color
       }
     }
   }
@@ -64,7 +64,7 @@ class Text {
     this.render.canvas.renderAll();
   }
   setSize(size) {
-    this.size = size;
+    this.size = +size;
     this.view.fontSize = size;
     this.render.canvas.renderAll();
   }

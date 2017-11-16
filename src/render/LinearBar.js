@@ -93,7 +93,7 @@ class LinearBar  {
     img.src = url;
   }
   setValue(val) {
-    this.value = val;
+    this.value = +val;
     this.progressImage.width = this.view.width/this.maxValue*this.value;
     this.render.canvas.renderAll();
   }

@@ -5,7 +5,7 @@
       <ul id="menu" class="tabs">
         <li class="tab col s4"><a href="#add" class="active">Добавить</a></li>
         <li class="tab col s4"><a href="#edit">Изменить</a></li>
-        <li class="tab col s4"><a href="#settings">Настройки</a></li>
+        <li class="tab col s4"><a href="#settings" @click="uploadData">Сохранить</a></li>
         <div class="indicator"></div>
       </ul>
     </div>
@@ -24,16 +24,11 @@
       <div id="edit">
         <div class="controls-section">
           <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
-          <editors-control :currentObject="currentObject"></editors-control>
+          <editors-control :renderer="renderer" :currentObject="currentObject"></editors-control>
         </div>
       </div>
-      <div id="settings">
-        <div class="controls-section">
-          <p class="flow-text label">Настройки</p>
-        </div>
-      </div>
+      <div id="settings"></div>
     </div>
-    <a id="uploadData" @click="uploadData" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
   </div>
 </template>
 
@@ -73,16 +68,17 @@
         });
         let data = resp.data.result;
 
-        this.renderer.setCover(res.background);
+        this.renderer.setCover(data.resources.background);
         for(let key in data.views) {
           let view = data.views[key];
-          this.addWidget(view.type, view, res);
+          this.addWidget(view.type, view, data.resources);
         }
         this.$emit('isLoad', false);
       },
       async uploadData() {
         let data = this.renderer.getJSON();
         this.$emit('isLoad', true);
+        $('#menu').tabs('select_tab', 'add');
 
         let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
           app_id: this.api.api_id,
@@ -114,8 +110,9 @@
         $('#menu').tabs('select_tab', 'add');
       });
 
-      if(false) {
+      if(this.$parent.isExist) {
         this.loadData();
+        this.isCoverEmpty = false;
       } else {
         let covers = this.api.api_result.response[0].cover.images;
         if(covers.length) {

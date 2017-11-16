@@ -34,9 +34,11 @@ class RadialBar  {
       },
       data: {
         id: this.id,
-        type: "linear",
+        type: "radial",
         value: "" + this.value,
         max_value: this.maxValue,
+        start_angle: this.startAngle,
+        direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
         w: Math.round(this.view.width),
@@ -107,7 +109,7 @@ class RadialBar  {
     this.render.canvas.renderAll();
   }
   setValue(v) {
-    this.value = v;
+    this.value = +v;
     this.progressImage.set({
       clipTo: (ctx) => {
         ctx.moveTo(0, 0);
@@ -119,7 +121,7 @@ class RadialBar  {
     this.render.canvas.renderAll();
   }
   setMaxValue(v) {
-    this.maxValue = v;
+    this.maxValue = +v;
     this.setValue(this.value);
   }
   setBorder(br) {
