@@ -1,8 +1,6 @@
 const FONTS = {
-  "BEBAS": "Bebas Neue Regular",
-  "BEBAS_BOLD": "Bebas Neue Bold",
-  "ROBOTO_REGULAR": "Roboto Regular",
-  "ROBOTO_BOLD": "Roboto Bold"
+  "BEBAS": "Bebas Neue",
+  "ROBOTO": "Roboto"
 }
 
 class Text {
@@ -24,6 +22,7 @@ class Text {
 
     this.view.objectCaching = false;
     this.view.selectable = true;
+    this.view.fontWeight = 'bold';
   }
   getJSON() {
     return {
