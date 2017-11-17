@@ -21,6 +21,8 @@ class Render {
     this.coverImage.set('selectable', false);
     this.canvas.add(this.coverImage);
 
+    this.isEditCover = false;
+
     this.objectsScale = 1;
 
     this.widgets = [];
@@ -56,7 +58,6 @@ class Render {
       resources = {...resources, ...data.images};
       views.push(data.data);
     });
-    console.log({resources, views})
     return {resources, views};
   }
   resizeCoverToHeight() {
@@ -96,6 +97,7 @@ class Render {
         height: h
       });
 
+      this.isEditCover = true;
       this.setCover(coverSrc);
     });
   }

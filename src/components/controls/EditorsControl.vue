@@ -31,7 +31,7 @@
         this.renderer.removeWidget(this.currentObject.id);
       },
       backToMenu() {
-        this.currentObject.view.trigger('mouseup');
+        this.renderer.canvas.trigger('selection:cleared');
       }
     },
     computed: {

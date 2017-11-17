@@ -83,15 +83,32 @@
         this.$emit('isLoad', true);
         $('#menu').tabs('select_tab', 'add');
 
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
-          app_id: this.api.api_id,
-          auth_token: this.api.auth_key,
-          group_id: this.api.group_id,
-          viewer_id: this.api.viewer_id,
-          ...data
-        });
-        console.log(resp);
-        Materialize.toast('Обложка сохранена!');
+        if(this.renderer.isEditCover || !this.$parent.isExist)
+          data.resources.background = this.renderer.coverImage._element.src;
+
+
+        console.log(data);
+
+        try {
+          let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
+            app_id: this.api.api_id,
+            auth_token: this.api.auth_key,
+            group_id: this.api.group_id,
+            viewer_id: this.api.viewer_id,
+            ...data
+          });
+          console.log(resp);
+
+          if(resp.data.code == 'ok') {
+            Materialize.toast('Обложка сохранена!', 1000);
+            this.renderer.isEditCover = false;
+            this.$parent.isExist = true;
+          } else {
+            Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
+          }
+        } catch(e) {
+          Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
+        }
         this.$emit('isLoad', false);
       },
 

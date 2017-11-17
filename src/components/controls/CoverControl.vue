@@ -69,8 +69,8 @@
   .control-cover-btns {
     z-index: 10000;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 25px;
+    top: 10px;
   }
 
   .btn-cover {

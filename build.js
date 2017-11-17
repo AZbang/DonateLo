@@ -14427,7 +14427,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./views/AdminEditor.vue":47,"./views/GettingStarted.vue":48,"./views/Register.vue":49,"axios":1,"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.control-cover-btns[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.control-cover-btns[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 25px;\n  top: 10px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
 
@@ -14494,7 +14494,7 @@ module.exports = {
       this.renderer.removeWidget(this.currentObject.id);
     },
     backToMenu() {
-      this.currentObject.view.trigger('mouseup');
+      this.renderer.canvas.trigger('selection:cleared');
     }
   },
   computed: {
@@ -14934,14 +14934,29 @@ module.exports = {
         _this2.$emit('isLoad', true);
         $('#menu').tabs('select_tab', 'add');
 
-        let resp = yield axios.post('https://app-donatelo.herokuapp.com/update_cover', _extends({
-          app_id: _this2.api.api_id,
-          auth_token: _this2.api.auth_key,
-          group_id: _this2.api.group_id,
-          viewer_id: _this2.api.viewer_id
-        }, data));
-        console.log(resp);
-        Materialize.toast('Обложка сохранена!');
+        if (_this2.renderer.isEditCover || !_this2.$parent.isExist) data.resources.background = _this2.renderer.coverImage._element.src;
+
+        console.log(data);
+
+        try {
+          let resp = yield axios.post('https://app-donatelo.herokuapp.com/update_cover', _extends({
+            app_id: _this2.api.api_id,
+            auth_token: _this2.api.auth_key,
+            group_id: _this2.api.group_id,
+            viewer_id: _this2.api.viewer_id
+          }, data));
+          console.log(resp);
+
+          if (resp.data.code == 'ok') {
+            Materialize.toast('Обложка сохранена!', 1000);
+            _this2.renderer.isEditCover = false;
+            _this2.$parent.isExist = true;
+          } else {
+            Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
+          }
+        } catch (e) {
+          Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
+        }
         _this2.$emit('isLoad', false);
       })();
     },
@@ -15503,6 +15518,8 @@ class Render {
     this.coverImage.set('selectable', false);
     this.canvas.add(this.coverImage);
 
+    this.isEditCover = false;
+
     this.objectsScale = 1;
 
     this.widgets = [];
@@ -15538,7 +15555,6 @@ class Render {
       resources = _extends({}, resources, data.images);
       views.push(data.data);
     });
-    console.log({ resources, views });
     return { resources, views };
   }
   resizeCoverToHeight() {
@@ -15577,6 +15593,7 @@ class Render {
         height: h
       });
 
+      this.isEditCover = true;
       this.setCover(coverSrc);
     });
   }
