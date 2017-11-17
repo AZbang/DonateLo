@@ -13,8 +13,8 @@ class LinearBar  {
 
     this.setX(data.x || 50);
     this.setY(data.y || 50);
-    this.setWidth(data.width || 200);
-    this.setHeight(data.height || 50);
+    this.setWidth(data.w || 200);
+    this.setHeight(data.h || 50);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
     this.setMaxValue(data.max_value || 100);
@@ -37,8 +37,8 @@ class LinearBar  {
         max_value: this.maxValue,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
+        w: Math.round(this.view.currentWidth),
+        h: Math.round(this.view.currentHeight),
         angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,

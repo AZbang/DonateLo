@@ -28,6 +28,12 @@
         showPicker: false
       }
     },
+    watch: {
+      startColor(v) {
+        this.colors =  [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda"];
+        this.selectColor = 0;
+      }
+    },
     methods: {
       updateColor(val) {
         this.$emit('setColor', val.hex);

@@ -14540,7 +14540,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],39:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-5f30e266] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-5f30e266] {\n  position: relative;\n}\n.wrap-card-content[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-5f30e266] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n}\n.card-panel i[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-5f30e266] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-5f30e266] {\n  position: relative;\n}\n.wrap-card-content[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel[data-v-5f30e266] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff;\n  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.05);\n}\n.card-panel i[data-v-5f30e266] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}")
 ;(function(){
 
 
@@ -14785,6 +14785,12 @@ module.exports = {
       showPicker: false
     };
   },
+  watch: {
+    startColor(v) {
+      this.colors = [this.startColor, "#ff8c41", "#fcd900", "#2cca90", "#48dfda"];
+      this.selectColor = 0;
+    }
+  },
   methods: {
     updateColor(val) {
       this.$emit('setColor', val.hex);
@@ -14869,7 +14875,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],47:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  width: 100vw;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-6426a840] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  width: 100vw;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: absolute;\n  bottom: -31px;\n  z-index: 100000;\n  right: 50px;\n  width: 60px;\n  background: #6e7bab;\n  height: 60px;\n}\n#uploadData i[data-v-6426a840] {\n  line-height: 62px;\n  font-size: 35px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.wrap-tabs[data-v-6426a840] {\n  z-index: 100000;\n  background: #fff;\n  position: relative;\n  width: 100vw;\n  height: 48px;\n}\n.tabs[data-v-6426a840] {\n  width: 50%;\n  position: absolute;\n  left: 0;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -14974,8 +14980,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#settings"},on:{"click":_vm.uploadData}},[_vm._v("Сохранить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"settings"}})])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#add"}},[_vm._v("Добавить")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_vm._m(0),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light",attrs:{"id":"uploadData"},on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("done")])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-tabs"},[_c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#add"}},[_vm._v("Добавить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])])}]
 __vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -15141,8 +15147,8 @@ class ContructorImage {
       value: this.value,
       x: Math.round(this.view.left),
       y: Math.round(this.view.top),
-      w: Math.round(this.view.width),
-      h: Math.round(this.view.height),
+      w: Math.round(this.view.currentWidth),
+      h: Math.round(this.view.currentHeight),
       angle: Math.round(this.view.angle)
       // border_color: obj.borderColor,
       // border_width: obj.borderWidth
@@ -15199,8 +15205,8 @@ class LinearBar {
 
     this.setX(data.x || 50);
     this.setY(data.y || 50);
-    this.setWidth(data.width || 200);
-    this.setHeight(data.height || 50);
+    this.setWidth(data.w || 200);
+    this.setHeight(data.h || 50);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
     this.setMaxValue(data.max_value || 100);
@@ -15223,8 +15229,8 @@ class LinearBar {
         max_value: this.maxValue,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
+        w: Math.round(this.view.currentWidth),
+        h: Math.round(this.view.currentHeight),
         angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
@@ -15331,8 +15337,8 @@ class RadialBar {
 
     this.setX(data.x || 50);
     this.setY(data.y || 50);
-    this.setWidth(data.width || 200);
-    this.setHeight(data.height || 200);
+    this.setWidth(data.w || 200);
+    this.setHeight(data.h || 200);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
     this.setStartAngle(data.start_angle || 0);
@@ -15358,8 +15364,8 @@ class RadialBar {
         direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
+        w: Math.round(this.view.currentWidth),
+        h: Math.round(this.view.currentHeight),
         angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,

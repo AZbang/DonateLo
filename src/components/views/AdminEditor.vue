@@ -2,12 +2,16 @@
   <div id="admin">
     <div class="fixed-wrap">
       <cover-control :renderer="renderer" :isCoverEmpty="isCoverEmpty"></cover-control>
-      <ul id="menu" class="tabs">
-        <li class="tab col s4"><a href="#add" class="active">Добавить</a></li>
-        <li class="tab col s4"><a href="#edit">Изменить</a></li>
-        <li class="tab col s4"><a href="#settings" @click="uploadData">Сохранить</a></li>
-        <div class="indicator"></div>
-      </ul>
+      <div class="wrap-tabs">
+        <ul id="menu" class="tabs">
+          <li class="tab col s4"><a href="#add" class="active">Добавить</a></li>
+          <li class="tab col s4"><a href="#edit">Изменить</a></li>
+          <div class="indicator"></div>
+        </ul>
+      </div>
+      <a id="uploadData" @click="uploadData" class="btn-floating btn-large waves-effect waves-light">
+        <i class="material-icons">done</i>
+      </a>
     </div>
     <div class="views-wrap">
       <div id="add">
@@ -27,7 +31,6 @@
           <editors-control :renderer="renderer" :currentObject="currentObject"></editors-control>
         </div>
       </div>
-      <div id="settings"></div>
     </div>
   </div>
 </template>
@@ -132,9 +135,17 @@
     z-index: 10000;
   }
   #uploadData {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    position: absolute;
+    bottom: -31px;
+    z-index: 100000;
+    right: 50px;
+    width: 60px;
+    background: #6e7bab;
+    height: 60px;
+  }
+  #uploadData i {
+    line-height: 62px;
+    font-size: 35px;
   }
   .views-wrap {
     margin-top: 348px;
@@ -146,9 +157,17 @@
     margin: 5px;
     color: #6e7bab;
   }
-  .tabs {
-    overflow: hidden;
+  .wrap-tabs {
     z-index: 100000;
+    background: #fff;
+    position: relative;
+    width: 100vw;
+    height: 48px;
+  }
+  .tabs {
+    width: 50%;
+    position: absolute;
+    left: 0;
   }
   .tab a {
     color: #6e7bab !important;

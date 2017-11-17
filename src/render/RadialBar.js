@@ -16,8 +16,8 @@ class RadialBar  {
 
     this.setX(data.x || 50);
     this.setY(data.y || 50);
-    this.setWidth(data.width || 200);
-    this.setHeight(data.height || 200);
+    this.setWidth(data.w || 200);
+    this.setHeight(data.h || 200);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
     this.setStartAngle(data.start_angle || 0);
@@ -43,8 +43,8 @@ class RadialBar  {
         direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
+        w: Math.round(this.view.currentWidth),
+        h: Math.round(this.view.currentHeight),
         angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,

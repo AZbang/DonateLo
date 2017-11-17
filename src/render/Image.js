@@ -29,8 +29,8 @@ class ContructorImage {
       value: this.value,
       x: Math.round(this.view.left),
       y: Math.round(this.view.top),
-      w: Math.round(this.view.width),
-      h: Math.round(this.view.height),
+      w: Math.round(this.view.currentWidth),
+      h: Math.round(this.view.currentHeight),
       angle: Math.round(this.view.angle),
       // border_color: obj.borderColor,
       // border_width: obj.borderWidth
