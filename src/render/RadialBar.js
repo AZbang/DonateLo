@@ -12,10 +12,8 @@ class RadialBar  {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
-    console.log(data);
-
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 200);
     this.setAngle(data.angle || 0);

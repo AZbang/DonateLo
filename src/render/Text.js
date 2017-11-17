@@ -18,8 +18,8 @@ class Text {
     this.setFontType(data.font || 'BEBAS');
     this.setColor(data.color || '#fff');
     this.setSize(data.size || 42);
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setAngle(data.angle || 0);
 
     this.view.objectCaching = false;

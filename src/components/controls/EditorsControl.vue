@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <div :object="currentObject" :is="editorComponent"></div>
-    <div class="fixed-bottom row">
-      <div class="input-field col s6">
-        <button class="btn delete-btn waves-effect btn-flat red lighten-1" @click="deleteObject">Удалить</button>
-      </div>
-      <div class="input-field col s6">
-        <button class="btn okey-btn waves-effect btn-flat green lighten-1" @click="backToMenu">Вернуться</button>
-      </div>
+  <div class="editor-wrap">
+    <div class="btns-wrap" v-show="editorComponent">
+      <a @click="deleteObject" class="btn-floating btn-large red waves-effect waves-light">
+        <i class="material-icons">delete</i>
+      </a>
+      <a @click="backToMenu" class="btn-floating btn-large green waves-effect waves-light">
+        <i class="material-icons">done</i>
+      </a>
     </div>
+    <div :object="currentObject" :is="editorComponent"></div>
   </div>
 </template>
 
@@ -44,23 +44,23 @@
 </script>
 
 <style scoped>
-  .fixed-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+  .editor-wrap {
+    position: relative;
+  }
+  .btns-wrap {
+    position: absolute;
+    top: -57px;
+    right: 42px;
+    position: absolute;
+    z-index: 100000;
+  }
+  a {
+    margin-left: 20px;
+    width: 60px;
     height: 60px;
-    padding: 10px 0;
-    background-color: #fff;
-    z-index: 1000;
-    margin: 0;
   }
-  .fixed-bottom .input-field {
-    margin: 0;
-  }
-  .btn {
-    color: #fff;
-    height: 100%;
-    width: 100%;
+  a i {
+    line-height: 62px;
+    font-size: 35px;
   }
 </style>

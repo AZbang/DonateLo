@@ -14427,7 +14427,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./views/AdminEditor.vue":47,"./views/GettingStarted.vue":48,"./views/Register.vue":49,"axios":1,"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.control-cover-btns[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 25px;\n  top: 10px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.control-cover-btns[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
 
@@ -14457,7 +14457,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"control-cover-btns"},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1)]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticStyle:{"height":"inherit"}},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"control-cover-btns"},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1)]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-24cdd05e"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -14472,7 +14472,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../helpers/UploadImage.vue":46,"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],37:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-bottom[data-v-318197e2] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n  margin: 0;\n}\n.fixed-bottom .input-field[data-v-318197e2] {\n  margin: 0;\n}\n.btn[data-v-318197e2] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".editor-wrap[data-v-318197e2] {\n  position: relative;\n}\n.btns-wrap[data-v-318197e2] {\n  position: absolute;\n  top: -57px;\n  right: 42px;\n  position: absolute;\n  z-index: 100000;\n}\na[data-v-318197e2] {\n  margin-left: 20px;\n  width: 60px;\n  height: 60px;\n}\na i[data-v-318197e2] {\n  line-height: 62px;\n  font-size: 35px;\n}")
 ;(function(){
 
 
@@ -14507,7 +14507,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c(_vm.editorComponent,{tag:"div",attrs:{"object":_vm.currentObject}}),_vm._v(" "),_c('div',{staticClass:"fixed-bottom row"},[_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn delete-btn waves-effect btn-flat red lighten-1",on:{"click":_vm.deleteObject}},[_vm._v("Удалить")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6"},[_c('button',{staticClass:"btn okey-btn waves-effect btn-flat green lighten-1",on:{"click":_vm.backToMenu}},[_vm._v("Вернуться")])])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"editor-wrap"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.editorComponent),expression:"editorComponent"}],staticClass:"btns-wrap"},[_c('a',{staticClass:"btn-floating btn-large red waves-effect waves-light",on:{"click":_vm.deleteObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")])]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large green waves-effect waves-light",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("done")])])]),_vm._v(" "),_c(_vm.editorComponent,{tag:"div",attrs:{"object":_vm.currentObject}})])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-318197e2"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -14875,7 +14875,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],47:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  width: 100vw;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: absolute;\n  bottom: -31px;\n  z-index: 100000;\n  right: 50px;\n  width: 60px;\n  background: #6e7bab;\n  height: 60px;\n}\n#uploadData i[data-v-6426a840] {\n  line-height: 62px;\n  font-size: 35px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.wrap-tabs[data-v-6426a840] {\n  z-index: 100000;\n  background: #fff;\n  position: relative;\n  width: 100vw;\n  height: 48px;\n}\n.tabs[data-v-6426a840] {\n  width: 50%;\n  position: absolute;\n  left: 0;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  width: 100vw;\n  z-index: 10000;\n}\n.btn-upload-data[data-v-6426a840] {\n  position: absolute;\n  top: -31px;\n  z-index: 100000;\n  right: 50px;\n  width: 60px;\n  background: #6e7bab;\n  height: 60px;\n}\n.btn-upload-data i[data-v-6426a840] {\n  line-height: 62px;\n  font-size: 35px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  position: relative;\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.wrap-tabs[data-v-6426a840] {\n  z-index: 100000;\n  background: #fff;\n  position: relative;\n  width: 100vw;\n  height: 48px;\n}\n.tabs[data-v-6426a840] {\n  width: 50%;\n  position: absolute;\n  left: 0;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -14923,6 +14923,8 @@ module.exports = {
           let view = data.views[key];
           _this.addWidget(view.type, view, data.resources);
         }
+        _this.renderer.canvas.trigger('selection:cleared');
+
         _this.$emit('isLoad', false);
       })();
     },
@@ -14932,7 +14934,6 @@ module.exports = {
       return _asyncToGenerator(function* () {
         let data = _this2.renderer.getJSON();
         _this2.$emit('isLoad', true);
-        $('#menu').tabs('select_tab', 'add');
 
         if (_this2.renderer.isEditCover || !_this2.$parent.isExist) data.resources.background = _this2.renderer.coverImage._element.src;
 
@@ -14976,7 +14977,7 @@ module.exports = {
     this.renderer = new Render('playground', window.innerWidth, 300);
     this.renderer.canvas.on('selection:cleared', () => {
       this.currentObject = null;
-      $('#menu').tabs('select_tab', 'add');
+      $('#menu').tabs('select_tab', 'widgets');
     });
 
     if (this.$parent.isExist) {
@@ -14995,8 +14996,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_vm._m(0),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light",attrs:{"id":"uploadData"},on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("done")])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"add"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-tabs"},[_c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#add"}},[_vm._v("Добавить")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])]),_vm._v(" "),_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])]),_vm._v(" "),_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrap-tabs"},[_c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#widgets"}},[_vm._v("Виджеты")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#services"}},[_vm._v("Сервисы")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])])}]
 __vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -15146,8 +15147,8 @@ class ContructorImage {
     };
     img.src = 'assets/image.png';
 
-    this.setWidth(data.width || 100);
-    this.setHeight(data.height || 100);
+    this.setWidth(data.width || 500);
+    this.setHeight(data.height || 150);
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setAngle(data.angle || 0);
@@ -15218,8 +15219,8 @@ class LinearBar {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 50);
     this.setAngle(data.angle || 0);
@@ -15348,10 +15349,8 @@ class RadialBar {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
-    console.log(data);
-
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 200);
     this.setAngle(data.angle || 0);
@@ -15519,9 +15518,6 @@ class Render {
     this.canvas.add(this.coverImage);
 
     this.isEditCover = false;
-
-    this.objectsScale = 1;
-
     this.widgets = [];
   }
   addWidget(type, data = {}, res = {}) {
@@ -15531,6 +15527,12 @@ class Render {
     widget.view.setOriginToCenter();
     widget.view.top -= widget.view.height / 2;
     widget.view.left -= widget.view.width / 2;
+    widget.view.padding = 0;
+    widget.view.cornerSize = 16;
+    widget.view.borderColor = '#6e7bab';
+    widget.view.cornerColor = '#6e7bab';
+    widget.view.cornerStrokeColor = '#6e7bab';
+    widget.view.transparentCorners = false;
 
     this.widgets.push(widget);
     this.canvas.add(widget.view);
@@ -15667,8 +15669,8 @@ class Text {
     this.setFontType(data.font || 'BEBAS');
     this.setColor(data.color || '#fff');
     this.setSize(data.size || 42);
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setAngle(data.angle || 0);
 
     this.view.objectCaching = false;

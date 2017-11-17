@@ -22,9 +22,6 @@ class Render {
     this.canvas.add(this.coverImage);
 
     this.isEditCover = false;
-
-    this.objectsScale = 1;
-
     this.widgets = [];
   }
   addWidget(type, data={}, res={}) {
@@ -34,6 +31,12 @@ class Render {
     widget.view.setOriginToCenter();
     widget.view.top -= widget.view.height/2;
     widget.view.left -= widget.view.width/2;
+    widget.view.padding = 0;
+    widget.view.cornerSize = 16;
+    widget.view.borderColor = '#6e7bab';
+    widget.view.cornerColor = '#6e7bab';
+    widget.view.cornerStrokeColor = '#6e7bab';
+    widget.view.transparentCorners = false;
 
     this.widgets.push(widget);
     this.canvas.add(widget.view);

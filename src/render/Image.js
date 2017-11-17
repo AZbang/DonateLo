@@ -13,8 +13,8 @@ class ContructorImage {
     }
     img.src = 'assets/image.png';
 
-    this.setWidth(data.width || 100);
-    this.setHeight(data.height || 100);
+    this.setWidth(data.width || 500);
+    this.setHeight(data.height || 150);
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setAngle(data.angle || 0);

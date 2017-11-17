@@ -11,8 +11,8 @@ class LinearBar  {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
+    this.setX(data.x || 500);
+    this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 50);
     this.setAngle(data.angle || 0);

@@ -1,6 +1,6 @@
 <template>
   <div id="cover-control">
-    <div v-show="!isCoverEmpty">
+    <div v-show="!isCoverEmpty" style="height: inherit;">
       <canvas id="playground"></canvas>
     </div>
 
@@ -69,7 +69,7 @@
   .control-cover-btns {
     z-index: 10000;
     position: absolute;
-    right: 25px;
+    right: 10px;
     top: 10px;
   }
 

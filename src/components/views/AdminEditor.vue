@@ -4,23 +4,28 @@
       <cover-control :renderer="renderer" :isCoverEmpty="isCoverEmpty"></cover-control>
       <div class="wrap-tabs">
         <ul id="menu" class="tabs">
-          <li class="tab col s4"><a href="#add" class="active">Добавить</a></li>
+          <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
+          <li class="tab col s4"><a href="#services">Сервисы</a></li>
           <li class="tab col s4"><a href="#edit">Изменить</a></li>
           <div class="indicator"></div>
         </ul>
       </div>
-      <a id="uploadData" @click="uploadData" class="btn-floating btn-large waves-effect waves-light">
-        <i class="material-icons">done</i>
-      </a>
     </div>
     <div class="views-wrap">
-      <div id="add">
+      <div id="widgets">
         <div class="controls-section">
+          <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+            <i class="material-icons">cloud_upload</i>
+          </a>
           <p class="flow-text label">Добавить виджет:</p>
           <widgets-control @addWidget="addWidget"></widgets-control>
         </div>
-
+      </div>
+      <div id="services">
         <div class="controls-section">
+          <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+            <i class="material-icons">cloud_upload</i>
+          </a>
           <p class="flow-text label">Добавить сервис:</p>
           <services-control></services-control>
         </div>
@@ -76,12 +81,13 @@
           let view = data.views[key];
           this.addWidget(view.type, view, data.resources);
         }
+        this.renderer.canvas.trigger('selection:cleared');
+
         this.$emit('isLoad', false);
       },
       async uploadData() {
         let data = this.renderer.getJSON();
         this.$emit('isLoad', true);
-        $('#menu').tabs('select_tab', 'add');
 
         if(this.renderer.isEditCover || !this.$parent.isExist)
           data.resources.background = this.renderer.coverImage._element.src;
@@ -127,7 +133,7 @@
       this.renderer = new Render('playground', window.innerWidth, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
-        $('#menu').tabs('select_tab', 'add');
+        $('#menu').tabs('select_tab', 'widgets');
       });
 
       if(this.$parent.isExist) {
@@ -151,16 +157,16 @@
     width: 100vw;
     z-index: 10000;
   }
-  #uploadData {
+  .btn-upload-data {
     position: absolute;
-    bottom: -31px;
+    top: -31px;
     z-index: 100000;
     right: 50px;
     width: 60px;
     background: #6e7bab;
     height: 60px;
   }
-  #uploadData i {
+  .btn-upload-data i {
     line-height: 62px;
     font-size: 35px;
   }
@@ -168,6 +174,7 @@
     margin-top: 348px;
   }
   .controls-section {
+    position: relative;
     padding: 2em 1em 0;
   }
   .controls-section .label {
