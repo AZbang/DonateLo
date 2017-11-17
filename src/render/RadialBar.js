@@ -12,6 +12,8 @@ class RadialBar  {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    console.log(data);
+
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setWidth(data.width || 200);
@@ -22,7 +24,7 @@ class RadialBar  {
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.progress_color || '#fff');
+    this.setProgressColor(data.bar_color || '#fff');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
   }
@@ -43,7 +45,7 @@ class RadialBar  {
         y: Math.round(this.view.top),
         w: Math.round(this.view.width),
         h: Math.round(this.view.height),
-        angle: this.view.angle,
+        angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -80,6 +82,7 @@ class RadialBar  {
       this.progressImage.left = 0;
       this.progressImage.setHeight(this.view.width);
       this.progressImage.setWidth(this.view.width);
+      this.setProgressColor(this.progressColor);
       this.setValue(this.value);
       this.render.canvas.renderAll();
     }
@@ -94,6 +97,7 @@ class RadialBar  {
       this.standImage.left = -this.view.width/2;
       this.standImage.setHeight(this.view.width);
       this.standImage.setWidth(this.view.width);
+      this.setStandColor(this.standColor);
       this.standImage.set({
         clipTo: (ctx) => {
           ctx.arc(0, 0, this.view.width/2, 0, Math.PI*2, true);

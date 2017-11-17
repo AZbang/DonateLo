@@ -17,15 +17,14 @@ class LinearBar  {
     this.setHeight(data.height || 50);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
-    this.setMaxValue(data.maxValue || 100);
+    this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.progressColor || '#fff');
-    this.setStandColor(data.standColor || '#fff');
+    this.setProgressColor(data.bar_color || '#fff');
+    this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
   }
   getJSON() {
-    console.log(this.standImage);
     return {
       images: {
         [this.id + ':stand']: this.standImage._element.src,
@@ -40,7 +39,7 @@ class LinearBar  {
         y: Math.round(this.view.top),
         w: Math.round(this.view.width),
         h: Math.round(this.view.height),
-        angle: this.view.angle,
+        angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -75,6 +74,7 @@ class LinearBar  {
       this.progressImage.top = -this.view.height/2;
       this.progressImage.left = -this.view.width/2;
       this.progressImage.setHeight(this.view.height);
+      this.setProgressColor(this.progressColor);
       this.setValue(this.value);
     }
     img.src = url;
@@ -88,6 +88,7 @@ class LinearBar  {
       this.standImage.left = -this.view.width/2;
       this.standImage.setHeight(this.view.height);
       this.standImage.setWidth(this.view.width);
+      this.setStandColor(this.standColor);
       this.render.canvas.renderAll();
     }
     img.src = url;

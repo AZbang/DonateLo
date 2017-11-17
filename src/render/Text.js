@@ -28,9 +28,9 @@ class Text {
   getJSON() {
     return {
       data: {
-        x: Math.round(this.view.left/this.render.scale),
-        y: Math.round(this.view.top/this.render.scale),
-        angle: this.view.angle,
+        x: Math.round(this.view.left),
+        y: Math.round(this.view.top),
+        angle: Math.round(this.view.angle),
 
         id: this.id,
         type: "text",

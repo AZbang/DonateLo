@@ -1,16 +1,17 @@
 <template>
   <div id="cover-control">
-    <div class="actions-wrap" v-show="!isCoverEmpty">
+    <div v-show="!isCoverEmpty">
+      <canvas id="playground"></canvas>
+    </div>
+
+    <div class="control-cover-btns" v-show="!isCoverEmpty">
       <div id="new-cover" class="btn-cover">
         <upload-image @uploadImage="uploadImage"></upload-image>
         <i class="material-icons">edit</i>
       </div>
-      <div id="resize-cover" class="btn-cover" @click="toggleSize">
+      <!-- <div id="resize-cover" class="btn-cover" @click="toggleSize">
         <i class="material-icons">fullscreen</i>
-      </div>
-    </div>
-    <div v-show="!isCoverEmpty">
-      <canvas id="playground"></canvas>
+      </div> -->
     </div>
 
     <div id="first-upload-bg" v-show="isCoverEmpty">
@@ -65,7 +66,7 @@
     font-size: 3em;
   }
 
-  .actions-wrap {
+  .control-cover-btns {
     z-index: 10000;
     position: absolute;
     right: 20px;

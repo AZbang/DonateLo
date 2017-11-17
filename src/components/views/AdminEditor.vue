@@ -104,7 +104,7 @@
     },
     mounted() {
       $('ul.tabs').tabs();
-      this.renderer = new Render('playground', 720, 300);
+      this.renderer = new Render('playground', window.innerWidth, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'add');
@@ -128,6 +128,7 @@
   .fixed-wrap {
     position: fixed;
     top: 0;
+    width: 100vw;
     z-index: 10000;
   }
   #uploadData {

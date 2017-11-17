@@ -14427,7 +14427,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./views/AdminEditor.vue":47,"./views/GettingStarted.vue":48,"./views/Register.vue":49,"axios":1,"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.actions-wrap[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#first-upload-bg[data-v-24cdd05e] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 98vw;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#first-upload-bg i[data-v-24cdd05e], #first-upload-bg p[data-v-24cdd05e] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#first-upload-bg i[data-v-24cdd05e] {\n  font-size: 3em;\n}\n\n.control-cover-btns[data-v-24cdd05e] {\n  z-index: 10000;\n  position: absolute;\n  right: 20px;\n  top: 20px;\n}\n\n.btn-cover[data-v-24cdd05e] {\n  padding: 9px;\n  width: 44px;\n  height: 44px;\n  margin-left: 8px;\n  color: #fff;\n  background: rgba(31,31,31,.75);\n  border-radius: 3px;\n  float: right;\n  cursor: pointer;\n}")
 ;(function(){
 
 
@@ -14457,7 +14457,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"actions-wrap"},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1),_vm._v(" "),_c('div',{staticClass:"btn-cover",attrs:{"id":"resize-cover"},on:{"click":_vm.toggleSize}},[_c('i',{staticClass:"material-icons"},[_vm._v("fullscreen")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"cover-control"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}]},[_c('canvas',{attrs:{"id":"playground"}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isCoverEmpty),expression:"!isCoverEmpty"}],staticClass:"control-cover-btns"},[_c('div',{staticClass:"btn-cover",attrs:{"id":"new-cover"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("edit")])],1)]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isCoverEmpty),expression:"isCoverEmpty"}],attrs:{"id":"first-upload-bg"}},[_c('upload-image',{on:{"uploadImage":_vm.uploadImage}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("add_a_photo")]),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])],1)])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-24cdd05e"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -14753,7 +14753,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }_vm.setValue($event)}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",domProps:{"value":_vm.object.fontType}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",domProps:{"value":_vm.object.size},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }_vm.setSize($event)}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m4"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"right"}},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет текста:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.object.color},on:{"setColor":_vm.setColor}})],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",domProps:{"value":_vm.object.fontType}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('input',{staticClass:"input",domProps:{"value":_vm.object.size},on:{"keyup":function($event){if(!('button' in $event)&&_vm._k($event.keyCode,"enter",13,$event.key)){ return null; }_vm.setSize($event)}}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s6 m4"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"right"}},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет текста:")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('color-picker',{attrs:{"startColor":_vm.object.color},on:{"setColor":_vm.setColor}})],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14869,7 +14869,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":33,"vue-hot-reload-api":32,"vueify/lib/insert-css":34}],47:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-6426a840] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".fixed-wrap[data-v-6426a840] {\n  position: fixed;\n  top: 0;\n  width: 100vw;\n  z-index: 10000;\n}\n#uploadData[data-v-6426a840] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}\n.views-wrap[data-v-6426a840] {\n  margin-top: 348px;\n}\n.controls-section[data-v-6426a840] {\n  padding: 2em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tabs[data-v-6426a840] {\n  overflow: hidden;\n  z-index: 100000;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -14952,7 +14952,7 @@ module.exports = {
   },
   mounted() {
     $('ul.tabs').tabs();
-    this.renderer = new Render('playground', 720, 300);
+    this.renderer = new Render('playground', window.innerWidth, 300);
     this.renderer.canvas.on('selection:cleared', () => {
       this.currentObject = null;
       $('#menu').tabs('select_tab', 'add');
@@ -15143,7 +15143,7 @@ class ContructorImage {
       y: Math.round(this.view.top),
       w: Math.round(this.view.width),
       h: Math.round(this.view.height),
-      angle: this.angle
+      angle: Math.round(this.view.angle)
       // border_color: obj.borderColor,
       // border_width: obj.borderWidth
     };
@@ -15203,15 +15203,14 @@ class LinearBar {
     this.setHeight(data.height || 50);
     this.setAngle(data.angle || 0);
     this.setValue(data.value || 50);
-    this.setMaxValue(data.maxValue || 100);
+    this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.progressColor || '#fff');
-    this.setStandColor(data.standColor || '#fff');
+    this.setProgressColor(data.bar_color || '#fff');
+    this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
   }
   getJSON() {
-    console.log(this.standImage);
     return {
       images: {
         [this.id + ':stand']: this.standImage._element.src,
@@ -15226,7 +15225,7 @@ class LinearBar {
         y: Math.round(this.view.top),
         w: Math.round(this.view.width),
         h: Math.round(this.view.height),
-        angle: this.view.angle,
+        angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -15261,6 +15260,7 @@ class LinearBar {
       this.progressImage.top = -this.view.height / 2;
       this.progressImage.left = -this.view.width / 2;
       this.progressImage.setHeight(this.view.height);
+      this.setProgressColor(this.progressColor);
       this.setValue(this.value);
     };
     img.src = url;
@@ -15274,6 +15274,7 @@ class LinearBar {
       this.standImage.left = -this.view.width / 2;
       this.standImage.setHeight(this.view.height);
       this.standImage.setWidth(this.view.width);
+      this.setStandColor(this.standColor);
       this.render.canvas.renderAll();
     };
     img.src = url;
@@ -15326,6 +15327,8 @@ class RadialBar {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    console.log(data);
+
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setWidth(data.width || 200);
@@ -15336,7 +15339,7 @@ class RadialBar {
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.progress_color || '#fff');
+    this.setProgressColor(data.bar_color || '#fff');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
   }
@@ -15357,7 +15360,7 @@ class RadialBar {
         y: Math.round(this.view.top),
         w: Math.round(this.view.width),
         h: Math.round(this.view.height),
-        angle: this.view.angle,
+        angle: Math.round(this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -15394,6 +15397,7 @@ class RadialBar {
       this.progressImage.left = 0;
       this.progressImage.setHeight(this.view.width);
       this.progressImage.setWidth(this.view.width);
+      this.setProgressColor(this.progressColor);
       this.setValue(this.value);
       this.render.canvas.renderAll();
     };
@@ -15408,6 +15412,7 @@ class RadialBar {
       this.standImage.left = -this.view.width / 2;
       this.standImage.setHeight(this.view.width);
       this.standImage.setWidth(this.view.width);
+      this.setStandColor(this.standColor);
       this.standImage.set({
         clipTo: ctx => {
           ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
@@ -15483,8 +15488,8 @@ class Render {
     this.scale = 1;
 
     this.canvas = new fabric.Canvas(id);
-    this.canvas.setWidth(this.width);
-    this.canvas.setHeight(this.height);
+    this.canvas.setWidth(1590);
+    this.canvas.setHeight(400);
 
     this.coverWidth = 1590;
     this.coverHeight = 400;
@@ -15500,13 +15505,13 @@ class Render {
     let widget = new WIDGETS[type](this, data, res);
     widget.view.objectCaching = false;
     widget.view.selectable = true;
-    widget.view.scale(this.objectsScale);
     widget.view.setOriginToCenter();
+    widget.view.top -= widget.view.height / 2;
+    widget.view.left -= widget.view.width / 2;
 
     this.widgets.push(widget);
     this.canvas.add(widget.view);
     this.canvas.renderAll();
-    this.canvas.setActiveObject(widget.view);
 
     return widget;
   }
@@ -15522,46 +15527,33 @@ class Render {
     let resources = {};
     let views = [];
 
-    let _scale = this.objectsScale;
-    this.setScaleObjects(1);
-
     this.widgets.forEach(i => {
       let data = i.getJSON();
       resources = _extends({}, resources, data.images);
       views.push(data.data);
     });
-    this.setScaleObjects(_scale);
-
     console.log({ resources, views });
     return { resources, views };
   }
-  setScaleObjects(scale) {
-    this.objectsScale = scale;
-    this.widgets.forEach(i => {
-      i.view.scale(scale);
-    });
-  }
   resizeCoverToHeight() {
-    let size = this.coverImage.getOriginalSize();
-    let scale = this.height / size.height;
-    this.coverImage.scale(scale);
-    this.coverImage.left = this.width / 2 - size.width * scale / 2;
-    this.canvas.setHeight(this.height);
-    this.setScaleObjects(this.height / this.coverHeight);
-    this.canvas.renderAll();
-
-    $('.views-wrap').css('margin-top', '348px');
+    // let scale = this.height/this.coverHeight;
+    // $('.canvas-container').css({
+    //   'transform': 'scale(' + scale + ')',
+    //   'margin-top': -this.coverHeight/4 + 'px',
+    //   'margin-left': -this.coverWidth/4 + 'px'
+    // });
+    // $('#cover-control').css('height', this.coverHeight-48 + 'px');
+    // $('.views-wrap').css('margin-top', '300px');
   }
   resizeCoverToWidth() {
-    let size = this.coverImage.getOriginalSize();
-    let scale = this.width / size.width;
-    this.coverImage.scale(scale);
-    this.coverImage.left = 0;
-    this.canvas.setHeight(size.height * scale);
-    this.setScaleObjects(this.width / this.coverWidth);
-    this.canvas.renderAll();
-
-    $('.views-wrap').css('margin-top', '230px');
+    let scale = this.width / this.coverWidth;
+    $('.canvas-container').css({
+      'transform': 'scale(' + scale + ')',
+      'margin-top': -this.coverHeight / 4 + 'px',
+      'margin-left': -this.coverWidth / 4 + 'px'
+    });
+    $('#cover-control').css('height', this.height + 'px');
+    $('.views-wrap').css('margin-top', '248px');
   }
   toggleSize(isFull) {
     if (isFull) this.resizeCoverToWidth();else this.resizeCoverToHeight();
@@ -15582,10 +15574,47 @@ class Render {
       this.setCover(coverSrc);
     });
   }
+  zoomCanvas(factor) {
+    this.canvas.setHeight(this.canvas.getHeight() * factor);
+    this.canvas.setWidth(this.canvas.getWidth() * factor);
+    // if(this.canvas.backgroundImage) {
+    //     // Need to scale background images as well
+    //     var bi = canvas.backgroundImage;
+    //     bi.width = bi.width * factor; bi.height = bi.height * factor;
+    // }
+    var objects = this.canvas.getObjects();
+    var tcounter = 0;
+
+    for (var i in objects) {
+      tcounter++;
+      //alert(tcounter);
+      var scaleX = objects[i].scaleX;
+      var scaleY = objects[i].scaleY;
+      var left = objects[i].left;
+      var top = objects[i].top;
+
+      var tempScaleX = scaleX * factor;
+      var tempScaleY = scaleY * factor;
+      var tempLeft = left * factor;
+      var tempTop = top * factor;
+
+      objects[i].scaleX = tempScaleX;
+      objects[i].scaleY = tempScaleY;
+      objects[i].left = tempLeft;
+      objects[i].top = tempTop;
+
+      objects[i].setCoords();
+    }
+    this.canvas.renderAll();
+    this.canvas.calcOffset();
+  }
   setCover(src) {
     let img = new Image();
     img.onload = () => {
       this.coverImage.setElement(img);
+      this.coverImage.setWidth(this.coverWidth);
+      this.coverImage.setHeight(this.coverHeight);
+
       this.resizeCoverToWidth();
       this.canvas.renderAll();
     };
@@ -15626,9 +15655,9 @@ class Text {
   getJSON() {
     return {
       data: {
-        x: Math.round(this.view.left / this.render.scale),
-        y: Math.round(this.view.top / this.render.scale),
-        angle: this.view.angle,
+        x: Math.round(this.view.left),
+        y: Math.round(this.view.top),
+        angle: Math.round(this.view.angle),
 
         id: this.id,
         type: "text",

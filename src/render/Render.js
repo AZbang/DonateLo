@@ -12,8 +12,8 @@ class Render {
     this.scale = 1;
 
     this.canvas = new fabric.Canvas(id);
-    this.canvas.setWidth(this.width);
-    this.canvas.setHeight(this.height);
+    this.canvas.setWidth(1590);
+    this.canvas.setHeight(400);
 
     this.coverWidth = 1590;
     this.coverHeight = 400;
@@ -29,13 +29,13 @@ class Render {
     let widget = new WIDGETS[type](this, data, res);
     widget.view.objectCaching = false;
     widget.view.selectable = true;
-    widget.view.scale(this.objectsScale);
     widget.view.setOriginToCenter();
+    widget.view.top -= widget.view.height/2;
+    widget.view.left -= widget.view.width/2;
 
     this.widgets.push(widget);
     this.canvas.add(widget.view);
     this.canvas.renderAll();
-    this.canvas.setActiveObject(widget.view);
 
     return widget;
   }
@@ -51,46 +51,33 @@ class Render {
     let resources = {};
     let views = [];
 
-    let _scale = this.objectsScale;
-    this.setScaleObjects(1);
-
     this.widgets.forEach((i) => {
       let data = i.getJSON();
       resources = {...resources, ...data.images};
       views.push(data.data);
     });
-    this.setScaleObjects(_scale);
-
     console.log({resources, views})
     return {resources, views};
   }
-  setScaleObjects(scale) {
-    this.objectsScale = scale;
-    this.widgets.forEach((i) => {
-      i.view.scale(scale);
-    });
-  }
   resizeCoverToHeight() {
-    let size = this.coverImage.getOriginalSize();
-    let scale = this.height/size.height;
-    this.coverImage.scale(scale);
-    this.coverImage.left = this.width/2-size.width*scale/2;
-    this.canvas.setHeight(this.height);
-    this.setScaleObjects(this.height/this.coverHeight);
-    this.canvas.renderAll();
-
-    $('.views-wrap').css('margin-top', '348px');
+    // let scale = this.height/this.coverHeight;
+    // $('.canvas-container').css({
+    //   'transform': 'scale(' + scale + ')',
+    //   'margin-top': -this.coverHeight/4 + 'px',
+    //   'margin-left': -this.coverWidth/4 + 'px'
+    // });
+    // $('#cover-control').css('height', this.coverHeight-48 + 'px');
+    // $('.views-wrap').css('margin-top', '300px');
   }
   resizeCoverToWidth() {
-    let size = this.coverImage.getOriginalSize();
-    let scale = this.width/size.width;
-    this.coverImage.scale(scale);
-    this.coverImage.left = 0;
-    this.canvas.setHeight(size.height*scale);
-    this.setScaleObjects(this.width/this.coverWidth);
-    this.canvas.renderAll();
-
-    $('.views-wrap').css('margin-top', '230px');
+    let scale = this.width/this.coverWidth;
+    $('.canvas-container').css({
+      'transform': 'scale(' + scale + ')',
+      'margin-top': -this.coverHeight/4 + 'px',
+      'margin-left': -this.coverWidth/4 + 'px'
+    });
+    $('#cover-control').css('height', this.height + 'px');
+    $('.views-wrap').css('margin-top', '248px');
   }
   toggleSize(isFull) {
     if(isFull) this.resizeCoverToWidth();
@@ -112,10 +99,47 @@ class Render {
       this.setCover(coverSrc);
     });
   }
+  zoomCanvas(factor) {
+    this.canvas.setHeight(this.canvas.getHeight() * factor);
+    this.canvas.setWidth(this.canvas.getWidth() * factor);
+    // if(this.canvas.backgroundImage) {
+    //     // Need to scale background images as well
+    //     var bi = canvas.backgroundImage;
+    //     bi.width = bi.width * factor; bi.height = bi.height * factor;
+    // }
+    var objects = this.canvas.getObjects();
+    var tcounter = 0;
+
+    for (var i in objects) {
+        tcounter++;
+        //alert(tcounter);
+        var scaleX = objects[i].scaleX;
+        var scaleY = objects[i].scaleY;
+        var left = objects[i].left;
+        var top = objects[i].top;
+
+        var tempScaleX = scaleX * factor;
+        var tempScaleY = scaleY * factor;
+        var tempLeft = left * factor;
+        var tempTop = top * factor;
+
+        objects[i].scaleX = tempScaleX;
+        objects[i].scaleY = tempScaleY;
+        objects[i].left = tempLeft;
+        objects[i].top = tempTop;
+
+        objects[i].setCoords();
+    }
+    this.canvas.renderAll();
+    this.canvas.calcOffset();
+  }
   setCover(src) {
     let img = new Image();
     img.onload = () => {
       this.coverImage.setElement(img);
+      this.coverImage.setWidth(this.coverWidth);
+      this.coverImage.setHeight(this.coverHeight);
+
       this.resizeCoverToWidth();
       this.canvas.renderAll();
     }

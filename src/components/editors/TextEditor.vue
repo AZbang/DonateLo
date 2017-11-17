@@ -3,7 +3,7 @@
     <div class="input-field col s12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <textarea class="input" :value="object.value" @keyup.enter="setValue"></textarea>
+        <textarea class="input" :value="object.value" @change="setValue"></textarea>
       </div>
     </div>
     <div class="input-field col s12 m5">

@@ -31,7 +31,7 @@ class ContructorImage {
       y: Math.round(this.view.top),
       w: Math.round(this.view.width),
       h: Math.round(this.view.height),
-      angle: this.angle,
+      angle: Math.round(this.view.angle),
       // border_color: obj.borderColor,
       // border_width: obj.borderWidth
     }
