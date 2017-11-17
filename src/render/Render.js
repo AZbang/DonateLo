@@ -74,11 +74,10 @@ class Render {
     let scale = this.width/this.coverWidth;
     $('.canvas-container').css({
       'transform': 'scale(' + scale + ')',
-      'margin-top': -this.coverHeight/4 + 'px',
-      'margin-left': -this.coverWidth/4 + 'px'
+      'transform-origin': '0 0'
     });
-    $('#cover-control').css('height', this.height + 'px');
-    $('.views-wrap').css('margin-top', '248px');
+    $('#cover-control').css('height', this.height*scale + 48 + 'px');
+    $('.views-wrap').css('margin-top', this.height*scale + 48*2 + 'px');
   }
   toggleSize(isFull) {
     if(isFull) this.resizeCoverToWidth();
