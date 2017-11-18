@@ -9,23 +9,20 @@
           <li class="tab col s4"><a href="#edit">Изменить</a></li>
           <div class="indicator"></div>
         </ul>
+        <a @click="uploadData" v-show="!currentObject" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+          <i class="material-icons">cloud_upload</i>
+        </a>
       </div>
     </div>
     <div class="views-wrap">
       <div id="widgets">
         <div class="controls-section">
-          <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
-            <i class="material-icons">cloud_upload</i>
-          </a>
           <p class="flow-text label">Добавить виджет:</p>
           <widgets-control @addWidget="addWidget"></widgets-control>
         </div>
       </div>
       <div id="services">
         <div class="controls-section">
-          <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
-            <i class="material-icons">cloud_upload</i>
-          </a>
           <p class="flow-text label">Добавить сервис:</p>
           <services-control></services-control>
         </div>

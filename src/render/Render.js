@@ -81,8 +81,9 @@ class Render {
       'transform': 'scale(' + scale + ')',
       'transform-origin': '0 0'
     });
-    $('#cover-control').css('height', this.height*scale + 48 + 'px');
-    $('.views-wrap').css('margin-top', this.height*scale + 48*2 + 'px');
+    $('#cover-control').css('height', this.coverHeight*scale + 'px');
+    $('#object-action-btns').css('top', this.coverHeight*scale + 48/2 + 'px')
+    $('.views-wrap').css('margin-top', this.coverHeight*scale + 48 + 'px');
   }
   toggleSize(isFull) {
     if(isFull) this.resizeCoverToWidth();
