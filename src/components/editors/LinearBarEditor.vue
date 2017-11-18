@@ -4,22 +4,28 @@
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <span class="input-prefix">%</span>
-        <input class="input" :value="object.value" @keyup.enter="setValue">
+        <input class="input browser-default" type="number" :value="object.value" @change="setValue">
       </div>
     </div>
     <div class="input-field col s12 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
         <span class="input-prefix">%</span>
-        <input class="input" :value="object.maxValue" @keyup.enter="setMaxValue">
+        <input class="input browser-default" type="number" :value="object.maxValue" @change="setMaxValue">
       </div>
     </div>
     <div class="input-field col s12 m4">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
-        <input class="input" :value="object.border" @keyup.enter="setBorder">
+        <input class="input browser-default" type="number" :value="object.border" @change="setBorder">
       </div>
+    <!-- </div>
+    <div class="input-field col s12 m4">
+      <p class="flow-text">Файл:</p>
+      <div class="input-wrap">
+        <input class="input" :value="object." @keyup.enter="setProgressImage">
+      </div> -->
     </div>
     <div class="input-field col m4">
       <p class="flow-text">Цвет:</p>
@@ -53,11 +59,13 @@
     },
     props: ['object'],
     methods: {
-      setProgressImage(e) {
-        this.object.setProgressImage(e.target.value);
+      setProgressImage(img, data) {
+        this.object.sourceProgressFilename = data.name;
+        this.object.setProgressImage(img);
       },
-      setStandImage(e) {
-        this.object.setStandImage(e.target.value);
+      setStandImage(img, data) {
+        this.object.sourceStandFilename = data.name;
+        this.object.setStandImage(img);
       },
       setValue(e) {
         this.object.setValue(e.target.value);

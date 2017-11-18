@@ -1,21 +1,24 @@
 <template>
   <editor-forms>
     <div class="input-field col s12">
-      <p class="flow-text">Значение:</p>
-      <div class="input-wrap" style="border-radius: 10px;">
+      <p class="flow-text" style="text-align: left;">Значение:</p>
+      <div class="input-wrap" style="border-radius: 10px; height: initial;">
         <textarea class="input" :value="object.value" @change="setValue"></textarea>
       </div>
     </div>
     <div class="input-field col s12 m5">
       <p class="flow-text">Шрифт:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.fontType">
+        <select class="input browser-default" v-model="object.fontType" @change="setFontType">
+          <option v-for="(font, key) in object.FONTS" :value="key">{{font}}</option>
+        </select>
       </div>
     </div>
     <div class="input-field col s6 m3">
       <p class="flow-text">Размер:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.size" @keyup.enter="setSize">
+        <span class="input-prefix">px</span>
+        <input class="input browser-default" type="number" :value="object.size" @change="setSize">
       </div>
     </div>
     <div class="input-field col s6 m4">
@@ -58,7 +61,10 @@
       },
       setColor(c) {
         this.object.setColor(c);
-      },
+      }
+    },
+    mounted() {
+      $('select').material_select();
     }
   }
 </script>

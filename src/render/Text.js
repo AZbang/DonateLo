@@ -1,8 +1,3 @@
-const FONTS = {
-  "BEBAS": "Roboto Regular",
-  "ROBOTO": "Roboto"
-}
-
 class Text {
   constructor(render, data) {
 
@@ -13,6 +8,11 @@ class Text {
       fontSize: data.size || 42
     });
     this.render = render;
+
+    this.FONTS = {
+      "BEBAS": "Bebas Neue",
+      "ROBOTO": "Roboto Regular"
+    }
 
     this.setValue(data.value || 'Здесь ваш текст, йоу');
     this.setFontType(data.font || 'BEBAS');
@@ -53,7 +53,7 @@ class Text {
   }
   setFontType(type) {
     this.fontType = type;
-    this.view.fontFamily = FONTS[type];
+    this.view.fontFamily = this.FONTS[type];
     this.render.canvas.renderAll();
   }
   setValue(val) {

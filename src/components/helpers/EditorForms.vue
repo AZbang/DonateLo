@@ -18,6 +18,7 @@
     background-color: #f9f9f9;
     border-radius: 60px;
     padding: 6px 17px;
+    height: 54px;
     box-shadow: 0 0 3px #ded2f7;
   }
   .input-color {
@@ -38,9 +39,14 @@
   }
   .input {
     margin: 0;
-    border: none;
     font-size: 2em;
+    border: none;
+    background: transparent;
     font-weight: 200;
+  }
+  .input[type="number"] {
+    width: 82%;
+    height: 41px;
   }
   textarea.input {
     resize: vertical;

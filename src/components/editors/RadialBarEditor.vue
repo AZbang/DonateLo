@@ -3,25 +3,29 @@
     <div class="input-field col s6 m4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.value" @change="setValue">
+        <span class="input-prefix">%</span>
+        <input class="input browser-default" type="number" :value="object.value" @change="setValue">
       </div>
     </div>
     <div class="input-field col s6 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.maxValue" @change="setValue">
+        <span class="input-prefix">%</span>
+        <input class="input browser-default" type="number" :value="object.maxValue" @change="setValue">
       </div>
     </div>
     <div class="input-field col s6 m4">
       <p class="flow-text">Стартовый угол:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.startAngle" @change="setStartAngle">
+        <span class="input-prefix">°</span>
+        <input class="input browser-default" type="number" :value="object.startAngle" @change="setStartAngle">
       </div>
     </div>
     <div class="input-field col s6 m3">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
-        <input class="input" :value="object.border" @change="setBorder">
+        <span class="input-prefix">px</span>
+        <input class="input browser-default" type="number" :value="object.border" @change="setBorder">
       </div>
     </div>
     <div class="input-field col m4">

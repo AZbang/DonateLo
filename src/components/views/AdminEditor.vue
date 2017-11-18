@@ -176,7 +176,7 @@
   }
   .controls-section {
     position: relative;
-    padding: 0 1em 0;
+    padding: 1em 1em 0;
   }
   .controls-section .label {
     margin: 5px;

@@ -50,7 +50,7 @@
   }
   .btns-wrap {
     position: absolute;
-    top: -57px;
+    top: -50px;
     right: 18px;
     position: absolute;
     z-index: 100000;
