@@ -12803,11 +12803,31 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../editors/ImageEditor.vue":41,"../editors/LinearBarEditor.vue":42,"../editors/RadialBarEditor.vue":43,"../editors/TextEditor.vue":44,"vue":34,"vue-hot-reload-api":33,"vueify/lib/insert-css":35}],39:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-06e51b17] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-06e51b17] {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n  color: #fff;\n  margin-bottom: 3px;\n}\n.wrap-card-content[data-v-06e51b17] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-06e51b17] {\n  font-size: 6em;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("/* label color */\r\n   .input-field label[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n   input[data-v-06e51b17] {\r\n     border-bottom: 2px solid #fff !important;\r\n   }\r\n   /* label focus color */\r\n   .input-field input[type=text]:focus + label[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n   /* label underline focus color */\r\n   .input-field input[type=text][data-v-06e51b17]:focus {\r\n     border-bottom: 1px solid #fff;\r\n     box-shadow: 0 1px 0 0 #fff;\r\n   }\r\n   /* valid color */\r\n   /*.input-field input[type=text].valid {\r\n     border-bottom: 1px solid #000;\r\n     box-shadow: 0 1px 0 0 #000;\r\n   }*/\r\n   /* invalid color */\r\n   /*.input-field input[type=text].invalid {\r\n     border-bottom: 1px solid #000;\r\n     box-shadow: 0 1px 0 0 #000;\r\n   }*/\r\n   /* icon prefix focus color */\r\n   .input-field .prefix.active[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n\r\n  .title[data-v-06e51b17] {\r\n    margin-top: 5px;\r\n    font-size: 3em;\r\n    font-weight: 200;\r\n    line-height: 78px;\r\n  }\r\n\r\n  .col[data-v-06e51b17] {\r\n    padding: 0 5px;\r\n    border-radius: 10px;\r\n  }\r\n  .card-panel[data-v-06e51b17] {\r\n    border-radius: 7px;\r\n    color: #fff;\r\n    margin-bottom: 3px;\r\n  }\r\n\r\n  .mini.card-panel[data-v-06e51b17] {\r\n    cursor: pointer;\r\n    height: 240px;\r\n    text-align: center;\r\n  }\r\n  .wrap-card-content[data-v-06e51b17] {\r\n    margin-top: 35px;\r\n  }\r\n  .card-panel i[data-v-06e51b17] {\r\n    font-size: 6em;\r\n  }")
+;(function(){
+
+
+module.exports = {
+  props: ['services'],
+  data() {
+    return {
+      service: {},
+      isOpenEditor: false
+    };
+  },
+  methods: {
+    openService(id) {
+      this.service = this.services[id];
+      this.isOpenEditor = true;
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable red lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("favorite")]),_vm._v(" "),_c('p',[_vm._v("Донаты")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable indigo lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("person")]),_vm._v(" "),_c('p',[_vm._v("ВК Комьюнити")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable green lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("photo_camera")]),_vm._v(" "),_c('p',[_vm._v("Google фото")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable orange lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("wb_cloudy")]),_vm._v(" "),_c('p',[_vm._v("Погода, дата, время")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable blue lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("subject")]),_vm._v(" "),_c('p',[_vm._v("Новости")])])])]),_vm._v(" "),_c('div',{staticClass:"col s6 m4"},[_c('div',{staticClass:"card-panel hoverable teal lighten-1"},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v("thumbs_up_down")]),_vm._v(" "),_c('p',[_vm._v("Голосования")])])])])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpenEditor),expression:"isOpenEditor"}],staticClass:"service"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"card-panel hoverable",class:_vm.services.bitcoin.card_style.color},[_c('i',{staticClass:"material-icons left"},[_vm._v(_vm._s(_vm.services.bitcoin.card_style.icon))]),_vm._v(" "),_c('h1',{staticClass:"title"},[_vm._v(_vm._s(_vm.services.bitcoin.name))]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v(_vm._s(_vm.services.bitcoin.decrtiption))]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services.bitcoin.inputs),function(input,id){return _c('div',{staticClass:"input-field col s12"},[_c('input',{attrs:{"id":id,"type":"text"}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":id}},[_vm._v(_vm._s(input.description))])])}))])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isOpenEditor),expression:"!isOpenEditor"}],staticClass:"row"},_vm._l((_vm.services),function(service,id){return _c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_vm._m(1,true),_vm._v(" "),_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])])}))])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"switch"},[_c('label',[_c('input',{attrs:{"type":"checkbox"}}),_vm._v(" "),_c('span',{staticClass:"lever"})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"switch"},[_c('label',[_c('input',{attrs:{"type":"checkbox"}}),_vm._v(" "),_c('span',{staticClass:"lever"})])])}]
 __vue__options__._scopeId = "data-v-06e51b17"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -13267,7 +13287,25 @@ module.exports = {
     return {
       isCoverEmpty: true,
       currentObject: null,
-      renderer: null
+      renderer: null,
+      services: {
+        "bitcoin": {
+          "name": "Биткоин-кошелек",
+          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
+          "api_link": "https://bitok-donatelo.herokuapp.com",
+          "inputs": {
+            "bitcoin-adress": {
+              "description": "Введите ваш биткоин-адрес.",
+              "regexp": "([0-9|a-z|A_Z]){32,34}",
+              "type": "str"
+            }
+          },
+          "card_style": {
+            "icon": "mic_none",
+            "color": "red lightness-1"
+          }
+        }
+      }
     };
   },
   methods: {
@@ -13362,7 +13400,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_c('div',{staticClass:"wrap-tabs"},[_vm._m(0),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control')],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_c('div',{staticClass:"wrap-tabs"},[_vm._m(0),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control',{attrs:{"services":_vm.services}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#widgets"}},[_vm._v("Виджеты")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#services"}},[_vm._v("Сервисы")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])}]
 __vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
