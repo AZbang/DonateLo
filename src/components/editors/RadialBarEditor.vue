@@ -24,15 +24,23 @@
         <input class="input" :value="object.border" @change="setBorder">
       </div>
     </div>
-    <div class="input-field col s9">
+    <div class="input-field col m4">
       <p class="flow-text">Цвет:</p>
-      <br>
-      <color-picker :startColor="object.progressColor" @setColor="setProgressColor"></color-picker>
+      <color-picker :initial="object.progressColor" :change="setProgressColor">
+        <div class="input-wrap">
+          <div class="input-color" :style="{background: object.progressColor}"></div>
+          <input class="input" :value="object.progressColor">
+        </div>
+      </color-picker>
     </div>
-    <div class="input-field col s12">
+    <div class="input-field col m4">
       <p class="flow-text">Задний фон:</p>
-      <br>
-      <color-picker :startColor="object.standColor" @setColor="setStandColor"></color-picker>
+      <color-picker :initial="object.standColor" :change="setStandColor">
+        <div class="input-wrap">
+          <div class="input-color" :style="{background: object.standColor}"></div>
+          <input class="input" :value="object.standColor">
+        </div>
+      </color-picker>
     </div>
   </editor-forms>
 </template>

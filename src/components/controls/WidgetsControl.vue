@@ -55,6 +55,7 @@
   }
   .card-panel {
     position: relative;
+    margin-bottom: 2px;
   }
   .wrap-card-content {
     background: -webkit-linear-gradient(#5e81a8, #b660bb);

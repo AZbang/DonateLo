@@ -12,10 +12,14 @@
         <input class="input" :value="object.borderWidth" @keyup.enter="setBorderWidth">
       </div>
     </div>
-    <div class="input-field col s12">
-      <p class="flow-text">Рамка:</p>
-      <br>
-      <color-picker :startColor="object.borderColor" @setColor="setBorderColor"></color-picker>
+    <div class="input-field col m4">
+      <p class="flow-text">Цвет рамки:</p>
+      <color-picker :initial="object.borderColor" :change="setBorderColor">
+        <div class="input-wrap">
+          <div class="input-color" :style="{background: object.borderColor}"></div>
+          <input class="input" :value="object.borderColor">
+        </div>
+      </color-picker>
     </div>
   </editor-forms>
 </template>

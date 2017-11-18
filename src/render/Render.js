@@ -11,12 +11,13 @@ class Render {
     this.height = h;
     this.scale = 1;
 
-    this.canvas = new fabric.Canvas(id);
-    this.canvas.setWidth(1590);
-    this.canvas.setHeight(400);
-
     this.coverWidth = 1590;
     this.coverHeight = 400;
+
+    this.canvas = new fabric.Canvas(id);
+    this.canvas.setWidth(this.coverWidth);
+    this.canvas.setHeight(this.coverHeight);
+
     this.coverImage = new fabric.Image();
     this.coverImage.set('selectable', false);
     this.canvas.add(this.coverImage);
@@ -38,6 +39,7 @@ class Render {
     widget.view.cornerStrokeColor = '#6e7bab';
     widget.view.transparentCorners = false;
 
+    // this.canvas.setActiveObject(widget.view);
     this.widgets.push(widget);
     this.canvas.add(widget.view);
     this.canvas.renderAll();
@@ -102,40 +104,6 @@ class Render {
       this.isEditCover = true;
       this.setCover(coverSrc);
     });
-  }
-  zoomCanvas(factor) {
-    this.canvas.setHeight(this.canvas.getHeight() * factor);
-    this.canvas.setWidth(this.canvas.getWidth() * factor);
-    // if(this.canvas.backgroundImage) {
-    //     // Need to scale background images as well
-    //     var bi = canvas.backgroundImage;
-    //     bi.width = bi.width * factor; bi.height = bi.height * factor;
-    // }
-    var objects = this.canvas.getObjects();
-    var tcounter = 0;
-
-    for (var i in objects) {
-        tcounter++;
-        //alert(tcounter);
-        var scaleX = objects[i].scaleX;
-        var scaleY = objects[i].scaleY;
-        var left = objects[i].left;
-        var top = objects[i].top;
-
-        var tempScaleX = scaleX * factor;
-        var tempScaleY = scaleY * factor;
-        var tempLeft = left * factor;
-        var tempTop = top * factor;
-
-        objects[i].scaleX = tempScaleX;
-        objects[i].scaleY = tempScaleY;
-        objects[i].left = tempLeft;
-        objects[i].top = tempTop;
-
-        objects[i].setCoords();
-    }
-    this.canvas.renderAll();
-    this.canvas.calcOffset();
   }
   setCover(src) {
     let img = new Image();

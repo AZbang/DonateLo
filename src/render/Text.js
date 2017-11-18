@@ -1,5 +1,5 @@
 const FONTS = {
-  "BEBAS": "Bebas Neue",
+  "BEBAS": "Roboto Regular",
   "ROBOTO": "Roboto"
 }
 
@@ -9,7 +9,9 @@ class Text {
     this.id = data.id || '' + Date.now();
     this.type = 'text';
 
-    this.view = new fabric.Text('Здесь ваш текст, йоу');
+    this.view = new fabric.Text(data.value || 'Здесь ваш текст, йоу', {
+      fontSize: data.size || 42
+    });
     this.render = render;
 
     this.setValue(data.value || 'Здесь ваш текст, йоу');
@@ -19,9 +21,6 @@ class Text {
     this.setX(data.x || 500);
     this.setY(data.y || 150);
     this.setAngle(data.angle || 0);
-
-    this.view.objectCaching = false;
-    this.view.selectable = true;
     this.view.fontWeight = 'bold';
   }
   getJSON() {

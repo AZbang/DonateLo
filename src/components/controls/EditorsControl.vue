@@ -28,6 +28,7 @@
     props: ['renderer', 'currentObject'],
     methods: {
       deleteObject() {
+        this.renderer.canvas.trigger('selection:cleared');
         this.renderer.removeWidget(this.currentObject.id);
       },
       backToMenu() {
@@ -50,12 +51,12 @@
   .btns-wrap {
     position: absolute;
     top: -57px;
-    right: 42px;
+    right: 18px;
     position: absolute;
     z-index: 100000;
   }
   a {
-    margin-left: 20px;
+    margin-left: 10px;
     width: 60px;
     height: 60px;
   }

@@ -11,10 +11,30 @@
   .input-field {
     margin-bottom: 1em;
   }
+  p {
+    text-align: center;
+  }
   .input-wrap {
     background-color: #f9f9f9;
-    border-radius: 3px;
-    padding: 15px;
+    border-radius: 60px;
+    padding: 6px 17px;
+    box-shadow: 0 0 3px #ded2f7;
+  }
+  .input-color {
+    position: absolute;
+    width: 40px;
+    left: 18px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+  .input-prefix {
+    position: absolute;
+    right: 32px;
+    top: 46px;
+    font-size: 1.6em;
+    font-weight: 300;
+    color: #b5b5b5;
   }
   .input {
     margin: 0;
@@ -38,12 +58,17 @@
     font-family: Roboto Light;
   }
   .btn-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: #f9f9f9;
-    padding: 13px 10px;
+    padding: 13px 14px;
     cursor: pointer;
     color: #6e7bbe;
+    margin-left: 10px;
     float: right;
+    border-radius: 50%;
+    height: 54px;
+    width: 54px;
+    box-shadow: 0 0 3px #ded2f7;
   }
   .btn-icon.active {
     color: #9d7bc4;

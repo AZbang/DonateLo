@@ -41,13 +41,14 @@
 </template>
 
 <script>
+  const axios = require('axios');
+
+  const Render = require('../../render/Render.js');
   const CoverControl = require('../controls/CoverControl.vue');
   const WidgetsControl = require('../controls/WidgetsControl.vue');
   const ServicesControl = require('../controls/ServicesControl.vue');
   const EditorsControl = require('../controls/EditorsControl.vue');
-  const Render = require('../../render/Render.js');
-  const axios = require('axios');
-  const Buffer = require('buffer/').Buffer;
+
 
   module.exports = {
     components: {
@@ -161,7 +162,7 @@
     position: absolute;
     top: -31px;
     z-index: 100000;
-    right: 50px;
+    right: 20px;
     width: 60px;
     background: #6e7bab;
     height: 60px;
@@ -175,7 +176,7 @@
   }
   .controls-section {
     position: relative;
-    padding: 2em 1em 0;
+    padding: 0 1em 0;
   }
   .controls-section .label {
     margin: 5px;

@@ -2,7 +2,7 @@
   <editor-forms>
     <div class="input-field col s12">
       <p class="flow-text">Значение:</p>
-      <div class="input-wrap">
+      <div class="input-wrap" style="border-radius: 10px;">
         <textarea class="input" :value="object.value" @change="setValue"></textarea>
       </div>
     </div>
@@ -19,15 +19,19 @@
       </div>
     </div>
     <div class="input-field col s6 m4">
-      <p class="flow-text" style="text-align: right;">Выравнивание:</p>
+      <p class="flow-text">Выравнивание:</p>
       <i class="material-icons btn-icon" :class="object.textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
       <i class="material-icons btn-icon" :class="object.textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
       <i class="material-icons btn-icon" :class="object.textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
     </div>
-    <div class="input-field col s12">
-      <p class="flow-text">Цвет текста:</p>
-      <br>
-      <color-picker @setColor="setColor" :startColor="object.color"></color-picker>
+    <div class="input-field col m4">
+      <p class="flow-text">Цвет:</p>
+      <color-picker :initial="object.color" :change="setColor">
+        <div class="input-wrap">
+          <div class="input-color" :style="{background: object.color}"></div>
+          <input class="input" :value="object.color">
+        </div>
+      </color-picker>
     </div>
   </editor-forms>
 </template>

@@ -4,12 +4,5 @@
   font-family: 'Bebas Neue';
   font-style: normal;
   font-weight: normal;
-  src: local('Bebas Neue'), url('Bebas-Regular.ttf') format('tff');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Roboto'), url('Roboto-Regular.ttf') format('tff');
+  src: local('Bebas Neue'), url('./BebasNeue Regular.otf') format('otf');
 }
