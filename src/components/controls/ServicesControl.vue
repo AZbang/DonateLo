@@ -11,8 +11,11 @@
           <br>
           <div class="row inputs">
             <div class="input-field col s12" v-for="(input, id) in service.inputs">
-              <input :id="id" type="text">
-              <label class="active" :for="id">{{input.description}}</label>
+              <input :name="id" type="text" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
+              <label class="active" :for="id">
+                <span v-show="errors.has(id)">Неверно указана форма</span>
+                <span v-show="!errors.has(id)">{{input.description}}</span>
+              </label>
             </div>
           </div>
         </div>
@@ -65,7 +68,10 @@
         this.isOpenEditor = true;
       },
       closeService() {
-        this.isOpenEditor = false;
+        this.$validator.validateAll().then((result) => {
+          if(result) this.isOpenEditor = false;
+          else Materialize.toast('Неверно указаны данные!');
+        });
       },
       deleteService() {
 

@@ -15,6 +15,7 @@
     "buffer": "^5.0.8",
     "hex-to-hsl": "^1.0.2",
     "hsl-to-hex": "^1.0.0",
+    "vee-validate": "^2.0.0-rc.22",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^2.3.3",
     "vue-color": "^2.4.2",
