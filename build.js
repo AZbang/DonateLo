@@ -19486,6 +19486,8 @@ module.exports = {
       _this2.setLoad(true);
       _this2.isExist = yield _this2.isExistGroup();
 
+      console.log(_this2.api);
+
       if (+_this2.api.viewer_type > 2 && _this2.api.group_id != null) {
         if (_this2.isExist) _this2.setView('admin');else _this2.setView('register');
         _this2.setLoad(false);

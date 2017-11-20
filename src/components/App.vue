@@ -68,6 +68,8 @@
       this.setLoad(true);
       this.isExist = await this.isExistGroup();
 
+      console.log(this.api);
+
       if(+this.api.viewer_type > 2 && this.api.group_id != null) {
         if(this.isExist) this.setView('admin');
         else this.setView('register');
