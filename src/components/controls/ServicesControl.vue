@@ -1,38 +1,48 @@
 <template>
   <div id="services">
-    <div class="service" v-show="isOpenEditor">
-      <div class="switch">
-       <label>
-         <input type="checkbox">
-          <span class="lever"></span>
-        </label>
-      </div>
-      <div class="card-panel hoverable" :class="services.bitcoin.card_style.color">
-        <i class="material-icons left">{{services.bitcoin.card_style.icon}}</i>
-        <h1 class="title">{{services.bitcoin.name}}</h1>
-        <p class="flow-text">{{services.bitcoin.decrtiption}}</p>
-
-        <div class="row">
-          <div class="input-field col s12" v-for="(input, id) in services.bitcoin.inputs">
-            <input :id="id" type="text">
-            <label class="active" :for="id">{{input.description}}</label>
+    <div class="service" v-if="isOpenEditor">
+      <div class="card" :class="service.card_style.color">
+        <div class="card-content white-text">
+          <span class="card-title flow-text" style="font-weight: bold">
+            <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
+            {{service.name}}
+          </span>
+          <p class="flow-text">{{service.decrtiption}}</p>
+          <br>
+          <div class="row inputs">
+            <div class="input-field col s12" v-for="(input, id) in service.inputs">
+              <input :id="id" type="text">
+              <label class="active" :for="id">{{input.description}}</label>
+            </div>
           </div>
+        </div>
+        <div class="card-action" style="border-color: #fff; overflow: hidden;">
+          <a href="#" class="left" style="color: #fff" @click="deleteService">Удалить</a>
+          <a href="#" class="right" style="color: #fff; margin-right: 0" @click="closeService">Сохранить</a>
         </div>
       </div>
     </div>
 
-    <div class="row" v-show="!isOpenEditor">
-      <div class="col s6 m4" v-for="(service, id) in services" @click="openService(id)">
-        <div class="switch">
-         <label>
-            <input type="checkbox">
-            <span class="lever"></span>
-          </label>
+    <div v-show="!isOpenEditor">
+      <p class="flow-text label">Установленные сервисы:</p>
+      <div class="row">
+        <div class="col s6 m4" v-for="(service, id) in services" v-if="service.is_register" @click="openService(id)">
+          <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
+            <div class="wrap-card-content">
+              <i class="material-icons">{{service.card_style.icon}}</i>
+              <p>{{service.name}}</p>
+            </div>
+          </div>
         </div>
-        <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
-          <div class="wrap-card-content">
-            <i class="material-icons">{{service.card_style.icon}}</i>
-            <p>{{service.name}}</p>
+      </div>
+      <p class="flow-text label">Каталог сервисов:</p>
+      <div class="row">
+        <div class="col s6 m4" v-for="(service, id) in services" v-if="!service.is_register" @click="openService(id)">
+          <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
+            <div class="wrap-card-content">
+              <i class="material-icons">{{service.card_style.icon}}</i>
+              <p>{{service.name}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -53,39 +63,35 @@
       openService(id) {
         this.service = this.services[id];
         this.isOpenEditor = true;
+      },
+      closeService() {
+        this.isOpenEditor = false;
+      },
+      deleteService() {
+
       }
     }
   }
 </script>
 
 <style scoped>
-/* label color */
+  .input-field.col label {
+      left: 5px;
+  }
+
    .input-field label {
      color: #fff;
    }
    input {
      border-bottom: 2px solid #fff !important;
    }
-   /* label focus color */
    .input-field input[type=text]:focus + label {
      color: #fff;
    }
-   /* label underline focus color */
    .input-field input[type=text]:focus {
      border-bottom: 1px solid #fff;
      box-shadow: 0 1px 0 0 #fff;
    }
-   /* valid color */
-   /*.input-field input[type=text].valid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }*/
-   /* invalid color */
-   /*.input-field input[type=text].invalid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }*/
-   /* icon prefix focus color */
    .input-field .prefix.active {
      color: #fff;
    }
@@ -96,7 +102,10 @@
     font-weight: 200;
     line-height: 78px;
   }
-
+  .label {
+    margin: 5px;
+    color: #6e7bab;
+  }
   .col {
     padding: 0 5px;
     border-radius: 10px;

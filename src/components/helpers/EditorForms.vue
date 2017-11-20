@@ -61,7 +61,7 @@
     font-size: 1.5em;
     margin: 0 0 5px;
     color: #6e7bbe;
-    font-family: Roboto Light;
+    font-family: Roboto;
   }
   .btn-icon {
     font-size: 2rem;

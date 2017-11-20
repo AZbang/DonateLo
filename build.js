@@ -12803,7 +12803,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../editors/ImageEditor.vue":41,"../editors/LinearBarEditor.vue":42,"../editors/RadialBarEditor.vue":43,"../editors/TextEditor.vue":44,"vue":34,"vue-hot-reload-api":33,"vueify/lib/insert-css":35}],39:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("/* label color */\r\n   .input-field label[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n   input[data-v-06e51b17] {\r\n     border-bottom: 2px solid #fff !important;\r\n   }\r\n   /* label focus color */\r\n   .input-field input[type=text]:focus + label[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n   /* label underline focus color */\r\n   .input-field input[type=text][data-v-06e51b17]:focus {\r\n     border-bottom: 1px solid #fff;\r\n     box-shadow: 0 1px 0 0 #fff;\r\n   }\r\n   /* valid color */\r\n   /*.input-field input[type=text].valid {\r\n     border-bottom: 1px solid #000;\r\n     box-shadow: 0 1px 0 0 #000;\r\n   }*/\r\n   /* invalid color */\r\n   /*.input-field input[type=text].invalid {\r\n     border-bottom: 1px solid #000;\r\n     box-shadow: 0 1px 0 0 #000;\r\n   }*/\r\n   /* icon prefix focus color */\r\n   .input-field .prefix.active[data-v-06e51b17] {\r\n     color: #fff;\r\n   }\r\n\r\n  .title[data-v-06e51b17] {\r\n    margin-top: 5px;\r\n    font-size: 3em;\r\n    font-weight: 200;\r\n    line-height: 78px;\r\n  }\r\n\r\n  .col[data-v-06e51b17] {\r\n    padding: 0 5px;\r\n    border-radius: 10px;\r\n  }\r\n  .card-panel[data-v-06e51b17] {\r\n    border-radius: 7px;\r\n    color: #fff;\r\n    margin-bottom: 3px;\r\n  }\r\n\r\n  .mini.card-panel[data-v-06e51b17] {\r\n    cursor: pointer;\r\n    height: 240px;\r\n    text-align: center;\r\n  }\r\n  .wrap-card-content[data-v-06e51b17] {\r\n    margin-top: 35px;\r\n  }\r\n  .card-panel i[data-v-06e51b17] {\r\n    font-size: 6em;\r\n  }")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".input-field.col label[data-v-06e51b17] {\n    left: 5px;\n}\n\n .input-field label[data-v-06e51b17] {\n   color: #fff;\n }\n input[data-v-06e51b17] {\n   border-bottom: 2px solid #fff !important;\n }\n .input-field input[type=text]:focus + label[data-v-06e51b17] {\n   color: #fff;\n }\n .input-field input[type=text][data-v-06e51b17]:focus {\n   border-bottom: 1px solid #fff;\n   box-shadow: 0 1px 0 0 #fff;\n }\n .input-field .prefix.active[data-v-06e51b17] {\n   color: #fff;\n }\n\n.title[data-v-06e51b17] {\n  margin-top: 5px;\n  font-size: 3em;\n  font-weight: 200;\n  line-height: 78px;\n}\n.label[data-v-06e51b17] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.col[data-v-06e51b17] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-06e51b17] {\n  border-radius: 7px;\n  color: #fff;\n  margin-bottom: 3px;\n}\n\n.mini.card-panel[data-v-06e51b17] {\n  cursor: pointer;\n  height: 240px;\n  text-align: center;\n}\n.wrap-card-content[data-v-06e51b17] {\n  margin-top: 35px;\n}\n.card-panel i[data-v-06e51b17] {\n  font-size: 6em;\n}")
 ;(function(){
 
 
@@ -12819,15 +12819,19 @@ module.exports = {
     openService(id) {
       this.service = this.services[id];
       this.isOpenEditor = true;
-    }
+    },
+    closeService() {
+      this.isOpenEditor = false;
+    },
+    deleteService() {}
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpenEditor),expression:"isOpenEditor"}],staticClass:"service"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"card-panel hoverable",class:_vm.services.bitcoin.card_style.color},[_c('i',{staticClass:"material-icons left"},[_vm._v(_vm._s(_vm.services.bitcoin.card_style.icon))]),_vm._v(" "),_c('h1',{staticClass:"title"},[_vm._v(_vm._s(_vm.services.bitcoin.name))]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v(_vm._s(_vm.services.bitcoin.decrtiption))]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services.bitcoin.inputs),function(input,id){return _c('div',{staticClass:"input-field col s12"},[_c('input',{attrs:{"id":id,"type":"text"}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":id}},[_vm._v(_vm._s(input.description))])])}))])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isOpenEditor),expression:"!isOpenEditor"}],staticClass:"row"},_vm._l((_vm.services),function(service,id){return _c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_vm._m(1,true),_vm._v(" "),_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])])}))])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"switch"},[_c('label',[_c('input',{attrs:{"type":"checkbox"}}),_vm._v(" "),_c('span',{staticClass:"lever"})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"switch"},[_c('label',[_c('input',{attrs:{"type":"checkbox"}}),_vm._v(" "),_c('span',{staticClass:"lever"})])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[(_vm.isOpenEditor)?_c('div',{staticClass:"service"},[_c('div',{staticClass:"card",class:_vm.service.card_style.color},[_c('div',{staticClass:"card-content white-text"},[_c('span',{staticClass:"card-title flow-text",staticStyle:{"font-weight":"bold"}},[_c('i',{staticClass:"material-icons left",staticStyle:{"font-size":"1.4em","font-weight":"bold"}},[_vm._v(_vm._s(_vm.service.card_style.icon))]),_vm._v("\n          "+_vm._s(_vm.service.name)+"\n        ")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v(_vm._s(_vm.service.decrtiption))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{staticClass:"row inputs"},_vm._l((_vm.service.inputs),function(input,id){return _c('div',{staticClass:"input-field col s12"},[_c('input',{attrs:{"id":id,"type":"text"}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":id}},[_vm._v(_vm._s(input.description))])])}))]),_vm._v(" "),_c('div',{staticClass:"card-action",staticStyle:{"border-color":"#fff","overflow":"hidden"}},[_c('a',{staticClass:"left",staticStyle:{"color":"#fff"},attrs:{"href":"#"},on:{"click":_vm.deleteService}},[_vm._v("Удалить")]),_vm._v(" "),_c('a',{staticClass:"right",staticStyle:{"color":"#fff","margin-right":"0"},attrs:{"href":"#"},on:{"click":_vm.closeService}},[_vm._v("Сохранить")])])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isOpenEditor),expression:"!isOpenEditor"}]},[_c('p',{staticClass:"flow-text label"},[_vm._v("Установленные сервисы:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()})),_vm._v(" "),_c('p',{staticClass:"flow-text label"},[_vm._v("Каталог сервисов:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (!service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()}))])])}
+__vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-06e51b17"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -13206,7 +13210,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":34,"vue-hot-reload-api":33,"vueify/lib/insert-css":35}],46:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-39ad21fd] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-39ad21fd] {\n  margin-bottom: 1em;\n}\np[data-v-39ad21fd] {\n  text-align: center;\n}\n.input-wrap[data-v-39ad21fd] {\n  background-color: #f9f9f9;\n  border-radius: 60px;\n  padding: 6px 17px;\n  height: 54px;\n  box-shadow: 0 0 3px #ded2f7;\n}\n.input-color[data-v-39ad21fd] {\n  position: absolute;\n  width: 40px;\n  left: 18px;\n  height: 40px;\n  border-radius: 50%;\n  background: #ccc;\n}\n.input-prefix[data-v-39ad21fd] {\n  position: absolute;\n  right: 32px;\n  top: 46px;\n  font-size: 1.6em;\n  font-weight: 300;\n  color: #b5b5b5;\n}\n.input[data-v-39ad21fd] {\n  margin: 0;\n  font-size: 2em;\n  border: none;\n  background: transparent;\n  font-weight: 200;\n}\n.input[type=\"number\"][data-v-39ad21fd] {\n  width: 82%;\n  height: 41px;\n}\ntextarea.input[data-v-39ad21fd] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-39ad21fd]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-39ad21fd] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto Light;\n}\n.btn-icon[data-v-39ad21fd] {\n  font-size: 2rem;\n  background-color: #f9f9f9;\n  padding: 13px 14px;\n  cursor: pointer;\n  color: #6e7bbe;\n  margin-left: 10px;\n  float: right;\n  border-radius: 50%;\n  height: 54px;\n  width: 54px;\n  box-shadow: 0 0 3px #ded2f7;\n}\n.btn-icon.active[data-v-39ad21fd] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-39ad21fd]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-39ad21fd] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.fixed-bottom .input-field[data-v-39ad21fd] {\n  margin: 0;\n}\n.btn[data-v-39ad21fd] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-39ad21fd] {\n  margin-bottom: 100px;\n}\n.input-field[data-v-39ad21fd] {\n  margin-bottom: 1em;\n}\np[data-v-39ad21fd] {\n  text-align: center;\n}\n.input-wrap[data-v-39ad21fd] {\n  background-color: #f9f9f9;\n  border-radius: 60px;\n  padding: 6px 17px;\n  height: 54px;\n  box-shadow: 0 0 3px #ded2f7;\n}\n.input-color[data-v-39ad21fd] {\n  position: absolute;\n  width: 40px;\n  left: 18px;\n  height: 40px;\n  border-radius: 50%;\n  background: #ccc;\n}\n.input-prefix[data-v-39ad21fd] {\n  position: absolute;\n  right: 32px;\n  top: 46px;\n  font-size: 1.6em;\n  font-weight: 300;\n  color: #b5b5b5;\n}\n.input[data-v-39ad21fd] {\n  margin: 0;\n  font-size: 2em;\n  border: none;\n  background: transparent;\n  font-weight: 200;\n}\n.input[type=\"number\"][data-v-39ad21fd] {\n  width: 82%;\n  height: 41px;\n}\ntextarea.input[data-v-39ad21fd] {\n  resize: vertical;\n  min-height: 100px;\n}\n.input[data-v-39ad21fd]:focus {\n  border-bottom: none !important;\n  box-shadow: none !important;\n  outline: none;\n}\np[data-v-39ad21fd] {\n  font-size: 1.5em;\n  margin: 0 0 5px;\n  color: #6e7bbe;\n  font-family: Roboto;\n}\n.btn-icon[data-v-39ad21fd] {\n  font-size: 2rem;\n  background-color: #f9f9f9;\n  padding: 13px 14px;\n  cursor: pointer;\n  color: #6e7bbe;\n  margin-left: 10px;\n  float: right;\n  border-radius: 50%;\n  height: 54px;\n  width: 54px;\n  box-shadow: 0 0 3px #ded2f7;\n}\n.btn-icon.active[data-v-39ad21fd] {\n  color: #9d7bc4;\n}\n.btn-icon[data-v-39ad21fd]:hover {\n  color: #9d7bc4;\n}\n.fixed-bottom[data-v-39ad21fd] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 60px;\n  padding: 10px 0;\n  background-color: #fff;\n  z-index: 1000;\n}\n.fixed-bottom .input-field[data-v-39ad21fd] {\n  margin: 0;\n}\n.btn[data-v-39ad21fd] {\n  color: #fff;\n  height: 100%;\n  width: 100%;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_vm._t("default")],2)}
@@ -13290,6 +13294,7 @@ module.exports = {
       renderer: null,
       services: {
         "bitcoin": {
+          "is_register": true,
           "name": "Биткоин-кошелек",
           "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
           "api_link": "https://bitok-donatelo.herokuapp.com",
@@ -13303,6 +13308,40 @@ module.exports = {
           "card_style": {
             "icon": "mic_none",
             "color": "red lightness-1"
+          }
+        },
+        "a": {
+          "is_register": false,
+          "name": "Биткоин-кошелек",
+          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
+          "api_link": "https://bitok-donatelo.herokuapp.com",
+          "inputs": {
+            "bitcoin-adress": {
+              "description": "Введите ваш биткоин-адрес.",
+              "regexp": "([0-9|a-z|A_Z]){32,34}",
+              "type": "str"
+            }
+          },
+          "card_style": {
+            "icon": "mic_none",
+            "color": "green lightness-1"
+          }
+        },
+        "b": {
+          "is_register": false,
+          "name": "Биткоин-кошелек",
+          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
+          "api_link": "https://bitok-donatelo.herokuapp.com",
+          "inputs": {
+            "bitcoin-adress": {
+              "description": "Введите ваш биткоин-адрес.",
+              "regexp": "([0-9|a-z|A_Z]){32,34}",
+              "type": "str"
+            }
+          },
+          "card_style": {
+            "icon": "mic_none",
+            "color": "blue lightness-1"
           }
         }
       }
@@ -13400,7 +13439,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_c('div',{staticClass:"wrap-tabs"},[_vm._m(0),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить сервис:")]),_vm._v(" "),_c('services-control',{attrs:{"services":_vm.services}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_c('div',{staticClass:"wrap-tabs"},[_vm._m(0),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])])],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('services-control',{attrs:{"services":_vm.services}})],1)]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)])])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#widgets"}},[_vm._v("Виджеты")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#services"}},[_vm._v("Сервисы")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])}]
 __vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -13543,20 +13582,13 @@ class ContructorImage {
     this.id = data.id || '' + Date.now();
 
     this.view = new fabric.Image();
-    let img = new Image();
-    img.onload = () => {
-      this.view.setElement(img);
-      this.setWidth(data.width || 100);
-      this.setHeight(data.height || 100);
-    };
-    img.src = 'assets/image.png';
 
-    this.setWidth(data.width || 500);
-    this.setHeight(data.height || 150);
     this.setX(data.x || 50);
     this.setY(data.y || 50);
+    this.setWidth(data.w || 500);
+    this.setHeight(data.h || 150);
     this.setAngle(data.angle || 0);
-    this.setValue(data.value || '');
+    this.setValue('assets/image.png');
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
   }
@@ -13598,6 +13630,16 @@ class ContructorImage {
   }
   setValue(src) {
     this.value = src;
+    let img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      let w = this.view.width;
+      let h = this.view.height;
+      this.view.setElement(img);
+      this.setWidth(w);
+      this.setHeight(h);
+    };
+    img.src = src;
   }
   setBorderWidth(width) {
     this.borderWidth = +width;
@@ -14037,7 +14079,7 @@ class Text {
 
     this.FONTS = {
       "BEBAS": "Bebas Neue",
-      "ROBOTO": "Roboto Regular"
+      "ROBOTO": "Roboto"
     };
 
     this.setValue(data.value || 'Здесь ваш текст, йоу');

@@ -11,7 +11,7 @@ class Text {
 
     this.FONTS = {
       "BEBAS": "Bebas Neue",
-      "ROBOTO": "Roboto Regular"
+      "ROBOTO": "Roboto"
     }
 
     this.setValue(data.value || 'Здесь ваш текст, йоу');

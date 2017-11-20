@@ -5,20 +5,13 @@ class ContructorImage {
     this.id = data.id || '' + Date.now();
 
     this.view = new fabric.Image();
-    let img = new Image();
-    img.onload = () => {
-      this.view.setElement(img);
-      this.setWidth(data.width || 100);
-      this.setHeight(data.height || 100);
-    }
-    img.src = 'assets/image.png';
 
-    this.setWidth(data.width || 500);
-    this.setHeight(data.height || 150);
     this.setX(data.x || 50);
     this.setY(data.y || 50);
+    this.setWidth(data.w || 500);
+    this.setHeight(data.h || 150);
     this.setAngle(data.angle || 0);
-    this.setValue(data.value || '');
+    this.setValue('assets/image.png');
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
   }
@@ -60,6 +53,16 @@ class ContructorImage {
   }
   setValue(src) {
     this.value = src;
+    let img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      let w = this.view.width;
+      let h = this.view.height
+      this.view.setElement(img);
+      this.setWidth(w);
+      this.setHeight(h);
+    }
+    img.src = src;
   }
   setBorderWidth(width) {
     this.borderWidth = +width;

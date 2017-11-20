@@ -23,7 +23,6 @@
       </div>
       <div id="services">
         <div class="controls-section">
-          <p class="flow-text label">Добавить сервис:</p>
           <services-control :services="services"></services-control>
         </div>
       </div>
@@ -62,6 +61,7 @@
         renderer: null,
         services: {
           "bitcoin": {
+            "is_register": true,
             "name": "Биткоин-кошелек",
             "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
             "api_link": "https://bitok-donatelo.herokuapp.com",
@@ -75,6 +75,40 @@
             "card_style": {
               "icon": "mic_none",
               "color": "red lightness-1"
+            }
+          },
+          "a": {
+            "is_register": false,
+            "name": "Биткоин-кошелек",
+            "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
+            "api_link": "https://bitok-donatelo.herokuapp.com",
+            "inputs": {
+              "bitcoin-adress": {
+                "description": "Введите ваш биткоин-адрес.",
+                "regexp": "([0-9|a-z|A_Z]){32,34}",
+                "type": "str"
+              }
+            },
+            "card_style": {
+              "icon": "mic_none",
+              "color": "green lightness-1"
+            }
+          },
+          "b": {
+            "is_register": false,
+            "name": "Биткоин-кошелек",
+            "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
+            "api_link": "https://bitok-donatelo.herokuapp.com",
+            "inputs": {
+              "bitcoin-adress": {
+                "description": "Введите ваш биткоин-адрес.",
+                "regexp": "([0-9|a-z|A_Z]){32,34}",
+                "type": "str"
+              }
+            },
+            "card_style": {
+              "icon": "mic_none",
+              "color": "blue lightness-1"
             }
           }
         }
