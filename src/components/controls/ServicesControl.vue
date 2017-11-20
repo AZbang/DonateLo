@@ -27,7 +27,7 @@
     </div>
 
     <div v-show="!isOpenEditor">
-      <p class="flow-text label">Установленные сервисы:</p>
+      <p class="flow-text label" v-show="isActivationServices">Установленные сервисы:</p>
       <div class="row">
         <div class="col s6 m4" v-for="(service, id) in services" v-if="service.is_register" @click="openService(id)">
           <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <p class="flow-text label">Каталог сервисов:</p>
+      <p class="flow-text label" v-show="!isActivationServices">Каталог сервисов:</p>
       <div class="row">
         <div class="col s6 m4" v-for="(service, id) in services" v-if="!service.is_register" @click="openService(id)">
           <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
@@ -60,6 +60,14 @@
       return {
         service: {},
         isOpenEditor: false
+      }
+    },
+    computed: {
+      isActivationServices() {
+        for(let key in this.services) {
+          if(this.services[key].is_active) return true;
+        }
+        return false;
       }
     },
     methods: {

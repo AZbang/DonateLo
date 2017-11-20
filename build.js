@@ -19619,6 +19619,14 @@ module.exports = {
       isOpenEditor: false
     };
   },
+  computed: {
+    isActivationServices() {
+      for (let key in this.services) {
+        if (this.services[key].is_active) return true;
+      }
+      return false;
+    }
+  },
   methods: {
     openService(id) {
       this.service = this.services[id];
@@ -19636,7 +19644,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[(_vm.isOpenEditor)?_c('div',{staticClass:"service"},[_c('div',{staticClass:"card",class:_vm.service.card_style.color},[_c('div',{staticClass:"card-content white-text"},[_c('span',{staticClass:"card-title flow-text",staticStyle:{"font-weight":"bold"}},[_c('i',{staticClass:"material-icons left",staticStyle:{"font-size":"1.4em","font-weight":"bold"}},[_vm._v(_vm._s(_vm.service.card_style.icon))]),_vm._v("\n          "+_vm._s(_vm.service.name)+"\n        ")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v(_vm._s(_vm.service.decrtiption))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{staticClass:"row inputs"},_vm._l((_vm.service.inputs),function(input,id){return _c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"validate",rawName:"v-validate",value:({required: true, regex: input.regexp}),expression:"{required: true, regex: input.regexp}"}],attrs:{"name":id,"type":"text","data-vv-delay":"1000"}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":id}},[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.has(id)),expression:"errors.has(id)"}]},[_vm._v("Неверно указана форма")]),_vm._v(" "),_c('span',{directives:[{name:"show",rawName:"v-show",value:(!_vm.errors.has(id)),expression:"!errors.has(id)"}]},[_vm._v(_vm._s(input.description))])])])}))]),_vm._v(" "),_c('div',{staticClass:"card-action",staticStyle:{"border-color":"#fff","overflow":"hidden"}},[_c('a',{staticClass:"left",staticStyle:{"color":"#fff"},attrs:{"href":"#"},on:{"click":_vm.deleteService}},[_vm._v("Удалить")]),_vm._v(" "),_c('a',{staticClass:"right",staticStyle:{"color":"#fff","margin-right":"0"},attrs:{"href":"#"},on:{"click":_vm.closeService}},[_vm._v("Сохранить")])])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isOpenEditor),expression:"!isOpenEditor"}]},[_c('p',{staticClass:"flow-text label"},[_vm._v("Установленные сервисы:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()})),_vm._v(" "),_c('p',{staticClass:"flow-text label"},[_vm._v("Каталог сервисов:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (!service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()}))])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"services"}},[(_vm.isOpenEditor)?_c('div',{staticClass:"service"},[_c('div',{staticClass:"card",class:_vm.service.card_style.color},[_c('div',{staticClass:"card-content white-text"},[_c('span',{staticClass:"card-title flow-text",staticStyle:{"font-weight":"bold"}},[_c('i',{staticClass:"material-icons left",staticStyle:{"font-size":"1.4em","font-weight":"bold"}},[_vm._v(_vm._s(_vm.service.card_style.icon))]),_vm._v("\n          "+_vm._s(_vm.service.name)+"\n        ")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v(_vm._s(_vm.service.decrtiption))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{staticClass:"row inputs"},_vm._l((_vm.service.inputs),function(input,id){return _c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"validate",rawName:"v-validate",value:({required: true, regex: input.regexp}),expression:"{required: true, regex: input.regexp}"}],attrs:{"name":id,"type":"text","data-vv-delay":"1000"}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":id}},[_c('span',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.has(id)),expression:"errors.has(id)"}]},[_vm._v("Неверно указана форма")]),_vm._v(" "),_c('span',{directives:[{name:"show",rawName:"v-show",value:(!_vm.errors.has(id)),expression:"!errors.has(id)"}]},[_vm._v(_vm._s(input.description))])])])}))]),_vm._v(" "),_c('div',{staticClass:"card-action",staticStyle:{"border-color":"#fff","overflow":"hidden"}},[_c('a',{staticClass:"left",staticStyle:{"color":"#fff"},attrs:{"href":"#"},on:{"click":_vm.deleteService}},[_vm._v("Удалить")]),_vm._v(" "),_c('a',{staticClass:"right",staticStyle:{"color":"#fff","margin-right":"0"},attrs:{"href":"#"},on:{"click":_vm.closeService}},[_vm._v("Сохранить")])])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isOpenEditor),expression:"!isOpenEditor"}]},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActivationServices),expression:"isActivationServices"}],staticClass:"flow-text label"},[_vm._v("Установленные сервисы:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()})),_vm._v(" "),_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.isActivationServices),expression:"!isActivationServices"}],staticClass:"flow-text label"},[_vm._v("Каталог сервисов:")]),_vm._v(" "),_c('div',{staticClass:"row"},_vm._l((_vm.services),function(service,id){return (!service.is_register)?_c('div',{staticClass:"col s6 m4",on:{"click":function($event){_vm.openService(id)}}},[_c('div',{staticClass:"mini card-panel hoverable",class:service.card_style.color,attrs:{"id":id}},[_c('div',{staticClass:"wrap-card-content"},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(service.card_style.icon))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(service.name))])])])]):_vm._e()}))])])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-06e51b17"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -20098,59 +20106,7 @@ module.exports = {
       isCoverEmpty: true,
       currentObject: null,
       renderer: null,
-      services: {
-        "bitcoin": {
-          "is_register": true,
-          "name": "Биткоин-кошелек",
-          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-          "api_link": "https://bitok-donatelo.herokuapp.com",
-          "inputs": {
-            "bitcoin-adress": {
-              "description": "Введите ваш биткоин-адрес.",
-              "regexp": "([0-9|a-z|A_Z]){32,34}",
-              "type": "str"
-            }
-          },
-          "card_style": {
-            "icon": "mic_none",
-            "color": "red lightness-1"
-          }
-        },
-        "a": {
-          "is_register": false,
-          "name": "Биткоин-кошелек",
-          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-          "api_link": "https://bitok-donatelo.herokuapp.com",
-          "inputs": {
-            "bitcoin-adress": {
-              "description": "Введите ваш биткоин-адрес.",
-              "regexp": "([0-9|a-z|A_Z]){32,34}",
-              "type": "str"
-            }
-          },
-          "card_style": {
-            "icon": "mic_none",
-            "color": "green lightness-1"
-          }
-        },
-        "b": {
-          "is_register": false,
-          "name": "Биткоин-кошелек",
-          "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-          "api_link": "https://bitok-donatelo.herokuapp.com",
-          "inputs": {
-            "bitcoin-adress": {
-              "description": "Введите ваш биткоин-адрес.",
-              "regexp": "([0-9|a-z|A_Z]){32,34}",
-              "type": "str"
-            }
-          },
-          "card_style": {
-            "icon": "mic_none",
-            "color": "blue lightness-1"
-          }
-        }
-      }
+      services: {}
     };
   },
   methods: {
@@ -20159,13 +20115,15 @@ module.exports = {
 
       return _asyncToGenerator(function* () {
         _this.$emit('isLoad', true);
-        let resp = yield axios.post('https://app-donatelo.herokuapp.com/get_cover', {
+        let resp = yield axios.post('https://app-donatelo.herokuapp.com/get_group', {
           app_id: _this.api.api_id,
           auth_token: _this.api.auth_key,
           group_id: _this.api.group_id,
           viewer_id: _this.api.viewer_id
         });
         let data = resp.data.result;
+
+        _this.services = data.services;
 
         _this.renderer.setCover(data.resources.background);
         for (let key in data.views) {

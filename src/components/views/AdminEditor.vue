@@ -59,72 +59,22 @@
         isCoverEmpty: true,
         currentObject: null,
         renderer: null,
-        services: {
-          "bitcoin": {
-            "is_register": true,
-            "name": "Биткоин-кошелек",
-            "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-            "api_link": "https://bitok-donatelo.herokuapp.com",
-            "inputs": {
-              "bitcoin-adress": {
-                "description": "Введите ваш биткоин-адрес.",
-                "regexp": "([0-9|a-z|A_Z]){32,34}",
-                "type": "str"
-              }
-            },
-            "card_style": {
-              "icon": "mic_none",
-              "color": "red lightness-1"
-            }
-          },
-          "a": {
-            "is_register": false,
-            "name": "Биткоин-кошелек",
-            "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-            "api_link": "https://bitok-donatelo.herokuapp.com",
-            "inputs": {
-              "bitcoin-adress": {
-                "description": "Введите ваш биткоин-адрес.",
-                "regexp": "([0-9|a-z|A_Z]){32,34}",
-                "type": "str"
-              }
-            },
-            "card_style": {
-              "icon": "mic_none",
-              "color": "green lightness-1"
-            }
-          },
-          "b": {
-            "is_register": false,
-            "name": "Биткоин-кошелек",
-            "decrtiption": "Данный сервис позволит вам вести актуальную статистику по пожертвованиями на ваш bitcoin-кошелек.",
-            "api_link": "https://bitok-donatelo.herokuapp.com",
-            "inputs": {
-              "bitcoin-adress": {
-                "description": "Введите ваш биткоин-адрес.",
-                "regexp": "([0-9|a-z|A_Z]){32,34}",
-                "type": "str"
-              }
-            },
-            "card_style": {
-              "icon": "mic_none",
-              "color": "blue lightness-1"
-            }
-          }
-        }
+        services: {}
       }
     },
     methods: {
       // API METHODS
       async loadData() {
         this.$emit('isLoad', true);
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_cover', {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {
           app_id: this.api.api_id,
           auth_token: this.api.auth_key,
           group_id: this.api.group_id,
           viewer_id: this.api.viewer_id
         });
         let data = resp.data.result;
+
+        this.services = data.services;
 
         this.renderer.setCover(data.resources.background);
         for(let key in data.views) {
