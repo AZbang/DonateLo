@@ -22,6 +22,16 @@ class Text {
     this.setY(data.y || 150);
     this.setAngle(data.angle || 0);
     this.view.fontWeight = 'bold';
+    this.view.setControlsVisibility({
+       mt: false,
+       mb: false,
+       ml: false,
+       mr: false,
+       bl: false,
+       br: false,
+       tl: false,
+       tr: false
+    });
   }
   getJSON() {
     return {

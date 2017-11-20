@@ -30,11 +30,6 @@
       UploadImage
     },
     props: ['renderer', 'isCoverEmpty'],
-    data() {
-      return {
-        isFullCover: true
-      }
-    },
     methods: {
       toggleSize() {
         this.isFullCover = !this.isFullCover;
@@ -42,6 +37,7 @@
       },
       uploadImage(src) {
         this.renderer.uploadImage(src);
+        this.isCoverEmpty = false;
       }
     }
   }
