@@ -140,6 +140,9 @@
       toggle() {
         this.isVisible = !this.isVisible;
       }
+    },
+    mounted() {
+      $('.color-picker input').css('background', 'transparent');
     }
   }
 </script>
@@ -181,7 +184,7 @@
     top: 0px;
     left: 0;
     background: black;
-    z-index: 0;
+    z-index: 10000;
     opacity: 0;
   }
 
@@ -193,9 +196,9 @@
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.12);
     font-family: "Roboto", "Helvetica Neue", sans-serif;
     position: absolute;
+    z-index: 100000;
     bottom: -75px;
     left: 0;
-    z-index: 2;
   }
 
   .color-picker__inner {
