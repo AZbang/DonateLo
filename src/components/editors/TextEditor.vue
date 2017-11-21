@@ -21,7 +21,7 @@
         <input class="input browser-default" type="number" :value="object.size" @change="setSize">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m4" style="text-align: center;">
       <p class="flow-text">Выравнивание:</p>
       <i class="material-icons btn-icon" :class="object.textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
       <i class="material-icons btn-icon" :class="object.textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>

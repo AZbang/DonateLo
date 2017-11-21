@@ -55,8 +55,8 @@
   }
   .btns-wrap {
     position: fixed;
-    right: 90px;
-    bottom: 140px;
+    right: 20px;
+    bottom: 20px;
     z-index: 1000;
   }
   a {

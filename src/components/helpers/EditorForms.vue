@@ -69,8 +69,7 @@
     padding: 13px 14px;
     cursor: pointer;
     color: #6e7bbe;
-    margin-left: 10px;
-    /*float: right;*/
+    margin: 0 5px;    
     border-radius: 50%;
     height: 54px;
     width: 54px;
