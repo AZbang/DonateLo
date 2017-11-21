@@ -51,11 +51,11 @@ class Text {
     }
   }
   setX(x) {
-    this.view.left = x;
+    this.view.set('left', x);
     this.render.canvas.renderAll();
   }
   setY(y) {
-    this.view.top = y;
+    this.view.set('top', y);
     this.render.canvas.renderAll();
   }
   setAngle(angle) {

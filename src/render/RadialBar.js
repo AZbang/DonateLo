@@ -15,11 +15,10 @@ class RadialBar  {
     this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
-    this.setWidth(data.w || 200);
-    this.setHeight(data.h || 200);
+    this.setSize(data.w || 200);
     this.setAngle(360-data.angle || 0);
     this.setValue(data.value || 50);
-    this.setStartAngle(360-data.start_angle || 0);
+    this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
@@ -66,14 +65,25 @@ class RadialBar  {
     this.view.top = y;
     this.render.canvas.renderAll();
   }
-  setWidth(w) {
+  setSize(w) {
     this.view.width = w;
-    this.render.canvas.renderAll();
+    this.view.height = w;
+    this.progressImage.top = 0;
+    this.progressImage.left = 0;
+    this.progressImage.width = this.view.width;
+    this.progressImage.height = this.view.width;
+    this.standImage.top = -this.view.height/2;
+    this.standImage.left = -this.view.width/2;
+    this.standImage.width = this.view.width;
+    this.standImage.height = this.view.width;
+    this.standImage.set({
+      clipTo: (ctx) => {
+        ctx.arc(0, 0, this.view.width/2, 0, Math.PI*2, true);
+      }
+    });
+    this.setValue(this.value);
   }
-  setHeight(h) {
-    this.view.height = h;
-    this.render.canvas.renderAll();
-  }
+
   setAngle(angle) {
     this.view.angle = angle;
     this.render.canvas.renderAll();
@@ -85,8 +95,8 @@ class RadialBar  {
       this.progressImage.setElement(img);
       this.progressImage.top = 0;
       this.progressImage.left = 0;
-      this.progressImage.setHeight(this.view.width);
-      this.progressImage.setWidth(this.view.width);
+      this.progressImage.width = this.view.width;
+      this.progressImage.height = this.view.width;
       this.setStartAngle(this.startAngle);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
@@ -101,8 +111,9 @@ class RadialBar  {
       this.standImage.setElement(img);
       this.standImage.top = -this.view.height/2;
       this.standImage.left = -this.view.width/2;
-      this.standImage.setHeight(this.view.width);
-      this.standImage.setWidth(this.view.width);
+      this.standImage.width = this.view.width;
+      this.standImage.height = this.view.width;
+
       this.setStandColor(this.standColor);
       this.standImage.set({
         clipTo: (ctx) => {
@@ -136,8 +147,9 @@ class RadialBar  {
   }
   setBorder(br) {
     this.border = +br;
-    this.standImage.setHeight(this.view.height+br*2);
-    this.standImage.setWidth(this.view.width+br*2);
+    this.standImage.width = this.view.width+br*2;
+    this.standImage.height = this.view.width+br*2;
+
     this.standImage.left -= this._saveLastBorder+br;
     this.standImage.top -= this._saveLastBorder+br;
     this.standImage.set({

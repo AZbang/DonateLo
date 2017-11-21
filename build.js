@@ -19701,6 +19701,12 @@ module.exports = {
     UploadImage
   },
   props: ['object'],
+  computed: {
+    angle() {
+      let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
+      if (deg > 360) return Math.abs(360 - deg);else return deg;
+    }
+  },
   methods: {
     setValue(e) {
       this.object.setValue(e.target.value);
@@ -19710,6 +19716,21 @@ module.exports = {
     },
     setBorderColor(c) {
       this.object.setBorderColor(c);
+    },
+    setX(e) {
+      this.object.setX(+e.target.value);
+    },
+    setY(e) {
+      this.object.setY(+e.target.value);
+    },
+    setW(e) {
+      this.object.setWidth(+e.target.value);
+    },
+    setH(e) {
+      this.object.setHeight(+e.target.value);
+    },
+    setAngle(e) {
+      this.object.setAngle(+e.target.value);
     }
   }
 };
@@ -19717,7 +19738,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("url")]),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("url")]),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19742,6 +19763,12 @@ module.exports = {
     EditorForms
   },
   props: ['object'],
+  computed: {
+    angle() {
+      let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
+      if (deg > 360) return Math.abs(360 - deg);else return deg;
+    }
+  },
   methods: {
     setProgressImage(img, data) {
       this.object.sourceProgressFilename = data.name;
@@ -19765,6 +19792,21 @@ module.exports = {
     },
     setBorder(e) {
       this.object.setBorder(e.target.value);
+    },
+    setX(e) {
+      this.object.setX(+e.target.value);
+    },
+    setY(e) {
+      this.object.setY(+e.target.value);
+    },
+    setW(e) {
+      this.object.setWidth(+e.target.value);
+    },
+    setH(e) {
+      this.object.setHeight(+e.target.value);
+    },
+    setAngle(e) {
+      this.object.setAngle(+e.target.value);
     }
   }
 };
@@ -19772,7 +19814,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setMaxValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setMaxValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19797,6 +19839,12 @@ module.exports = {
     EditorForms
   },
   props: ['object'],
+  computed: {
+    angle() {
+      let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
+      if (deg > 360) return Math.abs(360 - deg);else return deg;
+    }
+  },
   methods: {
     setProgressImage(e) {
       this.object.setProgressImage(e.target.value);
@@ -19821,6 +19869,18 @@ module.exports = {
     },
     setStandColor(c) {
       this.object.setStandColor(c);
+    },
+    setX(e) {
+      this.object.setX(+e.target.value);
+    },
+    setY(e) {
+      this.object.setY(+e.target.value);
+    },
+    setAngle(e) {
+      this.object.setAngle(+e.target.value);
+    },
+    setSize(e) {
+      this.object.setSize(+e.target.value * 2);
     }
   }
 };
@@ -19828,7 +19888,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Стартовый угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.startAngle},on:{"change":_vm.setStartAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width/2)},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19853,6 +19913,12 @@ module.exports = {
     EditorForms
   },
   props: ['object'],
+  computed: {
+    angle() {
+      let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
+      if (deg > 360) return Math.abs(360 - deg);else return deg;
+    }
+  },
   methods: {
     setFontType(e) {
       this.object.setFontType(e.target.value);
@@ -19865,6 +19931,15 @@ module.exports = {
     },
     setColor(c) {
       this.object.setColor(c);
+    },
+    setX(e) {
+      this.object.setX(+e.target.value);
+    },
+    setY(e) {
+      this.object.setY(+e.target.value);
+    },
+    setAngle(e) {
+      this.object.setAngle(+e.target.value);
     }
   },
   mounted() {
@@ -19875,7 +19950,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"left"}},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap",staticStyle:{"border-radius":"10px","height":"initial"}},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m5"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.fontType),expression:"object.fontType"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "fontType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setFontType]}},_vm._l((_vm.object.FONTS),function(font,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(font))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.size},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4",staticStyle:{"text-align":"center"}},[_c('p',{staticClass:"flow-text"},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.color,"change":_vm.setColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.color})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.color}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"left"}},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap",staticStyle:{"border-radius":"10px","height":"initial"}},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.fontType),expression:"object.fontType"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "fontType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setFontType]}},_vm._l((_vm.object.FONTS),function(font,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(font))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.size},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4",staticStyle:{"text-align":"center"}},[_c('p',{staticClass:"flow-text"},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.color,"change":_vm.setColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.color})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.color}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -20480,12 +20555,19 @@ class LinearBar {
     this.render.canvas.renderAll();
   }
   setWidth(w) {
-    this.view.width = w;
-    this.render.canvas.renderAll();
+    this.view.setWidth(w);
+    this.progressImage.left = -this.view.width / 2;
+    this.standImage.left = -this.view.width / 2;
+    this.standImage.setWidth(this.view.width);
+    this.setValue(this.value);
   }
   setHeight(h) {
-    this.view.height = h;
-    this.render.canvas.renderAll();
+    this.view.setHeight(h);
+    this.progressImage.top = -this.view.height / 2;
+    this.progressImage.setHeight(this.view.height);
+    this.standImage.top = -this.view.height / 2;
+    this.standImage.setHeight(this.view.height);
+    this.setValue(this.value);
   }
   setAngle(angle) {
     this.view.angle = angle;
@@ -20569,11 +20651,10 @@ class RadialBar {
     this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
-    this.setWidth(data.w || 200);
-    this.setHeight(data.h || 200);
+    this.setSize(data.w || 200);
     this.setAngle(360 - data.angle || 0);
     this.setValue(data.value || 50);
-    this.setStartAngle(360 - data.start_angle || 0);
+    this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
@@ -20620,14 +20701,25 @@ class RadialBar {
     this.view.top = y;
     this.render.canvas.renderAll();
   }
-  setWidth(w) {
+  setSize(w) {
     this.view.width = w;
-    this.render.canvas.renderAll();
+    this.view.height = w;
+    this.progressImage.top = 0;
+    this.progressImage.left = 0;
+    this.progressImage.width = this.view.width;
+    this.progressImage.height = this.view.width;
+    this.standImage.top = -this.view.height / 2;
+    this.standImage.left = -this.view.width / 2;
+    this.standImage.width = this.view.width;
+    this.standImage.height = this.view.width;
+    this.standImage.set({
+      clipTo: ctx => {
+        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
+      }
+    });
+    this.setValue(this.value);
   }
-  setHeight(h) {
-    this.view.height = h;
-    this.render.canvas.renderAll();
-  }
+
   setAngle(angle) {
     this.view.angle = angle;
     this.render.canvas.renderAll();
@@ -20639,8 +20731,8 @@ class RadialBar {
       this.progressImage.setElement(img);
       this.progressImage.top = 0;
       this.progressImage.left = 0;
-      this.progressImage.setHeight(this.view.width);
-      this.progressImage.setWidth(this.view.width);
+      this.progressImage.width = this.view.width;
+      this.progressImage.height = this.view.width;
       this.setStartAngle(this.startAngle);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
@@ -20655,8 +20747,9 @@ class RadialBar {
       this.standImage.setElement(img);
       this.standImage.top = -this.view.height / 2;
       this.standImage.left = -this.view.width / 2;
-      this.standImage.setHeight(this.view.width);
-      this.standImage.setWidth(this.view.width);
+      this.standImage.width = this.view.width;
+      this.standImage.height = this.view.width;
+
       this.setStandColor(this.standColor);
       this.standImage.set({
         clipTo: ctx => {
@@ -20690,8 +20783,9 @@ class RadialBar {
   }
   setBorder(br) {
     this.border = +br;
-    this.standImage.setHeight(this.view.height + br * 2);
-    this.standImage.setWidth(this.view.width + br * 2);
+    this.standImage.width = this.view.width + br * 2;
+    this.standImage.height = this.view.width + br * 2;
+
     this.standImage.left -= this._saveLastBorder + br;
     this.standImage.top -= this._saveLastBorder + br;
     this.standImage.set({
@@ -20762,6 +20856,23 @@ class Render {
     this.widgets.push(widget);
     this.canvas.add(widget.view);
     this.canvas.renderAll();
+
+    widget.view.on({
+      scaling: function (e) {
+        let obj = this,
+            w = obj.width * obj.scaleX,
+            h = obj.height * obj.scaleY,
+            s = obj.strokeWidth;
+        obj.set({
+          scaleX: 1,
+          scaleY: 1
+        });
+        if (widget.setSize) widget.setSize(w);else {
+          widget.setWidth(w);
+          widget.setHeight(h);
+        }
+      }
+    });
 
     return widget;
   }
@@ -20893,11 +21004,11 @@ class Text {
     };
   }
   setX(x) {
-    this.view.left = x;
+    this.view.set('left', x);
     this.render.canvas.renderAll();
   }
   setY(y) {
-    this.view.top = y;
+    this.view.set('top', y);
     this.render.canvas.renderAll();
   }
   setAngle(angle) {

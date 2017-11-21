@@ -56,12 +56,19 @@ class LinearBar  {
     this.render.canvas.renderAll();
   }
   setWidth(w) {
-    this.view.width = w;
-    this.render.canvas.renderAll();
+    this.view.setWidth(w);
+    this.progressImage.left = -this.view.width/2;
+    this.standImage.left = -this.view.width/2;
+    this.standImage.setWidth(this.view.width);
+    this.setValue(this.value);
   }
   setHeight(h) {
-    this.view.height = h;
-    this.render.canvas.renderAll();
+    this.view.setHeight(h);
+    this.progressImage.top = -this.view.height/2;
+    this.progressImage.setHeight(this.view.height);
+    this.standImage.top = -this.view.height/2;
+    this.standImage.setHeight(this.view.height);
+    this.setValue(this.value);
   }
   setAngle(angle) {
     this.view.angle = angle;

@@ -42,6 +42,24 @@ class Render {
     this.canvas.add(widget.view);
     this.canvas.renderAll();
 
+    widget.view.on({
+      scaling: function(e) {
+        let obj = this,
+            w = obj.width * obj.scaleX,
+            h = obj.height * obj.scaleY,
+            s = obj.strokeWidth;
+        obj.set({
+          scaleX: 1,
+          scaleY: 1
+        });
+        if(widget.setSize) widget.setSize(w);
+        else {
+          widget.setWidth(w);
+          widget.setHeight(h);
+        }
+      }
+    });
+
     return widget;
   }
   removeWidget(id) {
