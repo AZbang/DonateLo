@@ -1,34 +1,34 @@
 <template>
   <editor-forms>
-    <div class="input-field col s6 m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <span class="input-prefix">%</span>
         <input class="input browser-default" type="number" :value="object.value" @change="setValue">
       </div>
     </div>
-    <div class="input-field col s6 m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
         <span class="input-prefix">%</span>
         <input class="input browser-default" type="number" :value="object.maxValue" @change="setValue">
       </div>
     </div>
-    <div class="input-field col s6 m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Стартовый угол:</p>
       <div class="input-wrap">
         <span class="input-prefix">°</span>
         <input class="input browser-default" type="number" :value="object.startAngle" @change="setStartAngle">
       </div>
     </div>
-    <div class="input-field col s6 m3">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="object.border" @change="setBorder">
       </div>
     </div>
-    <div class="input-field col m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Цвет:</p>
       <color-picker :initial="object.progressColor" :change="setProgressColor">
         <div class="input-wrap">
@@ -37,7 +37,7 @@
         </div>
       </color-picker>
     </div>
-    <div class="input-field col m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Задний фон:</p>
       <color-picker :initial="object.standColor" :change="setStandColor">
         <div class="input-wrap">

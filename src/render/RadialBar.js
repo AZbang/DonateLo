@@ -26,6 +26,13 @@ class RadialBar  {
     this.setProgressColor(data.bar_color || '#fff');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
+
+    this.view.setControlsVisibility({
+       mt: false,
+       mb: false,
+       ml: false,
+       mr: false
+    });
   }
   getJSON() {
     return {

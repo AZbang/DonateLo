@@ -1,20 +1,20 @@
 <template>
   <editor-forms>
-    <div class="input-field col s10 m11">
+    <div class="input-field col s12 m12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <span class="input-prefix">url</span>
         <input class="input" :value="object.value" @change="setValue">
       </div>
     </div>
-    <div class="input-field col s6 m6">
+    <div class="input-field col s12 m6">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="object.borderWidth" @change="setBorderWidth">
       </div>
     </div>
-    <div class="input-field col m4">
+    <div class="input-field col s12 m4">
       <p class="flow-text">Цвет рамки:</p>
       <color-picker :initial="object.borderColor" :change="setBorderColor">
         <div class="input-wrap">

@@ -20,7 +20,7 @@ class Text {
     this.setColor(data.color || '#fff');
     this.setSize(data.size || 42);
     this.setX(data.x || 500);
-    this.setY(data.y+this.view.height/2-20 || 150);
+    this.setY(data.y || 150);
     this.setAngle(360-data.angle || 0);
     this.view.fontWeight = 'bold';
     this.view.setControlsVisibility({

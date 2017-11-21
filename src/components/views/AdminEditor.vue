@@ -2,17 +2,13 @@
   <div id="admin">
     <div class="fixed-wrap">
       <cover-control :renderer="renderer" :isCoverEmpty="isCoverEmpty"></cover-control>
-      <div class="wrap-tabs">
-        <ul id="menu" class="tabs">
-          <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
-          <li class="tab col s4"><a href="#services">Сервисы</a></li>
-          <li class="tab col s4"><a href="#edit">Изменить</a></li>
-          <div class="indicator"></div>
-        </ul>
-        <a @click="uploadData" v-show="!currentObject" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
-          <i class="material-icons">cloud_upload</i>
-        </a>
-      </div>
+      <ul id="menu" class="tabs">
+        <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
+        <li class="tab col s4"><a href="#services">Сервисы</a></li>
+        <li class="tab col s4"><a href="#settings">Настройки</a></li>
+        <li class="tab col s4"><a href="#edit">Изменить</a></li>
+        <div class="indicator"></div>
+      </ul>
     </div>
     <div class="views-wrap">
       <div id="widgets">
@@ -20,16 +16,27 @@
           <p class="flow-text label">Добавить виджет:</p>
           <widgets-control @addWidget="addWidget"></widgets-control>
         </div>
+        <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+          <i class="material-icons">cloud_upload</i>
+        </a>
       </div>
       <div id="services">
         <div class="controls-section">
           <services-control :services="services"></services-control>
         </div>
+        <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+          <i class="material-icons">cloud_upload</i>
+        </a>
       </div>
       <div id="edit">
         <div class="controls-section">
           <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
           <editors-control :renderer="renderer" :currentObject="currentObject"></editors-control>
+        </div>
+      </div>
+      <div id="settings">
+        <div class="controls-section">
+          <p class="flow-text label">Настройки</p>
         </div>
       </div>
     </div>
@@ -44,7 +51,6 @@
   const WidgetsControl = require('../controls/WidgetsControl.vue');
   const ServicesControl = require('../controls/ServicesControl.vue');
   const EditorsControl = require('../controls/EditorsControl.vue');
-
 
   module.exports = {
     components: {
@@ -151,15 +157,9 @@
 </script>
 
 <style scoped>
-  .fixed-wrap {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 10000;
-  }
   .btn-upload-data {
     position: absolute;
-    top: -31px;
+    bottom: 20px;
     z-index: 100000;
     right: 20px;
     width: 60px;
@@ -171,7 +171,8 @@
     font-size: 35px;
   }
   .views-wrap {
-    margin-top: 348px;
+    height: 70vh;
+    overflow-y: scroll;
   }
   .controls-section {
     position: relative;
@@ -180,18 +181,6 @@
   .controls-section .label {
     margin: 5px;
     color: #6e7bab;
-  }
-  .wrap-tabs {
-    z-index: 100000;
-    background: #fff;
-    position: relative;
-    width: 100vw;
-    height: 48px;
-  }
-  .tabs {
-    width: 50%;
-    position: absolute;
-    left: 0;
   }
   .tab a {
     color: #6e7bab !important;

@@ -1,6 +1,6 @@
 <template>
   <div class="editor-wrap">
-    <div id="object-action-btns" class="btns-wrap" v-show="editorComponent">
+    <div class="btns-wrap" v-show="editorComponent">
       <a @click="deleteObject" class="btn-floating btn-large red waves-effect waves-light">
         <i class="material-icons">delete</i>
       </a>
@@ -9,6 +9,11 @@
       </a>
     </div>
     <div :object="currentObject" :is="editorComponent"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
 </template>
 
@@ -50,8 +55,9 @@
   }
   .btns-wrap {
     position: fixed;
-    right: 18px;
-    z-index: 100000;
+    right: 90px;
+    bottom: 140px;
+    z-index: 1000;
   }
   a {
     margin-left: 10px;

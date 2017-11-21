@@ -83,6 +83,8 @@
   body {
     overflow-x: hidden;
     background-color: #edeef0;
+    width: 100vw;
+    height: 100vh;
   }
 
   .preload {

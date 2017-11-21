@@ -70,7 +70,7 @@
     cursor: pointer;
     color: #6e7bbe;
     margin-left: 10px;
-    float: right;
+    /*float: right;*/
     border-radius: 50%;
     height: 54px;
     width: 54px;
