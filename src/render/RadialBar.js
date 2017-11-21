@@ -12,13 +12,14 @@ class RadialBar  {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 200);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360-data.angle || 0);
     this.setValue(data.value || 50);
-    this.setStartAngle(data.start_angle || 0);
+    this.setStartAngle(360-data.start_angle || 0);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
@@ -37,13 +38,13 @@ class RadialBar  {
         type: "radial",
         value: "" + this.value,
         max_value: this.maxValue,
-        start_angle: this.startAngle,
+        start_angle: Math.round(360-this.startAngle),
         direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360-this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -75,11 +76,11 @@ class RadialBar  {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.progressImage.setElement(img);
-      this.progressImage.angle = -90;
       this.progressImage.top = 0;
       this.progressImage.left = 0;
       this.progressImage.setHeight(this.view.width);
       this.progressImage.setWidth(this.view.width);
+      this.setStartAngle(this.startAngle);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
       this.render.canvas.renderAll();
@@ -107,7 +108,7 @@ class RadialBar  {
   }
   setStartAngle(angle) {
     this.startAngle = +angle;
-    this.progressImage.angle = -90+angle;
+    this.progressImage.angle = angle;
     this.render.canvas.renderAll();
   }
   setValue(v) {

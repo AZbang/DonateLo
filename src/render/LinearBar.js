@@ -11,11 +11,12 @@ class LinearBar  {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 50);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360-data.angle || 0);
     this.setValue(data.value || 50);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
@@ -39,7 +40,7 @@ class LinearBar  {
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360-this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border

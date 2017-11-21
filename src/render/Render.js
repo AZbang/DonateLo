@@ -27,11 +27,9 @@ class Render {
   }
   addWidget(type, data={}, res={}) {
     let widget = new WIDGETS[type](this, data, res);
+    // widget.view.top += widget.view.height/
     widget.view.objectCaching = false;
     widget.view.selectable = true;
-    widget.view.setOriginToCenter();
-    widget.view.top -= widget.view.height/2;
-    widget.view.left -= widget.view.width/2;
     widget.view.padding = 0;
     widget.view.cornerSize = 16;
     widget.view.borderColor = '#6e7bab';

@@ -6,11 +6,12 @@ class ContructorImage {
 
     this.view = new fabric.Image();
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setWidth(data.w || 500);
     this.setHeight(data.h || 150);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360-data.angle || 0);
     this.setValue('assets/image.png');
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
@@ -25,7 +26,7 @@ class ContructorImage {
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360-this.view.angle),
         // border_color: obj.borderColor,
         // border_width: obj.borderWidth
       }

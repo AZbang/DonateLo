@@ -19509,7 +19509,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
+    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19550,7 +19550,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-24cdd05e", __vue__options__)
+    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19601,7 +19601,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.reload("data-v-318197e2", __vue__options__)
+    hotAPI.rerender("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19653,7 +19653,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.reload("data-v-06e51b17", __vue__options__)
+    hotAPI.rerender("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19683,7 +19683,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.reload("data-v-5f30e266", __vue__options__)
+    hotAPI.rerender("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19726,7 +19726,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.reload("data-v-72213304", __vue__options__)
+    hotAPI.rerender("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19781,7 +19781,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7a6ca297", __vue__options__)
+    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19837,7 +19837,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-3c4deddd", __vue__options__)
+    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19884,7 +19884,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-349acc4e", __vue__options__)
+    hotAPI.rerender("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20018,7 +20018,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1348798c", __vue__options__)
+    hotAPI.rerender("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20036,7 +20036,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-39ad21fd", __vue__options__)
+    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20073,7 +20073,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1dda79d6", __vue__options__)
+    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
@@ -20212,7 +20212,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6426a840", __vue__options__)
+    hotAPI.rerender("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
@@ -20230,7 +20230,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.reload("data-v-175239ae", __vue__options__)
+    hotAPI.rerender("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
@@ -20284,7 +20284,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.reload("data-v-0adae92f", __vue__options__)
+    hotAPI.rerender("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){
@@ -20347,11 +20347,12 @@ class ContructorImage {
 
     this.view = new fabric.Image();
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 50);
     this.setY(data.y || 50);
     this.setWidth(data.w || 500);
     this.setHeight(data.h || 150);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360 - data.angle || 0);
     this.setValue('assets/image.png');
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
@@ -20366,7 +20367,7 @@ class ContructorImage {
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle)
+        angle: Math.round(360 - this.view.angle)
         // border_color: obj.borderColor,
         // border_width: obj.borderWidth
       }
@@ -20431,11 +20432,12 @@ class LinearBar {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 50);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360 - data.angle || 0);
     this.setValue(data.value || 50);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
@@ -20459,7 +20461,7 @@ class LinearBar {
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360 - this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -20561,13 +20563,14 @@ class RadialBar {
     this.view = new fabric.Group([this.standImage, this.progressImage]);
     this._saveLastBorder = 0;
 
+    this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
     this.setWidth(data.w || 200);
     this.setHeight(data.h || 200);
-    this.setAngle(data.angle || 0);
+    this.setAngle(360 - data.angle || 0);
     this.setValue(data.value || 50);
-    this.setStartAngle(data.start_angle || 0);
+    this.setStartAngle(360 - data.start_angle || 0);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
@@ -20586,13 +20589,13 @@ class RadialBar {
         type: "radial",
         value: "" + this.value,
         max_value: this.maxValue,
-        start_angle: this.startAngle,
+        start_angle: Math.round(360 - this.startAngle),
         direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
         h: Math.round(this.view.currentHeight),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360 - this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
         border: this.border
@@ -20624,11 +20627,11 @@ class RadialBar {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.progressImage.setElement(img);
-      this.progressImage.angle = -90;
       this.progressImage.top = 0;
       this.progressImage.left = 0;
       this.progressImage.setHeight(this.view.width);
       this.progressImage.setWidth(this.view.width);
+      this.setStartAngle(this.startAngle);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
       this.render.canvas.renderAll();
@@ -20656,7 +20659,7 @@ class RadialBar {
   }
   setStartAngle(angle) {
     this.startAngle = +angle;
-    this.progressImage.angle = -90 + angle;
+    this.progressImage.angle = angle;
     this.render.canvas.renderAll();
   }
   setValue(v) {
@@ -20735,11 +20738,9 @@ class Render {
   }
   addWidget(type, data = {}, res = {}) {
     let widget = new WIDGETS[type](this, data, res);
+    // widget.view.top += widget.view.height/
     widget.view.objectCaching = false;
     widget.view.selectable = true;
-    widget.view.setOriginToCenter();
-    widget.view.top -= widget.view.height / 2;
-    widget.view.left -= widget.view.width / 2;
     widget.view.padding = 0;
     widget.view.cornerSize = 16;
     widget.view.borderColor = '#6e7bab';
@@ -20846,13 +20847,14 @@ class Text {
       "ROBOTO": "Roboto"
     };
 
+    this.view.setOriginToCenter();
     this.setValue(data.value || 'Здесь ваш текст, йоу');
     this.setFontType(data.font || 'BEBAS');
     this.setColor(data.color || '#fff');
     this.setSize(data.size || 42);
     this.setX(data.x || 500);
-    this.setY(data.y || 150);
-    this.setAngle(data.angle || 0);
+    this.setY(data.y + this.view.height / 2 - 20 || 150);
+    this.setAngle(360 - data.angle || 0);
     this.view.fontWeight = 'bold';
     this.view.setControlsVisibility({
       mt: false,
@@ -20870,7 +20872,7 @@ class Text {
       data: {
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        angle: Math.round(this.view.angle),
+        angle: Math.round(360 - this.view.angle),
 
         id: this.id,
         type: "text",
