@@ -30,6 +30,13 @@ class Render {
   getValueFromVarible(id) {
     return this.varibles[id] || '';
   }
+  setVaribles(varibles) {
+    this.varibles = varibles;
+    this.widgets.forEach((w) => {
+      if(w.type === 'text') w.setValue(w.value);
+      else w.setVarible(w.varible);
+    });
+  }
   addWidget(type, data={}, res={}) {
     let widget = new WIDGETS[type](this, data, res);
     // widget.view.top += widget.view.height/

@@ -83,7 +83,7 @@
           }
         }
         this.varibles = data.enviroment;
-        this.renderer.varibles = this.varibles;
+        this.renderer.setVaribles(this.varibles);
         this.renderer.setCover(data.resources.background);
         for(let key in data.views) {
           let view = data.views[key];
@@ -120,9 +120,10 @@
       },
       async loadVaribles() {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_enviroment', {group_id: this.api.group_id});
+        console.log(resp)
         if(resp.data.code === 'ok') {
           this.varibles = resp.data.result;
-          this.renderer.varibles = this.varibles;
+          this.renderer.setVaribles(this.varibles);
         }
       },
       async toggleService(id, isActive) {
@@ -137,7 +138,7 @@
         let resp = await axios.post('https://app-donatelo.herokuapp.com/update_service', {
           group_id: this.api.group_id,
           service_id: id,
-          form
+          fields: form
         });
         await this.loadVaribles();
         return resp.data.code === 'ok';
