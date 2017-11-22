@@ -44,7 +44,7 @@ class RadialBar  {
         type: "radial",
         value: this.varible,
         max_value: this.maxValue,
-        start_angle: Math.round(360-this.startAngle),
+        start_angle: 0,
         direction: 0,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),

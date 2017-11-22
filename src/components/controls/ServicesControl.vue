@@ -85,7 +85,7 @@
             }
             this.$emit('updateService', this.service.id, form);
             this.isOpenEditor = false;
-          } else Materialize.toast('Неверно указаны данные!');
+          } else Materialize.toast('Неверно указаны данные!', 1000);
         });
       },
       async deleteService() {
