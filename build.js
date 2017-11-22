@@ -19425,7 +19425,7 @@ exports.insert = function (css) {
 }
 
 },{}],37:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background-color: #edeef0;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preload {\n  position: fixed;\n  top: 0;\n  left: 0;\n  background: #fff;\n  z-index: 10000000;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preloader-wrapper {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -32px;\n  margin-left: -32px;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background-color: #fff;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preload {\n  position: fixed;\n  top: 0;\n  left: 0;\n  background: #fff;\n  z-index: 10000000;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preloader-wrapper {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -32px;\n  margin-left: -32px;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
 ;(function(){
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -19508,7 +19508,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
+    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19549,7 +19549,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
+    hotAPI.reload("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19600,7 +19600,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-318197e2", __vue__options__)
+    hotAPI.reload("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19677,7 +19677,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-06e51b17", __vue__options__)
+    hotAPI.reload("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19707,7 +19707,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-5f30e266", __vue__options__)
+    hotAPI.reload("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19774,7 +19774,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-72213304", __vue__options__)
+    hotAPI.reload("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19853,7 +19853,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
+    hotAPI.reload("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19927,7 +19927,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
+    hotAPI.reload("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19989,7 +19989,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-349acc4e", __vue__options__)
+    hotAPI.reload("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20126,7 +20126,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1348798c", __vue__options__)
+    hotAPI.reload("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20144,7 +20144,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
+    hotAPI.reload("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20181,11 +20181,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
+    hotAPI.reload("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".btn-upload-data[data-v-6426a840] {\n  position: absolute;\n  bottom: 20px;\n  z-index: 100000;\n  right: 20px;\n  width: 60px;\n  background: #6e7bab;\n  height: 60px;\n}\n.btn-upload-data i[data-v-6426a840] {\n  line-height: 62px;\n  font-size: 35px;\n}\n.views-wrap[data-v-6426a840] {\n  height: 70vh;\n  overflow-y: scroll;\n}\n.controls-section[data-v-6426a840] {\n  position: relative;\n  padding: 1em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#admin[data-v-6426a840] {\n  background-color: #edeef0;\n}\n.btn-upload-data[data-v-6426a840] {\n  position: absolute;\n  bottom: 20px;\n  z-index: 100000;\n  right: 20px;\n  width: 60px;\n  background: #6e7bab;\n  height: 60px;\n}\n.btn-upload-data i[data-v-6426a840] {\n  line-height: 62px;\n  font-size: 35px;\n}\n.views-wrap[data-v-6426a840] {\n  height: 70vh;\n  overflow-y: scroll;\n}\n.controls-section[data-v-6426a840] {\n  position: relative;\n  padding: 1em 1em 0;\n}\n.controls-section .label[data-v-6426a840] {\n  margin: 5px;\n  color: #6e7bab;\n}\n.tab a[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tab a.active[data-v-6426a840] {\n  color: #6e7bab !important;\n}\n.tabs .indicator[data-v-6426a840] {\n  background-color: #6e7bab !important;\n}")
 ;(function(){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -20264,7 +20264,8 @@ module.exports = {
           } else {
             Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
           }
-        } catch (e) {
+        } catch (err) {
+          console.log(err);
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
         }
         _this2.$emit('isLoad', false);
@@ -20356,14 +20357,14 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6426a840", __vue__options__)
+    hotAPI.reload("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin-top: 10%;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin-top: 10%;\n}\n.banner[data-v-175239ae] {\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n}\n.info[data-v-175239ae] {\n  font-size: 1.2em;\n}\n.label[data-v-175239ae] {\n  font-size: 1.6em;\n  font-weight: 500;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно сделать динамическую обложку для своей группы или паблика.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Описание особенностей с картиночками.")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"getting-started"}},[_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/banner.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для своей группы или паблика.")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/screen1.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Виджеты")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки!")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Все что вам нужно - это расставлять различные элементы на вашу обложку и изменять стилистику! Попробуйте сами:")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/screen2.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Сервисы")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Donatelo предоставляет полноценный доступ к созданию своих собственных сервисов для разработчик, что позволяет делать свои собственные обложки при максимальной кастомности и разнообразности функционала!")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Вам, как пользователю приложения предоставляется постоянно пополняемый список виджетов и сервисов, однако это ни капли не усложняет работу!")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-175239ae"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -20374,11 +20375,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-175239ae", __vue__options__)
+    hotAPI.reload("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".wrap[data-v-0adae92f] {\n  position: absolute;\n  width: 100vw;\n  left: 0;\n  top: 0;\n  height: 100vh;\n  background: #fff;\n}\n.row[data-v-0adae92f] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 600px;\n  margin-left: -300px;\n  margin-top: -150px;\n}\np[data-v-0adae92f] {\n  color: #5e81a8;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".row[data-v-0adae92f] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 600px;\n  margin-left: -300px;\n  margin-top: -150px;\n}\np[data-v-0adae92f] {\n  color: #5e81a8;\n}")
 ;(function(){
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -20428,7 +20429,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-0adae92f", __vue__options__)
+    hotAPI.reload("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){

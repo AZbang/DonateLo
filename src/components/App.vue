@@ -81,7 +81,7 @@
 <style lang="css">
   body {
     overflow-x: hidden;
-    background-color: #edeef0;
+    background-color: #fff;
     width: 100vw;
     height: 100vh;
   }

@@ -113,7 +113,8 @@
           } else {
             Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
           }
-        } catch(e) {
+        } catch(err) {
+          console.log(err);
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
         }
         this.$emit('isLoad', false);
@@ -180,6 +181,9 @@
 </script>
 
 <style scoped>
+  #admin {
+    background-color: #edeef0;
+  }
   .btn-upload-data {
     position: absolute;
     bottom: 20px;

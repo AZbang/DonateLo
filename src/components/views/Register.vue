@@ -43,14 +43,6 @@
 </script>
 
 <style scoped>
-  .wrap {
-    position: absolute;
-    width: 100vw;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    background: #fff;
-  }
   .row {
     position: absolute;
     top: 50%;
