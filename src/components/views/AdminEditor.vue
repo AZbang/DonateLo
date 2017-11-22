@@ -147,7 +147,10 @@
         this.isCoverEmpty = true;
         this.$emit('isLoad', false);
         let covers =  this.api.api_result.response[0].cover.images;
-        if(covers && covers.length) this.renderer.setCover(covers[covers.length-1].url);
+        if(covers && covers.length) {
+          this.isCoverEmpty = false;
+          this.renderer.setCover(covers[covers.length-1].url);
+        }
       },
       addWidget(type, data, res) {
         let widget = this.renderer.addWidget(type, data, res);
@@ -157,6 +160,7 @@
           $('#menu').tabs('select_tab', 'edit');
         });
         widget.view.trigger('mousedown');
+        this.isCoverEmpty = false;
       },
     },
     mounted() {
