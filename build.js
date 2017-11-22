@@ -20309,11 +20309,9 @@ module.exports = {
     },
 
     setCoverFromVK() {
+      this.isCoverEmpty = false;
       let covers = this.api.api_result.response[0].cover.images;
-      if (covers.length) {
-        this.isCoverEmpty = false;
-        this.renderer.setCover(covers[covers.length - 1].url);
-      }
+      if (covers && covers.length) this.renderer.setCover(covers[covers.length - 1].url);
     },
     addWidget(type, data, res) {
       let widget = this.renderer.addWidget(type, data, res);
