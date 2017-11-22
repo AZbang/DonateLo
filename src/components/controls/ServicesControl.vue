@@ -11,7 +11,7 @@
           <br>
           <div class="row inputs">
             <div class="input-field col s12" v-for="(input, id) in service.inputs">
-              <input :name="id" type="text" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
+              <input :name="id" type="text" v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
               <label class="active" :for="id">
                 <span v-show="errors.has(id)">Неверно указана форма</span>
                 <span v-show="!errors.has(id)">{{input.description}}</span>
@@ -21,7 +21,7 @@
         </div>
         <div class="card-action" style="border-color: #fff; overflow: hidden;">
           <a href="#" class="left" style="color: #fff" @click="deleteService">Удалить</a>
-          <a href="#" class="right" style="color: #fff; margin-right: 0" @click="closeService">Сохранить</a>
+          <a href="#" class="right" style="color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
         </div>
       </div>
     </div>
@@ -73,16 +73,24 @@
     methods: {
       openService(id) {
         this.service = this.services[id];
+        this.service.id = id;
         this.isOpenEditor = true;
       },
-      closeService() {
-        this.$validator.validateAll().then((result) => {
-          if(result) this.isOpenEditor = false;
-          else Materialize.toast('Неверно указаны данные!');
+      async saveService() {
+        this.$validator.validateAll().then(async (result) => {
+          if(result) {
+            let form = {};
+            for(let input in this.service.inputs) {
+               form[input] = this.service.inputs[input].value;
+            }
+            this.$emit('updateService', this.service.id, form);
+            this.isOpenEditor = false;
+          } else Materialize.toast('Неверно указаны данные!');
         });
       },
-      deleteService() {
-
+      async deleteService() {
+        await this.$emit('toggleService', this.service.id, false);
+        this.isOpenEditor = false;
       }
     }
   }

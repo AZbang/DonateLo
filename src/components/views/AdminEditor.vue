@@ -22,7 +22,7 @@
       </div>
       <div id="services">
         <div class="controls-section">
-          <services-control :services="services"></services-control>
+          <services-control @toggleService="toggleService" @updateService="updateService" :services="services"></services-control>
         </div>
         <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
           <i class="material-icons">cloud_upload</i>
@@ -65,23 +65,24 @@
         isCoverEmpty: true,
         currentObject: null,
         renderer: null,
-        services: {}
+        services: {},
+        varibles: {}
       }
     },
     methods: {
       // API METHODS
       async loadData() {
         this.$emit('isLoad', true);
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {
-          app_id: this.api.api_id,
-          auth_token: this.api.auth_key,
-          group_id: this.api.group_id,
-          viewer_id: this.api.viewer_id
-        });
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {group_id: this.api.group_id});
         let data = resp.data.result;
 
         this.services = data.services;
-
+        for(let key in this.services) {
+          for(let input in this.services[key].inputs) {
+            this.services[key].inputs[input].value = '';
+          }
+        }
+        this.varibles = data.enviroment;
         this.renderer.setCover(data.resources.background);
         for(let key in data.views) {
           let view = data.views[key];
@@ -98,18 +99,11 @@
         if(this.renderer.isEditCover || !this.$parent.isExist)
           data.resources.background = this.renderer.coverImage._element.src;
 
-
-        console.log(data);
-
         try {
           let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
-            app_id: this.api.api_id,
-            auth_token: this.api.auth_key,
             group_id: this.api.group_id,
-            viewer_id: this.api.viewer_id,
             ...data
           });
-          console.log(resp);
 
           if(resp.data.code == 'ok') {
             Materialize.toast('Обложка сохранена!', 1000);
@@ -122,6 +116,28 @@
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
         }
         this.$emit('isLoad', false);
+      },
+      async loadVaribles() {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_enviroment', {group_id: this.api.group_id});
+        if(resp.data.code === 'ok') this.varibles = resp.data.result;
+      },
+      async toggleService(id, isActive) {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/activate_service', {
+          group_id: this.api.group_id,
+          service_id: id,
+          activation: isActive
+        });
+        return resp.data.code === 'ok';
+      },
+      async updateService(id, form) {
+        console.log(form);
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/update_service', {
+          group_id: this.api.group_id,
+          service_id: id,
+          form
+        });
+        await this.loadVaribles();
+        return resp.data.code === 'ok';
       },
 
       addWidget(type, data, res) {
