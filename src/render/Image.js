@@ -21,11 +21,11 @@ class ContructorImage {
       data: {
         id: this.id,
         type: "image",
-        value: this.varible,
+        value: this.varible || '',
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
-        w: Math.round(this.view.currentWidth),
-        h: Math.round(this.view.currentHeight),
+        w: Math.round(this.view.width),
+        h: Math.round(this.view.height),
         angle: Math.round(360-this.view.angle),
         // border_color: obj.borderColor,
         // border_width: obj.borderWidth

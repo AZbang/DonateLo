@@ -111,6 +111,7 @@
             this.renderer.isEditCover = false;
             this.$parent.isExist = true;
           } else {
+            console.log(resp.data);
             Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
           }
         } catch(err) {
