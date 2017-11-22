@@ -75,23 +75,23 @@
         this.$emit('isLoad', true);
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {group_id: this.api.group_id});
         let data = resp.data.result;
-
-        this.services = data.services;
-        for(let key in this.services) {
-          for(let input in this.services[key].inputs) {
-            this.services[key].inputs[input].value = '';
+        if(resp.data.code == 'ok') {
+          this.services = data.services;
+          for(let key in this.services) {
+            for(let input in this.services[key].inputs) {
+              this.services[key].inputs[input].value = '';
+            }
           }
-        }
-        this.varibles = data.enviroment;
-        this.renderer.setVaribles(this.varibles);
-        this.renderer.setCover(data.resources.background);
-        for(let key in data.views) {
-          let view = data.views[key];
-          this.addWidget(view.type, view, data.resources);
-        }
-        this.renderer.canvas.trigger('selection:cleared');
-
-        this.$emit('isLoad', false);
+          this.varibles = data.enviroment;
+          this.renderer.setVaribles(this.varibles);
+          this.renderer.setCover(data.resources.background);
+          for(let key in data.views) {
+            let view = data.views[key];
+            this.addWidget(view.type, view, data.resources);
+          }
+          this.renderer.canvas.trigger('selection:cleared');
+          this.$emit('isLoad', false);
+        } else this.setCoverFromVK();
       },
       async uploadData() {
         let data = this.renderer.getJSON();
@@ -120,7 +120,6 @@
       },
       async loadVaribles() {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_enviroment', {group_id: this.api.group_id});
-        console.log(resp)
         if(resp.data.code === 'ok') {
           this.varibles = resp.data.result;
           this.renderer.setVaribles(this.varibles);
@@ -143,7 +142,14 @@
         await this.loadVaribles();
         return resp.data.code === 'ok';
       },
-
+      
+      setCoverFromVK() {
+        let covers = this.api.api_result.response[0].cover.images;
+        if(covers.length) {
+          this.isCoverEmpty = false;
+          this.renderer.setCover(covers[covers.length-1].url);
+        }
+      },
       addWidget(type, data, res) {
         let widget = this.renderer.addWidget(type, data, res);
 
@@ -165,13 +171,7 @@
       if(this.$parent.isExist) {
         this.loadData();
         this.isCoverEmpty = false;
-      } else {
-        let covers = this.api.api_result.response[0].cover.images;
-        if(covers.length) {
-          this.isCoverEmpty = false;
-          this.renderer.setCover(covers[covers.length-1].url);
-        }
-      }
+      } else this.setCoverFromVK();
     }
   }
 </script>
