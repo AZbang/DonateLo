@@ -28,18 +28,19 @@
         <input class="input browser-default" type="number" :value="angle" @change="setAngle">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m8">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <span class="input-prefix">%</span>
-        <input class="input browser-default" type="number" :value="object.value" @change="setValue">
+        <select class="input browser-default" v-model="object.varible" @change="setVarible">
+          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
+        </select>
       </div>
     </div>
     <div class="input-field col s12 m4">
       <p class="flow-text">Максимум:</p>
       <div class="input-wrap">
         <span class="input-prefix">%</span>
-        <input class="input browser-default" type="number" :value="object.maxValue" @change="setValue">
+        <input class="input browser-default" type="number" :value="object.maxValue" @change="setMaxValue">
       </div>
     </div>
     <!-- <div class="input-field col s12 m4">
@@ -86,7 +87,7 @@
       ColorPicker,
       EditorForms
     },
-    props: ['object'],
+    props: ['object', 'varibles'],
     computed: {
       angle() {
         let deg = Math.abs(Math.round(360-360-this.object.view.angle));
@@ -104,8 +105,8 @@
       setStartAngle(e) {
         this.object.setStartAngle(e.target.value);
       },
-      setValue(e) {
-        this.object.setValue(e.target.value);
+      setVarible(e) {
+        this.object.setVarible(e.target.value);
       },
       setMaxValue(e) {
         this.object.setMaxValue(e.target.value);

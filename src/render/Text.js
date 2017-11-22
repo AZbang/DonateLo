@@ -69,7 +69,11 @@ class Text {
   }
   setValue(val) {
     this.value = val;
-    this.view.text = val;
+
+    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
+      console.log(this.render.getValueFromVarible(v))
+      return this.render.getValueFromVarible(v);
+    });
     this.render.canvas.renderAll();
   }
   setSize(size) {

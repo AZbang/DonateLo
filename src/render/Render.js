@@ -24,6 +24,11 @@ class Render {
 
     this.isEditCover = false;
     this.widgets = [];
+
+    this.varibles = {};
+  }
+  getValueFromVarible(id) {
+    return this.varibles[id] || '';
   }
   addWidget(type, data={}, res={}) {
     let widget = new WIDGETS[type](this, data, res);

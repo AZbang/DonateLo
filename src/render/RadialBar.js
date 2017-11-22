@@ -17,7 +17,7 @@ class RadialBar  {
     this.setY(data.y || 150);
     this.setSize(data.w || 200);
     this.setAngle(360-data.angle || 0);
-    this.setValue(data.value || 50);
+    this.setVarible(data.value || '');
     this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
@@ -42,7 +42,7 @@ class RadialBar  {
       data: {
         id: this.id,
         type: "radial",
-        value: "" + this.value,
+        value: this.varible,
         max_value: this.maxValue,
         start_angle: Math.round(360-this.startAngle),
         direction: 0,
@@ -83,7 +83,10 @@ class RadialBar  {
     });
     this.setValue(this.value);
   }
-
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
+  }
   setAngle(angle) {
     this.view.angle = angle;
     this.render.canvas.renderAll();

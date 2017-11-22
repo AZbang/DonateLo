@@ -38,8 +38,9 @@
     <div class="input-field col s12 m12">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <span class="input-prefix">url</span>
-        <input class="input" :value="object.value" @change="setValue">
+        <select class="input browser-default" v-model="object.varible" @change="setVarible">
+          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
+        </select>
       </div>
     </div>
     <div class="input-field col s12 m6">
@@ -72,7 +73,7 @@
       EditorForms,
       UploadImage
     },
-    props: ['object'],
+    props: ['object', 'varibles'],
     computed: {
       angle() {
         let deg = Math.abs(Math.round(360-360-this.object.view.angle));
@@ -81,6 +82,9 @@
       }
     },
     methods: {
+      setVarible(e) {
+        this.object.setVarible(e.target.value);
+      },
       setValue(e) {
         this.object.setValue(e.target.value);
       },

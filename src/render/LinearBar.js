@@ -34,7 +34,7 @@ class LinearBar  {
       data: {
         id: this.id,
         type: "linear",
-        value: "" + this.value,
+        value: this.varible,
         max_value: this.maxValue,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
@@ -46,6 +46,10 @@ class LinearBar  {
         border: this.border
       }
     }
+  }
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
   }
   setX(x) {
     this.view.left = x;

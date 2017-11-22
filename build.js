@@ -19509,7 +19509,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
+    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19550,7 +19550,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-24cdd05e", __vue__options__)
+    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19570,7 +19570,7 @@ module.exports = {
     RadialEditor,
     ImageEditor
   },
-  props: ['renderer', 'currentObject'],
+  props: ['renderer', 'currentObject', 'varibles'],
   methods: {
     deleteObject() {
       this.renderer.canvas.trigger('selection:cleared');
@@ -19590,7 +19590,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"editor-wrap"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.editorComponent),expression:"editorComponent"}],staticClass:"btns-wrap"},[_c('a',{staticClass:"btn-floating btn-large red waves-effect waves-light",on:{"click":_vm.deleteObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")])]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large green waves-effect waves-light",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("done")])])]),_vm._v(" "),_c(_vm.editorComponent,{tag:"div",attrs:{"object":_vm.currentObject}}),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"editor-wrap"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.editorComponent),expression:"editorComponent"}],staticClass:"btns-wrap"},[_c('a',{staticClass:"btn-floating btn-large red waves-effect waves-light",on:{"click":_vm.deleteObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")])]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large green waves-effect waves-light",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("done")])])]),_vm._v(" "),_c(_vm.editorComponent,{tag:"div",attrs:{"object":_vm.currentObject,"varibles":_vm.varibles}}),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-318197e2"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -19601,7 +19601,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.reload("data-v-318197e2", __vue__options__)
+    hotAPI.rerender("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19678,7 +19678,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.reload("data-v-06e51b17", __vue__options__)
+    hotAPI.rerender("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19708,7 +19708,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.reload("data-v-5f30e266", __vue__options__)
+    hotAPI.rerender("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19725,7 +19725,7 @@ module.exports = {
     EditorForms,
     UploadImage
   },
-  props: ['object'],
+  props: ['object', 'varibles'],
   computed: {
     angle() {
       let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
@@ -19733,6 +19733,9 @@ module.exports = {
     }
   },
   methods: {
+    setVarible(e) {
+      this.object.setVarible(e.target.value);
+    },
     setValue(e) {
       this.object.setValue(e.target.value);
     },
@@ -19763,7 +19766,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("url")]),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.varible),expression:"object.varible"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "varible", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setVarible]}},_vm._l((_vm.varibles),function(value,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(key)+": "+_vm._s(value))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m6"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19772,7 +19775,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.reload("data-v-72213304", __vue__options__)
+    hotAPI.rerender("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19787,7 +19790,7 @@ module.exports = {
     ColorPicker,
     EditorForms
   },
-  props: ['object'],
+  props: ['object', 'varibles'],
   computed: {
     angle() {
       let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
@@ -19795,6 +19798,9 @@ module.exports = {
     }
   },
   methods: {
+    setVarible(e) {
+      this.object.setVarible(e.target.value);
+    },
     setProgressImage(img, data) {
       this.object.sourceProgressFilename = data.name;
       this.object.setProgressImage(img);
@@ -19839,7 +19845,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setMaxValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m8"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.varible),expression:"object.varible"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "varible", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setVarible]}},_vm._l((_vm.varibles),function(value,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(key)+": "+_vm._s(value))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setMaxValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19848,7 +19854,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7a6ca297", __vue__options__)
+    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19863,7 +19869,7 @@ module.exports = {
     ColorPicker,
     EditorForms
   },
-  props: ['object'],
+  props: ['object', 'varibles'],
   computed: {
     angle() {
       let deg = Math.abs(Math.round(360 - 360 - this.object.view.angle));
@@ -19880,8 +19886,8 @@ module.exports = {
     setStartAngle(e) {
       this.object.setStartAngle(e.target.value);
     },
-    setValue(e) {
-      this.object.setValue(e.target.value);
+    setVarible(e) {
+      this.object.setVarible(e.target.value);
     },
     setMaxValue(e) {
       this.object.setMaxValue(e.target.value);
@@ -19913,7 +19919,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width/2)},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width/2)},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m8"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.varible),expression:"object.varible"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "varible", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setVarible]}},_vm._l((_vm.varibles),function(value,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(key)+": "+_vm._s(value))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Максимум:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("%")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.maxValue},on:{"change":_vm.setMaxValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.border},on:{"change":_vm.setBorder}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.progressColor,"change":_vm.setProgressColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.progressColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.progressColor}})])])],1),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Задний фон:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.standColor,"change":_vm.setStandColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.standColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.standColor}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19922,7 +19928,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-3c4deddd", __vue__options__)
+    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19984,7 +19990,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-349acc4e", __vue__options__)
+    hotAPI.rerender("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20121,7 +20127,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1348798c", __vue__options__)
+    hotAPI.rerender("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20139,7 +20145,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-39ad21fd", __vue__options__)
+    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20176,7 +20182,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1dda79d6", __vue__options__)
+    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
@@ -20227,6 +20233,7 @@ module.exports = {
           }
         }
         _this.varibles = data.enviroment;
+        _this.renderer.varibles = _this.varibles;
         _this.renderer.setCover(data.resources.background);
         for (let key in data.views) {
           let view = data.views[key];
@@ -20269,7 +20276,10 @@ module.exports = {
 
       return _asyncToGenerator(function* () {
         let resp = yield axios.post('https://app-donatelo.herokuapp.com/get_enviroment', { group_id: _this3.api.group_id });
-        if (resp.data.code === 'ok') _this3.varibles = resp.data.result;
+        if (resp.data.code === 'ok') {
+          _this3.varibles = resp.data.result;
+          _this3.renderer.varibles = _this3.varibles;
+        }
       })();
     },
     toggleService(id, isActive) {
@@ -20288,7 +20298,6 @@ module.exports = {
       var _this5 = this;
 
       return _asyncToGenerator(function* () {
-        console.log(form);
         let resp = yield axios.post('https://app-donatelo.herokuapp.com/update_service', {
           group_id: _this5.api.group_id,
           service_id: id,
@@ -20333,7 +20342,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('services-control',{attrs:{"services":_vm.services},on:{"toggleService":_vm.toggleService,"updateService":_vm.updateService}})],1),_vm._v(" "),_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_vm._m(1)])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"admin"}},[_c('div',{staticClass:"fixed-wrap"},[_c('cover-control',{attrs:{"renderer":_vm.renderer,"isCoverEmpty":_vm.isCoverEmpty}}),_vm._v(" "),_vm._m(0)],1),_vm._v(" "),_c('div',{staticClass:"views-wrap"},[_c('div',{attrs:{"id":"widgets"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Добавить виджет:")]),_vm._v(" "),_c('widgets-control',{on:{"addWidget":_vm.addWidget}})],1),_vm._v(" "),_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])]),_vm._v(" "),_c('div',{attrs:{"id":"services"}},[_c('div',{staticClass:"controls-section"},[_c('services-control',{attrs:{"services":_vm.services},on:{"toggleService":_vm.toggleService,"updateService":_vm.updateService}})],1),_vm._v(" "),_c('a',{staticClass:"btn-upload-data btn-floating btn-large waves-effect waves-light",on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("cloud_upload")])])]),_vm._v(" "),_c('div',{attrs:{"id":"edit"}},[_c('div',{staticClass:"controls-section"},[_c('p',{directives:[{name:"show",rawName:"v-show",value:(!_vm.currentObject),expression:"!currentObject"}],staticClass:"flow-text label"},[_vm._v("Выберите объект или сервис для изменения")]),_vm._v(" "),_c('editors-control',{attrs:{"varibles":_vm.varibles,"renderer":_vm.renderer,"currentObject":_vm.currentObject}})],1)]),_vm._v(" "),_vm._m(1)])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"tabs",attrs:{"id":"menu"}},[_c('li',{staticClass:"tab col s4"},[_c('a',{staticClass:"active",attrs:{"href":"#widgets"}},[_vm._v("Виджеты")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#services"}},[_vm._v("Сервисы")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#settings"}},[_vm._v("Настройки")])]),_vm._v(" "),_c('li',{staticClass:"tab col s4"},[_c('a',{attrs:{"href":"#edit"}},[_vm._v("Изменить")])]),_vm._v(" "),_c('div',{staticClass:"indicator"})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"settings"}},[_c('div',{staticClass:"controls-section"},[_c('p',{staticClass:"flow-text label"},[_vm._v("Настройки")])])])}]
 __vue__options__._scopeId = "data-v-6426a840"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -20344,7 +20353,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6426a840", __vue__options__)
+    hotAPI.rerender("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
@@ -20362,7 +20371,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.reload("data-v-175239ae", __vue__options__)
+    hotAPI.rerender("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
@@ -20416,7 +20425,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.reload("data-v-0adae92f", __vue__options__)
+    hotAPI.rerender("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){
@@ -20494,7 +20503,7 @@ class ContructorImage {
       data: {
         id: this.id,
         type: "image",
-        value: this.value,
+        value: this.varible,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
@@ -20504,6 +20513,10 @@ class ContructorImage {
         // border_width: obj.borderWidth
       }
     };
+  }
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
   }
   setX(x) {
     this.view.left = x;
@@ -20587,7 +20600,7 @@ class LinearBar {
       data: {
         id: this.id,
         type: "linear",
-        value: "" + this.value,
+        value: this.varible,
         max_value: this.maxValue,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
@@ -20599,6 +20612,10 @@ class LinearBar {
         border: this.border
       }
     };
+  }
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
   }
   setX(x) {
     this.view.left = x;
@@ -20707,7 +20724,7 @@ class RadialBar {
     this.setY(data.y || 150);
     this.setSize(data.w || 200);
     this.setAngle(360 - data.angle || 0);
-    this.setValue(data.value || 50);
+    this.setVarible(data.value || '');
     this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
@@ -20732,7 +20749,7 @@ class RadialBar {
       data: {
         id: this.id,
         type: "radial",
-        value: "" + this.value,
+        value: this.varible,
         max_value: this.maxValue,
         start_angle: Math.round(360 - this.startAngle),
         direction: 0,
@@ -20773,7 +20790,10 @@ class RadialBar {
     });
     this.setValue(this.value);
   }
-
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
+  }
   setAngle(angle) {
     this.view.angle = angle;
     this.render.canvas.renderAll();
@@ -20893,6 +20913,11 @@ class Render {
 
     this.isEditCover = false;
     this.widgets = [];
+
+    this.varibles = {};
+  }
+  getValueFromVarible(id) {
+    return this.varibles[id] || '';
   }
   addWidget(type, data = {}, res = {}) {
     let widget = new WIDGETS[type](this, data, res);
@@ -21076,7 +21101,11 @@ class Text {
   }
   setValue(val) {
     this.value = val;
-    this.view.text = val;
+
+    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
+      console.log(this.render.getValueFromVarible(v));
+      return this.render.getValueFromVarible(v);
+    });
     this.render.canvas.renderAll();
   }
   setSize(size) {

@@ -31,7 +31,7 @@
       <div id="edit">
         <div class="controls-section">
           <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
-          <editors-control :renderer="renderer" :currentObject="currentObject"></editors-control>
+          <editors-control :varibles="varibles" :renderer="renderer" :currentObject="currentObject"></editors-control>
         </div>
       </div>
       <div id="settings">
@@ -83,6 +83,7 @@
           }
         }
         this.varibles = data.enviroment;
+        this.renderer.varibles = this.varibles;
         this.renderer.setCover(data.resources.background);
         for(let key in data.views) {
           let view = data.views[key];
@@ -119,7 +120,10 @@
       },
       async loadVaribles() {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_enviroment', {group_id: this.api.group_id});
-        if(resp.data.code === 'ok') this.varibles = resp.data.result;
+        if(resp.data.code === 'ok') {
+          this.varibles = resp.data.result;
+          this.renderer.varibles = this.varibles;
+        }
       },
       async toggleService(id, isActive) {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/activate_service', {
@@ -130,7 +134,6 @@
         return resp.data.code === 'ok';
       },
       async updateService(id, form) {
-        console.log(form);
         let resp = await axios.post('https://app-donatelo.herokuapp.com/update_service', {
           group_id: this.api.group_id,
           service_id: id,

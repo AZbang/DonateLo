@@ -21,7 +21,7 @@ class ContructorImage {
       data: {
         id: this.id,
         type: "image",
-        value: this.value,
+        value: this.varible,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
         w: Math.round(this.view.currentWidth),
@@ -31,6 +31,10 @@ class ContructorImage {
         // border_width: obj.borderWidth
       }
     }
+  }
+  setVarible(id) {
+    this.varible = id;
+    this.setValue(this.render.getValueFromVarible(id));
   }
   setX(x) {
     this.view.left = x;

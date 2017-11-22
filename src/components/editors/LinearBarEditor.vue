@@ -35,11 +35,12 @@
         <input class="input browser-default" type="number" :value="angle" @change="setAngle">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m8">
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
-        <span class="input-prefix">%</span>
-        <input class="input browser-default" type="number" :value="object.value" @change="setValue">
+        <select class="input browser-default" v-model="object.varible" @change="setVarible">
+          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
+        </select>
       </div>
     </div>
     <div class="input-field col s12 m4">
@@ -92,7 +93,7 @@
       ColorPicker,
       EditorForms
     },
-    props: ['object'],
+    props: ['object', 'varibles'],
     computed: {
       angle() {
         let deg = Math.abs(Math.round(360-360-this.object.view.angle));
@@ -101,6 +102,9 @@
       }
     },
     methods: {
+      setVarible(e) {
+        this.object.setVarible(e.target.value);
+      },
       setProgressImage(img, data) {
         this.object.sourceProgressFilename = data.name;
         this.object.setProgressImage(img);

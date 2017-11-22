@@ -8,7 +8,7 @@
         <i class="material-icons">done</i>
       </a>
     </div>
-    <div :object="currentObject" :is="editorComponent"></div>
+    <div :object="currentObject" :varibles="varibles" :is="editorComponent"></div>
     <br>
     <br>
     <br>
@@ -30,7 +30,7 @@
       RadialEditor,
       ImageEditor
     },
-    props: ['renderer', 'currentObject'],
+    props: ['renderer', 'currentObject', 'varibles'],
     methods: {
       deleteObject() {
         this.renderer.canvas.trigger('selection:cleared');
