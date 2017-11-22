@@ -144,7 +144,8 @@
       },
 
       setCoverFromVK() {
-        this.isCoverEmpty = false;
+        this.isCoverEmpty = true;
+        this.$emit('isLoad', false);
         let covers =  this.api.api_result.response[0].cover.images;
         if(covers && covers.length) this.renderer.setCover(covers[covers.length-1].url);
       },
