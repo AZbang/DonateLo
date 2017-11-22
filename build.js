@@ -19509,7 +19509,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
+    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19550,7 +19550,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
+    hotAPI.reload("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19601,7 +19601,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-318197e2", __vue__options__)
+    hotAPI.reload("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19678,7 +19678,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-06e51b17", __vue__options__)
+    hotAPI.reload("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19708,7 +19708,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-5f30e266", __vue__options__)
+    hotAPI.reload("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19775,7 +19775,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-72213304", __vue__options__)
+    hotAPI.reload("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19854,7 +19854,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
+    hotAPI.reload("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19928,7 +19928,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
+    hotAPI.reload("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19981,7 +19981,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"left"}},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap",staticStyle:{"border-radius":"10px","height":"initial"}},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.fontType),expression:"object.fontType"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "fontType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setFontType]}},_vm._l((_vm.object.FONTS),function(font,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(font))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.size},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4",staticStyle:{"text-align":"center"}},[_c('p',{staticClass:"flow-text"},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.color,"change":_vm.setColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.color})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.color}})])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('p',{staticClass:"flow-text",staticStyle:{"text-align":"left"}},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap",staticStyle:{"border-radius":"10px","height":"initial"}},[_c('textarea',{staticClass:"input",domProps:{"value":_vm.object.value},on:{"change":_vm.setValue}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Шрифт:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.fontType),expression:"object.fontType"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "fontType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setFontType]}},_vm._l((_vm.object.FONTS),function(font,key){return _c('option',{style:({fontFamily: font}),domProps:{"value":key}},[_vm._v(_vm._s(font))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Размер:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.size},on:{"change":_vm.setSize}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4",staticStyle:{"text-align":"center"}},[_c('p',{staticClass:"flow-text"},[_vm._v("Выравнивание:")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'right' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('right')}}},[_vm._v("format_align_right")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'center' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('center')}}},[_vm._v("format_align_center")]),_vm._v(" "),_c('i',{staticClass:"material-icons btn-icon",class:_vm.object.textAlign === 'left' ? 'active' : '',on:{"click":function($event){_vm.setTextAlign('left')}}},[_vm._v("format_align_left")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.color,"change":_vm.setColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.color})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.color}})])])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19990,7 +19990,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-349acc4e", __vue__options__)
+    hotAPI.reload("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20127,7 +20127,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1348798c", __vue__options__)
+    hotAPI.reload("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20145,7 +20145,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
+    hotAPI.reload("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20182,7 +20182,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
+    hotAPI.reload("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
@@ -20353,7 +20353,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6426a840", __vue__options__)
+    hotAPI.reload("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
@@ -20371,7 +20371,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-175239ae", __vue__options__)
+    hotAPI.reload("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
@@ -20425,7 +20425,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-0adae92f", __vue__options__)
+    hotAPI.reload("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){
@@ -21103,7 +21103,6 @@ class Text {
     this.value = val;
 
     this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
-      console.log(this.render.getValueFromVarible(v));
       return this.render.getValueFromVarible(v);
     });
     this.render.canvas.renderAll();

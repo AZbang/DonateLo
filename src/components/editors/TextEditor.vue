@@ -31,7 +31,7 @@
       <p class="flow-text">Шрифт:</p>
       <div class="input-wrap">
         <select class="input browser-default" v-model="object.fontType" @change="setFontType">
-          <option v-for="(font, key) in object.FONTS" :value="key">{{font}}</option>
+          <option :style="{fontFamily: font}" v-for="(font, key) in object.FONTS" :value="key">{{font}}</option>
         </select>
       </div>
     </div>
