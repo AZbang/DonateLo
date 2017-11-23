@@ -164,8 +164,10 @@
     mounted() {
       VK.External.resizeWindow(window.screen.availWidth-200, Math.max(660, window.screen.availHeight-300));
 
+      let w = mobilecheck() ? window.innerWidth : Math.min(window.screen.availWidth-200, 1000);
+
       $('ul.tabs').tabs();
-      this.renderer = new Render('playground', Math.min(window.screen.availWidth-200, 1000), 300);
+      this.renderer = new Render('playground', w, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'widgets');
@@ -187,7 +189,7 @@
     background: #fff;
   }
   .tabs {
-    width: 50%;
+    width: 70%;
     position: absolute;
     left: 0;
     top: 0;

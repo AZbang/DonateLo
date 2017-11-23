@@ -14,7 +14,7 @@
           <br>
           <div class="row inputs">
             <div class="input-field col s12" v-for="(input, id) in service.inputs">
-              <input :name="id" type="text" v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
+              <input :name="id" v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
               <label class="active" :for="id">
                 <span>{{input.description}}</span>
               </label>
@@ -112,6 +112,9 @@
   .input-field.col label {
       left: 5px;
   }
+  input:not([type]):focus:not([readonly])+label {
+    color: #fff !important;
+  }
   .close-service {
     position: absolute;
     right: 30px;
@@ -125,6 +128,7 @@
      color: #fff;
    }
    input {
+     margin-top: 15px;
      border-bottom: 2px solid #fff !important;
    }
    .input-field input[type=text]:focus + label {
