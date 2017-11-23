@@ -44,7 +44,7 @@ class RadialBar  {
       data: {
         id: this.id,
         type: "radial",
-        value: this.varible,
+        value: this.varible || '',
         max_value: this.maxValue,
         start_angle: 0,
         direction: 0,

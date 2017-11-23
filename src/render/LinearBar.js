@@ -36,7 +36,7 @@ class LinearBar  {
       data: {
         id: this.id,
         type: "linear",
-        value: this.varible,
+        value: this.varible || '',
         max_value: this.maxValue,
         x: Math.round(this.view.left),
         y: Math.round(this.view.top),
