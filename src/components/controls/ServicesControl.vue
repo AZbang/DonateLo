@@ -2,6 +2,7 @@
   <div id="services">
     <div class="service" v-if="isOpenEditor">
       <div class="card" :class="service.card_style.color">
+        <i class="close-service material-icons" style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #fff;" @click="closeService">close</i>
         <div class="card-content white-text">
           <span class="card-title flow-text" style="font-weight: bold">
             <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
@@ -13,14 +14,13 @@
             <div class="input-field col s12" v-for="(input, id) in service.inputs">
               <input :name="id" type="text" v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
               <label class="active" :for="id">
-                <span v-show="errors.has(id)">Неверно указана форма</span>
-                <span v-show="!errors.has(id)">{{input.description}}</span>
+                <span>{{input.description}}</span>
               </label>
             </div>
           </div>
         </div>
-        <div class="card-action" style="border-color: #fff; overflow: hidden;">
-          <a href="#" class="left" style="color: #fff" @click="deleteService">Удалить</a>
+        <div class="card-action" style="border: none; overflow: hidden;">
+          <!-- <a href="#" class="left" style="color: #fff" @click="deleteService">Удалить</a> -->
           <a href="#" class="right" style="color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
         </div>
       </div>
@@ -71,7 +71,13 @@
       }
     },
     methods: {
+      closeService() {
+        $('.btn-upload-data').show();
+        this.isOpenEditor = false;
+        this.service = null;
+      },
       openService(id) {
+        $('.btn-upload-data').hide();
         this.service = this.services[id];
         this.service.id = id;
         this.isOpenEditor = true;
@@ -99,6 +105,14 @@
 <style scoped>
   .input-field.col label {
       left: 5px;
+  }
+  .close-service {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+  .card-content {
+    padding: 24px 24px 0px;
   }
 
    .input-field label {
