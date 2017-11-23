@@ -2,13 +2,14 @@
   <div id="admin">
     <div class="fixed-wrap">
       <cover-control :renderer="renderer" :isCoverEmpty="isCoverEmpty"></cover-control>
-      <ul id="menu" class="tabs">
-        <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
-        <li class="tab col s4"><a href="#services">Сервисы</a></li>
-        <li class="tab col s4"><a href="#settings">Настройки</a></li>
-        <li class="tab col s4"><a href="#edit">Изменить</a></li>
-        <div class="indicator"></div>
-      </ul>
+      <div class="wrap-menu">
+        <ul id="menu" class="tabs">
+          <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
+          <li class="tab col s4"><a href="#services">Сервисы</a></li>
+          <li class="tab col s4" style="display: none;"><a href="#edit">Изменить</a></li>
+          <div class="indicator"></div>
+        </ul>
+      </div>
     </div>
     <div class="views-wrap">
       <div id="widgets">
@@ -16,7 +17,7 @@
           <p class="flow-text label">Добавить виджет:</p>
           <widgets-control @addWidget="addWidget"></widgets-control>
         </div>
-        <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+        <a @click="uploadData" class="fixed-btns btn-upload-data btn-floating btn-large waves-effect waves-light">
           <i class="material-icons">cloud_upload</i>
         </a>
       </div>
@@ -24,7 +25,7 @@
         <div class="controls-section">
           <services-control @toggleService="toggleService" @updateService="updateService" :services="services"></services-control>
         </div>
-        <a @click="uploadData" class="btn-upload-data btn-floating btn-large waves-effect waves-light">
+        <a @click="uploadData" class="fixed-btns btn-upload-data btn-floating btn-large waves-effect waves-light">
           <i class="material-icons">cloud_upload</i>
         </a>
       </div>
@@ -32,11 +33,6 @@
         <div class="controls-section">
           <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
           <editors-control :varibles="varibles" :renderer="renderer" :currentObject="currentObject"></editors-control>
-        </div>
-      </div>
-      <div id="settings">
-        <div class="controls-section">
-          <p class="flow-text label">Настройки</p>
         </div>
       </div>
     </div>
@@ -166,10 +162,10 @@
       },
     },
     mounted() {
-      VK.External.resizeWindow(window.screen.availWidth/2, window.screen.availHeight*2/3);
+      VK.External.resizeWindow(window.screen.availWidth, window.screen.availHeight-300);
 
       $('ul.tabs').tabs();
-      this.renderer = new Render('playground', window.screen.availWidth/2, 300);
+      this.renderer = new Render('playground', window.innerWidth, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'widgets');
@@ -184,6 +180,18 @@
 </script>
 
 <style scoped>
+  .wrap-menu {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    background: #fff;
+  }
+  .tabs {
+    width: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
   #admin {
     background-color: #edeef0;
   }

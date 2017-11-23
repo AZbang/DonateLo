@@ -1,24 +1,31 @@
 <template>
   <editor-forms>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">X:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Y:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Угол:</p>
       <div class="input-wrap">
         <span class="input-prefix">°</span>
         <input class="input browser-default" type="number" :value="angle" @change="setAngle">
+      </div>
+    </div>
+    <div class="input-field col s12 m3">
+      <p class="flow-text">Размер:</p>
+      <div class="input-wrap">
+        <span class="input-prefix">px</span>
+        <input class="input browser-default" type="number" :value="object.size" @change="setSize">
       </div>
     </div>
     <div class="input-field col s12">
@@ -36,19 +43,6 @@
       </div>
     </div>
     <div class="input-field col s12 m4">
-      <p class="flow-text">Размер:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="object.size" @change="setSize">
-      </div>
-    </div>
-    <div class="input-field col s12 m4" style="text-align: center;">
-      <p class="flow-text">Выравнивание:</p>
-      <i class="material-icons btn-icon" :class="object.textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
-      <i class="material-icons btn-icon" :class="object.textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
-      <i class="material-icons btn-icon" :class="object.textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
-    </div>
-    <div class="input-field col s12 m4">
       <p class="flow-text">Цвет:</p>
       <color-picker :initial="object.color" :change="setColor">
         <div class="input-wrap">
@@ -57,6 +51,16 @@
         </div>
       </color-picker>
     </div>
+    <div class="input-field col s12 m4" style="text-align: center;">
+      <p class="flow-text">Выравнивание:</p>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'right' ? 'active' : ''" @click="setTextAlign('right')">format_align_right</i>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'center' ? 'active' : ''" @click="setTextAlign('center')">format_align_center</i>
+      <i class="material-icons btn-icon" :class="object.textAlign === 'left' ? 'active' : ''" @click="setTextAlign('left')">format_align_left</i>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
   </editor-forms>
 </template>
 

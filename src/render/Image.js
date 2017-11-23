@@ -7,14 +7,14 @@ class ContructorImage {
     this.view = new fabric.Image();
 
     this.view.setOriginToCenter();
-    this.setX(data.x || 50);
-    this.setY(data.y || 50);
-    this.setWidth(data.w || 500);
-    this.setHeight(data.h || 150);
+    this.setX(data.x || 200);
+    this.setY(data.y || 200);
+    this.setWidth(data.w || 200);
+    this.setHeight(data.h || 200);
     this.setAngle(360-data.angle || 0);
     if(data.value) this.setVarible(data.value);
     else this.setValue('assets/image.png');
-      
+
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
   }

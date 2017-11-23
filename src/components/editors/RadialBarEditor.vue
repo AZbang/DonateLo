@@ -1,27 +1,27 @@
 <template>
   <editor-forms>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">X:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Y:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Размер:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.width/2)" @change="setSize">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Угол:</p>
       <div class="input-wrap">
         <span class="input-prefix">°</span>
@@ -32,7 +32,7 @@
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <select class="input browser-default" v-model="object.varible" @change="setVarible">
-          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
+          <option v-for="(value, key) in varibles" :value="key">{{key}}</option>
         </select>
       </div>
     </div>
@@ -50,7 +50,7 @@
         <input class="input browser-default" type="number" :value="object.startAngle" @change="setStartAngle">
       </div>
     </div> -->
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
@@ -75,6 +75,10 @@
         </div>
       </color-picker>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
   </editor-forms>
 </template>
 

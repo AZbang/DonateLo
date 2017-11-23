@@ -151,20 +151,23 @@
   .input-wrap {
     background-color: #f9f9f9;
     border-radius: 60px;
-    padding: 6px 0 6px 60px;
+    padding: 2px 50px;
+    height: 45px;
     box-shadow: 0 0 3px #ded2f7;
   }
   .input-color {
     position: absolute;
-    width: 40px;
+    width: 30px;
     left: 10px;
-    height: 40px;
+    height: 30px;
+    top: 7px;
     border-radius: 50%;
   }
   .input {
     margin: 0;
+    font-size: 1.6em;
     border: none;
-    font-size: 2em;
+    background: transparent;
     font-weight: 200;
   }
   .input:focus {

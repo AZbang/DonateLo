@@ -1,38 +1,31 @@
 <template>
   <editor-forms>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">X:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Y:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Высота:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.width)" @change="setW">
       </div>
     </div>
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3">
       <p class="flow-text">Ширина:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
         <input class="input browser-default" type="number" :value="Math.round(object.view.height)" @change="setH">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Угол:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">°</span>
-        <input class="input browser-default" type="number" :value="angle" @change="setAngle">
       </div>
     </div>
     <div class="input-field col s12 m12">
@@ -43,7 +36,14 @@
         </select>
       </div>
     </div>
-    <div class="input-field col s12 m6">
+    <div class="input-field col s12 m4">
+      <p class="flow-text">Угол:</p>
+      <div class="input-wrap">
+        <span class="input-prefix">°</span>
+        <input class="input browser-default" type="number" :value="angle" @change="setAngle">
+      </div>
+    </div>
+    <div class="input-field col s12 m4">
       <p class="flow-text">Рамка:</p>
       <div class="input-wrap">
         <span class="input-prefix">px</span>
@@ -59,6 +59,10 @@
         </div>
       </color-picker>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
   </editor-forms>
 </template>
 

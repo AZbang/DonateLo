@@ -35,7 +35,7 @@
 <script>
   module.exports = {
     mounted() {
-      VK.External.resizeWindow(920, 2000);
+      VK.External.resizeWindow(920, 3000);
     }
   }
 </script>

@@ -110,6 +110,7 @@ class Render {
       'transform-origin': '0 0'
     });
     $('#cover-control').css('height', this.coverHeight*scale + 'px');
+    $('.fixed-btns').css('top', this.coverHeight*scale+14 + 'px')
     $('.views-wrap').css('height', window.innerHeight - (this.coverHeight*scale+48) + 'px');
   }
   toggleSize(isFull) {

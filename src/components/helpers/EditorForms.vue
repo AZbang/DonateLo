@@ -5,20 +5,20 @@
 </template>
 
 <style scoped>
-  .row {
-    margin-bottom: 100px;
-  }
   .input-field {
     margin-bottom: 1em;
   }
   p {
-    text-align: center;
+    font-size: 1.1em;
+    margin: 0 16px 5px;
+    color: #6e7bbe;
+    font-family: Roboto;
   }
   .input-wrap {
     background-color: #f9f9f9;
     border-radius: 60px;
-    padding: 6px 17px;
-    height: 54px;
+    padding: 2px 19px;
+    height: 45px;
     box-shadow: 0 0 3px #ded2f7;
   }
   .input-color {
@@ -32,14 +32,14 @@
   .input-prefix {
     position: absolute;
     right: 32px;
-    top: 46px;
-    font-size: 1.6em;
+    top: 35px;
+    font-size: 1.4em;
     font-weight: 300;
     color: #b5b5b5;
   }
   .input {
     margin: 0;
-    font-size: 2em;
+    font-size: 1.6em;
     border: none;
     background: transparent;
     font-weight: 200;
@@ -51,28 +51,23 @@
   textarea.input {
     resize: vertical;
     min-height: 100px;
+    padding-top: 10px;
   }
   .input:focus {
     border-bottom: none !important;
     box-shadow: none !important;
     outline: none;
   }
-  p {
-    font-size: 1.5em;
-    margin: 0 0 5px;
-    color: #6e7bbe;
-    font-family: Roboto;
-  }
   .btn-icon {
-    font-size: 2rem;
+    font-size: 26px;
     background-color: #f9f9f9;
-    padding: 13px 14px;
+    padding: 10px 10px;
     cursor: pointer;
     color: #6e7bbe;
-    margin: 0 5px;    
+    margin: 0 5px;
     border-radius: 50%;
-    height: 54px;
-    width: 54px;
+    height: 45px;
+    width: 45px;
     box-shadow: 0 0 3px #ded2f7;
   }
   .btn-icon.active {

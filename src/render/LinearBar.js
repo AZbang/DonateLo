@@ -14,14 +14,16 @@ class LinearBar  {
     this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
-    this.setWidth(data.w || 200);
+    this.setWidth(data.w || 400);
     this.setHeight(data.h || 50);
     this.setAngle(360-data.angle || 0);
-    this.setValue(data.value || 50);
+    if(data.value) this.setVarible(data.value);
+    else this.setValue(50);
+
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.bar_color || '#fff');
+    this.setProgressColor(data.bar_color || '#ded2f7');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
   }

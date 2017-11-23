@@ -17,12 +17,14 @@ class RadialBar  {
     this.setY(data.y || 150);
     this.setSize(data.w || 200);
     this.setAngle(360-data.angle || 0);
-    this.setVarible(data.value || '');
+    if(data.value) this.setVarible(data.value);
+    else this.setValue(25);
+
     this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.bar_color || '#fff');
+    this.setProgressColor(data.bar_color || '#ded2f7');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
 

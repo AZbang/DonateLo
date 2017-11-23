@@ -1,6 +1,6 @@
 <template>
   <div class="editor-wrap">
-    <div class="btns-wrap" v-show="editorComponent">
+    <div class="fixed-btns btns-wrap" v-show="editorComponent">
       <a @click="deleteObject" class="btn-floating btn-large red waves-effect waves-light">
         <i class="material-icons">delete</i>
       </a>

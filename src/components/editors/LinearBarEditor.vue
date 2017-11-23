@@ -1,87 +1,89 @@
 <template>
-  <editor-forms>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">X:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Y:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Высота:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.width)" @change="setW">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Ширина:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.height)" @change="setH">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Угол:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">°</span>
-        <input class="input browser-default" type="number" :value="angle" @change="setAngle">
-      </div>
-    </div>
-    <div class="input-field col s12 m8">
-      <p class="flow-text">Значение:</p>
-      <div class="input-wrap">
-        <select class="input browser-default" v-model="object.varible" @change="setVarible">
-          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Максимум:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">%</span>
-        <input class="input browser-default" type="number" :value="object.maxValue" @change="setMaxValue">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Рамка:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="object.border" @change="setBorder">
-      </div>
-    <!-- </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Файл:</p>
-      <div class="input-wrap">
-        <input class="input" :value="object." @keyup.enter="setProgressImage">
-      </div> -->
-    </div>
-    <div class="input-field col m4">
-      <p class="flow-text">Цвет:</p>
-      <color-picker :initial="object.progressColor" :change="setProgressColor">
+  <div>
+    <editor-forms>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">X:</p>
         <div class="input-wrap">
-          <div class="input-color" :style="{background: object.progressColor}"></div>
-          <input class="input" :value="object.progressColor">
+          <span class="input-prefix">px</span>
+          <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
         </div>
-      </color-picker>
-    </div>
-    <div class="input-field col m4">
-      <p class="flow-text">Задний фон:</p>
-      <color-picker :initial="object.standColor" :change="setStandColor">
+      </div>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">Y:</p>
         <div class="input-wrap">
-          <div class="input-color" :style="{background: object.standColor}"></div>
-          <input class="input" :value="object.standColor">
+          <span class="input-prefix">px</span>
+          <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
         </div>
-      </color-picker>
-    </div>
-  </editor-forms>
+      </div>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">Высота:</p>
+        <div class="input-wrap">
+          <span class="input-prefix">px</span>
+          <input class="input browser-default" type="number" :value="Math.round(object.view.width)" @change="setW">
+        </div>
+      </div>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">Ширина:</p>
+        <div class="input-wrap">
+          <span class="input-prefix">px</span>
+          <input class="input browser-default" type="number" :value="Math.round(object.view.height)" @change="setH">
+        </div>
+      </div>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">Угол:</p>
+        <div class="input-wrap">
+          <span class="input-prefix">°</span>
+          <input class="input browser-default" type="number" :value="angle" @change="setAngle">
+        </div>
+      </div>
+      <div class="input-field col s12 m3">
+        <p class="flow-text">Рамка:</p>
+        <div class="input-wrap">
+          <span class="input-prefix">px</span>
+          <input class="input browser-default" type="number" :value="object.border" @change="setBorder">
+        </div>
+      </div>
+    </editor-forms>
+    <editor-forms>
+      <div class="input-field col s12 m4">
+        <p class="flow-text">Максимум:</p>
+        <div class="input-wrap">
+          <span class="input-prefix">num</span>
+          <input class="input browser-default" type="number" :value="object.maxValue" @change="setMaxValue">
+        </div>
+      </div>
+      <div class="input-field col s12 m8">
+        <p class="flow-text">Значение:</p>
+        <div class="input-wrap">
+          <select class="input browser-default" v-model="object.varible" @change="setVarible">
+            <option v-for="(value, key) in varibles" :value="key">{{key}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-field col m4">
+        <p class="flow-text">Цвет:</p>
+        <color-picker :initial="object.progressColor" :change="setProgressColor">
+          <div class="input-wrap">
+            <div class="input-color" :style="{background: object.progressColor}"></div>
+            <input class="input" :value="object.progressColor">
+          </div>
+        </color-picker>
+      </div>
+      <div class="input-field col m4">
+        <p class="flow-text">Задний фон:</p>
+        <color-picker :initial="object.standColor" :change="setStandColor">
+          <div class="input-wrap">
+            <div class="input-color" :style="{background: object.standColor}"></div>
+            <input class="input" :value="object.standColor">
+          </div>
+        </color-picker>
+      </div>
+    </editor-forms>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 </template>
 
 <script>
