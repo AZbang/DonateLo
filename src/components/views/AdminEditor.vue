@@ -147,6 +147,7 @@
         let covers =  this.api.api_result.response[0].cover.images;
         if(covers && covers.length) {
           this.isCoverEmpty = false;
+          this.isEditCover = true;
           this.renderer.setCover(covers[covers.length-1].url);
         }
       },
