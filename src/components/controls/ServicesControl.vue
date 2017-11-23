@@ -110,7 +110,7 @@
     font-size: 0.9em;
   }
   .input-field.col label {
-      left: 5px;
+    left: 5px;
   }
   input:not([type]):focus:not([readonly])+label {
     color: #fff !important;
