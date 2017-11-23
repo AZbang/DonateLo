@@ -8,7 +8,9 @@
             <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
             {{service.name}}
           </span>
-          <p class="flow-text">{{service.decrtiption}}</p>
+          <p class="flow-text">{{service.decrtiption}}
+            <a class="docs" v-show="service.docs" target="_blank" :href="service.docs">Подробнее...</a>
+          </p>
           <br>
           <div class="row inputs">
             <div class="input-field col s12" v-for="(input, id) in service.inputs">
@@ -20,7 +22,6 @@
           </div>
         </div>
         <div class="card-action" style="border: none; overflow: hidden;">
-          <!-- <a href="#" class="left" style="color: #fff" @click="deleteService">Удалить</a> -->
           <a href="#" class="right" style="color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
         </div>
       </div>
@@ -103,6 +104,11 @@
 </script>
 
 <style scoped>
+  .docs {
+    color: #fff;
+    border-bottom: 1px dotted #fff;
+    font-size: 0.9em;
+  }
   .input-field.col label {
       left: 5px;
   }
