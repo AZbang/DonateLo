@@ -19425,7 +19425,7 @@ exports.insert = function (css) {
 }
 
 },{}],37:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("::-webkit-scrollbar-track {\n\tborder-radius: 10px;\n\tbackground-color: #6e7cac;\n}\n::-webkit-scrollbar {\n\twidth: 8px;\n\tbackground-color: #edeef0;\n}\n::-webkit-scrollbar-thumb {\n\tbackground-color: #edeef0;\n}\n\nbody {\n  overflow-x: hidden;\n  background-color: #fff;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preload {\n  position: fixed;\n  top: 0;\n  left: 0;\n  background: #fff;\n  z-index: 10000000;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preloader-wrapper {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -32px;\n  margin-left: -32px;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("::-webkit-scrollbar-track {\n\tborder-radius: 10px;\n\tbackground-color: #edeef0;\n}\n::-webkit-scrollbar {\n\twidth: 8px;\n\tbackground-color: #6e7cac;\n}\n::-webkit-scrollbar-thumb {\n\tbackground-color: #edeef0;\n}\n\nbody {\n  overflow-x: hidden;\n  background-color: #fff;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preload {\n  position: fixed;\n  top: 0;\n  left: 0;\n  background: #fff;\n  z-index: 10000000;\n  width: 100vw;\n  height: 100vh;\n}\n\n.preloader-wrapper {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-top: -32px;\n  margin-left: -32px;\n}\n\n.vk-color {\n  box-shadow: none;\n  background: #5e81a8 !important;\n}\n.label {\n  font-weight: 300;\n  margin-top: 10px;\n}")
 ;(function(){
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -19508,7 +19508,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
+    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19549,7 +19549,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
+    hotAPI.reload("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19600,7 +19600,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-318197e2", __vue__options__)
+    hotAPI.reload("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19683,7 +19683,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-06e51b17", __vue__options__)
+    hotAPI.reload("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19713,7 +19713,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-5f30e266", __vue__options__)
+    hotAPI.reload("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19780,7 +19780,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-72213304", __vue__options__)
+    hotAPI.reload("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19859,7 +19859,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
+    hotAPI.reload("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19933,7 +19933,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
+    hotAPI.reload("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19995,7 +19995,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-349acc4e", __vue__options__)
+    hotAPI.reload("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20132,7 +20132,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1348798c", __vue__options__)
+    hotAPI.reload("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20150,7 +20150,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
+    hotAPI.reload("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20187,7 +20187,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
+    hotAPI.reload("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
@@ -20366,11 +20366,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6426a840", __vue__options__)
+    hotAPI.reload("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin: 6% 0 6% 0;\n}\n.banner[data-v-175239ae] {\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n}\n.info[data-v-175239ae] {\n  font-size: 1.2em;\n}\n.label[data-v-175239ae] {\n  font-size: 1.6em;\n  font-weight: 500;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin: 6% 0 6% 6%;\n}\n.banner[data-v-175239ae] {\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n}\n.info[data-v-175239ae] {\n  font-size: 1.2em;\n}\n.label[data-v-175239ae] {\n  font-size: 1.6em;\n  font-weight: 500;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
 ;(function(){
 
 
@@ -20394,7 +20394,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-175239ae", __vue__options__)
+    hotAPI.reload("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
@@ -20450,7 +20450,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-0adae92f", __vue__options__)
+    hotAPI.reload("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){

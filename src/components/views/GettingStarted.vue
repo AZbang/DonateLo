@@ -42,7 +42,7 @@
 
 <style scoped>
   .container {
-    margin: 6% 0 6% 0;
+    margin: 6% 0 6% 6%;
   }
   .banner {
     width: 100%;

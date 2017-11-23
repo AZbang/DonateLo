@@ -81,11 +81,11 @@
 <style lang="css">
   ::-webkit-scrollbar-track {
   	border-radius: 10px;
-  	background-color: #6e7cac;
+  	background-color: #edeef0;
   }
   ::-webkit-scrollbar {
   	width: 8px;
-  	background-color: #edeef0;
+  	background-color: #6e7cac;
   }
   ::-webkit-scrollbar-thumb {
   	background-color: #edeef0;
