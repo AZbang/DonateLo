@@ -20256,7 +20256,7 @@ module.exports = {
         let data = _this2.renderer.getJSON();
         _this2.$emit('isLoad', true);
 
-        if (_this2.renderer.isEditCover || !_this2.$parent.isExist) data.resources.background = _this2.renderer.coverImage._element.src;
+        data.resources.background = _this2.renderer.coverImage._element.src;
 
         try {
           let resp = yield axios.post('https://app-donatelo.herokuapp.com/update_cover', _extends({

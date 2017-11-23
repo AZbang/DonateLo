@@ -93,8 +93,7 @@
         let data = this.renderer.getJSON();
         this.$emit('isLoad', true);
 
-        if(this.renderer.isEditCover || !this.$parent.isExist)
-          data.resources.background = this.renderer.coverImage._element.src;
+        data.resources.background = this.renderer.coverImage._element.src;
 
         try {
           let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
