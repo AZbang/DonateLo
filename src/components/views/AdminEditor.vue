@@ -166,10 +166,10 @@
       },
     },
     mounted() {
-      VK.External.resizeWindow(920, window.innerHeight-400);
+      VK.External.resizeWindow(window.screen.availWidth/2, window.screen.availHeight*2/3);
 
       $('ul.tabs').tabs();
-      this.renderer = new Render('playground', window.innerWidth, 300);
+      this.renderer = new Render('playground', window.screen.availWidth/2, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'widgets');
