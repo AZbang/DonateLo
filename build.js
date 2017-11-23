@@ -20330,6 +20330,8 @@ module.exports = {
     }
   },
   mounted() {
+    VK.External.resizeWindow(920, window.innerHeight - 400);
+
     $('ul.tabs').tabs();
     this.renderer = new Render('playground', window.innerWidth, 300);
     this.renderer.canvas.on('selection:cleared', () => {
@@ -20363,6 +20365,16 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-175239ae] {\n  margin-top: 10%;\n}\n.banner[data-v-175239ae] {\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n}\n.info[data-v-175239ae] {\n  font-size: 1.2em;\n}\n.label[data-v-175239ae] {\n  font-size: 1.6em;\n  font-weight: 500;\n}\nh1[data-v-175239ae], p[data-v-175239ae] {\n  color: #3d5977;\n}")
+;(function(){
+
+
+module.exports = {
+  mounted() {
+    VK.External.resizeWindow(920, 2000);
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"getting-started"}},[_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/banner.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Что такое Donatelo?")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Возможно когда-то Вы задумывались о динамической обложки для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и не стоит того.")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для своей группы или паблика.")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/screen1.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Виджеты")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки!")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Все что вам нужно - это расставлять различные элементы на вашу обложку и изменять стилистику! Попробуйте сами:")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('img',{staticClass:"responsive-img",attrs:{"src":"assets/screen2.png"}}),_vm._v(" "),_c('div',{staticClass:"info container center"},[_c('h1',{staticClass:"label"},[_vm._v("Сервисы")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Donatelo предоставляет полноценный доступ к созданию своих собственных сервисов для разработчик, что позволяет делать свои собственные обложки при максимальной кастомности и разнообразности функционала!")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Вам, как пользователю приложения предоставляется постоянно пополняемый список виджетов и сервисов, однако это ни капли не усложняет работу!")]),_vm._v(" "),_c('a',{staticClass:"btn vk-color",attrs:{"target":"_blank","href":'https://vk.com/add_community_app.php?aid=' + _vm.$parent.api.api_id}},[_vm._v("Подключить приложение")])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
@@ -20398,6 +20410,8 @@ module.exports = {
       var _this = this;
 
       return _asyncToGenerator(function* () {
+        VK.External.resizeWindow(920, 400);
+
         _this.$emit('isLoad', true);
         let resp = yield axios.post('https://app-donatelo.herokuapp.com/create_group', {
           app_id: _this.api.api_id,
@@ -20479,10 +20493,15 @@ const VeeValidate = require('vee-validate');
 const App = require('./components/App.vue');
 
 Vue.use(VeeValidate);
-new Vue({
-  el: '#app',
-  render: h => h(App)
-});
+
+VK.init(() => {
+  new Vue({
+    el: '#app',
+    render: h => h(App)
+  });
+}, () => {
+  Materialize.toast('Произошла ошибка, попробуйте позже. :(');
+}, '5.69');
 
 },{"./components/App.vue":37,"./fabricExtensions":52,"vee-validate":33,"vue":35}],54:[function(require,module,exports){
 class ContructorImage {
@@ -20499,7 +20518,8 @@ class ContructorImage {
     this.setWidth(data.w || 500);
     this.setHeight(data.h || 150);
     this.setAngle(360 - data.angle || 0);
-    this.setValue('assets/image.png');
+    if (data.value) this.setVarible(data.value);else this.setValue('assets/image.png');
+
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
   }

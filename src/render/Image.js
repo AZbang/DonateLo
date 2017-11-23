@@ -12,7 +12,9 @@ class ContructorImage {
     this.setWidth(data.w || 500);
     this.setHeight(data.h || 150);
     this.setAngle(360-data.angle || 0);
-    this.setValue('assets/image.png');
+    if(data.value) this.setVarible(data.value);
+    else this.setValue('assets/image.png');
+      
     this.setBorderWidth(data.borderWidth || 0);
     this.setBorderColor(data.borderColor || '#fff');
   }

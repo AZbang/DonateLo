@@ -32,6 +32,14 @@
   </div>
 </template>
 
+<script>
+  module.exports = {
+    mounted() {
+      VK.External.resizeWindow(920, 2000);
+    }
+  }
+</script>
+
 <style scoped>
   .container {
     margin-top: 10%;

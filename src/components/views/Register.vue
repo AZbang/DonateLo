@@ -22,6 +22,8 @@
     },
     methods: {
       async submitToken(e) {
+        VK.External.resizeWindow(920, 400);
+
         this.$emit('isLoad', true);
         let resp = await axios.post('https://app-donatelo.herokuapp.com/create_group', {
           app_id: this.api.api_id,

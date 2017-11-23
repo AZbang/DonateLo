@@ -166,6 +166,8 @@
       },
     },
     mounted() {
+      VK.External.resizeWindow(920, window.innerHeight-400);
+
       $('ul.tabs').tabs();
       this.renderer = new Render('playground', window.innerWidth, 300);
       this.renderer.canvas.on('selection:cleared', () => {
