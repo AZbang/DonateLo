@@ -20247,8 +20247,9 @@ module.exports = {
             _this.addWidget(view.type, view, data.resources);
           }
           _this.renderer.canvas.trigger('selection:cleared');
-          _this.$emit('isLoad', false);
         } else _this.isCoverEmpty = true;
+
+        _this.$emit('isLoad', false);
       })();
     },
     uploadData() {

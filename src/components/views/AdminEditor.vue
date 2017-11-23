@@ -88,8 +88,9 @@
             this.addWidget(view.type, view, data.resources);
           }
           this.renderer.canvas.trigger('selection:cleared');
-          this.$emit('isLoad', false);
         } else this.isCoverEmpty = true;
+
+        this.$emit('isLoad', false);
       },
       async uploadData() {
         let data = this.renderer.getJSON();
