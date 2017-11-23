@@ -20231,6 +20231,8 @@ module.exports = {
         let resp = yield axios.post('https://app-donatelo.herokuapp.com/get_group', { group_id: _this.api.group_id });
         let data = resp.data.result;
         if (resp.data.code == 'ok') {
+          _this.isCoverEmpty = false;
+
           _this.services = data.services;
           for (let key in _this.services) {
             for (let input in _this.services[key].inputs) {
@@ -20246,7 +20248,7 @@ module.exports = {
           }
           _this.renderer.canvas.trigger('selection:cleared');
           _this.$emit('isLoad', false);
-        } else _this.setCoverFromVK();
+        } else _this.isCoverEmpty = true;
       })();
     },
     uploadData() {
@@ -20256,7 +20258,7 @@ module.exports = {
         let data = _this2.renderer.getJSON();
         _this2.$emit('isLoad', true);
 
-        data.resources.background = _this2.renderer.coverImage._element.src;
+        if (_this2.renderer.isEditCover || !_this2.$parent.isExist) data.resources.background = _this2.renderer.coverImage._element.src;
 
         try {
           let resp = yield axios.post('https://app-donatelo.herokuapp.com/update_cover', _extends({
@@ -20321,7 +20323,6 @@ module.exports = {
       let covers = this.api.api_result.response[0].cover.images;
       if (covers && covers.length) {
         this.isCoverEmpty = false;
-        this.isEditCover = true;
         this.renderer.setCover(covers[covers.length - 1].url);
       }
     },
@@ -20350,8 +20351,7 @@ module.exports = {
 
     if (this.$parent.isExist) {
       this.loadData();
-      this.isCoverEmpty = false;
-    } else this.setCoverFromVK();
+    }
   }
 };
 })()

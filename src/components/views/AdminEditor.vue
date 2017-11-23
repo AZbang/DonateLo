@@ -72,6 +72,8 @@
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {group_id: this.api.group_id});
         let data = resp.data.result;
         if(resp.data.code == 'ok') {
+          this.isCoverEmpty = false;
+
           this.services = data.services;
           for(let key in this.services) {
             for(let input in this.services[key].inputs) {
@@ -87,13 +89,14 @@
           }
           this.renderer.canvas.trigger('selection:cleared');
           this.$emit('isLoad', false);
-        } else this.setCoverFromVK();
+        } else this.isCoverEmpty = true;
       },
       async uploadData() {
         let data = this.renderer.getJSON();
         this.$emit('isLoad', true);
 
-        data.resources.background = this.renderer.coverImage._element.src;
+        if(this.renderer.isEditCover || !this.$parent.isExist)
+          data.resources.background = this.renderer.coverImage._element.src;
 
         try {
           let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
@@ -146,7 +149,6 @@
         let covers =  this.api.api_result.response[0].cover.images;
         if(covers && covers.length) {
           this.isCoverEmpty = false;
-          this.isEditCover = true;
           this.renderer.setCover(covers[covers.length-1].url);
         }
       },
@@ -175,8 +177,7 @@
 
       if(this.$parent.isExist) {
         this.loadData();
-        this.isCoverEmpty = false;
-      } else this.setCoverFromVK();
+      }
     }
   }
 </script>
