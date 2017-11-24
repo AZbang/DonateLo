@@ -32,7 +32,7 @@
       <p class="flow-text">Значение:</p>
       <div class="input-wrap">
         <select class="input browser-default" v-model="object.varible" @change="setVarible">
-          <option v-for="(value, key) in varibles" :value="key">{{key}}: {{value}}</option>
+          <option v-for="(value, key) in varibles" :value="key">{{key}}</option>
         </select>
       </div>
     </div>

@@ -61,7 +61,7 @@
     left: 0rem;
   }
   .wrap {
-    padding-top: 30%;
+    padding-top: 100px;
   }
   p {
     color: #5e81a8;

@@ -19508,7 +19508,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
+    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){
@@ -19549,7 +19549,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-24cdd05e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-24cdd05e", __vue__options__)
+    hotAPI.rerender("data-v-24cdd05e", __vue__options__)
   }
 })()}
 },{"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],39:[function(require,module,exports){
@@ -19600,7 +19600,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-318197e2", __vue__options__)
   } else {
-    hotAPI.reload("data-v-318197e2", __vue__options__)
+    hotAPI.rerender("data-v-318197e2", __vue__options__)
   }
 })()}
 },{"../editors/ImageEditor.vue":42,"../editors/LinearBarEditor.vue":43,"../editors/RadialBarEditor.vue":44,"../editors/TextEditor.vue":45,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],40:[function(require,module,exports){
@@ -19683,7 +19683,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-06e51b17", __vue__options__)
   } else {
-    hotAPI.reload("data-v-06e51b17", __vue__options__)
+    hotAPI.rerender("data-v-06e51b17", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],41:[function(require,module,exports){
@@ -19713,7 +19713,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-5f30e266", __vue__options__)
   } else {
-    hotAPI.reload("data-v-5f30e266", __vue__options__)
+    hotAPI.rerender("data-v-5f30e266", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],42:[function(require,module,exports){
@@ -19771,7 +19771,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.varible),expression:"object.varible"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "varible", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setVarible]}},_vm._l((_vm.varibles),function(value,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(key)+": "+_vm._s(value))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('editor-forms',[_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("X:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.left)},on:{"change":_vm.setX}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Y:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.top)},on:{"change":_vm.setY}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Высота:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.width)},on:{"change":_vm.setW}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m3"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ширина:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":Math.round(_vm.object.view.height)},on:{"change":_vm.setH}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m12"},[_c('p',{staticClass:"flow-text"},[_vm._v("Значение:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.object.varible),expression:"object.varible"}],staticClass:"input browser-default",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.object, "varible", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.setVarible]}},_vm._l((_vm.varibles),function(value,key){return _c('option',{domProps:{"value":key}},[_vm._v(_vm._s(key))])}))])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Угол:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("°")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.angle},on:{"change":_vm.setAngle}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Рамка:")]),_vm._v(" "),_c('div',{staticClass:"input-wrap"},[_c('span',{staticClass:"input-prefix"},[_vm._v("px")]),_vm._v(" "),_c('input',{staticClass:"input browser-default",attrs:{"type":"number"},domProps:{"value":_vm.object.borderWidth},on:{"change":_vm.setBorderWidth}})])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12 m4"},[_c('p',{staticClass:"flow-text"},[_vm._v("Цвет рамки:")]),_vm._v(" "),_c('color-picker',{attrs:{"initial":_vm.object.borderColor,"change":_vm.setBorderColor}},[_c('div',{staticClass:"input-wrap"},[_c('div',{staticClass:"input-color",style:({background: _vm.object.borderColor})}),_vm._v(" "),_c('input',{staticClass:"input",domProps:{"value":_vm.object.borderColor}})])])],1),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('br')])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19780,7 +19780,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72213304", __vue__options__)
   } else {
-    hotAPI.reload("data-v-72213304", __vue__options__)
+    hotAPI.rerender("data-v-72213304", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"../helpers/UploadImage.vue":48,"vue":35,"vue-hot-reload-api":34}],43:[function(require,module,exports){
@@ -19859,7 +19859,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7a6ca297", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7a6ca297", __vue__options__)
+    hotAPI.rerender("data-v-7a6ca297", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],44:[function(require,module,exports){
@@ -19933,7 +19933,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3c4deddd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-3c4deddd", __vue__options__)
+    hotAPI.rerender("data-v-3c4deddd", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],45:[function(require,module,exports){
@@ -19995,7 +19995,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-349acc4e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-349acc4e", __vue__options__)
+    hotAPI.rerender("data-v-349acc4e", __vue__options__)
   }
 })()}
 },{"../helpers/ColorPicker.vue":46,"../helpers/EditorForms.vue":47,"vue":35,"vue-hot-reload-api":34}],46:[function(require,module,exports){
@@ -20132,7 +20132,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1348798c", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1348798c", __vue__options__)
+    hotAPI.rerender("data-v-1348798c", __vue__options__)
   }
 })()}
 },{"hex-to-hsl":26,"hsl-to-hex":28,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],47:[function(require,module,exports){
@@ -20150,7 +20150,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-39ad21fd", __vue__options__)
   } else {
-    hotAPI.reload("data-v-39ad21fd", __vue__options__)
+    hotAPI.rerender("data-v-39ad21fd", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],48:[function(require,module,exports){
@@ -20187,7 +20187,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1dda79d6", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1dda79d6", __vue__options__)
+    hotAPI.rerender("data-v-1dda79d6", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],49:[function(require,module,exports){
@@ -20223,31 +20223,33 @@ module.exports = {
     };
   },
   methods: {
-    loadData() {
+    loadGroup() {
       var _this = this;
 
       return _asyncToGenerator(function* () {
         _this.$emit('isLoad', true);
         let resp = yield axios.post('https://app-donatelo.herokuapp.com/get_group', { group_id: _this.api.group_id });
         let data = resp.data.result;
-        if (resp.data.code == 'ok') {
-          _this.isCoverEmpty = false;
 
-          _this.services = data.services;
-          for (let key in _this.services) {
-            for (let input in _this.services[key].inputs) {
-              _this.services[key].inputs[input].value = '';
-            }
+        _this.services = data.services;
+        for (let key in _this.services) {
+          for (let input in _this.services[key].inputs) {
+            _this.services[key].inputs[input].value = '';
           }
-          _this.varibles = data.enviroment;
-          _this.renderer.setVaribles(_this.varibles);
+        }
+        _this.varibles = data.enviroment;
+        _this.renderer.setVaribles(_this.varibles);
+
+        if (data.resources.background) {
+          _this.isCoverEmpty = false;
           _this.renderer.setCover(data.resources.background);
-          for (let key in data.views) {
-            let view = data.views[key];
-            _this.addWidget(view.type, view, data.resources);
-          }
-          _this.renderer.canvas.trigger('selection:cleared');
-        } else _this.isCoverEmpty = true;
+        }
+
+        for (let key in data.views) {
+          let view = data.views[key];
+          _this.addWidget(view.type, view, data.resources);
+        }
+        _this.renderer.canvas.trigger('selection:cleared');
 
         _this.$emit('isLoad', false);
       })();
@@ -20271,11 +20273,9 @@ module.exports = {
             _this2.renderer.isEditCover = false;
             _this2.$parent.isExist = true;
           } else {
-            console.log(resp.data);
             Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
           }
         } catch (err) {
-          console.log(err);
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
         }
         _this2.$emit('isLoad', false);
@@ -20317,16 +20317,6 @@ module.exports = {
         return resp.data.code === 'ok';
       })();
     },
-
-    setCoverFromVK() {
-      this.isCoverEmpty = true;
-      this.$emit('isLoad', false);
-      let covers = this.api.api_result.response[0].cover.images;
-      if (covers && covers.length) {
-        this.isCoverEmpty = false;
-        this.renderer.setCover(covers[covers.length - 1].url);
-      }
-    },
     addWidget(type, data, res) {
       let widget = this.renderer.addWidget(type, data, res);
 
@@ -20349,10 +20339,7 @@ module.exports = {
       this.currentObject = null;
       $('#menu').tabs('select_tab', 'widgets');
     });
-
-    if (this.$parent.isExist) {
-      this.loadData();
-    }
+    this.loadGroup();
   }
 };
 })()
@@ -20370,7 +20357,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6426a840", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6426a840", __vue__options__)
+    hotAPI.rerender("data-v-6426a840", __vue__options__)
   }
 })()}
 },{"../../render/Render.js":57,"../controls/CoverControl.vue":38,"../controls/EditorsControl.vue":39,"../controls/ServicesControl.vue":40,"../controls/WidgetsControl.vue":41,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],50:[function(require,module,exports){
@@ -20398,11 +20385,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-175239ae", __vue__options__)
   } else {
-    hotAPI.reload("data-v-175239ae", __vue__options__)
+    hotAPI.rerender("data-v-175239ae", __vue__options__)
   }
 })()}
 },{"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],51:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("input[data-v-0adae92f] {\n  margin-top: 15px;\n  border-bottom: 2px solid #5e81a8 !important;\n}\n.input-field input[type=text]:focus + label[data-v-0adae92f] {\n  color: #5e81a8;\n}\n.input-field input[type=text][data-v-0adae92f]:focus {\n  border-bottom: 1px solid #5e81a8;\n  box-shadow: 0 1px 0 0 #5e81a8;\n}\nlabel[data-v-0adae92f] {\n  left: 0rem;\n}\n.wrap[data-v-0adae92f] {\n  padding-top: 30%;\n}\np[data-v-0adae92f] {\n  color: #5e81a8;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("input[data-v-0adae92f] {\n  margin-top: 15px;\n  border-bottom: 2px solid #5e81a8 !important;\n}\n.input-field input[type=text]:focus + label[data-v-0adae92f] {\n  color: #5e81a8;\n}\n.input-field input[type=text][data-v-0adae92f]:focus {\n  border-bottom: 1px solid #5e81a8;\n  box-shadow: 0 1px 0 0 #5e81a8;\n}\nlabel[data-v-0adae92f] {\n  left: 0rem;\n}\n.wrap[data-v-0adae92f] {\n  padding-top: 100px;\n}\np[data-v-0adae92f] {\n  color: #5e81a8;\n}")
 ;(function(){
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -20454,7 +20441,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0adae92f", __vue__options__)
   } else {
-    hotAPI.reload("data-v-0adae92f", __vue__options__)
+    hotAPI.rerender("data-v-0adae92f", __vue__options__)
   }
 })()}
 },{"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],52:[function(require,module,exports){

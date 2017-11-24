@@ -67,28 +67,30 @@
     },
     methods: {
       // API METHODS
-      async loadData() {
+      async loadGroup() {
         this.$emit('isLoad', true);
         let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {group_id: this.api.group_id});
         let data = resp.data.result;
-        if(resp.data.code == 'ok') {
-          this.isCoverEmpty = false;
 
-          this.services = data.services;
-          for(let key in this.services) {
-            for(let input in this.services[key].inputs) {
-              this.services[key].inputs[input].value = '';
-            }
+        this.services = data.services;
+        for(let key in this.services) {
+          for(let input in this.services[key].inputs) {
+            this.services[key].inputs[input].value = '';
           }
-          this.varibles = data.enviroment;
-          this.renderer.setVaribles(this.varibles);
+        }
+        this.varibles = data.enviroment;
+        this.renderer.setVaribles(this.varibles);
+
+        if(data.resources.background) {
+          this.isCoverEmpty = false;
           this.renderer.setCover(data.resources.background);
-          for(let key in data.views) {
-            let view = data.views[key];
-            this.addWidget(view.type, view, data.resources);
-          }
-          this.renderer.canvas.trigger('selection:cleared');
-        } else this.isCoverEmpty = true;
+        }
+
+        for(let key in data.views) {
+          let view = data.views[key];
+          this.addWidget(view.type, view, data.resources);
+        }
+        this.renderer.canvas.trigger('selection:cleared');
 
         this.$emit('isLoad', false);
       },
@@ -110,11 +112,9 @@
             this.renderer.isEditCover = false;
             this.$parent.isExist = true;
           } else {
-            console.log(resp.data);
             Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
           }
         } catch(err) {
-          console.log(err);
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
         }
         this.$emit('isLoad', false);
@@ -143,16 +143,6 @@
         await this.loadVaribles();
         return resp.data.code === 'ok';
       },
-
-      setCoverFromVK() {
-        this.isCoverEmpty = true;
-        this.$emit('isLoad', false);
-        let covers =  this.api.api_result.response[0].cover.images;
-        if(covers && covers.length) {
-          this.isCoverEmpty = false;
-          this.renderer.setCover(covers[covers.length-1].url);
-        }
-      },
       addWidget(type, data, res) {
         let widget = this.renderer.addWidget(type, data, res);
 
@@ -175,10 +165,7 @@
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'widgets');
       });
-
-      if(this.$parent.isExist) {
-        this.loadData();
-      }
+      this.loadGroup();
     }
   }
 </script>
