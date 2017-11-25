@@ -19446,18 +19446,6 @@ module.exports = {
     };
   },
   methods: {
-    getVKApiData() {
-      let query = window.location.search.substring(1);
-      let vars = query.split("&");
-      let api = {};
-
-      for (let i = 0; i < vars.length; i++) {
-        let pair = vars[i].split("=");
-        api[pair[0]] = pair[1];
-      }
-      api.api_result = JSON.parse(decodeURIComponent(api.api_result));
-      this.api = api;
-    },
     isExistGroup() {
       var _this = this;
 
@@ -19482,7 +19470,6 @@ module.exports = {
     var _this2 = this;
 
     return _asyncToGenerator(function* () {
-      _this2.getVKApiData();
       _this2.setLoad(true);
       _this2.isExist = yield _this2.isExistGroup();
 
@@ -19508,7 +19495,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6ab04d9a", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6ab04d9a", __vue__options__)
+    hotAPI.reload("data-v-6ab04d9a", __vue__options__)
   }
 })()}
 },{"./views/AdminEditor.vue":49,"./views/GettingStarted.vue":50,"./views/Register.vue":51,"axios":1,"vue":35,"vue-hot-reload-api":34,"vueify/lib/insert-css":36}],38:[function(require,module,exports){

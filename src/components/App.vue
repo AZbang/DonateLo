@@ -35,18 +35,6 @@
       }
     },
     methods: {
-      getVKApiData() {
-        let query = window.location.search.substring(1);
-        let vars = query.split("&");
-        let api = {};
-
-        for(let i = 0; i < vars.length; i++) {
-          let pair = vars[i].split("=");
-          api[pair[0]] = pair[1];
-        }
-        api.api_result = JSON.parse(decodeURIComponent(api.api_result));
-        this.api = api;
-      },
       async isExistGroup() {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/group_exist', {
           app_id: this.api.api_id,
@@ -64,7 +52,6 @@
       }
     },
     async mounted() {
-      this.getVKApiData();
       this.setLoad(true);
       this.isExist = await this.isExistGroup();
 

@@ -25,7 +25,9 @@ var errorMessage = () => {
 
 gulp.task('server', () => {
 	return connect.server({
-		port: 1338,
+		proxy: '127.0.0.1:80',
+		port: 80,
+		https: true,
 		livereload: true,
 		root: './'
 	});
