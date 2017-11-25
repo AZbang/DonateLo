@@ -60,6 +60,14 @@
     data() {
       return {
         service: {},
+        futureServices: {
+          timer: {
+            name: "Таймер"
+          },
+          votes: {
+            name: "Голосования"
+          }
+        },
         isOpenEditor: false
       }
     },
@@ -92,6 +100,7 @@
             }
             this.$emit('updateService', this.service.id, form);
             this.isOpenEditor = false;
+            $('.btn-upload-data').show();
           } else Materialize.toast('Неверно указаны данные!', 1000);
         });
       },
