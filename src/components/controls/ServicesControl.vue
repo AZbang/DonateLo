@@ -28,7 +28,7 @@
     <div v-show="!isOpenEditor">
       <p class="flow-text label">Каталог сервисов:</p>
       <div class="row">
-        <div class="col s4 m3" v-for="(service, id) in services" @click="openService(id)">
+        <div class="col s6 m3" v-for="(service, id) in services" @click="openService(id)">
           <div class="mini card-panel hoverable" :id="id">
             <div class="wrap-card-content">
               <i class="material-icons">{{service.card_style.icon}}</i>
@@ -39,7 +39,7 @@
       </div>
       <p class="flow-text label">В разработке:</p>
       <div class="row">
-        <div class="col s4 m3" v-for="(service, id) in futureServices" v-if="!service.is_register">
+        <div class="col s6 m3" v-for="(service, id) in futureServices" v-if="!service.is_register">
           <div class="mini card-panel" style="cursor: default; opacity: .5;":id="id">
             <div class="wrap-card-content">
               <i class="material-icons">{{service.icon}}</i>
