@@ -34,12 +34,12 @@ gulp.task('server', () => {
 });
 
 gulp.task('dev', () => {
-	return browserify({ entries: 'src/index.js'})
+	return browserify({ entries: 'src/index.js', debug: isDev})
 		.transform(babelify)
 		.transform(vueify)
 		.bundle()
 		.pipe(source('build.js'))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());
 });
 
@@ -47,5 +47,4 @@ gulp.task('watch', () => {
 	gulp.watch('./src/**/*.*', ['dev']);
 });
 
-
-gulp.task('default', ['dev', 'watch', 'server']);
+gulp.task('default', ['dev',  'watch', 'server']);

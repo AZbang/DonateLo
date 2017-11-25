@@ -1,37 +1,35 @@
 <template>
   <div id="services">
     <div class="service" v-if="isOpenEditor">
-      <div class="card" :class="service.card_style.color">
-        <i class="close-service material-icons" style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #fff;" @click="closeService">close</i>
-        <div class="card-content white-text">
-          <span class="card-title flow-text" style="font-weight: bold">
-            <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
-            {{service.name}}
-          </span>
-          <p class="flow-text">{{service.decrtiption}}
-            <a class="docs" v-show="service.docs" target="_blank" :href="service.docs">Подробнее...</a>
-          </p>
-          <br>
-          <div class="row inputs">
-            <div class="input-field col s12" v-for="(input, id) in service.inputs">
-              <input :name="id" v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
-              <label class="active" :for="id">
-                <span>{{input.description}}</span>
-              </label>
-            </div>
+    <div class="card">
+      <i class="close-service material-icons" style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #fff;" @click="closeService">close</i>
+      <div class="card-content white-text">
+        <span class="card-title flow-text" style="font-weight: bold">
+          <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
+          {{service.name}}
+        </span>
+        <p class="flow-text">{{service.decrtiption}}
+          <a class="docs" v-show="service.docs" target="_blank" :href="service.docs">Подробнее...</a>
+        </p>
+        <br>
+        <div class="row inputs">
+          <div class="input-field col s12" v-for="(input, id) in service.inputs">
+            <p>{{input.description}}</p>
+            <input :name="id"  v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
           </div>
         </div>
-        <div class="card-action" style="border: none; overflow: hidden;">
-          <a href="#" class="right" style="color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
-        </div>
+      </div>
+      <div class="card-action waves-effect waves-light" style="border: none; overflow: hidden;">
+        <a href="#"  style="right: 0; color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
       </div>
     </div>
+  </div>
 
     <div v-show="!isOpenEditor">
-      <p class="flow-text label" v-show="isActivationServices">Установленные сервисы:</p>
+      <p class="flow-text label">Каталог сервисов:</p>
       <div class="row">
-        <div class="col s6 m4" v-for="(service, id) in services" v-if="service.is_register" @click="openService(id)">
-          <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
+        <div class="col s4 m3" v-for="(service, id) in services" @click="openService(id)">
+          <div class="mini card-panel hoverable" :id="id">
             <div class="wrap-card-content">
               <i class="material-icons">{{service.card_style.icon}}</i>
               <p>{{service.name}}</p>
@@ -39,12 +37,12 @@
           </div>
         </div>
       </div>
-      <p class="flow-text label" v-show="!isActivationServices">Каталог сервисов:</p>
+      <p class="flow-text label">В разработке:</p>
       <div class="row">
-        <div class="col s6 m4" v-for="(service, id) in services" v-if="!service.is_register" @click="openService(id)">
-          <div class="mini card-panel hoverable" :id="id" :class="service.card_style.color">
+        <div class="col s4 m3" v-for="(service, id) in futureServices" v-if="!service.is_register">
+          <div class="mini card-panel" style="cursor: default; opacity: .5;":id="id">
             <div class="wrap-card-content">
-              <i class="material-icons">{{service.card_style.icon}}</i>
+              <i class="material-icons">{{service.icon}}</i>
               <p>{{service.name}}</p>
             </div>
           </div>
@@ -62,10 +60,20 @@
         service: {},
         futureServices: {
           timer: {
-            name: "Таймер"
+            name: "Таймер",
+            icon: "timer"
           },
           votes: {
-            name: "Голосования"
+            name: "Голосования",
+            icon: "thumbs_up_down"
+          },
+          qiwi: {
+            name: "QIWI Кошелек",
+            icon: "account_balance_wallet"
+          },
+          bitcoin: {
+            name: "Bitcoin Кошелек",
+            icon: "local_atm"
           }
         },
         isOpenEditor: false
@@ -113,13 +121,21 @@
 </script>
 
 <style scoped>
+  .enter { transform: translateX(100%) }
+  .enter-to { transform: translateX(0) }
+  .slide-enter-active { position: absolute }
+
+  .leave { transform: translateX(0) }
+  .leave-to { transform: translateX(-100%) }
+
+  .slide-enter-active,
+  .slide-leave-active { transition: all 750ms ease-in-out }
+
+
   .docs {
     color: #fff;
     border-bottom: 1px dotted #fff;
     font-size: 0.9em;
-  }
-  .input-field.col label {
-    left: 5px;
   }
   input:not([type]):focus:not([readonly])+label {
     color: #fff !important;
@@ -132,12 +148,14 @@
   .card-content {
     padding: 24px 24px 0px;
   }
+  .service .card {
+    background: #7091ff;
+  }
 
    .input-field label {
      color: #fff;
    }
    input {
-     margin-top: 15px;
      border-bottom: 2px solid #fff !important;
    }
    .input-field input[type=text]:focus + label {
@@ -173,13 +191,20 @@
 
   .mini.card-panel {
     cursor: pointer;
-    height: 240px;
+    height: 270px;
+    background: -webkit-linear-gradient(#7091ff, #a173ff);
     text-align: center;
+    padding: 0;
+  }
+  .mini.card-panel p {
+    font-size: 24px;
+    line-height: 23px;
+    font-weight: bold;
+  }
+  .mini.card-panel i {
+    font-size: 6em;
   }
   .wrap-card-content {
-    margin-top: 35px;
-  }
-  .card-panel i {
-    font-size: 6em;
+    padding-top: 56px;
   }
 </style>

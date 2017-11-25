@@ -92,6 +92,9 @@
   .disable {
     opacity: .5;
   }
+  .disable .card-panel {
+    cursor: default;
+  }
   .wrap-card-content {
     background: -webkit-linear-gradient(#5e81a8, #b660bb);
     -webkit-background-clip: text;
