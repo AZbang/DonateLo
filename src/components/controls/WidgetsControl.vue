@@ -33,38 +33,38 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('text')">
+      <div class="col s6 m3 disable">
+        <div class="card-panel hoverable">
           <div class="wrap-card-content">
             <i class="material-icons">tag_faces</i>
             <p>Стикеры</p>
           </div>
         </div>
       </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('linear')">
+      <div class="col s6 m3 disable">
+        <div class="card-panel hoverable">
           <div class="wrap-card-content">
             <i class="material-icons">toll</i>
             <p>Иконки</p>
           </div>
         </div>
       </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('radial')">
+      <div class="col s6 m3 disable">
+        <div class="card-panel hoverable">
           <div class="wrap-card-content">
             <i class="material-icons">star</i>
             <p>Фигура</p>
           </div>
         </div>
       </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('image')">
+      <div class="col s6 m3 disable">
+        <div class="card-panel hoverable">
           <div class="wrap-card-content">
             <i class="material-icons">timeline</i>
             <p>График</p>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -88,6 +88,9 @@
   .card-panel {
     position: relative;
     margin-bottom: 2px;
+  }
+  .disable {
+    opacity: .5;
   }
   .wrap-card-content {
     background: -webkit-linear-gradient(#5e81a8, #b660bb);
