@@ -44,7 +44,6 @@
           let pair = vars[i].split("=");
           api[pair[0]] = pair[1];
         }
-        api.api_result = JSON.parse(decodeURIComponent(api.api_result));
         this.api = api;
       },
       async isExistGroup() {

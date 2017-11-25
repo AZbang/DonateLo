@@ -25,19 +25,21 @@ var errorMessage = () => {
 
 gulp.task('server', () => {
 	return connect.server({
-		port: 1338,
+		proxy: '127.0.0.1:80',
+		port: 80,
+		https: true,
 		livereload: true,
 		root: './'
 	});
 });
 
 gulp.task('dev', () => {
-	return browserify({ entries: 'src/index.js'})
+	return browserify({ entries: 'src/index.js', debug: isDev})
 		.transform(babelify)
 		.transform(vueify)
 		.bundle()
 		.pipe(source('build.js'))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());
 });
 
@@ -45,5 +47,4 @@ gulp.task('watch', () => {
 	gulp.watch('./src/**/*.*', ['dev']);
 });
 
-
-gulp.task('default', ['dev', 'watch', 'server']);
+gulp.task('default', ['dev',  'watch', 'server']);
