@@ -1,6 +1,6 @@
 <template>
   <div id="getting-started">
-    <img class="responsive-img" src="assets/banner.png">
+    <img class="responsive-img" src="dist/assets/banner.png">
     <div class="info container center">
       <h1 class="label">Что такое Donatelo?</h1>
       <p class="flow-text">Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.</p>
@@ -9,7 +9,7 @@
     </div>
     <br>
     <br>
-    <img class="responsive-img" src="assets/screen1.png">
+    <img class="responsive-img" src="dist/assets/screen1.png">
     <div class="info container center">
       <h1 class="label">Виджеты</h1>
       <p class="flow-text">Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! </p>
@@ -18,7 +18,7 @@
     </div>
     <br>
     <br>
-    <img class="responsive-img" src="assets/screen2.png">
+    <img class="responsive-img" src="dist/assets/screen2.png">
     <div class="info container center">
       <h1 class="label">Сервисы</h1>
       <p class="flow-text">Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.</p>

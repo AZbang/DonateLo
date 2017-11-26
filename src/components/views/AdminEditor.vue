@@ -6,6 +6,7 @@
         <ul id="menu" class="tabs">
           <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
           <li class="tab col s4"><a href="#services">Сервисы</a></li>
+          <li class="tab col s4 hide-on-small-only"><a href="#settings">Настройки</a></li>
           <li class="tab col s4" style="display: none;"><a href="#edit">Изменить</a></li>
           <div class="indicator"></div>
         </ul>
@@ -29,6 +30,15 @@
           <i class="material-icons">cloud_upload</i>
         </a>
       </div>
+      <div id="settings">
+        <div class="controls-section">
+          <settings-control @updateToken="updateToken">
+            <a @click="updateToken" class="fixed-btns btn-floating btn-large waves-effect waves-light">
+              <i class="material-icons">done</i>
+            </a>
+          </settings-control>
+        </div>
+      </div>
       <div id="edit">
         <div class="controls-section">
           <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
@@ -47,13 +57,15 @@
   const WidgetsControl = require('../controls/WidgetsControl.vue');
   const ServicesControl = require('../controls/ServicesControl.vue');
   const EditorsControl = require('../controls/EditorsControl.vue');
+  const SettingsControl = require('../controls/SettingsControl.vue');
 
   module.exports = {
     components: {
       CoverControl,
       WidgetsControl,
       ServicesControl,
-      EditorsControl
+      EditorsControl,
+      SettingsControl
     },
     props: ['api'],
     data() {
@@ -126,6 +138,13 @@
           this.renderer.setVaribles(this.varibles);
         }
       },
+      async updateToken(token) {
+        let resp = await axios.post('https://app-donatelo.herokuapp.com/update_token', {
+          group_id: this.api.group_id,
+          access_token: token,
+        });
+        return resp.data;
+      },
       async toggleService(id, isActive) {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/activate_service', {
           group_id: this.api.group_id,
@@ -143,6 +162,7 @@
         await this.loadVaribles();
         return resp.data.code === 'ok';
       },
+
       addWidget(type, data, res) {
         let widget = this.renderer.addWidget(type, data, res);
 
@@ -186,8 +206,8 @@
   #admin {
     background-color: #edeef0;
   }
-  .btn-upload-data {
-    position: absolute;
+  a.fixed-btns {
+    position: fixed;
     bottom: 20px;
     z-index: 100000;
     right: 20px;
@@ -195,7 +215,7 @@
     background: #6e7bab;
     height: 60px;
   }
-  .btn-upload-data i {
+  a.fixed-btns i {
     line-height: 62px;
     font-size: 35px;
   }
