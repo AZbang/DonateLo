@@ -21,8 +21,8 @@ class LinearBar  {
     else this.setValue(50);
 
     this.setMaxValue(data.max_value || 100);
-    this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
-    this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
+    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
+    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
     this.setProgressColor(data.bar_color || '#ded2f7');
     this.setStandColor(data.stand_color || '#fff');
     this.setBorder(data.border || 0);
