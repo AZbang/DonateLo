@@ -20,7 +20,7 @@ class LinearBar  {
     if(data.value) this.setVarible(data.value);
     else this.setValue(50);
 
-    this.setMaxValue(+data.max_value.toFixed(5) || 100);
+    this.setMaxValue(data.max_value || 100);
     this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
     this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
     this.setProgressColor(data.bar_color || '#ded2f7');
@@ -113,7 +113,7 @@ class LinearBar  {
     this.render.canvas.renderAll();
   }
   setMaxValue(max) {
-    this.maxValue = max;
+    this.maxValue = +(+max).toFixed(5);
     this.progressImage.width = this.view.width/this.maxValue*this.value;
     this.render.canvas.renderAll();
   }
