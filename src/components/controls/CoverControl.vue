@@ -35,8 +35,8 @@
         this.isFullCover = !this.isFullCover;
         this.renderer.toggleSize(this.isFullCover);
       },
-      uploadImage(src, input) {
-        this.renderer.setCover(src);
+      uploadImage(src) {
+        this.renderer.uploadImage(src);
         this.isCoverEmpty = false;
       }
     }
