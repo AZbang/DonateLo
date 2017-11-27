@@ -1,6 +1,8 @@
 <template>
   <div class="editor-wrap">
-    <slot @click="updateToken"></slot>
+    <a @click="updateToken" class="fixed-btns btn-floating btn-large waves-effect waves-light">
+      <i class="material-icons">done</i>
+    </a>
     <editor-forms>
       <div class="input-field col s12">
         <p class="flow-text">Изменить токен:</p>
@@ -27,11 +29,24 @@
     },
     methods: {
       updateToken() {
-        this.$emit('updateToken', token);
+        this.$emit('updateToken', this.token);
       }
     }
   }
 </script>
 
 <style scoped>
+a.fixed-btns {
+  position: fixed;
+  bottom: 20px;
+  z-index: 100000;
+  right: 20px;
+  width: 60px;
+  background: #6e7bab;
+  height: 60px;
+}
+a.fixed-btns i {
+  line-height: 62px;
+  font-size: 35px;
+}
 </style>

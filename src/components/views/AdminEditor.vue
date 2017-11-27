@@ -32,11 +32,7 @@
       </div>
       <div id="settings">
         <div class="controls-section">
-          <settings-control @updateToken="updateToken">
-            <a @click="updateToken" class="fixed-btns btn-floating btn-large waves-effect waves-light">
-              <i class="material-icons">done</i>
-            </a>
-          </settings-control>
+          <settings-control @updateToken="updateToken"></settings-control>
         </div>
       </div>
       <div id="edit">
@@ -124,7 +120,8 @@
             this.renderer.isEditCover = false;
             this.$parent.isExist = true;
           } else {
-            Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
+            console.log(resp.data);
+            Materialize.toast(resp.data.message, 10000);
           }
         } catch(err) {
           Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
@@ -139,11 +136,16 @@
         }
       },
       async updateToken(token) {
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/update_token', {
-          group_id: this.api.group_id,
-          access_token: token,
-        });
-        return resp.data;
+        try {
+          let resp = await axios.post('https://app-donatelo.herokuapp.com/edit_token', {
+            group_id: this.api.group_id,
+            access_token: token
+          });
+          Materialize.toast('Токен изменился.', 1000);
+          $('#menu').tabs('select_tab', 'add');
+        } catch(e) {
+          Materialize.toast('Укажите правильный токен для изменения', 1000);
+        }
       },
       async toggleService(id, isActive) {
         let resp = await axios.post('https://app-donatelo.herokuapp.com/activate_service', {
