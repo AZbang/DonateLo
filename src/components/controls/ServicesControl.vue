@@ -70,10 +70,6 @@
           qiwi: {
             name: "QIWI Кошелек",
             icon: "account_balance_wallet"
-          },
-          bitcoin: {
-            name: "Bitcoin Кошелек",
-            icon: "local_atm"
           }
         },
         isOpenEditor: false
@@ -197,6 +193,7 @@
     padding: 0;
   }
   .mini.card-panel p {
+    padding: 0 30px;
     font-size: 24px;
     line-height: 23px;
     font-weight: bold;

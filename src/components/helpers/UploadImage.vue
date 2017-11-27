@@ -1,5 +1,5 @@
 <template>
-  <input type="file" class="select-image" @change="uploadImage">
+  <input type="file" name="photo" class="select-image" @change="uploadImage">
 </template>
 
 <script>
@@ -10,7 +10,7 @@
         if(!files.length) return;
 
         let reader = new FileReader();
-        reader.onload = (e) => this.$emit('uploadImage', e.target.result, files[0]);
+        reader.onload = (e) => this.$emit('uploadImage', e.target.result, new FormData(document.forms.image));
         reader.readAsDataURL(files[0]);
       }
     },

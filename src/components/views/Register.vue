@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="container">
-      <img class="responsive-img" src="assets/token.png" alt="token">
+      <img class="responsive-img" src="dist/assets/token.png" alt="token">
       <p class="flow-text">Введите API токен вашей группы:</p>
       <div class="input-field col s12">
         <input id="token" type="text" v-model="token" @keyup.enter="submitToken">
