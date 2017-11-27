@@ -36,7 +36,7 @@
         this.renderer.toggleSize(this.isFullCover);
       },
       uploadImage(src, input) {
-        this.$emit('setCoverToVK', input);
+        this.renderer.setCover(src);
         this.isCoverEmpty = false;
       }
     }
