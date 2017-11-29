@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div :is="viewComponent" :api="api" @setView="setView" @isLoad="setLoad"></div>
+    <div :is="viewComponent" @setView="setView"></div>
   </div>
 </template>
 
@@ -28,51 +28,21 @@
   module.exports = {
     data() {
       return {
-        api: {},
-        viewComponent: null,
-        isLoad: false,
-        isExist: true
+        viewComponent: null
       }
     },
     methods: {
-      getVKApiData() {
-        let query = window.location.search.substring(1);
-        let vars = query.split("&");
-        let api = {};
-
-        for(let i = 0; i < vars.length; i++) {
-          let pair = vars[i].split("=");
-          api[pair[0]] = pair[1];
-        }
-        this.api = api;
-      },
-      async isExistGroup() {
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/group_exist', {
-          app_id: this.api.api_id,
-          auth_token: this.api.auth_key,
-          group_id: this.api.group_id,
-          viewer_id: this.api.viewer_id
-        });
-        return resp.data.result;
-      },
-      setLoad(v) {
-        this.isLoad = v;
-      },
       setView(name) {
         this.viewComponent = VIEWS[name];
       }
     },
     async mounted() {
-      this.getVKApiData();
-      this.setLoad(true);
       this.isExist = await this.isExistGroup();
 
       if(+this.api.viewer_type > 2 && this.api.group_id != null) {
         if(this.isExist) this.setView('admin');
         else this.setView('register');
       } else this.setView('getting_started');
-
-      this.setLoad(false);
     }
   }
 </script>

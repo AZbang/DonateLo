@@ -178,16 +178,15 @@
     },
     mounted() {
       VK.External.resizeWindow(window.screen.availWidth-200, Math.max(660, window.screen.availHeight-300));
+      let w = helper.isMobile() ? window.innerWidth : Math.min(window.screen.availWidth-200, 1000);
 
-      let w = mobilecheck() ? window.innerWidth : Math.min(window.screen.availWidth-200, 1000);
-
-      $('ul.tabs').tabs();
       this.renderer = new Render('playground', w, 300);
       this.renderer.canvas.on('selection:cleared', () => {
         this.currentObject = null;
         $('#menu').tabs('select_tab', 'widgets');
       });
-      this.loadGroup();
+
+      $('ul.tabs').tabs();
     }
   }
 </script>

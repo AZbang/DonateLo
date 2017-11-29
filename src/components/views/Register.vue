@@ -18,29 +18,18 @@
     props: ['api'],
     data() {
       return {
-        token: ""
+        token: ''
       }
     },
     methods: {
       async submitToken(e) {
-        VK.External.resizeWindow(920, 600);
-
-        this.$emit('isLoad', true);
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/create_group', {
-          app_id: this.api.api_id,
-          auth_token: this.api.auth_key,
-          access_token: this.token,
-          group_id: this.api.group_id,
-          viewer_id: this.api.viewer_id
-        });
-        this.$emit('isLoad', false);
-        if(resp.data.code == 'ok')
-          this.$emit('setView', 'admin');
-        else {
-          this.token = '';
-          Materialize.toast('Ошибка! Пожалуйста, проверьте Ваш токен.');
-        }
+        let isSuccess = await this.$store.dispatch('callApi', 'editToken', this.token);
+        if(isSuccess) this.$emit('setView', 'admin');
+        else this.token = '';
       }
+    },
+    mounted() {
+      VK.External.resizeWindow(1000, 600);
     }
   }
 </script>
