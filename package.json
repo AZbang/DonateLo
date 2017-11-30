@@ -2,50 +2,41 @@
   "name": "donatelo",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://azbang@bitbucket.org/alxmamaev/donatelo.git"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "buffer": "^5.0.8",
-    "hex-to-hsl": "^1.0.2",
-    "hsl-to-hex": "^1.0.0",
+    "element-ui": "^2.0.7",
     "vee-validate": "^2.0.0-rc.22",
-    "vinyl-source-stream": "^1.1.0",
-    "vue": "^2.3.3",
-    "vue-color": "^2.4.2",
-    "vue-router": "^2.5.3"
-  },
-  "browser": {
-    "vue": "vue/dist/vue.common.js"
+    "vue": "^2.5.9",
+    "vue-template-compiler": "^2.5.9",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^6.0.0",
-    "babel-plugin-async-to-promises": "^1.0.5",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1",
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.1.0",
+    "babel-plugin-transform-runtime": "^6.1.18",
     "babel-preset-stage-3": "^6.24.1",
-    "babelify": "^7.3.0",
-    "browserify": "^14.4.0",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0",
-    "gulp-if": "^2.0.2",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rev": "^8.1.0",
-    "gulp-rev-replace": "^0.4.3",
-    "gulp-uglify": "^3.0.0",
-    "vue-loader": "^10.0.0",
-    "vueify": "^9.4.1"
+    "babel-runtime": "^6.3.13",
+    "css-loader": "^0.21.0",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "html-loader": "^0.4.0",
+    "inject-loader": "^2.0.1",
+    "json-loader": "^0.5.7",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "vue-hot-reload-api": "^1.2.2",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^9.9.5",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.12.0",
+    "webpack-stream": "^2.3.0"
   },
-  "author": "azbang",
-  "homepage": "https://bitbucket.org/alxmamaev/donatelo#readme"
+  "author": "azbang"
 }

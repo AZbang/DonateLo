@@ -1,8 +1,8 @@
 const axios = require('axios');
 const helper = require('../helper');
 const Render = require('../render');
-
 const MESSAGES = require('./messages.json');
+
 const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 const CONTROLS = {
   WIDGETS: 'widgets',
@@ -31,15 +31,14 @@ module.exports = {
     views: [],
     varibles: [],
     services: [],
-    resources: {},
-
+    resources: {}
   },
   mutations: {
     setControl(state, view) {
-      CONTROLS[view] && state.currentControl = CONTROLS[view];
+      if(CONTROLS[view]) state.currentControl = CONTROLS[view];
     },
     setView(state, view) {
-      VIEWS[view] && state.currentView = VIEWS[view];
+      if(VIEWS[view]) state.currentView = VIEWS[view];
     },
     setLoading(state, v) {
       state.loading = !!v;
@@ -75,7 +74,7 @@ module.exports = {
         if(state.isGroupExist) commit('setView', 'ADMIN');
         else commit('setView', 'REGISTER');
       } else commit('setView', 'GETTING_STARTED');
-    }
+    },
     async callApi({commit, dispatch}, methodApi, silent=false) {
       silent && commit('setLoading', true);
       try {
@@ -102,7 +101,7 @@ module.exports = {
       });
       commit('setView', 'ADMIN');
       return resp.data.code === 'ok' ? MESSAGES.CREATED_GROUP : MESSAGES.NOT_CORRECT_TOKEN;
-    }
+    },
     async editToken({state, commit}, token) {
       let resp = await axios.post(DONATELO_API + '/editToken', {
         group_id: this.api.group_id,

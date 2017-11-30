@@ -14,5 +14,9 @@
   "CREATED_GROUP": {
     "ru": "Спасибо! Группа зарегистрирована!",
     "isError": false
+  },
+  "CREATED_SERVICE": {
+    "ru": "Сервис активирован",
+    "isError": false
   }
 }

@@ -1,79 +1,32 @@
 <template>
   <div id="admin">
     <div class="fixed-wrap">
-      <cover-control :renderer="renderer" :isCoverEmpty="isCoverEmpty"></cover-control>
-      <div class="wrap-menu">
-        <ul id="menu" class="tabs">
-          <li class="tab col s4"><a href="#widgets" class="active">Виджеты</a></li>
-          <li class="tab col s4"><a href="#services">Сервисы</a></li>
-          <li class="tab col s4 hide-on-small-only"><a href="#settings">Настройки</a></li>
-          <li class="tab col s4" style="display: none;"><a href="#edit">Изменить</a></li>
-          <div class="indicator"></div>
-        </ul>
-      </div>
+      <el-menu :default-active="'widgets'" class="el-menu-demo" mode="horizontal" @select="setControl">
+        <el-menu-item index="widgets">Виджеты</el-menu-item>
+        <el-menu-item index="services">Сервисы</el-menu-item>
+        <el-menu-item index="controls">Настройки</el-menu-item>
+      </el-menu>
     </div>
-    <div class="views-wrap">
-      <div id="widgets">
-        <div class="controls-section">
-          <p class="flow-text label">Добавить виджет:</p>
-          <widgets-control @addWidget="addWidget"></widgets-control>
-        </div>
-        <a @click="uploadData" class="fixed-btns btn-upload-data btn-floating btn-large waves-effect waves-light">
-          <i class="material-icons">cloud_upload</i>
-        </a>
-      </div>
-      <div id="services">
-        <div class="controls-section">
-          <services-control @toggleService="toggleService" @updateService="updateService" :services="services"></services-control>
-        </div>
-        <a @click="uploadData" class="fixed-btns btn-upload-data btn-floating btn-large waves-effect waves-light">
-          <i class="material-icons">cloud_upload</i>
-        </a>
-      </div>
-      <div id="settings">
-        <div class="controls-section">
-          <settings-control @updateToken="updateToken"></settings-control>
-        </div>
-      </div>
-      <div id="edit">
-        <div class="controls-section">
-          <p class="flow-text label" v-show="!currentObject">Выберите объект или сервис для изменения</p>
-          <editors-control :varibles="varibles" :renderer="renderer" :currentObject="currentObject"></editors-control>
-        </div>
-      </div>
-    </div>
+    <div :is="control"></div>
   </div>
 </template>
 
 <script>
-  const axios = require('axios');
-
-  const Render = require('../../render/Render.js');
-  const CoverControl = require('../controls/CoverControl.vue');
-  const WidgetsControl = require('../controls/WidgetsControl.vue');
-  const ServicesControl = require('../controls/ServicesControl.vue');
-  const EditorsControl = require('../controls/EditorsControl.vue');
-  const SettingsControl = require('../controls/SettingsControl.vue');
+  // const CoverControl = require('../controls/CoverControl.vue');
+  // const WidgetsControl = require('../controls/WidgetsControl.vue');
+  // const ServicesControl = require('../controls/ServicesControl.vue');
+  // const EditorsControl = require('../controls/EditorsControl.vue');
+  // const SettingsControl = require('../controls/SettingsControl.vue');
+  const helper = require('../../helper.js');
 
   module.exports = {
-    components: {
-      CoverControl,
-      WidgetsControl,
-      ServicesControl,
-      EditorsControl,
-      SettingsControl
-    },
-    props: ['api'],
-    data() {
-      return {
-        isCoverEmpty: true,
-        currentObject: null,
-        renderer: null
-      }
-    },
     methods: {
+      setControl(name) {
+        console.log(name);
+      },
+
       // API METHODS
-      async loadGroup() {
+      loadGroup() {
         this.renderer.setVaribles(this.varibles);
 
         if(data.resources.background) {
@@ -87,7 +40,6 @@
         }
         this.renderer.canvas.trigger('selection:cleared');
       },
-
       addWidget(type, data, res) {
         let widget = this.renderer.addWidget(type, data, res);
 
@@ -103,13 +55,15 @@
       VK.External.resizeWindow(window.screen.availWidth-200, Math.max(660, window.screen.availHeight-300));
       let w = helper.isMobile() ? window.innerWidth : Math.min(window.screen.availWidth-200, 1000);
 
-      this.renderer = new Render('playground', w, 300);
-      this.renderer.canvas.on('selection:cleared', () => {
-        this.currentObject = null;
-        $('#menu').tabs('select_tab', 'widgets');
-      });
+      console.log(VK);
 
-      $('ul.tabs').tabs();
+      // this.renderer = new Render('playground', w, 300);
+      // this.renderer.canvas.on('selection:cleared', () => {
+      //   this.currentObject = null;
+      //   $('#menu').tabs('select_tab', 'widgets');
+      // });
+      //
+      // $('ul.tabs').tabs();
     }
   }
 </script>

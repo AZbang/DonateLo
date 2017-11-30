@@ -13,44 +13,21 @@
   module.exports = {
     computed: {
       view() {
-        return VIEWS[this.$store.state.currentView]
+        return VIEWS[this.$store.state.currentView];
       },
       isLoading() {
         return this.$store.state.isLoading;
       }
     },
     mounted() {
+      console.log(VK);
       this.$store.dispatch('computedView');
     }
   }
 </script>
 
-<style lang="css">
-  ::-webkit-scrollbar-track {
-  	border-radius: 10px;
-  	background-color: #edeef0;
-  }
-  ::-webkit-scrollbar {
-  	width: 8px;
-  	background-color: #edeef0;
-  }
-  ::-webkit-scrollbar-thumb {
-  	background-color: #6e7cac;
-  }
-
+<style>
   body {
-    overflow-x: hidden;
-    background-color: #fff;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .vk-color {
-    box-shadow: none;
-    background: #5e81a8 !important;
-  }
-  .label {
-    font-weight: 300;
-    margin-top: 10px;
+    overflow: hidden;
   }
 </style>
