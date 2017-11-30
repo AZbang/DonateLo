@@ -10,5 +10,9 @@
   "CORRECT_TOKEN": {
     "ru": "Токен загружен.",
     "isError": false
+  },
+  "CREATED_GROUP": {
+    "ru": "Спасибо! Группа зарегистрирована!",
+    "isError": false
   }
 }

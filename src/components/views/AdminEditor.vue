@@ -68,25 +68,12 @@
       return {
         isCoverEmpty: true,
         currentObject: null,
-        renderer: null,
-        services: {},
-        varibles: {}
+        renderer: null
       }
     },
     methods: {
       // API METHODS
       async loadGroup() {
-        this.$emit('isLoad', true);
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_group', {group_id: this.api.group_id});
-        let data = resp.data.result;
-
-        this.services = data.services;
-        for(let key in this.services) {
-          for(let input in this.services[key].inputs) {
-            this.services[key].inputs[input].value = '';
-          }
-        }
-        this.varibles = data.enviroment;
         this.renderer.setVaribles(this.varibles);
 
         if(data.resources.background) {
@@ -99,70 +86,6 @@
           this.addWidget(view.type, view, data.resources);
         }
         this.renderer.canvas.trigger('selection:cleared');
-
-        this.$emit('isLoad', false);
-      },
-      async uploadData() {
-        let data = this.renderer.getJSON();
-        this.$emit('isLoad', true);
-
-        if(this.renderer.isEditCover || !this.$parent.isExist)
-          data.resources.background = this.renderer.coverImage._element.src;
-
-        try {
-          let resp = await axios.post('https://app-donatelo.herokuapp.com/update_cover', {
-            group_id: this.api.group_id,
-            ...data
-          });
-
-          if(resp.data.code == 'ok') {
-            Materialize.toast('Обложка сохранена!', 1000);
-            this.renderer.isEditCover = false;
-            this.$parent.isExist = true;
-          } else {
-            console.log(resp.data);
-            Materialize.toast(resp.data.message, 10000);
-          }
-        } catch(err) {
-          Materialize.toast('Извините, произошла ошибка, попробуйте позже.', 1000);
-        }
-        this.$emit('isLoad', false);
-      },
-      async loadVaribles() {
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/get_enviroment', {group_id: this.api.group_id});
-        if(resp.data.code === 'ok') {
-          this.varibles = resp.data.result;
-          this.renderer.setVaribles(this.varibles);
-        }
-      },
-      async updateToken(token) {
-        try {
-          let resp = await axios.post('https://app-donatelo.herokuapp.com/edit_token', {
-            group_id: this.api.group_id,
-            access_token: token
-          });
-          Materialize.toast('Токен изменился.', 1000);
-          $('#menu').tabs('select_tab', 'add');
-        } catch(e) {
-          Materialize.toast('Укажите правильный токен для изменения', 1000);
-        }
-      },
-      async toggleService(id, isActive) {
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/activate_service', {
-          group_id: this.api.group_id,
-          service_id: id,
-          activation: isActive
-        });
-        return resp.data.code === 'ok';
-      },
-      async updateService(id, form) {
-        let resp = await axios.post('https://app-donatelo.herokuapp.com/update_service', {
-          group_id: this.api.group_id,
-          service_id: id,
-          fields: form
-        });
-        await this.loadVaribles();
-        return resp.data.code === 'ok';
       },
 
       addWidget(type, data, res) {

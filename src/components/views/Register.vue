@@ -22,10 +22,8 @@
       }
     },
     methods: {
-      async submitToken(e) {
-        let isSuccess = await this.$store.dispatch('callApi', 'editToken', this.token);
-        if(isSuccess) this.$emit('setView', 'admin');
-        else this.token = '';
+      submitToken(e) {
+        this.$store.dispatch('callApi', 'createGroup', this.token);
       }
     },
     mounted() {
