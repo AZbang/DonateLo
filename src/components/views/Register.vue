@@ -18,7 +18,10 @@
     },
     methods: {
       submitToken(e) {
-        this.$store.dispatch('callApi', 'createGroup', this.token);
+        this.$store.dispatch('callApi', {
+          method: 'createGroup',
+          token: this.token
+        });
       }
     },
     mounted() {

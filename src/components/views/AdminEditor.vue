@@ -1,5 +1,6 @@
 <template>
   <div id="admin">
+    <cover-control></cover-control>
     <div class="fixed-wrap">
       <el-menu :default-active="'widgets'" class="el-menu-demo" mode="horizontal" @select="setControl">
         <el-menu-item index="widgets">Виджеты</el-menu-item>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-  // const CoverControl = require('../controls/CoverControl.vue');
+  const CoverControl = require('../controls/CoverControl.vue');
   // const WidgetsControl = require('../controls/WidgetsControl.vue');
   // const ServicesControl = require('../controls/ServicesControl.vue');
   // const EditorsControl = require('../controls/EditorsControl.vue');
@@ -20,11 +21,13 @@
   const helper = require('../../helper.js');
 
   module.exports = {
+    components: {
+      CoverControl
+    },
     methods: {
       setControl(name) {
         console.log(name);
       },
-
       // API METHODS
       loadGroup() {
         this.renderer.setVaribles(this.varibles);
@@ -54,9 +57,7 @@
     mounted() {
       VK.External.resizeWindow(window.screen.availWidth-200, Math.max(660, window.screen.availHeight-300));
       let w = helper.isMobile() ? window.innerWidth : Math.min(window.screen.availWidth-200, 1000);
-
-      console.log(VK);
-
+      
       // this.renderer = new Render('playground', w, 300);
       // this.renderer.canvas.on('selection:cleared', () => {
       //   this.currentObject = null;

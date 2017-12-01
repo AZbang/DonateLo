@@ -59,7 +59,7 @@
 	const ElementUI = __webpack_require__(9);
 
 	const App = __webpack_require__(147);
-	const store = __webpack_require__(192);
+	const store = __webpack_require__(198);
 
 	Vue.use(ElementUI);
 	Vue.use(VeeValidate);
@@ -62785,7 +62785,7 @@
 	__vue_exports__ = __webpack_require__(148)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(191)
+	var __vue_template__ = __webpack_require__(197)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -62830,8 +62830,8 @@
 	const axios = __webpack_require__(149);
 	const VIEWS = {
 	  Admin: __webpack_require__(175),
-	  GettingStarted: __webpack_require__(183),
-	  Register: __webpack_require__(186)
+	  GettingStarted: __webpack_require__(191),
+	  Register: __webpack_require__(194)
 	};
 
 	module.exports = {
@@ -64391,7 +64391,7 @@
 	__vue_exports__ = __webpack_require__(180)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(182)
+	var __vue_template__ = __webpack_require__(190)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -64760,20 +64760,23 @@
 	//
 	//
 	//
+	//
 
-	// const CoverControl = require('../controls/CoverControl.vue');
+	const CoverControl = __webpack_require__(181);
 	// const WidgetsControl = require('../controls/WidgetsControl.vue');
 	// const ServicesControl = require('../controls/ServicesControl.vue');
 	// const EditorsControl = require('../controls/EditorsControl.vue');
 	// const SettingsControl = require('../controls/SettingsControl.vue');
-	const helper = __webpack_require__(181);
+	const helper = __webpack_require__(189);
 
 	module.exports = {
+	  components: {
+	    CoverControl
+	  },
 	  methods: {
 	    setControl(name) {
 	      console.log(name);
 	    },
-
 	    // API METHODS
 	    loadGroup() {
 	      this.renderer.setVaribles(this.varibles);
@@ -64804,8 +64807,6 @@
 	    VK.External.resizeWindow(window.screen.availWidth - 200, Math.max(660, window.screen.availHeight - 300));
 	    let w = helper.isMobile() ? window.innerWidth : Math.min(window.screen.availWidth - 200, 1000);
 
-	    console.log(VK);
-
 	    // this.renderer = new Render('playground', w, 300);
 	    // this.renderer.canvas.on('selection:cleared', () => {
 	    //   this.currentObject = null;
@@ -64818,6 +64819,296 @@
 
 /***/ }),
 /* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(182)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(188)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\controls\\CoverControl.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-70870590", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-70870590", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] CoverControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	const UploadImage = __webpack_require__(183);
+
+	module.exports = {
+	  components: {
+	    UploadImage
+	  },
+	  computed: {
+	    isCoverEditable() {
+	      return this.$store.state.isCoverEditable;
+	    }
+	  },
+	  methods: {
+	    setCover(src) {
+	      console.log(src);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(184)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(186)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(187)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\helper\\UploadImage.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1e49ce30", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-1e49ce30", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] UploadImage.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(185);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(179)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1e49ce30!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1e49ce30!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(178)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  methods: {
+	    uploadImage(e) {
+	      let file = e.target.files[0] || e.dataTransfer.files[0];
+
+	      const isFormat = file.type === 'image/jpeg' || file.type === 'image/png';
+	      const isLt2M = file.size / 1024 / 1024 < 3;
+
+	      if (!isFormat) this.$store.dispatch('showLog', 'IMAGE_NOT_VALID_FORMAT');
+	      if (!isLt2M) this.$store.dispatch('showLog', 'IMAGE_LIMIT_SIZE');
+
+	      if (isFormat && isLt2M) {
+	        let reader = new FileReader();
+	        reader.onload = e => this.$emit('upload', e.target.result);
+	        reader.readAsDataURL(file);
+	      }
+	    }
+	  }
+	};
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('input', {
+	    staticClass: "select-image",
+	    attrs: {
+	      "type": "file",
+	      "name": "photo"
+	    },
+	    on: {
+	      "change": _vm.uploadImage
+	    }
+	  })
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1e49ce30", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "cover-control"
+	    }
+	  }, [_c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.isCoverEditable),
+	      expression: "isCoverEditable"
+	    }],
+	    staticStyle: {
+	      "height": "inherit"
+	    }
+	  }, [_c('canvas', {
+	    attrs: {
+	      "id": "playground"
+	    }
+	  })]), _vm._v(" "), _c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.isCoverEditable),
+	      expression: "isCoverEditable"
+	    }],
+	    staticClass: "cover-uploader-btn"
+	  }, [_c('upload-image', {
+	    on: {
+	      "upload": _vm.setCover
+	    }
+	  }), _vm._v(" "), _c('el-button', {
+	    attrs: {
+	      "type": "info",
+	      "icon": "el-icon-edit"
+	    }
+	  })], 1), _vm._v(" "), _c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (!_vm.isCoverEditable),
+	      expression: "!isCoverEditable"
+	    }],
+	    staticClass: "cover-uploader-area"
+	  }, [_c('upload-image', {
+	    on: {
+	      "upload": _vm.setCover
+	    }
+	  }), _vm._v(" "), _c('i', {
+	    staticClass: "el-icon-picture cover-uploader-area__icon"
+	  }), _vm._v(" "), _c('p', {
+	    staticClass: "cover-uploader-area__text"
+	  }, [_vm._v("Загрузите обложку для редактирования")])], 1)])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-70870590", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 189 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -64842,7 +65133,7 @@
 	};
 
 /***/ }),
-/* 182 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -64850,7 +65141,7 @@
 	    attrs: {
 	      "id": "admin"
 	    }
-	  }, [_c('div', {
+	  }, [_c('cover-control'), _vm._v(" "), _c('div', {
 	    staticClass: "fixed-wrap"
 	  }, [_c('el-menu', {
 	    staticClass: "el-menu-demo",
@@ -64875,7 +65166,7 @@
 	    }
 	  }, [_vm._v("Настройки")])], 1)], 1), _vm._v(" "), _c(_vm.control, {
 	    tag: "div"
-	  })])
+	  })], 1)
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
@@ -64885,17 +65176,17 @@
 	}
 
 /***/ }),
-/* 183 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(184)
+	__vue_exports__ = __webpack_require__(192)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(185)
+	var __vue_template__ = __webpack_require__(193)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -64929,7 +65220,7 @@
 
 
 /***/ }),
-/* 184 */
+/* 192 */
 /***/ (function(module, exports) {
 
 	//
@@ -64977,7 +65268,7 @@
 	};
 
 /***/ }),
-/* 185 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65061,17 +65352,17 @@
 	}
 
 /***/ }),
-/* 186 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(189)
+	__vue_exports__ = __webpack_require__(195)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(190)
+	var __vue_template__ = __webpack_require__(196)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -65105,9 +65396,7 @@
 
 
 /***/ }),
-/* 187 */,
-/* 188 */,
-/* 189 */
+/* 195 */
 /***/ (function(module, exports) {
 
 	//
@@ -65130,7 +65419,10 @@
 	  },
 	  methods: {
 	    submitToken(e) {
-	      this.$store.dispatch('callApi', 'createGroup', this.token);
+	      this.$store.dispatch('callApi', {
+	        method: 'createGroup',
+	        token: this.token
+	      });
 	    }
 	  },
 	  mounted() {
@@ -65139,7 +65431,7 @@
 	};
 
 /***/ }),
-/* 190 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65182,7 +65474,7 @@
 	}
 
 /***/ }),
-/* 191 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65208,7 +65500,7 @@
 	}
 
 /***/ }),
-/* 192 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -65216,9 +65508,9 @@
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 	const axios = __webpack_require__(149);
-	const helper = __webpack_require__(181);
-	const Render = __webpack_require__(193);
-	const MESSAGES = __webpack_require__(198);
+	const helper = __webpack_require__(189);
+	const Render = __webpack_require__(199);
+	const MESSAGES = __webpack_require__(204);
 
 	const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 	const CONTROLS = {
@@ -65238,10 +65530,12 @@
 	  state: {
 	    render: new Render(),
 
-	    loading: false,
-	    isGroupExist: false,
 	    lang: 'ru',
 	    api: helper.parseLocationParams(),
+
+	    loading: false,
+	    isGroupExist: false,
+	    isCoverEditable: false,
 
 	    currentControl: 'WIDGETS',
 	    currentView: 'GETTING_STARTED',
@@ -65264,9 +65558,10 @@
 	    setGroupExist(state, v) {
 	      state.isGroupExist = v;
 	    },
-	    setViews(state, views) {},
-	    setResources(state, res) {},
-	    setServices(state, services) {
+
+	    addViews(state, views) {},
+	    addResources(state, res) {},
+	    addServices(state, services) {
 	      for (let key in services) {
 	        for (let input in services[key].inputs) {
 	          services[key].inputs[input].value = '';
@@ -65278,30 +65573,36 @@
 	  },
 	  actions: {
 	    showLog({ state }, log) {
-	      this._vm.$message.error(log[state.lang]);
+	      let ms = MESSAGES[log];
+	      if (ms.isError) this._vm.$message.error(ms[state.lang]);else this._vm.$message.success(ms[state.lang]);
 	    },
 	    computedView({ state, commit, dispatch }) {
 	      return _asyncToGenerator(function* () {
-	        yield dispatch('callApi', 'getGroupExist');
-	        console.log(+state.api.viewer_type, state.api.group_id, state.isGroupExist);
-
+	        yield dispatch('callApi', {
+	          method: 'getGroupExist',
+	          silent: true
+	        });
 	        if (+state.api.viewer_type > 2 && state.api.group_id != null) {
 	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
 	        } else commit('setView', 'GETTING_STARTED');
 	      })();
 	    },
-	    callApi({ commit, dispatch }, methodApi, params = {}) {
+	    callApi({ commit, dispatch }, params) {
 	      return _asyncToGenerator(function* () {
-	        !params.isSilent && commit('setLoading', true);
+	        console.log(params);
+
+	        !params.silent && commit('setLoading', true);
+	        console.log(params);
+
 	        try {
-	          var log = yield dispatch(methodApi, params);
+	          var log = yield dispatch(params.method, params);
 	          log && dispatch('showLog', log);
 	        } catch (e) {
-	          dispatch('showLog', MESSAGES.METHOD_API_ERROR);
 	          console.error(e);
+	          dispatch('showLog', 'METHOD_API_ERROR');
 	        }
-	        !params.isSilent && commit('setLoading', false);
-	        return log;
+
+	        !params.silent && commit('setLoading', false);
 	      })();
 	    },
 
@@ -65315,13 +65616,13 @@
 	    },
 	    createGroup({ state, commit }, { token }) {
 	      return _asyncToGenerator(function* () {
+	        console.log(token);
 	        let resp = yield axios.post(DONATELO_API + '/create_group', {
 	          group_id: state.api.group_id,
 	          access_token: token
 	        });
-	        console.log(token);
 	        resp.data.code === 'ok' && commit('setView', 'ADMIN');
-	        return resp.data.code === 'ok' ? MESSAGES.CREATED_GROUP : MESSAGES.NOT_CORRECT_TOKEN;
+	        return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
 	      })();
 	    },
 	    editToken({ state, commit }, { token }) {
@@ -65332,7 +65633,7 @@
 	          group_id: _this.api.group_id,
 	          access_token: token
 	        });
-	        return resp.data.code === 'ok' ? MESSAGES.CORRECT_TOKEN : MESSAGES.NOT_CORRECT_TOKEN;
+	        return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
 	      })();
 	    },
 	    getGroup({ state, commit }) {
@@ -65345,7 +65646,7 @@
 	        commit('setServices', data.services);
 	        commit('setVaribles', data.enviroment);
 
-	        return MESSAGES.GROUP_LOADED;
+	        return 'GROUP_LOADED';
 	      })();
 	    },
 	    updateGroup({ state, commit }) {
@@ -65358,7 +65659,7 @@
 	          group_id: state.api.group_id
 	        }, data));
 
-	        return MESSAGES.UPDATED_GROUP;
+	        return 'UPDATED_GROUP';
 	      })();
 	    },
 	    loadVaribles({ commit, state }) {
@@ -65376,23 +65677,23 @@
 	          service_id: id,
 	          fields: form
 	        });
-	        return MESSAGES.UPDATED_SERVICE;
+	        return 'UPDATED_SERVICE';
 	      })();
 	    }
 	  }
 	};
 
 /***/ }),
-/* 193 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	const WIDGETS = {
-	  'text': __webpack_require__(194),
-	  'linear': __webpack_require__(195),
-	  'radial': __webpack_require__(196),
-	  'image': __webpack_require__(197)
+	  'text': __webpack_require__(200),
+	  'linear': __webpack_require__(201),
+	  'radial': __webpack_require__(202),
+	  'image': __webpack_require__(203)
 	};
 
 	class Render {
@@ -65538,7 +65839,7 @@
 	module.exports = Render;
 
 /***/ }),
-/* 194 */
+/* 200 */
 /***/ (function(module, exports) {
 
 	class Text {
@@ -65633,7 +65934,7 @@
 	module.exports = Text;
 
 /***/ }),
-/* 195 */
+/* 201 */
 /***/ (function(module, exports) {
 
 	class LinearBar {
@@ -65778,7 +66079,7 @@
 	module.exports = LinearBar;
 
 /***/ }),
-/* 196 */
+/* 202 */
 /***/ (function(module, exports) {
 
 	class RadialBar {
@@ -65962,7 +66263,7 @@
 	module.exports = RadialBar;
 
 /***/ }),
-/* 197 */
+/* 203 */
 /***/ (function(module, exports) {
 
 	class ContructorImage {
@@ -66050,10 +66351,10 @@
 	module.exports = ContructorImage;
 
 /***/ }),
-/* 198 */
+/* 204 */
 /***/ (function(module, exports) {
 
-	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true}}
+	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
 
 /***/ })
 /******/ ]);

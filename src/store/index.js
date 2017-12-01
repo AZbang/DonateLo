@@ -21,10 +21,12 @@ module.exports = {
   state: {
     render: new Render(),
 
-    loading: false,
-    isGroupExist: false,
     lang: 'ru',
     api: helper.parseLocationParams(),
+
+    loading: false,
+    isGroupExist: false,
+    isCoverEditable: false,
 
     currentControl: 'WIDGETS',
     currentView: 'GETTING_STARTED',
@@ -47,13 +49,15 @@ module.exports = {
     setGroupExist(state, v) {
       state.isGroupExist = v;
     },
-    setViews(state, views) {
+
+
+    addViews(state, views) {
 
     },
-    setResources(state, res) {
+    addResources(state, res) {
 
     },
-    setServices(state, services) {
+    addServices(state, services) {
       for(let key in services) {
         for(let input in services[key].inputs) {
           services[key].inputs[input].value = '';
@@ -67,28 +71,37 @@ module.exports = {
   },
   actions: {
     showLog({state}, log) {
-      this._vm.$message.error(log[state.lang]);
+      let ms = MESSAGES[log];
+      if(ms.isError) this._vm.$message.error(ms[state.lang]);
+      else this._vm.$message.success(ms[state.lang]);
     },
     async computedView({state, commit, dispatch}) {
-      await dispatch('callApi', 'getGroupExist');
-      console.log(+state.api.viewer_type, state.api.group_id, state.isGroupExist);
-
+      await dispatch('callApi', {
+        method: 'getGroupExist',
+        silent: true
+      });
       if(+state.api.viewer_type > 2 && state.api.group_id != null) {
         if(state.isGroupExist) commit('setView', 'ADMIN');
         else commit('setView', 'REGISTER_TOKEN');
       } else commit('setView', 'GETTING_STARTED');
     },
-    async callApi({commit, dispatch}, methodApi, params={}) {
-      !params.isSilent && commit('setLoading', true);
+    async callApi({commit, dispatch}, params) {
+      console.log(params);
+
+      !params.silent && commit('setLoading', true);
+      console.log(params);
+
       try {
-        var log = await dispatch(methodApi, params);
+        var log = await dispatch(params.method, params);
         log && dispatch('showLog', log);
-      } catch(e) {
-        dispatch('showLog', MESSAGES.METHOD_API_ERROR);
-        console.error(e);
       }
-      !params.isSilent && commit('setLoading', false);
-      return log;
+
+      catch(e) {
+        console.error(e);
+        dispatch('showLog', 'METHOD_API_ERROR');
+      }
+
+      !params.silent && commit('setLoading', false);
     },
 
     async getGroupExist({state, commit}) {
@@ -98,20 +111,20 @@ module.exports = {
       commit('setGroupExist', resp.data.result);
     },
     async createGroup({state, commit}, {token}) {
+      console.log(token);
       let resp = await axios.post(DONATELO_API + '/create_group', {
         group_id: state.api.group_id,
         access_token: token
       });
-      console.log(token)
       resp.data.code === 'ok' && commit('setView', 'ADMIN');
-      return resp.data.code === 'ok' ? MESSAGES.CREATED_GROUP : MESSAGES.NOT_CORRECT_TOKEN;
+      return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
     },
     async editToken({state, commit}, {token}) {
       let resp = await axios.post(DONATELO_API + '/editToken', {
         group_id: this.api.group_id,
         access_token: token
       });
-      return resp.data.code === 'ok' ? MESSAGES.CORRECT_TOKEN : MESSAGES.NOT_CORRECT_TOKEN;
+      return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
     },
     async getGroup({state, commit}) {
       let resp = await axios.post(DONATELO_API + '/get_group', {group_id: state.api.group_id});
@@ -122,7 +135,7 @@ module.exports = {
       commit('setServices', data.services);
       commit('setVaribles', data.enviroment);
 
-      return MESSAGES.GROUP_LOADED;
+      return 'GROUP_LOADED';
     },
     async updateGroup({state, commit}) {
       let data = this.renderer.getJSON();
@@ -132,7 +145,7 @@ module.exports = {
         ...data
       });
 
-      return MESSAGES.UPDATED_GROUP;
+      return 'UPDATED_GROUP';
     },
     async loadVaribles({commit, state}) {
       let resp = await axios.post(DONATELO_API + '/get_enviroment', {
@@ -146,7 +159,7 @@ module.exports = {
         service_id: id,
         fields: form
       });
-      return MESSAGES.UPDATED_SERVICE;
+      return 'UPDATED_SERVICE';
     },
   }
 }

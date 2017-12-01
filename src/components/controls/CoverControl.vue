@@ -1,83 +1,38 @@
 <template>
   <div id="cover-control">
-    <div v-show="!isCoverEmpty" style="height: inherit;">
+    <div style="height: inherit;" v-show="isCoverEditable">
       <canvas id="playground"></canvas>
     </div>
 
-    <div class="control-cover-btns" v-show="!isCoverEmpty">
-      <div id="new-cover" class="btn-cover">
-        <upload-image @uploadImage="uploadImage"></upload-image>
-        <i class="material-icons">edit</i>
-      </div>
-      <!-- <div id="resize-cover" class="btn-cover" @click="toggleSize">
-        <i class="material-icons">fullscreen</i>
-      </div> -->
+    <div class="cover-uploader-btn" v-show="isCoverEditable">
+      <upload-image @upload="setCover"></upload-image>
+      <el-button type="info" icon="el-icon-edit"></el-button>
     </div>
 
-    <div id="first-upload-bg" v-show="isCoverEmpty">
-      <upload-image @uploadImage="uploadImage"></upload-image>
-      <i class="material-icons">add_a_photo</i><br>
-      <p class="flow-text">Загрузите обложку группы</p>
+    <div class="cover-uploader-area" v-show="!isCoverEditable">
+      <upload-image @upload="setCover"></upload-image>
+      <i class="el-icon-picture cover-uploader-area__icon"></i>
+      <p class="cover-uploader-area__text">Загрузите обложку для редактирования</p>
     </div>
   </div>
 </template>
 
 <script>
-  const UploadImage = require('../helpers/UploadImage.vue');
+  const UploadImage = require('../helper/UploadImage.vue');
 
   module.exports = {
     components: {
       UploadImage
     },
-    props: ['renderer', 'isCoverEmpty'],
+    computed: {
+      isCoverEditable() {
+        return this.$store.state.isCoverEditable;
+      }
+    },
     methods: {
-      toggleSize() {
-        this.isFullCover = !this.isFullCover;
-        this.renderer.toggleSize(this.isFullCover);
-      },
-      uploadImage(src) {
-        this.renderer.uploadImage(src);
-        this.isCoverEmpty = false;
+      setCover(src) {
+        console.log(src);
       }
     }
   }
 </script>
-
-<style scoped>
-  #first-upload-bg {
-    height: 300px;
-    border: 5px dashed #7a9ee0;
-    width: 98vw;
-    text-align: center;
-    padding-top: 110px;
-    position: relative;
-    box-sizing: border-box;
-  }
-  #first-upload-bg i, #first-upload-bg p {
-    color: #7a9ee0;
-    margin-top: 0;
-    text-align: center;
-  }
-  #first-upload-bg i {
-    font-size: 3em;
-  }
-
-  .control-cover-btns {
-    z-index: 10000;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
-  .btn-cover {
-    padding: 9px;
-    width: 44px;
-    height: 44px;
-    margin-left: 8px;
-    color: #fff;
-    background: rgba(31,31,31,.75);
-    border-radius: 3px;
-    float: right;
-    cursor: pointer;
-  }
-</style>

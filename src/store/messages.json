@@ -22,5 +22,13 @@
   "METHOD_API_ERROR": {
     "ru": "Произошла ошибка на сервере, попробуйте позже",
     "isError": true
+  },
+  "IMAGE_NOT_VALID_FORMAT": {
+    "ru": "Неправильный формат загружаемого файла",
+    "isError": true
+  },
+  "IMAGE_LIMIT_SIZE": {
+    "ru": "Превышен лимит загружаемого файла",
+    "isError": true
   }
 }
