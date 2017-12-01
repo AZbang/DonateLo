@@ -26,7 +26,8 @@ module.exports = {
     lang: 'ru',
     api: helper.parseLocationParams(),
 
-    currentControl: 'widgets',
+    currentControl: 'WIDGETS',
+    currentView: 'GETTING_STARTED',
 
     views: [],
     varibles: [],
@@ -66,10 +67,12 @@ module.exports = {
   },
   actions: {
     showLog({state}, log) {
-      Materialize.toast(log[state.lang], 2000);
+      console.log(log[state.lang], 2000);
     },
     async computedView({state, commit, dispatch}) {
-      await dispatch('getGroupExist');
+      await dispatch('callApi', 'getGroupExist');
+      console.log('sdfdf');
+
       if(+state.api.viewer_type > 2 && state.api.group_id != null) {
         if(state.isGroupExist) commit('setView', 'ADMIN');
         else commit('setView', 'REGISTER');
@@ -78,7 +81,7 @@ module.exports = {
     async callApi({commit, dispatch}, methodApi, silent=false) {
       silent && commit('setLoading', true);
       try {
-        let log = await dispatch(methodApi);
+        var log = await dispatch(methodApi);
         log && dispatch.showLog(log);
       } catch(e) {
         console.error(e);

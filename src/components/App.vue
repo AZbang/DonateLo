@@ -1,18 +1,21 @@
 <template>
-  <div v-loading="isLoading" :is="view"></div>
+  <div>
+    <div v-loading="isLoading" :is="view"></div>
+  </div>
 </template>
 
 <script>
   const axios = require('axios');
   const VIEWS = {
-    'Admin': require('./views/AdminEditor.vue'),
-    'GettingStarted': require('./views/GettingStarted.vue'),
-    'Register': require('./views/Register.vue')
+    Admin: require('./views/AdminEditor.vue'),
+    GettingStarted: require('./views/GettingStarted.vue'),
+    Register: require('./views/Register.vue')
   }
 
   module.exports = {
     computed: {
       view() {
+        console.log(this.$store.state.currentView);
         return VIEWS[this.$store.state.currentView];
       },
       isLoading() {
@@ -20,14 +23,7 @@
       }
     },
     mounted() {
-      console.log(VK);
       this.$store.dispatch('computedView');
     }
   }
 </script>
-
-<style>
-  body {
-    overflow: hidden;
-  }
-</style>
