@@ -1,71 +1,18 @@
 const axios = require('axios');
 const helper = require('../helper');
 const Render = require('../render');
-const MESSAGES = require('./messages.json');
 
 const DONATELO_API = 'https://app-donatelo.herokuapp.com';
-const CONTROLS = {
-  WIDGETS: 'widgets',
-  SERVICES: 'services',
-  WIDGET_EDITOR: 'widgetEditor',
-  SERVICE_EDITOR: 'serviceEditor',
-  SETTINGS: 'settings'
-};
-const VIEWS = {
-  GETTING_STARTED: 'GettingStarted',
-  REGISTER_TOKEN: 'Register',
-  ADMIN: 'Admin'
-}
-const WIDGETS = [
-  {
-    type: "text",
-    label: "Текст",
-    icon: "el-icon-tickets"
-  },
-  {
-    type: "linear",
-    label: "Линейный бар",
-    icon: "el-icon-menu"
-  },
-  {
-    type: "radial",
-    label: "Радиальный бар",
-    icon: "el-icon-remove"
-  },
-  {
-    type: "image",
-    label: "Картинка",
-    icon: "el-icon-picture"
-  },
-  {
-    type: "stickers",
-    label: "Стикеры",
-    disable: true,
-    icon: "el-icon-star-on"
-  },
-  {
-    type: "stickers",
-    label: "Стикеры",
-    disable: true,
-    icon: "el-icon-star-on"
-  },
-  {
-    type: "stickers",
-    label: "Стикеры",
-    disable: true,
-    icon: "el-icon-star-on"
-  },
-  {
-    type: "stickers",
-    label: "Стикеры",
-    disable: true,
-    icon: "el-icon-star-on"
-  }
-];
+
+const MESSAGES = require('./messages.json');
+const WIDGETS = require('./widgets.json');
+
+const SECTIONS = require('../vue/sections');
+const VIEWS = require('../vue/views');
 
 module.exports = {
   state: {
-    render: new Render(),
+    render: null,
 
     lang: 'ru',
     api: helper.parseLocationParams(),
@@ -74,8 +21,8 @@ module.exports = {
     isGroupExist: false,
     isCoverEditable: false,
 
-    currentControl: 'widgets',
-    currentView: 'GettingStarted',
+    currentSection: SECTIONS.WIDGETS,
+    currentView: null,
     editableObject: null,
 
     widgets: WIDGETS,
@@ -83,8 +30,11 @@ module.exports = {
     services: []
   },
   mutations: {
-    setControl(state, view) {
-      if(CONTROLS[view]) state.currentControl = CONTROLS[view];
+    initRender(state, id) {
+      state.render = new Render(id);
+    },
+    setSection(state, view) {
+      if(SECTIONS[view]) state.currentSection = SECTIONS[view];
     },
     setView(state, view) {
       if(VIEWS[view]) state.currentView = VIEWS[view];
@@ -131,13 +81,17 @@ module.exports = {
 
       widget.view.on('mousedown', () => {
         commit('setEditableObject', widget);
-        commit('setControl', 'WIDGET_EDITOR');
+        commit('setSection', 'WIDGET_EDITOR');
       });
       widget.view.on('selection:cleared', () => {
         commit('setEditableObject', null);
-        commit('setControl', 'WIDGET_EDITOR');
+        commit('setSection', 'WIDGET_EDITOR');
       });
       widget.view.trigger('mousedown');
+    },
+    removeWidget({state, commit}, id) {
+      commit('setSection', 'WIDGETS');
+      state.render.removeWidget(this.widget.id);
     },
 
     showLog({state}, log) {
@@ -156,10 +110,7 @@ module.exports = {
       } else commit('setView', 'GETTING_STARTED');
     },
     async callApi({commit, dispatch}, params) {
-      console.log(params);
-
       !params.silent && commit('setLoading', true);
-      console.log(params);
 
       try {
         var log = await dispatch(params.method, params);
@@ -181,7 +132,6 @@ module.exports = {
       commit('setGroupExist', resp.data.result);
     },
     async createGroup({state, commit}, {token}) {
-      console.log(token);
       let resp = await axios.post(DONATELO_API + '/create_group', {
         group_id: state.api.group_id,
         access_token: token

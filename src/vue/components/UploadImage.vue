@@ -6,10 +6,11 @@
   module.exports = {
     methods: {
       uploadImage(e) {
-        let file = e.target.files[0] || e.dataTransfer.files[0];
+        let files = e.target.files || e.dataTransfer.files;
+        if(!files[0]) return;
 
-        const isFormat = file.type === 'image/jpeg' || file.type === 'image/png';
-        const isLt2M = file.size / 1024 / 1024 < 3;
+        const isFormat = files[0].type === 'image/jpeg' || files[0].type === 'image/png';
+        const isLt2M = files[0].size / 1024 / 1024 < 3;
 
         if(!isFormat) this.$store.dispatch('showLog', 'IMAGE_NOT_VALID_FORMAT');
         if(!isLt2M) this.$store.dispatch('showLog', 'IMAGE_LIMIT_SIZE');
@@ -17,7 +18,7 @@
         if(isFormat && isLt2M) {
           let reader = new FileReader();
           reader.onload = (e) => this.$emit('upload', e.target.result);
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(files[0]);
         }
       }
     }

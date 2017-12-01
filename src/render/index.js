@@ -6,18 +6,15 @@ const WIDGETS = {
 }
 
 class Render {
-  constructor() {
-    this.width = window.innerWidth;
+  constructor(id) {
+    this.width = 1000;
     this.height = 300;
     this.scale = 1;
 
     this.coverWidth = 1590;
     this.coverHeight = 400;
 
-    this.element = document.createElement('canvas');
-    this.element.id = 'playground';
-
-    this.canvas = new fabric.Canvas('playground');
+    this.canvas = new fabric.Canvas(id);
     this.canvas.setWidth(this.coverWidth);
     this.canvas.setHeight(this.coverHeight);
 
@@ -98,16 +95,13 @@ class Render {
   // Cover
   resizeCoverToWidth() {
     let scale = this.width/this.coverWidth;
-    $('.canvas-container').css({
-      'transform': 'scale(' + scale + ')',
-      'transform-origin': '0 0'
-    });
-    $('#cover-control').css('height', this.coverHeight*scale + 'px');
-    $('.fixed-btns').css('top', this.coverHeight*scale+14 + 'px')
-    $('.views-wrap').css('height', window.innerHeight - (this.coverHeight*scale+48) + 'px');
+    let container = document.getElementsByClassName('canvas-container')[0];
+    container.style.transform = 'scale(' + scale + ')';
+    container.style.transformOrigin = '0 0';
+    document.getElementById('cover-control').style.height = this.coverHeight*scale + 'px';
   }
   setCover(src) {
-    fabric.Image.fromURL(base64, (texture) => {
+    fabric.Image.fromURL(src, (texture) => {
       let scale = this.coverWidth/texture.getWidth();
       let w = this.coverWidth/scale;
       let h = this.coverHeight/scale;

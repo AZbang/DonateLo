@@ -40320,6 +40320,14 @@
   -webkit-text-fill-color: transparent;
   font-size: 3em; }
 
+.admin__menu {
+  position: relative; }
+
+.admin__menu-btn-cover-save {
+  position: absolute;
+  bottom: 12px;
+  right: 10px; }
+
 body {
   margin: 0;
   padding: 0;

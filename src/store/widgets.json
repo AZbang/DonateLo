@@ -1,0 +1,46 @@
+[
+  {
+    "type": "text",
+    "label": "Текст",
+    "icon": "el-icon-tickets"
+  },
+  {
+    "type": "linear",
+    "label": "Линейный бар",
+    "icon": "el-icon-menu"
+  },
+  {
+    "type": "radial",
+    "label": "Радиальный бар",
+    "icon": "el-icon-remove"
+  },
+  {
+    "type": "image",
+    "label": "Картинка",
+    "icon": "el-icon-picture"
+  },
+  {
+    "type": "stickers",
+    "label": "Стикеры",
+    "disable": true,
+    "icon": "el-icon-star-on"
+  },
+  {
+    "type": "stickers",
+    "label": "Стикеры",
+    "disable": true,
+    "icon": "el-icon-star-on"
+  },
+  {
+    "type": "stickers",
+    "label": "Стикеры",
+    "disable": true,
+    "icon": "el-icon-star-on"
+  },
+  {
+    "type": "stickers",
+    "label": "Стикеры",
+    "disable": true,
+    "icon": "el-icon-star-on"
+  }
+]

@@ -5,7 +5,7 @@ const Vuex = require('vuex');
 const VeeValidate = require('vee-validate');
 const ElementUI = require('element-ui');
 
-const App = require('./components/App.vue');
+const App = require('./vue/App.vue');
 const store = require('./store');
 
 Vue.use(ElementUI);

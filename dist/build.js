@@ -59,7 +59,7 @@
 	const ElementUI = __webpack_require__(9);
 
 	const App = __webpack_require__(147);
-	const store = __webpack_require__(201);
+	const store = __webpack_require__(150);
 
 	Vue.use(ElementUI);
 	Vue.use(VeeValidate);
@@ -62785,7 +62785,7 @@
 	__vue_exports__ = __webpack_require__(148)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(200)
+	var __vue_template__ = __webpack_require__(149)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -62797,7 +62797,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\App.vue"
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\App.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -62808,9 +62808,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-7b75e88d", __vue_options__)
+	    hotAPI.createRecord("data-v-4aeb2dc9", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-7b75e88d", __vue_options__)
+	    hotAPI.reload("data-v-4aeb2dc9", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -62820,24 +62820,17 @@
 
 /***/ }),
 /* 148 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	//
 	//
 	//
 	//
-
-	const axios = __webpack_require__(149);
-	const VIEWS = {
-	  Admin: __webpack_require__(175),
-	  GettingStarted: __webpack_require__(194),
-	  Register: __webpack_require__(197)
-	};
 
 	module.exports = {
 	  computed: {
 	    view() {
-	      return VIEWS[this.$store.state.currentView];
+	      return this.$store.state.currentView;
 	    },
 	    loading() {
 	      return this.$store.state.loading;
@@ -62845,6 +62838,7 @@
 	  },
 	  mounted() {
 	    this.$store.dispatch('computedView');
+	    console.log(this.$store.state.currentView);
 	  }
 	};
 
@@ -62852,18 +62846,260 @@
 /* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(150);
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c(_vm.view, {
+	    directives: [{
+	      name: "loading",
+	      rawName: "v-loading",
+	      value: (_vm.loading),
+	      expression: "loading"
+	    }],
+	    tag: "div",
+	    staticStyle: {
+	      "width": "100vw",
+	      "height": "100vh"
+	    }
+	  })
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-4aeb2dc9", module.exports)
+	  }
+	}
 
 /***/ }),
 /* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+	const axios = __webpack_require__(151);
+	const helper = __webpack_require__(177);
+	const Render = __webpack_require__(178);
+
+	const DONATELO_API = 'https://app-donatelo.herokuapp.com';
+
+	const MESSAGES = __webpack_require__(183);
+	const WIDGETS = __webpack_require__(184);
+
+	const SECTIONS = __webpack_require__(185);
+	const VIEWS = __webpack_require__(189);
+
+	module.exports = {
+	  state: {
+	    render: null,
+
+	    lang: 'ru',
+	    api: helper.parseLocationParams(),
+
+	    loading: false,
+	    isGroupExist: false,
+	    isCoverEditable: false,
+
+	    currentSection: SECTIONS.WIDGETS,
+	    currentView: null,
+	    editableObject: null,
+
+	    widgets: WIDGETS,
+	    varibles: [],
+	    services: []
+	  },
+	  mutations: {
+	    initRender(state, id) {
+	      state.render = new Render(id);
+	    },
+	    setSection(state, view) {
+	      if (SECTIONS[view]) state.currentSection = SECTIONS[view];
+	    },
+	    setView(state, view) {
+	      if (VIEWS[view]) state.currentView = VIEWS[view];
+	    },
+	    setEditableObject(state, widget) {
+	      state.editableObject = widget;
+	    },
+
+	    setCover(state, src) {
+	      state.isCoverEditable = true;
+	      state.render.setCover(src);
+	    },
+
+	    setLoading(state, v) {
+	      state.loading = !!v;
+	    },
+	    setGroupExist(state, v) {
+	      state.isGroupExist = v;
+	    },
+	    setServices(state, services) {
+	      for (let key in services) {
+	        for (let input in services[key].inputs) {
+	          services[key].inputs[input].value = '';
+	        }
+	        state.services.push(services[key]);
+	      }
+	    },
+	    setVaribles(state, vars) {
+	      state.varibles = vars;
+	      state.renderer.setVaribles(vars);
+	    }
+	  },
+	  actions: {
+	    addWidgets({ dispatch }, data) {
+	      for (let key in data.views) {
+	        let view = data.views[key];
+	        dispatch('addWidget', {
+	          type: view.type, view, res: data.resources
+	        });
+	      }
+	    },
+	    addWidget({ state, commit }, data) {
+	      let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
+
+	      widget.view.on('mousedown', () => {
+	        commit('setEditableObject', widget);
+	        commit('setSection', 'WIDGET_EDITOR');
+	      });
+	      widget.view.on('selection:cleared', () => {
+	        commit('setEditableObject', null);
+	        commit('setSection', 'WIDGET_EDITOR');
+	      });
+	      widget.view.trigger('mousedown');
+	    },
+	    removeWidget({ state, commit }, id) {
+	      commit('setSection', 'WIDGETS');
+	      state.render.removeWidget(this.widget.id);
+	    },
+
+	    showLog({ state }, log) {
+	      let ms = MESSAGES[log];
+	      if (ms.isError) this._vm.$message.error(ms[state.lang]);else this._vm.$message.success(ms[state.lang]);
+	    },
+	    computedView({ state, commit, dispatch }) {
+	      return _asyncToGenerator(function* () {
+	        yield dispatch('callApi', {
+	          method: 'getGroupExist',
+	          silent: true
+	        });
+	        if (+state.api.viewer_type > 2 && state.api.group_id != null) {
+	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
+	        } else commit('setView', 'GETTING_STARTED');
+	      })();
+	    },
+	    callApi({ commit, dispatch }, params) {
+	      return _asyncToGenerator(function* () {
+	        !params.silent && commit('setLoading', true);
+
+	        try {
+	          var log = yield dispatch(params.method, params);
+	          log && dispatch('showLog', log);
+	        } catch (e) {
+	          console.error(e);
+	          dispatch('showLog', 'METHOD_API_ERROR');
+	        }
+
+	        !params.silent && commit('setLoading', false);
+	      })();
+	    },
+
+	    getGroupExist({ state, commit }) {
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/group_exist', {
+	          group_id: state.api.group_id
+	        });
+	        commit('setGroupExist', resp.data.result);
+	      })();
+	    },
+	    createGroup({ state, commit }, { token }) {
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/create_group', {
+	          group_id: state.api.group_id,
+	          access_token: token
+	        });
+	        resp.data.code === 'ok' && commit('setView', 'ADMIN');
+	        return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
+	      })();
+	    },
+	    editToken({ state, commit }, { token }) {
+	      var _this = this;
+
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/editToken', {
+	          group_id: _this.api.group_id,
+	          access_token: token
+	        });
+	        return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
+	      })();
+	    },
+	    getGroup({ state, dispatch, commit }) {
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/get_group', { group_id: state.api.group_id });
+	        let data = resp.data.result;
+
+	        commit('setServices', data.services);
+	        commit('setVaribles', data.enviroment);
+	        dispatch('addWidgets', data);
+
+	        if (data.resources.background) {
+	          dispatch('setCover', data.resources.background);
+	        }
+	        state.render.canvas.trigger('selection:cleared');
+
+	        return 'GROUP_LOADED';
+	      })();
+	    },
+	    updateGroup({ state, commit }) {
+	      var _this2 = this;
+
+	      return _asyncToGenerator(function* () {
+	        let data = _this2.renderer.getJSON();
+
+	        data.resources.background = _this2.renderer.coverImage._element.src;
+	        let resp = yield axios.post(DONATELO_API + '/update_cover', _extends({
+	          group_id: state.api.group_id
+	        }, data));
+
+	        return 'UPDATED_GROUP';
+	      })();
+	    },
+	    loadVaribles({ commit, state }) {
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/get_enviroment', {
+	          group_id: state.api.group_id
+	        });
+	        commit('setVaribles', resp.data.result);
+	      })();
+	    },
+	    updateService({ commit, state }, { id, form }) {
+	      return _asyncToGenerator(function* () {
+	        let resp = yield axios.post(DONATELO_API + '/update_service', {
+	          group_id: state.api.group_id,
+	          service_id: id,
+	          fields: form
+	        });
+	        return 'UPDATED_SERVICE';
+	      })();
+	    }
+	  }
+	};
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(152);
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var utils = __webpack_require__(151);
-	var bind = __webpack_require__(152);
-	var Axios = __webpack_require__(154);
-	var defaults = __webpack_require__(155);
+	var utils = __webpack_require__(153);
+	var bind = __webpack_require__(154);
+	var Axios = __webpack_require__(156);
+	var defaults = __webpack_require__(157);
 
 	/**
 	 * Create an instance of Axios
@@ -62896,15 +63132,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(172);
-	axios.CancelToken = __webpack_require__(173);
-	axios.isCancel = __webpack_require__(169);
+	axios.Cancel = __webpack_require__(174);
+	axios.CancelToken = __webpack_require__(175);
+	axios.isCancel = __webpack_require__(171);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(174);
+	axios.spread = __webpack_require__(176);
 
 	module.exports = axios;
 
@@ -62913,13 +63149,13 @@
 
 
 /***/ }),
-/* 151 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(152);
-	var isBuffer = __webpack_require__(153);
+	var bind = __webpack_require__(154);
+	var isBuffer = __webpack_require__(155);
 
 	/*global toString:true*/
 
@@ -63222,7 +63458,7 @@
 
 
 /***/ }),
-/* 152 */
+/* 154 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -63239,7 +63475,7 @@
 
 
 /***/ }),
-/* 153 */
+/* 155 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -63266,17 +63502,17 @@
 
 
 /***/ }),
-/* 154 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(155);
-	var utils = __webpack_require__(151);
-	var InterceptorManager = __webpack_require__(166);
-	var dispatchRequest = __webpack_require__(167);
-	var isAbsoluteURL = __webpack_require__(170);
-	var combineURLs = __webpack_require__(171);
+	var defaults = __webpack_require__(157);
+	var utils = __webpack_require__(153);
+	var InterceptorManager = __webpack_require__(168);
+	var dispatchRequest = __webpack_require__(169);
+	var isAbsoluteURL = __webpack_require__(172);
+	var combineURLs = __webpack_require__(173);
 
 	/**
 	 * Create a new instance of Axios
@@ -63358,13 +63594,13 @@
 
 
 /***/ }),
-/* 155 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(151);
-	var normalizeHeaderName = __webpack_require__(156);
+	var utils = __webpack_require__(153);
+	var normalizeHeaderName = __webpack_require__(158);
 
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -63380,10 +63616,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(157);
+	    adapter = __webpack_require__(159);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(157);
+	    adapter = __webpack_require__(159);
 	  }
 	  return adapter;
 	}
@@ -63457,12 +63693,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 156 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -63475,18 +63711,18 @@
 
 
 /***/ }),
-/* 157 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(151);
-	var settle = __webpack_require__(158);
-	var buildURL = __webpack_require__(161);
-	var parseHeaders = __webpack_require__(162);
-	var isURLSameOrigin = __webpack_require__(163);
-	var createError = __webpack_require__(159);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(164);
+	var utils = __webpack_require__(153);
+	var settle = __webpack_require__(160);
+	var buildURL = __webpack_require__(163);
+	var parseHeaders = __webpack_require__(164);
+	var isURLSameOrigin = __webpack_require__(165);
+	var createError = __webpack_require__(161);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(166);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -63583,7 +63819,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(165);
+	      var cookies = __webpack_require__(167);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -63662,12 +63898,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 158 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(159);
+	var createError = __webpack_require__(161);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -63694,12 +63930,12 @@
 
 
 /***/ }),
-/* 159 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(160);
+	var enhanceError = __webpack_require__(162);
 
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -63718,7 +63954,7 @@
 
 
 /***/ }),
-/* 160 */
+/* 162 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -63745,12 +63981,12 @@
 
 
 /***/ }),
-/* 161 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -63819,12 +64055,12 @@
 
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	/**
 	 * Parse headers into an object
@@ -63862,12 +64098,12 @@
 
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -63936,7 +64172,7 @@
 
 
 /***/ }),
-/* 164 */
+/* 166 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -63978,12 +64214,12 @@
 
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -64037,12 +64273,12 @@
 
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -64095,15 +64331,15 @@
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
-	var transformData = __webpack_require__(168);
-	var isCancel = __webpack_require__(169);
-	var defaults = __webpack_require__(155);
+	var utils = __webpack_require__(153);
+	var transformData = __webpack_require__(170);
+	var isCancel = __webpack_require__(171);
+	var defaults = __webpack_require__(157);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -64180,12 +64416,12 @@
 
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(151);
+	var utils = __webpack_require__(153);
 
 	/**
 	 * Transform the data for a request or a response
@@ -64206,7 +64442,7 @@
 
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64217,7 +64453,7 @@
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64237,7 +64473,7 @@
 
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64257,7 +64493,7 @@
 
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64282,12 +64518,12 @@
 
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(172);
+	var Cancel = __webpack_require__(174);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -64345,7 +64581,7 @@
 
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64378,17 +64614,714 @@
 
 
 /***/ }),
-/* 175 */
+/* 177 */
+/***/ (function(module, exports) {
+
+	module.exports = {
+	  parseLocationParams() {
+	    let query = window.location.search.substring(1);
+	    let vars = query.split("&");
+	    let api = {};
+
+	    for (let i = 0; i < vars.length; i++) {
+	      let pair = vars[i].split("=");
+	      api[pair[0]] = pair[1];
+	    }
+	    return api;
+	  },
+	  isMobile() {
+	    var check = false;
+	    (function (a) {
+	      if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+	    })(navigator.userAgent || navigator.vendor || window.opera);
+	    return check;
+	  }
+	};
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	const WIDGETS = {
+	  'text': __webpack_require__(179),
+	  'linear': __webpack_require__(180),
+	  'radial': __webpack_require__(181),
+	  'image': __webpack_require__(182)
+	};
+
+	class Render {
+	  constructor(id) {
+	    this.width = 1000;
+	    this.height = 300;
+	    this.scale = 1;
+
+	    this.coverWidth = 1590;
+	    this.coverHeight = 400;
+
+	    this.canvas = new fabric.Canvas(id);
+	    this.canvas.setWidth(this.coverWidth);
+	    this.canvas.setHeight(this.coverHeight);
+
+	    this.coverImage = new fabric.Image();
+	    this.coverImage.set('selectable', false);
+	    this.canvas.add(this.coverImage);
+	    this.widgets = [];
+
+	    this.varibles = {};
+	  }
+	  getValueFromVarible(id) {
+	    return this.varibles[id] || '';
+	  }
+	  setVaribles(varibles) {
+	    this.varibles = varibles;
+	    this.widgets.forEach(w => {
+	      if (w.type === 'text') w.setValue(w.value);else w.setVarible(w.varible);
+	    });
+	  }
+
+	  addWidget(type, data = {}, res = {}) {
+	    let widget = new WIDGETS[type](this, data, res);
+
+	    widget.view.objectCaching = false;
+	    widget.view.selectable = true;
+	    widget.view.padding = 0;
+	    widget.view.cornerSize = 16;
+	    widget.view.borderColor = '#6e7bab';
+	    widget.view.cornerColor = '#6e7bab';
+	    widget.view.cornerStrokeColor = '#6e7bab';
+	    widget.view.transparentCorners = false;
+
+	    this.widgets.push(widget);
+	    this.canvas.add(widget.view);
+	    this.canvas.renderAll();
+
+	    widget.view.on({
+	      scaling: function (e) {
+	        let obj = this,
+	            w = obj.width * obj.scaleX,
+	            h = obj.height * obj.scaleY,
+	            s = obj.strokeWidth;
+	        obj.set({
+	          scaleX: 1,
+	          scaleY: 1
+	        });
+	        if (widget.setSize) widget.setSize(w);else {
+	          widget.setWidth(w);
+	          widget.setHeight(h);
+	        }
+	      }
+	    });
+
+	    return widget;
+	  }
+	  removeWidget(id) {
+	    this.widgets.forEach((w, i) => {
+	      if (w.id == id) {
+	        this.canvas.remove(w.view);
+	        this.widgets.splice(i, 1);
+	      }
+	    });
+	  }
+	  getJSON() {
+	    let resources = {};
+	    let views = [];
+
+	    this.widgets.forEach(i => {
+	      let data = i.getJSON();
+	      resources = _extends({}, resources, data.images);
+	      views.push(data.data);
+	    });
+	    return { resources, views };
+	  }
+
+	  // Cover
+	  resizeCoverToWidth() {
+	    let scale = this.width / this.coverWidth;
+	    let container = document.getElementsByClassName('canvas-container')[0];
+	    container.style.transform = 'scale(' + scale + ')';
+	    container.style.transformOrigin = '0 0';
+	    document.getElementById('cover-control').style.height = this.coverHeight * scale + 'px';
+	  }
+	  setCover(src) {
+	    fabric.Image.fromURL(src, texture => {
+	      let scale = this.coverWidth / texture.getWidth();
+	      let w = this.coverWidth / scale;
+	      let h = this.coverHeight / scale;
+
+	      let coverSrc = texture.toDataURL({
+	        left: texture.getWidth() / 2 - w / 2,
+	        top: texture.getHeight() / 2 - h / 2,
+	        width: w,
+	        height: h
+	      });
+
+	      let img = new Image();
+	      img.onload = () => {
+	        this.coverImage.setElement(img);
+	        this.coverImage.setWidth(this.coverWidth);
+	        this.coverImage.setHeight(this.coverHeight);
+
+	        this.resizeCoverToWidth();
+	        this.canvas.renderAll();
+	      };
+	      img.src = src;
+	    });
+	  }
+	}
+
+	module.exports = Render;
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports) {
+
+	class Text {
+	  constructor(render, data) {
+
+	    this.id = data.id || '' + Date.now();
+	    this.type = 'text';
+
+	    this.view = new fabric.Text(data.value || 'Здесь ваш текст, йоу', {
+	      fontSize: data.size || 42
+	    });
+	    this.render = render;
+
+	    this.FONTS = {
+	      "BEBAS": "Bebas Neue",
+	      "ROBOTO": "Roboto"
+	    };
+
+	    this.view.setOriginToCenter();
+	    this.setValue(data.value || 'Здесь ваш текст, йоу');
+	    this.setFontType(data.font || 'BEBAS');
+	    this.setColor(data.color || '#fff');
+	    this.setSize(data.size || 42);
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setAngle(360 - data.angle || 0);
+	    this.view.fontWeight = 'bold';
+	    this.view.setControlsVisibility({
+	      mt: false,
+	      mb: false,
+	      ml: false,
+	      mr: false,
+	      bl: false,
+	      br: false,
+	      tl: false,
+	      tr: false
+	    });
+	  }
+	  getJSON() {
+	    return {
+	      data: {
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        angle: Math.round(360 - this.view.angle),
+
+	        id: this.id,
+	        type: "text",
+	        value: this.value,
+	        font: this.fontType,
+	        size: this.size,
+	        color: this.color
+	      }
+	    };
+	  }
+	  setX(x) {
+	    this.view.set('left', x);
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.set('top', y);
+	    this.render.canvas.renderAll();
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setFontType(type) {
+	    this.fontType = type;
+	    this.view.fontFamily = this.FONTS[type];
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(val) {
+	    this.value = val;
+
+	    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
+	      return this.render.getValueFromVarible(v);
+	    });
+	    this.render.canvas.renderAll();
+	  }
+	  setSize(size) {
+	    this.size = +size;
+	    this.view.fontSize = size;
+	    this.render.canvas.renderAll();
+	  }
+	  setColor(color) {
+	    this.color = color;
+	    this.view.fill = color;
+	    this.render.canvas.renderAll();
+	  }
+	}
+
+	module.exports = Text;
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports) {
+
+	class LinearBar {
+	  constructor(render, data, res) {
+	    this.render = render;
+
+	    this.type = 'linear';
+	    this.id = data.id || '' + Date.now();
+
+	    this.progressImage = new fabric.Image();
+	    this.standImage = new fabric.Image();
+
+	    this.view = new fabric.Group([this.standImage, this.progressImage]);
+	    this._saveLastBorder = 0;
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setWidth(data.w || 400);
+	    this.setHeight(data.h || 50);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue(50);
+
+	    this.setMaxValue(data.max_value || 100);
+	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
+	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
+	    this.setProgressColor(data.bar_color || '#ded2f7');
+	    this.setStandColor(data.stand_color || '#fff');
+	    this.setBorder(data.border || 0);
+	  }
+	  getJSON() {
+	    return {
+	      images: {
+	        [this.id + ':stand']: this.standImage._element.src,
+	        [this.id + ':bar']: this.progressImage._element.src
+	      },
+	      data: {
+	        id: this.id,
+	        type: "linear",
+	        value: this.varible || '',
+	        max_value: +this.maxValue + 0.0000001,
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle),
+	        stand_color: this.standColor,
+	        bar_color: this.progressColor,
+	        border: this.border
+	      }
+	    };
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setWidth(w) {
+	    this.view.setWidth(w);
+	    this.progressImage.left = -this.view.width / 2;
+	    this.standImage.left = -this.view.width / 2;
+	    this.standImage.setWidth(this.view.width);
+	    this.setValue(this.value);
+	  }
+	  setHeight(h) {
+	    this.view.setHeight(h);
+	    this.progressImage.top = -this.view.height / 2;
+	    this.progressImage.setHeight(this.view.height);
+	    this.standImage.top = -this.view.height / 2;
+	    this.standImage.setHeight(this.view.height);
+	    this.setValue(this.value);
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.progressImage.setElement(img);
+	      this.progressImage.top = -this.view.height / 2;
+	      this.progressImage.left = -this.view.width / 2;
+	      this.progressImage.setHeight(this.view.height);
+	      this.setProgressColor(this.progressColor);
+	      this.setValue(this.value);
+	    };
+	    img.src = url;
+	  }
+	  setStandImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.standImage.setElement(img);
+	      this.standImage.top = -this.view.height / 2;
+	      this.standImage.left = -this.view.width / 2;
+	      this.standImage.setHeight(this.view.height);
+	      this.standImage.setWidth(this.view.width);
+	      this.setStandColor(this.standColor);
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setValue(val) {
+	    this.value = +val;
+	    this.progressImage.width = this.view.width / this.maxValue * this.value;
+	    this.render.canvas.renderAll();
+	  }
+	  setMaxValue(max) {
+	    this.maxValue = +(+max).toFixed(5);
+	    this.progressImage.width = this.view.width / this.maxValue * this.value;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressColor(color) {
+	    this.progressColor = color;
+	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setStandColor(color) {
+	    this.standColor = color;
+	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setBorder(border) {
+	    this.border = border;
+	    this.standImage.setHeight(this.view.height + this.border * 2);
+	    this.standImage.setWidth(this.view.width + this.border * 2);
+	    this.standImage.left -= this._saveLastBorder + this.border;
+	    this.standImage.top -= this._saveLastBorder + this.border;
+	    this._saveLastBorder = this.border;
+	    this.render.canvas.renderAll();
+	  }
+	}
+
+	module.exports = LinearBar;
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports) {
+
+	class RadialBar {
+	  constructor(render, data, res) {
+	    this.render = render;
+
+	    this.type = 'radial';
+	    this.id = data.id || '' + Date.now();
+
+	    this.progressImage = new fabric.Image();
+	    this.standImage = new fabric.Image();
+	    this.progressImage.setOriginToCenter();
+
+	    this.view = new fabric.Group([this.standImage, this.progressImage]);
+	    this._saveLastBorder = 0;
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setSize(data.w || 200);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue(25);
+
+	    this.setStartAngle(-90);
+	    this.setMaxValue(data.max_value || 100);
+	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
+	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
+	    this.setProgressColor(data.bar_color || '#ded2f7');
+	    this.setStandColor(data.stand_color || '#fff');
+	    this.setBorder(data.border || 0);
+
+	    this.view.setControlsVisibility({
+	      mt: false,
+	      mb: false,
+	      ml: false,
+	      mr: false
+	    });
+	  }
+	  getJSON() {
+	    return {
+	      images: {
+	        [this.id + ':stand']: this.standImage._element.src,
+	        [this.id + ':bar']: this.progressImage._element.src
+	      },
+	      data: {
+	        id: this.id,
+	        type: "radial",
+	        value: this.varible || '',
+	        max_value: +this.maxValue + 0.0000001,
+	        start_angle: 0,
+	        direction: 0,
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle),
+	        stand_color: this.standColor,
+	        bar_color: this.progressColor,
+	        border: this.border
+	      }
+	    };
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setSize(w) {
+	    this.view.width = w;
+	    this.view.height = w;
+	    this.progressImage.top = 0;
+	    this.progressImage.left = 0;
+	    this.progressImage.width = this.view.width;
+	    this.progressImage.height = this.view.width;
+	    this.standImage.top = -this.view.height / 2;
+	    this.standImage.left = -this.view.width / 2;
+	    this.standImage.width = this.view.width;
+	    this.standImage.height = this.view.width;
+	    this.standImage.set({
+	      clipTo: ctx => {
+	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
+	      }
+	    });
+	    this.setValue(this.value);
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.progressImage.setElement(img);
+	      this.progressImage.top = 0;
+	      this.progressImage.left = 0;
+	      this.progressImage.width = this.view.width;
+	      this.progressImage.height = this.view.width;
+	      this.setStartAngle(this.startAngle);
+	      this.setProgressColor(this.progressColor);
+	      this.setValue(this.value);
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setStandImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.standImage.setElement(img);
+	      this.standImage.top = -this.view.height / 2;
+	      this.standImage.left = -this.view.width / 2;
+	      this.standImage.width = this.view.width;
+	      this.standImage.height = this.view.width;
+
+	      this.setStandColor(this.standColor);
+	      this.standImage.set({
+	        clipTo: ctx => {
+	          ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
+	        }
+	      });
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setStartAngle(angle) {
+	    this.startAngle = +angle;
+	    this.progressImage.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(v) {
+	    this.value = +v;
+	    this.progressImage.set({
+	      clipTo: ctx => {
+	        ctx.moveTo(0, 0);
+	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2 / this.maxValue * this.value, false);
+	        ctx.lineTo(0, 0);
+	        ctx.fill();
+	      }
+	    });
+	    this.render.canvas.renderAll();
+	  }
+	  setMaxValue(max) {
+	    this.maxValue = +(+max).toFixed(5);
+	    this.setValue(this.value);
+	  }
+	  setBorder(br) {
+	    this.border = +br;
+	    this.standImage.width = this.view.width + br * 2;
+	    this.standImage.height = this.view.width + br * 2;
+
+	    this.standImage.left -= this._saveLastBorder + br;
+	    this.standImage.top -= this._saveLastBorder + br;
+	    this.standImage.set({
+	      clipTo: ctx => {
+	        ctx.arc(0, 0, this.standImage.width / 2, 0, Math.PI * 2, true);
+	      }
+	    });
+	    this._saveLastBorder = br;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressColor(color) {
+	    this.progressColor = color;
+	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setStandColor(color) {
+	    this.standColor = color;
+	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	}
+
+	module.exports = RadialBar;
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports) {
+
+	class ContructorImage {
+	  constructor(render, data) {
+	    this.render = render;
+	    this.type = 'image';
+	    this.id = data.id || '' + Date.now();
+
+	    this.view = new fabric.Image();
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 200);
+	    this.setY(data.y || 200);
+	    this.setWidth(data.w || 200);
+	    this.setHeight(data.h || 200);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue('dist/assets/image.png');
+
+	    this.setBorderWidth(data.borderWidth || 0);
+	    this.setBorderColor(data.borderColor || '#fff');
+	  }
+	  getJSON() {
+	    return {
+	      data: {
+	        id: this.id,
+	        type: "image",
+	        value: this.varible || '',
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle)
+	        // border_color: obj.borderColor,
+	        // border_width: obj.borderWidth
+	      }
+	    };
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setWidth(w) {
+	    this.view.width = w;
+	    this.render.canvas.renderAll();
+	  }
+	  setHeight(h) {
+	    this.view.height = h;
+	    this.render.canvas.renderAll();
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(src) {
+	    this.value = src;
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      let w = this.view.width;
+	      let h = this.view.height;
+	      this.view.setElement(img);
+	      this.setWidth(w);
+	      this.setHeight(h);
+	    };
+	    img.src = src;
+	  }
+	  setBorderWidth(width) {
+	    this.borderWidth = +width;
+	    this.view.strokeWidth = +width;
+	  }
+	  setBorderColor(color) {
+	    this.borderColor = color;
+	    this.view.stroke = color;
+	  }
+	}
+
+	module.exports = ContructorImage;
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports) {
+
+	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports) {
+
+	module.exports = [{"type":"text","label":"Текст","icon":"el-icon-tickets"},{"type":"linear","label":"Линейный бар","icon":"el-icon-menu"},{"type":"radial","label":"Радиальный бар","icon":"el-icon-remove"},{"type":"image","label":"Картинка","icon":"el-icon-picture"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"el-icon-star-on"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"el-icon-star-on"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"el-icon-star-on"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"el-icon-star-on"}]
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  WIDGETS: __webpack_require__(186)
+	  // SERVICES: require('./Services.vue'),
+	  // SETTINGS: require('./Settings.vue'),
+
+	  // WIDGET_EDITOR: require('./WidgetEditor.vue'),
+	  // SERVICE_EDITOR: require('./ServiceEditor.vue')
+	};
+
+/***/ }),
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(176)
+	__vue_exports__ = __webpack_require__(187)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(193)
+	var __vue_template__ = __webpack_require__(188)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -64400,7 +65333,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\views\\AdminEditor.vue"
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\sections\\Widgets.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -64411,18 +65344,449 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-06d1d21a", __vue_options__)
+	    hotAPI.createRecord("data-v-502f2d49", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-06d1d21a", __vue_options__)
+	    hotAPI.reload("data-v-502f2d49", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] AdminEditor.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] Widgets.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 	module.exports = __vue_exports__
 
 
 /***/ }),
-/* 176 */
+/* 187 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  computed: {
+	    widgets() {
+	      return this.$store.state.widgets;
+	    }
+	  },
+	  methods: {
+	    addWidget(type) {
+	      this.$store.dispatch('addWidget', { type });
+	    }
+	  }
+	};
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "widgets-container",
+	    attrs: {
+	      "id": "widgets"
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Добавить виджет:")]), _vm._v(" "), _c('el-row', {
+	    attrs: {
+	      "gutter": 10
+	    }
+	  }, _vm._l((_vm.widgets), function(widget) {
+	    return _c('el-col', {
+	      staticClass: "widgets-container__col",
+	      attrs: {
+	        "span": 6
+	      }
+	    }, [_c('div', {
+	      staticClass: "widget-card",
+	      class: widget.disable && 'widget-card--disable',
+	      on: {
+	        "click": function($event) {
+	          _vm.addWidget(widget.type)
+	        }
+	      }
+	    }, [_c('div', {
+	      staticClass: "widget-card__content"
+	    }, [_c('i', {
+	      staticClass: "widget-card__icon",
+	      class: widget.icon
+	    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(widget.label))])])])])
+	  }))], 1)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-502f2d49", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  GETTING_STARTED: __webpack_require__(190),
+	  REGISTER_GROUP: __webpack_require__(193),
+	  ADMIN: __webpack_require__(196)
+	};
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(191)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(192)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\GettingStarted.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a3bee55a", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a3bee55a", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] GettingStarted.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  computed: {
+	    addAppLink() {
+	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
+	    }
+	  },
+	  mounted() {
+	    VK.External.resizeWindow(840, 3000);
+	  }
+	};
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "getting-started"
+	    }
+	  }, [_c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/banner.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Что такое Donatelo?")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для вашей группы или паблика.")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/screen1.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! ")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Все что вам нужно - это расставлять различные визуальные элементы на вашу обложку и изменять стилистику. ")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/screen2.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Если вам не хватает существующих сервисов, то специально для разработчиков Donatelo предоставляет API для интеграции ваших сервисов с нешей платформой, например вы можете интегрировать показ актуальных новостей с вашего сайта, специальные промо акции, все ограничивается лишь вашей фантазией! ")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-a3bee55a", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(194)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(195)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\RegisterGroup.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1e8dac54", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-1e8dac54", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] RegisterGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  props: ['api'],
+	  data() {
+	    return {
+	      token: ''
+	    };
+	  },
+	  methods: {
+	    submitToken(e) {
+	      this.$store.dispatch('callApi', {
+	        method: 'createGroup',
+	        token: this.token
+	      });
+	    }
+	  },
+	  mounted() {
+	    VK.External.resizeWindow(1000, 600);
+	  }
+	};
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "register-group"
+	    }
+	  }, [_c('div', {
+	    staticClass: "container"
+	  }, [_c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/token.png",
+	      "alt": "token"
+	    }
+	  }), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('el-input', {
+	    attrs: {
+	      "placeholder": "Ваш токен",
+	      "suffix-icon": "el-icon-edit"
+	    },
+	    on: {
+	      "change": _vm.submitToken
+	    },
+	    model: {
+	      value: (_vm.token),
+	      callback: function($$v) {
+	        _vm.token = $$v
+	      },
+	      expression: "token"
+	    }
+	  })], 1)])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1e8dac54", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(197)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(208)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\AdminGroup.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a536eab4", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a536eab4", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] AdminGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//
@@ -64439,53 +65803,42 @@
 	//
 	//
 	//
+	//
 
-	const CONTROLS = {
-	  widgets: __webpack_require__(177)
-	  // services: require('../controls/ServicesControl.vue'),
-	  // widgetEditor: require('../controls/widgetEditorControl.vue'),
-	  // serviceEditor: require('../controls/serviceEditorControl.vue'),
-	  // settings: require('../controls/SettingsControl.vue')
-	};
-
-	const CoverControl = __webpack_require__(184);
-	const helper = __webpack_require__(192);
+	const CoverControl = __webpack_require__(198);
 
 	module.exports = {
 	  components: {
 	    CoverControl
 	  },
 	  computed: {
-	    nameControl() {
-	      return this.$store.state.currentControl;
-	    },
-	    viewControl() {
-	      return CONTROLS[this.nameControl];
+	    viewSection() {
+	      return this.$store.state.currentSection;
 	    }
 	  },
 	  methods: {
 	    setControl(view) {
-	      this.$store.commit('setControl', view);
+	      this.$store.commit('setSection', view);
 	    }
 	  },
 	  mounted() {
-	    VK.External.resizeWindow(window.screen.availWidth - 200, Math.max(660, window.screen.availHeight - 300));
-	    let w = helper.isMobile() ? window.innerWidth : Math.min(window.screen.availWidth - 200, 1000);
+	    VK.External.resizeWindow(1000, Math.max(660, window.screen.availHeight - 200));
+	    this.$store.commit('initRender', 'playground');
 	  }
 	};
 
 /***/ }),
-/* 177 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(182)
+	__vue_exports__ = __webpack_require__(199)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(183)
+	var __vue_template__ = __webpack_require__(207)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -64497,7 +65850,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\controls\\WidgetsControl.vue"
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\CoverControl.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -64508,20 +65861,147 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-0127c0c0", __vue_options__)
+	    hotAPI.createRecord("data-v-632fcf14", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-0127c0c0", __vue_options__)
+	    hotAPI.reload("data-v-632fcf14", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] WidgetsControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] CoverControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 	module.exports = __vue_exports__
 
 
 /***/ }),
-/* 178 */,
-/* 179 */,
-/* 180 */
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	const UploadImage = __webpack_require__(200);
+
+	module.exports = {
+	  components: {
+	    UploadImage
+	  },
+	  computed: {
+	    isCoverEditable() {
+	      return this.$store.state.isCoverEditable;
+	    }
+	  },
+	  methods: {
+	    setCover(src) {
+	      this.$store.commit('setCover', src);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(201)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(205)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(206)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\UploadImage.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-33a83648", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-33a83648", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] UploadImage.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(202);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(204)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(203)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 203 */
 /***/ (function(module, exports) {
 
 	/*
@@ -64577,7 +66057,7 @@
 
 
 /***/ }),
-/* 181 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -64799,256 +66279,7 @@
 
 
 /***/ }),
-/* 182 */
-/***/ (function(module, exports) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	module.exports = {
-	  computed: {
-	    widgets() {
-	      return this.$store.state.widgets;
-	    }
-	  },
-	  methods: {
-	    addWidget(type) {
-	      this.$store.dispatch('addWidget', { type });
-	    }
-	  }
-	};
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    staticClass: "widgets-container",
-	    attrs: {
-	      "id": "widgets"
-	    }
-	  }, [_c('el-row', {
-	    attrs: {
-	      "gutter": 10
-	    }
-	  }, _vm._l((_vm.widgets), function(widget) {
-	    return _c('el-col', {
-	      staticClass: "widgets-container__col",
-	      attrs: {
-	        "span": 6
-	      }
-	    }, [_c('div', {
-	      staticClass: "widget-card",
-	      class: widget.disable && 'widget-card--disable',
-	      on: {
-	        "click": function($event) {
-	          _vm.addWidget(widget.type)
-	        }
-	      }
-	    }, [_c('div', {
-	      staticClass: "widget-card__content"
-	    }, [_c('i', {
-	      staticClass: "widget-card__icon",
-	      class: widget.icon
-	    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(widget.label))])])])])
-	  }))], 1)
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-0127c0c0", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(185)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(191)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\controls\\CoverControl.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-70870590", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-70870590", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] CoverControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	const UploadImage = __webpack_require__(186);
-
-	module.exports = {
-	  components: {
-	    UploadImage
-	  },
-	  computed: {
-	    isCoverEditable() {
-	      return this.$store.state.isCoverEditable;
-	    }
-	  },
-	  methods: {
-	    setCover(src) {
-	      this.$store.commit('setCover', src);
-	    }
-	  }
-	};
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* styles */
-	__webpack_require__(187)
-
-	/* script */
-	__vue_exports__ = __webpack_require__(189)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(190)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\helper\\UploadImage.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-1e49ce30", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-1e49ce30", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] UploadImage.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(188);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(181)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1e49ce30!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1e49ce30!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(180)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n.select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 189 */
+/* 205 */
 /***/ (function(module, exports) {
 
 	//
@@ -65059,10 +66290,11 @@
 	module.exports = {
 	  methods: {
 	    uploadImage(e) {
-	      let file = e.target.files[0] || e.dataTransfer.files[0];
+	      let files = e.target.files || e.dataTransfer.files;
+	      if (!files[0]) return;
 
-	      const isFormat = file.type === 'image/jpeg' || file.type === 'image/png';
-	      const isLt2M = file.size / 1024 / 1024 < 3;
+	      const isFormat = files[0].type === 'image/jpeg' || files[0].type === 'image/png';
+	      const isLt2M = files[0].size / 1024 / 1024 < 3;
 
 	      if (!isFormat) this.$store.dispatch('showLog', 'IMAGE_NOT_VALID_FORMAT');
 	      if (!isLt2M) this.$store.dispatch('showLog', 'IMAGE_LIMIT_SIZE');
@@ -65070,14 +66302,14 @@
 	      if (isFormat && isLt2M) {
 	        let reader = new FileReader();
 	        reader.onload = e => this.$emit('upload', e.target.result);
-	        reader.readAsDataURL(file);
+	        reader.readAsDataURL(files[0]);
 	      }
 	    }
 	  }
 	};
 
 /***/ }),
-/* 190 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65095,12 +66327,12 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1e49ce30", module.exports)
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-33a83648", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 191 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65160,37 +66392,12 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-70870590", module.exports)
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-632fcf14", module.exports)
 	  }
 	}
 
 /***/ }),
-/* 192 */
-/***/ (function(module, exports) {
-
-	module.exports = {
-	  parseLocationParams() {
-	    let query = window.location.search.substring(1);
-	    let vars = query.split("&");
-	    let api = {};
-
-	    for (let i = 0; i < vars.length; i++) {
-	      let pair = vars[i].split("=");
-	      api[pair[0]] = pair[1];
-	    }
-	    return api;
-	  },
-	  isMobile() {
-	    var check = false;
-	    (function (a) {
-	      if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
-	    })(navigator.userAgent || navigator.vendor || window.opera);
-	    return check;
-	  }
-	};
-
-/***/ }),
-/* 193 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65199,11 +66406,11 @@
 	      "id": "admin"
 	    }
 	  }, [_c('cover-control'), _vm._v(" "), _c('div', {
-	    staticClass: "fixed-wrap"
+	    staticClass: "admin__menu"
 	  }, [_c('el-menu', {
 	    staticClass: "el-menu-demo",
 	    attrs: {
-	      "default-active": 'widgets',
+	      "default-active": 'WIDGETS',
 	      "mode": "horizontal"
 	    },
 	    on: {
@@ -65211,1266 +66418,32 @@
 	    }
 	  }, [_c('el-menu-item', {
 	    attrs: {
-	      "index": "widgets"
+	      "index": "WIDGETS"
 	    }
 	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('el-menu-item', {
 	    attrs: {
-	      "index": "services"
+	      "index": "SERVICES"
 	    }
 	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('el-menu-item', {
 	    attrs: {
-	      "index": "controls"
+	      "index": "SETTINGS"
 	    }
-	  }, [_vm._v("Настройки")])], 1)], 1), _vm._v(" "), _c(_vm.viewControl, {
-	    tag: "div"
+	  }, [_vm._v("Настройки")])], 1), _vm._v(" "), _c('el-button', {
+	    staticClass: "admin__menu-btn-cover-save",
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Сохранить обложку")])], 1), _vm._v(" "), _c(_vm.viewSection, {
+	    tag: "div",
+	    staticClass: "admin__section"
 	  })], 1)
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-06d1d21a", module.exports)
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-a536eab4", module.exports)
 	  }
 	}
-
-/***/ }),
-/* 194 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(195)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(196)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\views\\GettingStarted.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-3e5b99e2", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-3e5b99e2", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] GettingStarted.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 195 */
-/***/ (function(module, exports) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	module.exports = {
-	  computed: {
-	    addAppLink() {
-	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
-	    }
-	  },
-	  mounted() {
-	    VK.External.resizeWindow(840, 3000);
-	  }
-	};
-
-/***/ }),
-/* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    attrs: {
-	      "id": "getting-started"
-	    }
-	  }, [_c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/banner.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Что такое Donatelo?")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для вашей группы или паблика.")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/screen1.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! ")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Все что вам нужно - это расставлять различные визуальные элементы на вашу обложку и изменять стилистику. ")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/screen2.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Если вам не хватает существующих сервисов, то специально для разработчиков Donatelo предоставляет API для интеграции ваших сервисов с нешей платформой, например вы можете интегрировать показ актуальных новостей с вашего сайта, специальные промо акции, все ограничивается лишь вашей фантазией! ")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)])])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-3e5b99e2", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(198)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(199)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\views\\Register.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-eb1cc4d6", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-eb1cc4d6", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Register.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	module.exports = {
-	  props: ['api'],
-	  data() {
-	    return {
-	      token: ''
-	    };
-	  },
-	  methods: {
-	    submitToken(e) {
-	      this.$store.dispatch('callApi', {
-	        method: 'createGroup',
-	        token: this.token
-	      });
-	    }
-	  },
-	  mounted() {
-	    VK.External.resizeWindow(1000, 600);
-	  }
-	};
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    attrs: {
-	      "id": "register-group"
-	    }
-	  }, [_c('div', {
-	    staticClass: "container"
-	  }, [_c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/token.png",
-	      "alt": "token"
-	    }
-	  }), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('el-input', {
-	    attrs: {
-	      "placeholder": "Ваш токен",
-	      "suffix-icon": "el-icon-edit"
-	    },
-	    on: {
-	      "change": _vm.submitToken
-	    },
-	    model: {
-	      value: (_vm.token),
-	      callback: function($$v) {
-	        _vm.token = $$v
-	      },
-	      expression: "token"
-	    }
-	  })], 1)])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-eb1cc4d6", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c(_vm.view, {
-	    directives: [{
-	      name: "loading",
-	      rawName: "v-loading",
-	      value: (_vm.loading),
-	      expression: "loading"
-	    }],
-	    tag: "div",
-	    staticStyle: {
-	      "width": "100vw",
-	      "height": "100vh"
-	    }
-	  })
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-7b75e88d", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 201 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-	const axios = __webpack_require__(149);
-	const helper = __webpack_require__(192);
-	const Render = __webpack_require__(202);
-	const MESSAGES = __webpack_require__(207);
-
-	const DONATELO_API = 'https://app-donatelo.herokuapp.com';
-	const CONTROLS = {
-	  WIDGETS: 'widgets',
-	  SERVICES: 'services',
-	  WIDGET_EDITOR: 'widgetEditor',
-	  SERVICE_EDITOR: 'serviceEditor',
-	  SETTINGS: 'settings'
-	};
-	const VIEWS = {
-	  GETTING_STARTED: 'GettingStarted',
-	  REGISTER_TOKEN: 'Register',
-	  ADMIN: 'Admin'
-	};
-	const WIDGETS = [{
-	  type: "text",
-	  label: "Текст",
-	  icon: "el-icon-tickets"
-	}, {
-	  type: "linear",
-	  label: "Линейный бар",
-	  icon: "el-icon-menu"
-	}, {
-	  type: "radial",
-	  label: "Радиальный бар",
-	  icon: "el-icon-remove"
-	}, {
-	  type: "image",
-	  label: "Картинка",
-	  icon: "el-icon-picture"
-	}, {
-	  type: "stickers",
-	  label: "Стикеры",
-	  disable: true,
-	  icon: "el-icon-star-on"
-	}, {
-	  type: "stickers",
-	  label: "Стикеры",
-	  disable: true,
-	  icon: "el-icon-star-on"
-	}, {
-	  type: "stickers",
-	  label: "Стикеры",
-	  disable: true,
-	  icon: "el-icon-star-on"
-	}, {
-	  type: "stickers",
-	  label: "Стикеры",
-	  disable: true,
-	  icon: "el-icon-star-on"
-	}];
-
-	module.exports = {
-	  state: {
-	    render: new Render(),
-
-	    lang: 'ru',
-	    api: helper.parseLocationParams(),
-
-	    loading: false,
-	    isGroupExist: false,
-	    isCoverEditable: false,
-
-	    currentControl: 'widgets',
-	    currentView: 'GettingStarted',
-	    editableObject: null,
-
-	    widgets: WIDGETS,
-	    varibles: [],
-	    services: []
-	  },
-	  mutations: {
-	    setControl(state, view) {
-	      if (CONTROLS[view]) state.currentControl = CONTROLS[view];
-	    },
-	    setView(state, view) {
-	      if (VIEWS[view]) state.currentView = VIEWS[view];
-	    },
-	    setEditableObject(state, widget) {
-	      state.editableObject = widget;
-	    },
-
-	    setCover(state, src) {
-	      state.isCoverEditable = true;
-	      state.render.setCover(src);
-	    },
-
-	    setLoading(state, v) {
-	      state.loading = !!v;
-	    },
-	    setGroupExist(state, v) {
-	      state.isGroupExist = v;
-	    },
-	    setServices(state, services) {
-	      for (let key in services) {
-	        for (let input in services[key].inputs) {
-	          services[key].inputs[input].value = '';
-	        }
-	        state.services.push(services[key]);
-	      }
-	    },
-	    setVaribles(state, vars) {
-	      state.varibles = vars;
-	      state.renderer.setVaribles(vars);
-	    }
-	  },
-	  actions: {
-	    addWidgets({ dispatch }, data) {
-	      for (let key in data.views) {
-	        let view = data.views[key];
-	        dispatch('addWidget', {
-	          type: view.type, view, res: data.resources
-	        });
-	      }
-	    },
-	    addWidget({ state, commit }, data) {
-	      let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
-
-	      widget.view.on('mousedown', () => {
-	        commit('setEditableObject', widget);
-	        commit('setControl', 'WIDGET_EDITOR');
-	      });
-	      widget.view.on('selection:cleared', () => {
-	        commit('setEditableObject', null);
-	        commit('setControl', 'WIDGET_EDITOR');
-	      });
-	      widget.view.trigger('mousedown');
-	    },
-
-	    showLog({ state }, log) {
-	      let ms = MESSAGES[log];
-	      if (ms.isError) this._vm.$message.error(ms[state.lang]);else this._vm.$message.success(ms[state.lang]);
-	    },
-	    computedView({ state, commit, dispatch }) {
-	      return _asyncToGenerator(function* () {
-	        yield dispatch('callApi', {
-	          method: 'getGroupExist',
-	          silent: true
-	        });
-	        if (+state.api.viewer_type > 2 && state.api.group_id != null) {
-	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
-	        } else commit('setView', 'GETTING_STARTED');
-	      })();
-	    },
-	    callApi({ commit, dispatch }, params) {
-	      return _asyncToGenerator(function* () {
-	        console.log(params);
-
-	        !params.silent && commit('setLoading', true);
-	        console.log(params);
-
-	        try {
-	          var log = yield dispatch(params.method, params);
-	          log && dispatch('showLog', log);
-	        } catch (e) {
-	          console.error(e);
-	          dispatch('showLog', 'METHOD_API_ERROR');
-	        }
-
-	        !params.silent && commit('setLoading', false);
-	      })();
-	    },
-
-	    getGroupExist({ state, commit }) {
-	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/group_exist', {
-	          group_id: state.api.group_id
-	        });
-	        commit('setGroupExist', resp.data.result);
-	      })();
-	    },
-	    createGroup({ state, commit }, { token }) {
-	      return _asyncToGenerator(function* () {
-	        console.log(token);
-	        let resp = yield axios.post(DONATELO_API + '/create_group', {
-	          group_id: state.api.group_id,
-	          access_token: token
-	        });
-	        resp.data.code === 'ok' && commit('setView', 'ADMIN');
-	        return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
-	      })();
-	    },
-	    editToken({ state, commit }, { token }) {
-	      var _this = this;
-
-	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/editToken', {
-	          group_id: _this.api.group_id,
-	          access_token: token
-	        });
-	        return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
-	      })();
-	    },
-	    getGroup({ state, dispatch, commit }) {
-	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/get_group', { group_id: state.api.group_id });
-	        let data = resp.data.result;
-
-	        commit('setServices', data.services);
-	        commit('setVaribles', data.enviroment);
-	        dispatch('addWidgets', data);
-
-	        if (data.resources.background) {
-	          dispatch('setCover', data.resources.background);
-	        }
-	        state.render.canvas.trigger('selection:cleared');
-
-	        return 'GROUP_LOADED';
-	      })();
-	    },
-	    updateGroup({ state, commit }) {
-	      var _this2 = this;
-
-	      return _asyncToGenerator(function* () {
-	        let data = _this2.renderer.getJSON();
-
-	        data.resources.background = _this2.renderer.coverImage._element.src;
-	        let resp = yield axios.post(DONATELO_API + '/update_cover', _extends({
-	          group_id: state.api.group_id
-	        }, data));
-
-	        return 'UPDATED_GROUP';
-	      })();
-	    },
-	    loadVaribles({ commit, state }) {
-	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/get_enviroment', {
-	          group_id: state.api.group_id
-	        });
-	        commit('setVaribles', resp.data.result);
-	      })();
-	    },
-	    updateService({ commit, state }, { id, form }) {
-	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/update_service', {
-	          group_id: state.api.group_id,
-	          service_id: id,
-	          fields: form
-	        });
-	        return 'UPDATED_SERVICE';
-	      })();
-	    }
-	  }
-	};
-
-/***/ }),
-/* 202 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	const WIDGETS = {
-	  'text': __webpack_require__(203),
-	  'linear': __webpack_require__(204),
-	  'radial': __webpack_require__(205),
-	  'image': __webpack_require__(206)
-	};
-
-	class Render {
-	  constructor() {
-	    this.width = window.innerWidth;
-	    this.height = 300;
-	    this.scale = 1;
-
-	    this.coverWidth = 1590;
-	    this.coverHeight = 400;
-
-	    this.element = document.createElement('canvas');
-	    this.element.id = 'playground';
-
-	    this.canvas = new fabric.Canvas('playground');
-	    this.canvas.setWidth(this.coverWidth);
-	    this.canvas.setHeight(this.coverHeight);
-
-	    this.coverImage = new fabric.Image();
-	    this.coverImage.set('selectable', false);
-	    this.canvas.add(this.coverImage);
-	    this.widgets = [];
-
-	    this.varibles = {};
-	  }
-	  getValueFromVarible(id) {
-	    return this.varibles[id] || '';
-	  }
-	  setVaribles(varibles) {
-	    this.varibles = varibles;
-	    this.widgets.forEach(w => {
-	      if (w.type === 'text') w.setValue(w.value);else w.setVarible(w.varible);
-	    });
-	  }
-
-	  addWidget(type, data = {}, res = {}) {
-	    let widget = new WIDGETS[type](this, data, res);
-
-	    widget.view.objectCaching = false;
-	    widget.view.selectable = true;
-	    widget.view.padding = 0;
-	    widget.view.cornerSize = 16;
-	    widget.view.borderColor = '#6e7bab';
-	    widget.view.cornerColor = '#6e7bab';
-	    widget.view.cornerStrokeColor = '#6e7bab';
-	    widget.view.transparentCorners = false;
-
-	    this.widgets.push(widget);
-	    this.canvas.add(widget.view);
-	    this.canvas.renderAll();
-
-	    widget.view.on({
-	      scaling: function (e) {
-	        let obj = this,
-	            w = obj.width * obj.scaleX,
-	            h = obj.height * obj.scaleY,
-	            s = obj.strokeWidth;
-	        obj.set({
-	          scaleX: 1,
-	          scaleY: 1
-	        });
-	        if (widget.setSize) widget.setSize(w);else {
-	          widget.setWidth(w);
-	          widget.setHeight(h);
-	        }
-	      }
-	    });
-
-	    return widget;
-	  }
-	  removeWidget(id) {
-	    this.widgets.forEach((w, i) => {
-	      if (w.id == id) {
-	        this.canvas.remove(w.view);
-	        this.widgets.splice(i, 1);
-	      }
-	    });
-	  }
-	  getJSON() {
-	    let resources = {};
-	    let views = [];
-
-	    this.widgets.forEach(i => {
-	      let data = i.getJSON();
-	      resources = _extends({}, resources, data.images);
-	      views.push(data.data);
-	    });
-	    return { resources, views };
-	  }
-
-	  // Cover
-	  resizeCoverToWidth() {
-	    let scale = this.width / this.coverWidth;
-	    $('.canvas-container').css({
-	      'transform': 'scale(' + scale + ')',
-	      'transform-origin': '0 0'
-	    });
-	    $('#cover-control').css('height', this.coverHeight * scale + 'px');
-	    $('.fixed-btns').css('top', this.coverHeight * scale + 14 + 'px');
-	    $('.views-wrap').css('height', window.innerHeight - (this.coverHeight * scale + 48) + 'px');
-	  }
-	  setCover(src) {
-	    fabric.Image.fromURL(base64, texture => {
-	      let scale = this.coverWidth / texture.getWidth();
-	      let w = this.coverWidth / scale;
-	      let h = this.coverHeight / scale;
-
-	      let coverSrc = texture.toDataURL({
-	        left: texture.getWidth() / 2 - w / 2,
-	        top: texture.getHeight() / 2 - h / 2,
-	        width: w,
-	        height: h
-	      });
-
-	      let img = new Image();
-	      img.onload = () => {
-	        this.coverImage.setElement(img);
-	        this.coverImage.setWidth(this.coverWidth);
-	        this.coverImage.setHeight(this.coverHeight);
-
-	        this.resizeCoverToWidth();
-	        this.canvas.renderAll();
-	      };
-	      img.src = src;
-	    });
-	  }
-	}
-
-	module.exports = Render;
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports) {
-
-	class Text {
-	  constructor(render, data) {
-
-	    this.id = data.id || '' + Date.now();
-	    this.type = 'text';
-
-	    this.view = new fabric.Text(data.value || 'Здесь ваш текст, йоу', {
-	      fontSize: data.size || 42
-	    });
-	    this.render = render;
-
-	    this.FONTS = {
-	      "BEBAS": "Bebas Neue",
-	      "ROBOTO": "Roboto"
-	    };
-
-	    this.view.setOriginToCenter();
-	    this.setValue(data.value || 'Здесь ваш текст, йоу');
-	    this.setFontType(data.font || 'BEBAS');
-	    this.setColor(data.color || '#fff');
-	    this.setSize(data.size || 42);
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setAngle(360 - data.angle || 0);
-	    this.view.fontWeight = 'bold';
-	    this.view.setControlsVisibility({
-	      mt: false,
-	      mb: false,
-	      ml: false,
-	      mr: false,
-	      bl: false,
-	      br: false,
-	      tl: false,
-	      tr: false
-	    });
-	  }
-	  getJSON() {
-	    return {
-	      data: {
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        angle: Math.round(360 - this.view.angle),
-
-	        id: this.id,
-	        type: "text",
-	        value: this.value,
-	        font: this.fontType,
-	        size: this.size,
-	        color: this.color
-	      }
-	    };
-	  }
-	  setX(x) {
-	    this.view.set('left', x);
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.set('top', y);
-	    this.render.canvas.renderAll();
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setFontType(type) {
-	    this.fontType = type;
-	    this.view.fontFamily = this.FONTS[type];
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(val) {
-	    this.value = val;
-
-	    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
-	      return this.render.getValueFromVarible(v);
-	    });
-	    this.render.canvas.renderAll();
-	  }
-	  setSize(size) {
-	    this.size = +size;
-	    this.view.fontSize = size;
-	    this.render.canvas.renderAll();
-	  }
-	  setColor(color) {
-	    this.color = color;
-	    this.view.fill = color;
-	    this.render.canvas.renderAll();
-	  }
-	}
-
-	module.exports = Text;
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports) {
-
-	class LinearBar {
-	  constructor(render, data, res) {
-	    this.render = render;
-
-	    this.type = 'linear';
-	    this.id = data.id || '' + Date.now();
-
-	    this.progressImage = new fabric.Image();
-	    this.standImage = new fabric.Image();
-
-	    this.view = new fabric.Group([this.standImage, this.progressImage]);
-	    this._saveLastBorder = 0;
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setWidth(data.w || 400);
-	    this.setHeight(data.h || 50);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue(50);
-
-	    this.setMaxValue(data.max_value || 100);
-	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
-	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
-	    this.setProgressColor(data.bar_color || '#ded2f7');
-	    this.setStandColor(data.stand_color || '#fff');
-	    this.setBorder(data.border || 0);
-	  }
-	  getJSON() {
-	    return {
-	      images: {
-	        [this.id + ':stand']: this.standImage._element.src,
-	        [this.id + ':bar']: this.progressImage._element.src
-	      },
-	      data: {
-	        id: this.id,
-	        type: "linear",
-	        value: this.varible || '',
-	        max_value: +this.maxValue + 0.0000001,
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle),
-	        stand_color: this.standColor,
-	        bar_color: this.progressColor,
-	        border: this.border
-	      }
-	    };
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setWidth(w) {
-	    this.view.setWidth(w);
-	    this.progressImage.left = -this.view.width / 2;
-	    this.standImage.left = -this.view.width / 2;
-	    this.standImage.setWidth(this.view.width);
-	    this.setValue(this.value);
-	  }
-	  setHeight(h) {
-	    this.view.setHeight(h);
-	    this.progressImage.top = -this.view.height / 2;
-	    this.progressImage.setHeight(this.view.height);
-	    this.standImage.top = -this.view.height / 2;
-	    this.standImage.setHeight(this.view.height);
-	    this.setValue(this.value);
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.progressImage.setElement(img);
-	      this.progressImage.top = -this.view.height / 2;
-	      this.progressImage.left = -this.view.width / 2;
-	      this.progressImage.setHeight(this.view.height);
-	      this.setProgressColor(this.progressColor);
-	      this.setValue(this.value);
-	    };
-	    img.src = url;
-	  }
-	  setStandImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.standImage.setElement(img);
-	      this.standImage.top = -this.view.height / 2;
-	      this.standImage.left = -this.view.width / 2;
-	      this.standImage.setHeight(this.view.height);
-	      this.standImage.setWidth(this.view.width);
-	      this.setStandColor(this.standColor);
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setValue(val) {
-	    this.value = +val;
-	    this.progressImage.width = this.view.width / this.maxValue * this.value;
-	    this.render.canvas.renderAll();
-	  }
-	  setMaxValue(max) {
-	    this.maxValue = +(+max).toFixed(5);
-	    this.progressImage.width = this.view.width / this.maxValue * this.value;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressColor(color) {
-	    this.progressColor = color;
-	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setStandColor(color) {
-	    this.standColor = color;
-	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setBorder(border) {
-	    this.border = border;
-	    this.standImage.setHeight(this.view.height + this.border * 2);
-	    this.standImage.setWidth(this.view.width + this.border * 2);
-	    this.standImage.left -= this._saveLastBorder + this.border;
-	    this.standImage.top -= this._saveLastBorder + this.border;
-	    this._saveLastBorder = this.border;
-	    this.render.canvas.renderAll();
-	  }
-	}
-
-	module.exports = LinearBar;
-
-/***/ }),
-/* 205 */
-/***/ (function(module, exports) {
-
-	class RadialBar {
-	  constructor(render, data, res) {
-	    this.render = render;
-
-	    this.type = 'radial';
-	    this.id = data.id || '' + Date.now();
-
-	    this.progressImage = new fabric.Image();
-	    this.standImage = new fabric.Image();
-	    this.progressImage.setOriginToCenter();
-
-	    this.view = new fabric.Group([this.standImage, this.progressImage]);
-	    this._saveLastBorder = 0;
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setSize(data.w || 200);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue(25);
-
-	    this.setStartAngle(-90);
-	    this.setMaxValue(data.max_value || 100);
-	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
-	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
-	    this.setProgressColor(data.bar_color || '#ded2f7');
-	    this.setStandColor(data.stand_color || '#fff');
-	    this.setBorder(data.border || 0);
-
-	    this.view.setControlsVisibility({
-	      mt: false,
-	      mb: false,
-	      ml: false,
-	      mr: false
-	    });
-	  }
-	  getJSON() {
-	    return {
-	      images: {
-	        [this.id + ':stand']: this.standImage._element.src,
-	        [this.id + ':bar']: this.progressImage._element.src
-	      },
-	      data: {
-	        id: this.id,
-	        type: "radial",
-	        value: this.varible || '',
-	        max_value: +this.maxValue + 0.0000001,
-	        start_angle: 0,
-	        direction: 0,
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle),
-	        stand_color: this.standColor,
-	        bar_color: this.progressColor,
-	        border: this.border
-	      }
-	    };
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setSize(w) {
-	    this.view.width = w;
-	    this.view.height = w;
-	    this.progressImage.top = 0;
-	    this.progressImage.left = 0;
-	    this.progressImage.width = this.view.width;
-	    this.progressImage.height = this.view.width;
-	    this.standImage.top = -this.view.height / 2;
-	    this.standImage.left = -this.view.width / 2;
-	    this.standImage.width = this.view.width;
-	    this.standImage.height = this.view.width;
-	    this.standImage.set({
-	      clipTo: ctx => {
-	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
-	      }
-	    });
-	    this.setValue(this.value);
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.progressImage.setElement(img);
-	      this.progressImage.top = 0;
-	      this.progressImage.left = 0;
-	      this.progressImage.width = this.view.width;
-	      this.progressImage.height = this.view.width;
-	      this.setStartAngle(this.startAngle);
-	      this.setProgressColor(this.progressColor);
-	      this.setValue(this.value);
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setStandImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.standImage.setElement(img);
-	      this.standImage.top = -this.view.height / 2;
-	      this.standImage.left = -this.view.width / 2;
-	      this.standImage.width = this.view.width;
-	      this.standImage.height = this.view.width;
-
-	      this.setStandColor(this.standColor);
-	      this.standImage.set({
-	        clipTo: ctx => {
-	          ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
-	        }
-	      });
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setStartAngle(angle) {
-	    this.startAngle = +angle;
-	    this.progressImage.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(v) {
-	    this.value = +v;
-	    this.progressImage.set({
-	      clipTo: ctx => {
-	        ctx.moveTo(0, 0);
-	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2 / this.maxValue * this.value, false);
-	        ctx.lineTo(0, 0);
-	        ctx.fill();
-	      }
-	    });
-	    this.render.canvas.renderAll();
-	  }
-	  setMaxValue(max) {
-	    this.maxValue = +(+max).toFixed(5);
-	    this.setValue(this.value);
-	  }
-	  setBorder(br) {
-	    this.border = +br;
-	    this.standImage.width = this.view.width + br * 2;
-	    this.standImage.height = this.view.width + br * 2;
-
-	    this.standImage.left -= this._saveLastBorder + br;
-	    this.standImage.top -= this._saveLastBorder + br;
-	    this.standImage.set({
-	      clipTo: ctx => {
-	        ctx.arc(0, 0, this.standImage.width / 2, 0, Math.PI * 2, true);
-	      }
-	    });
-	    this._saveLastBorder = br;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressColor(color) {
-	    this.progressColor = color;
-	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setStandColor(color) {
-	    this.standColor = color;
-	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	}
-
-	module.exports = RadialBar;
-
-/***/ }),
-/* 206 */
-/***/ (function(module, exports) {
-
-	class ContructorImage {
-	  constructor(render, data) {
-	    this.render = render;
-	    this.type = 'image';
-	    this.id = data.id || '' + Date.now();
-
-	    this.view = new fabric.Image();
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 200);
-	    this.setY(data.y || 200);
-	    this.setWidth(data.w || 200);
-	    this.setHeight(data.h || 200);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue('dist/assets/image.png');
-
-	    this.setBorderWidth(data.borderWidth || 0);
-	    this.setBorderColor(data.borderColor || '#fff');
-	  }
-	  getJSON() {
-	    return {
-	      data: {
-	        id: this.id,
-	        type: "image",
-	        value: this.varible || '',
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle)
-	        // border_color: obj.borderColor,
-	        // border_width: obj.borderWidth
-	      }
-	    };
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setWidth(w) {
-	    this.view.width = w;
-	    this.render.canvas.renderAll();
-	  }
-	  setHeight(h) {
-	    this.view.height = h;
-	    this.render.canvas.renderAll();
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(src) {
-	    this.value = src;
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      let w = this.view.width;
-	      let h = this.view.height;
-	      this.view.setElement(img);
-	      this.setWidth(w);
-	      this.setHeight(h);
-	    };
-	    img.src = src;
-	  }
-	  setBorderWidth(width) {
-	    this.borderWidth = +width;
-	    this.view.strokeWidth = +width;
-	  }
-	  setBorderColor(color) {
-	    this.borderColor = color;
-	    this.view.stroke = color;
-	  }
-	}
-
-	module.exports = ContructorImage;
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports) {
-
-	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
 
 /***/ })
 /******/ ]);

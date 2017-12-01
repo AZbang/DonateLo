@@ -1,5 +1,6 @@
 <template >
   <div id="widgets" class="widgets-container">
+    <p class="text">Добавить виджет:</p>
     <el-row :gutter="10">
       <el-col class="widgets-container__col" :span="6" v-for="widget in widgets">
         <div class="widget-card" @click="addWidget(widget.type)" :class="widget.disable && 'widget-card--disable'">

@@ -3,17 +3,10 @@
 </template>
 
 <script>
-  const axios = require('axios');
-  const VIEWS = {
-    Admin: require('./views/AdminEditor.vue'),
-    GettingStarted: require('./views/GettingStarted.vue'),
-    Register: require('./views/Register.vue')
-  }
-
   module.exports = {
     computed: {
       view() {
-        return VIEWS[this.$store.state.currentView];
+        return this.$store.state.currentView;
       },
       loading() {
         return this.$store.state.loading;
@@ -21,6 +14,7 @@
     },
     mounted() {
       this.$store.dispatch('computedView');
+      console.log(this.$store.state.currentView)
     }
   }
 </script>
