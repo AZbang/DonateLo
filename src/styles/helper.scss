@@ -5,3 +5,17 @@
 .center {
   text-align: center;
 }
+
+.container {
+  margin: 5em;
+}
+.label {
+  color: $--text-color;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+.text {
+  color: $--text-color;
+  font-size: 1.1em;
+  font-weight: 400;
+}

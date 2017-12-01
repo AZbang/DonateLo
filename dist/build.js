@@ -62826,8 +62826,6 @@
 	//
 	//
 	//
-	//
-	//
 
 	const axios = __webpack_require__(149);
 	const VIEWS = {
@@ -62839,11 +62837,10 @@
 	module.exports = {
 	  computed: {
 	    view() {
-	      console.log(this.$store.state.currentView);
 	      return VIEWS[this.$store.state.currentView];
 	    },
-	    isLoading() {
-	      return this.$store.state.isLoading;
+	    loading() {
+	      return this.$store.state.loading;
 	    }
 	  },
 	  mounted() {
@@ -64994,13 +64991,13 @@
 	      "src": "dist/assets/banner.png"
 	    }
 	  }), _vm._v(" "), _c('div', {
-	    staticClass: "getting-started__container"
+	    staticClass: "container"
 	  }, [_c('h1', {
-	    staticClass: "getting-started__label"
+	    staticClass: "label"
 	  }, [_vm._v("Что такое Donatelo?")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для вашей группы или паблика.")]), _vm._v(" "), _c('a', {
 	    attrs: {
 	      "target": "_blank",
@@ -65016,13 +65013,13 @@
 	      "src": "dist/assets/screen1.png"
 	    }
 	  }), _vm._v(" "), _c('div', {
-	    staticClass: "getting-started__container"
+	    staticClass: "container"
 	  }, [_c('h1', {
-	    staticClass: "getting-started__label"
+	    staticClass: "label"
 	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! ")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Все что вам нужно - это расставлять различные визуальные элементы на вашу обложку и изменять стилистику. ")]), _vm._v(" "), _c('a', {
 	    attrs: {
 	      "target": "_blank",
@@ -65038,13 +65035,13 @@
 	      "src": "dist/assets/screen2.png"
 	    }
 	  }), _vm._v(" "), _c('div', {
-	    staticClass: "getting-started__container"
+	    staticClass: "container"
 	  }, [_c('h1', {
-	    staticClass: "getting-started__label"
+	    staticClass: "label"
 	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.")]), _vm._v(" "), _c('p', {
-	    staticClass: "getting-started__description"
+	    staticClass: "text"
 	  }, [_vm._v("Если вам не хватает существующих сервисов, то специально для разработчиков Donatelo предоставляет API для интеграции ваших сервисов с нешей платформой, например вы можете интегрировать показ актуальных новостей с вашего сайта, специальные промо акции, все ограничивается лишь вашей фантазией! ")]), _vm._v(" "), _c('a', {
 	    attrs: {
 	      "target": "_blank",
@@ -65070,9 +65067,6 @@
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
-	/* styles */
-	__webpack_require__(187)
-
 	/* script */
 	__vue_exports__ = __webpack_require__(189)
 
@@ -65092,7 +65086,6 @@
 	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\components\\views\\Register.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__._scopeId = "data-v-eb1cc4d6"
 
 	/* hot reload */
 	if (false) {(function () {
@@ -65112,48 +65105,10 @@
 
 
 /***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(188);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(179)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-eb1cc4d6&scoped=true!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Register.vue", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-eb1cc4d6&scoped=true!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Register.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(178)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\ninput[data-v-eb1cc4d6] {\n  margin-top: 15px;\n  border-bottom: 2px solid #5e81a8 !important;\n}\n.input-field input[type=text]:focus + label[data-v-eb1cc4d6] {\n  color: #5e81a8;\n}\n.input-field input[type=text][data-v-eb1cc4d6]:focus {\n  border-bottom: 1px solid #5e81a8;\n  box-shadow: 0 1px 0 0 #5e81a8;\n}\nlabel[data-v-eb1cc4d6] {\n  left: 0rem;\n}\n.wrap[data-v-eb1cc4d6] {\n  padding-top: 100px;\n}\np[data-v-eb1cc4d6] {\n  color: #5e81a8;\n}\n", ""]);
-
-	// exports
-
-
-/***/ }),
+/* 187 */,
+/* 188 */,
 /* 189 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	//
 	//
@@ -65165,11 +65120,6 @@
 	//
 	//
 	//
-	//
-	//
-	//
-
-	const axios = __webpack_require__(149);
 
 	module.exports = {
 	  props: ['api'],
@@ -65194,7 +65144,9 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    staticClass: "wrap"
+	    attrs: {
+	      "id": "register-group"
+	    }
 	  }, [_c('div', {
 	    staticClass: "container"
 	  }, [_c('img', {
@@ -65204,38 +65156,23 @@
 	      "alt": "token"
 	    }
 	  }), _vm._v(" "), _c('p', {
-	    staticClass: "flow-text"
-	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('div', {
-	    staticClass: "input-field col s12"
-	  }, [_c('input', {
-	    directives: [{
-	      name: "model",
-	      rawName: "v-model",
-	      value: (_vm.token),
-	      expression: "token"
-	    }],
+	    staticClass: "text"
+	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('el-input', {
 	    attrs: {
-	      "id": "token",
-	      "type": "text"
-	    },
-	    domProps: {
-	      "value": (_vm.token)
+	      "placeholder": "Ваш токен",
+	      "suffix-icon": "el-icon-edit"
 	    },
 	    on: {
-	      "keyup": function($event) {
-	        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13, $event.key)) { return null; }
-	        _vm.submitToken($event)
+	      "change": _vm.submitToken
+	    },
+	    model: {
+	      value: (_vm.token),
+	      callback: function($$v) {
+	        _vm.token = $$v
 	      },
-	      "input": function($event) {
-	        if ($event.target.composing) { return; }
-	        _vm.token = $event.target.value
-	      }
+	      expression: "token"
 	    }
-	  }), _vm._v(" "), _c('label', {
-	    attrs: {
-	      "for": "token"
-	    }
-	  }, [_vm._v("API токен")])])])])
+	  })], 1)])
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
@@ -65249,15 +65186,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c(_vm.view, {
+	  return _c(_vm.view, {
 	    directives: [{
 	      name: "loading",
 	      rawName: "v-loading",
-	      value: (_vm.isLoading),
-	      expression: "isLoading"
+	      value: (_vm.loading),
+	      expression: "loading"
 	    }],
-	    tag: "div"
-	  })])
+	    tag: "div",
+	    staticStyle: {
+	      "width": "100vw",
+	      "height": "100vh"
+	    }
+	  })
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
@@ -65337,29 +65278,29 @@
 	  },
 	  actions: {
 	    showLog({ state }, log) {
-	      console.log(log[state.lang], 2000);
+	      this._vm.$message.error(log[state.lang]);
 	    },
 	    computedView({ state, commit, dispatch }) {
 	      return _asyncToGenerator(function* () {
 	        yield dispatch('callApi', 'getGroupExist');
-	        console.log('sdfdf');
+	        console.log(+state.api.viewer_type, state.api.group_id, state.isGroupExist);
 
 	        if (+state.api.viewer_type > 2 && state.api.group_id != null) {
-	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER');
+	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
 	        } else commit('setView', 'GETTING_STARTED');
 	      })();
 	    },
-	    callApi({ commit, dispatch }, methodApi, silent = false) {
+	    callApi({ commit, dispatch }, methodApi, params = {}) {
 	      return _asyncToGenerator(function* () {
-	        silent && commit('setLoading', true);
+	        !params.isSilent && commit('setLoading', true);
 	        try {
-	          var log = yield dispatch(methodApi);
-	          log && dispatch.showLog(log);
+	          var log = yield dispatch(methodApi, params);
+	          log && dispatch('showLog', log);
 	        } catch (e) {
+	          dispatch('showLog', MESSAGES.METHOD_API_ERROR);
 	          console.error(e);
-	          dispatch.showLog(MESSAGES.METHOD_API_ERROR);
 	        }
-	        silent && commit('isLoading', false);
+	        !params.isSilent && commit('setLoading', false);
 	        return log;
 	      })();
 	    },
@@ -65372,24 +65313,23 @@
 	        commit('setGroupExist', resp.data.result);
 	      })();
 	    },
-	    createGroup({ state, commit }, token) {
-	      var _this = this;
-
+	    createGroup({ state, commit }, { token }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/create_group', {
-	          group_id: _this.api.group_id,
+	          group_id: state.api.group_id,
 	          access_token: token
 	        });
-	        commit('setView', 'ADMIN');
+	        console.log(token);
+	        resp.data.code === 'ok' && commit('setView', 'ADMIN');
 	        return resp.data.code === 'ok' ? MESSAGES.CREATED_GROUP : MESSAGES.NOT_CORRECT_TOKEN;
 	      })();
 	    },
-	    editToken({ state, commit }, token) {
-	      var _this2 = this;
+	    editToken({ state, commit }, { token }) {
+	      var _this = this;
 
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/editToken', {
-	          group_id: _this2.api.group_id,
+	          group_id: _this.api.group_id,
 	          access_token: token
 	        });
 	        return resp.data.code === 'ok' ? MESSAGES.CORRECT_TOKEN : MESSAGES.NOT_CORRECT_TOKEN;
@@ -65409,11 +65349,11 @@
 	      })();
 	    },
 	    updateGroup({ state, commit }) {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      return _asyncToGenerator(function* () {
-	        let data = _this3.renderer.getJSON();
-	        data.resources.background = _this3.renderer.coverImage._element.src;
+	        let data = _this2.renderer.getJSON();
+	        data.resources.background = _this2.renderer.coverImage._element.src;
 	        let resp = yield axios.post(DONATELO_API + '/update_cover', _extends({
 	          group_id: state.api.group_id
 	        }, data));
@@ -65429,7 +65369,7 @@
 	        commit('setVaribles', resp.data.result);
 	      })();
 	    },
-	    updateService({ commit, state }, id, form) {
+	    updateService({ commit, state }, { id, form }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/update_service', {
 	          group_id: state.api.group_id,
@@ -66113,7 +66053,7 @@
 /* 198 */
 /***/ (function(module, exports) {
 
-	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false}}
+	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true}}
 
 /***/ })
 /******/ ]);

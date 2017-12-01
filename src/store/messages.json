@@ -18,5 +18,9 @@
   "CREATED_SERVICE": {
     "ru": "Сервис активирован",
     "isError": false
+  },
+  "METHOD_API_ERROR": {
+    "ru": "Произошла ошибка на сервере, попробуйте позже",
+    "isError": true
   }
 }

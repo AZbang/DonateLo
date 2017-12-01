@@ -67,27 +67,27 @@ module.exports = {
   },
   actions: {
     showLog({state}, log) {
-      console.log(log[state.lang], 2000);
+      this._vm.$message.error(log[state.lang]);
     },
     async computedView({state, commit, dispatch}) {
       await dispatch('callApi', 'getGroupExist');
-      console.log('sdfdf');
+      console.log(+state.api.viewer_type, state.api.group_id, state.isGroupExist);
 
       if(+state.api.viewer_type > 2 && state.api.group_id != null) {
         if(state.isGroupExist) commit('setView', 'ADMIN');
-        else commit('setView', 'REGISTER');
+        else commit('setView', 'REGISTER_TOKEN');
       } else commit('setView', 'GETTING_STARTED');
     },
-    async callApi({commit, dispatch}, methodApi, silent=false) {
-      silent && commit('setLoading', true);
+    async callApi({commit, dispatch}, methodApi, params={}) {
+      !params.isSilent && commit('setLoading', true);
       try {
-        var log = await dispatch(methodApi);
-        log && dispatch.showLog(log);
+        var log = await dispatch(methodApi, params);
+        log && dispatch('showLog', log);
       } catch(e) {
+        dispatch('showLog', MESSAGES.METHOD_API_ERROR);
         console.error(e);
-        dispatch.showLog(MESSAGES.METHOD_API_ERROR);
       }
-      silent && commit('isLoading', false);
+      !params.isSilent && commit('setLoading', false);
       return log;
     },
 
@@ -97,15 +97,16 @@ module.exports = {
       });
       commit('setGroupExist', resp.data.result);
     },
-    async createGroup({state, commit}, token) {
+    async createGroup({state, commit}, {token}) {
       let resp = await axios.post(DONATELO_API + '/create_group', {
-        group_id: this.api.group_id,
+        group_id: state.api.group_id,
         access_token: token
       });
-      commit('setView', 'ADMIN');
+      console.log(token)
+      resp.data.code === 'ok' && commit('setView', 'ADMIN');
       return resp.data.code === 'ok' ? MESSAGES.CREATED_GROUP : MESSAGES.NOT_CORRECT_TOKEN;
     },
-    async editToken({state, commit}, token) {
+    async editToken({state, commit}, {token}) {
       let resp = await axios.post(DONATELO_API + '/editToken', {
         group_id: this.api.group_id,
         access_token: token
@@ -139,7 +140,7 @@ module.exports = {
       });
       commit('setVaribles', resp.data.result);
     },
-    async updateService({commit, state}, id, form) {
+    async updateService({commit, state}, {id, form}) {
       let resp = await axios.post(DONATELO_API + '/update_service', {
         group_id: state.api.group_id,
         service_id: id,

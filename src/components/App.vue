@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div v-loading="isLoading" :is="view"></div>
-  </div>
+  <div style="width: 100vw; height: 100vh;" v-loading="loading" :is="view"></div>
 </template>
 
 <script>
@@ -15,11 +13,10 @@
   module.exports = {
     computed: {
       view() {
-        console.log(this.$store.state.currentView);
         return VIEWS[this.$store.state.currentView];
       },
-      isLoading() {
-        return this.$store.state.isLoading;
+      loading() {
+        return this.$store.state.loading;
       }
     },
     mounted() {

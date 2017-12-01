@@ -40244,15 +40244,15 @@
 .center {
   text-align: center; }
 
-.getting-started__container {
+.container {
   margin: 5em; }
 
-.getting-started__label {
+.label {
   color: #3d5977;
   font-size: 1.6em;
   font-weight: 500; }
 
-.getting-started__description {
+.text {
   color: #3d5977;
   font-size: 1.1em;
   font-weight: 400; }
