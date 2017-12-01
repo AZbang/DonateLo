@@ -1,117 +1,29 @@
 <template >
-  <div id="widgets">
-    <div class="row">
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('text')">
-          <div class="wrap-card-content">
-            <i class="material-icons">text_format</i>
-            <p>Текст</p>
+  <div id="widgets" class="widgets-container">
+    <el-row :gutter="10">
+      <el-col class="widgets-container__col" :span="6" v-for="widget in widgets">
+        <div class="widget-card" @click="addWidget(widget.type)" :class="widget.disable && 'widget-card--disable'">
+          <div class="widget-card__content">
+            <i class="widget-card__icon" :class="widget.icon"></i>
+            <p>{{widget.label}}</p>
           </div>
         </div>
-      </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('linear')">
-          <div class="wrap-card-content">
-            <i class="material-icons">format_align_left</i>
-            <p>Линейный бар</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('radial')">
-          <div class="wrap-card-content">
-            <i class="material-icons">panorama_fish_eye</i>
-            <p>Радиальный бар</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3">
-        <div class="card-panel hoverable" @click="addWidget('image')">
-          <div class="wrap-card-content">
-            <i class="material-icons">image</i>
-            <p>Картинка</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3 disable">
-        <div class="card-panel hoverable">
-          <div class="wrap-card-content">
-            <i class="material-icons">tag_faces</i>
-            <p>Стикеры</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3 disable">
-        <div class="card-panel hoverable">
-          <div class="wrap-card-content">
-            <i class="material-icons">toll</i>
-            <p>Иконки</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3 disable">
-        <div class="card-panel hoverable">
-          <div class="wrap-card-content">
-            <i class="material-icons">star</i>
-            <p>Фигура</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6 m3 disable">
-        <div class="card-panel hoverable">
-          <div class="wrap-card-content">
-            <i class="material-icons">timeline</i>
-            <p>График</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
   module.exports = {
+    computed: {
+      widgets() {
+        return this.$store.state.widgets;
+      }
+    },
     methods: {
       addWidget(type) {
-        this.$emit('addWidget', type);
+        this.$store.dispatch('addWidget', {type});
       }
     }
   }
 </script>
-
-
-<style scoped>
-  .col {
-    padding: 0 5px;
-    border-radius: 10px;
-  }
-  .card-panel {
-    position: relative;
-    margin-bottom: 2px;
-  }
-  .disable {
-    opacity: .5;
-  }
-  .disable .card-panel {
-    cursor: default;
-  }
-  .wrap-card-content {
-    background: -webkit-linear-gradient(#5e81a8, #b660bb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .card-panel {
-    border-radius: 7px;
-    cursor: pointer;
-    height: 150px;
-    text-align: center;
-    background: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.05);
-  }
-  .card-panel i {
-    background: -webkit-linear-gradient(#5e81a8, #b660bb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 3em;
-  }
-</style>

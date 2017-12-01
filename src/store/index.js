@@ -16,6 +16,52 @@ const VIEWS = {
   REGISTER_TOKEN: 'Register',
   ADMIN: 'Admin'
 }
+const WIDGETS = [
+  {
+    type: "text",
+    label: "Текст",
+    icon: "el-icon-tickets"
+  },
+  {
+    type: "linear",
+    label: "Линейный бар",
+    icon: "el-icon-menu"
+  },
+  {
+    type: "radial",
+    label: "Радиальный бар",
+    icon: "el-icon-remove"
+  },
+  {
+    type: "image",
+    label: "Картинка",
+    icon: "el-icon-picture"
+  },
+  {
+    type: "stickers",
+    label: "Стикеры",
+    disable: true,
+    icon: "el-icon-star-on"
+  },
+  {
+    type: "stickers",
+    label: "Стикеры",
+    disable: true,
+    icon: "el-icon-star-on"
+  },
+  {
+    type: "stickers",
+    label: "Стикеры",
+    disable: true,
+    icon: "el-icon-star-on"
+  },
+  {
+    type: "stickers",
+    label: "Стикеры",
+    disable: true,
+    icon: "el-icon-star-on"
+  }
+];
 
 module.exports = {
   state: {
@@ -28,13 +74,13 @@ module.exports = {
     isGroupExist: false,
     isCoverEditable: false,
 
-    currentControl: 'WIDGETS',
-    currentView: 'GETTING_STARTED',
+    currentControl: 'widgets',
+    currentView: 'GettingStarted',
+    editableObject: null,
 
-    views: [],
+    widgets: WIDGETS,
     varibles: [],
-    services: [],
-    resources: {}
+    services: []
   },
   mutations: {
     setControl(state, view) {
@@ -43,21 +89,22 @@ module.exports = {
     setView(state, view) {
       if(VIEWS[view]) state.currentView = VIEWS[view];
     },
+    setEditableObject(state, widget) {
+      state.editableObject = widget;
+    },
+
+    setCover(state, src) {
+      state.isCoverEditable = true;
+      state.render.setCover(src);
+    },
+
     setLoading(state, v) {
       state.loading = !!v;
     },
     setGroupExist(state, v) {
       state.isGroupExist = v;
     },
-
-
-    addViews(state, views) {
-
-    },
-    addResources(state, res) {
-
-    },
-    addServices(state, services) {
+    setServices(state, services) {
       for(let key in services) {
         for(let input in services[key].inputs) {
           services[key].inputs[input].value = '';
@@ -66,10 +113,33 @@ module.exports = {
       }
     },
     setVaribles(state, vars) {
-
+      state.varibles = vars;
+      state.renderer.setVaribles(vars);
     }
   },
   actions: {
+    addWidgets({dispatch}, data) {
+      for(let key in data.views) {
+        let view = data.views[key];
+        dispatch('addWidget', {
+          type: view.type, view, res: data.resources
+        });
+      }
+    },
+    addWidget({state, commit}, data) {
+      let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
+
+      widget.view.on('mousedown', () => {
+        commit('setEditableObject', widget);
+        commit('setControl', 'WIDGET_EDITOR');
+      });
+      widget.view.on('selection:cleared', () => {
+        commit('setEditableObject', null);
+        commit('setControl', 'WIDGET_EDITOR');
+      });
+      widget.view.trigger('mousedown');
+    },
+
     showLog({state}, log) {
       let ms = MESSAGES[log];
       if(ms.isError) this._vm.$message.error(ms[state.lang]);
@@ -126,19 +196,24 @@ module.exports = {
       });
       return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
     },
-    async getGroup({state, commit}) {
+    async getGroup({state, dispatch, commit}) {
       let resp = await axios.post(DONATELO_API + '/get_group', {group_id: state.api.group_id});
       let data = resp.data.result;
 
-      commit('setViews', data.views);
-      commit('setResources', data.resources);
       commit('setServices', data.services);
       commit('setVaribles', data.enviroment);
+      dispatch('addWidgets', data);
+
+      if(data.resources.background) {
+        dispatch('setCover', data.resources.background);
+      }
+      state.render.canvas.trigger('selection:cleared');
 
       return 'GROUP_LOADED';
     },
     async updateGroup({state, commit}) {
       let data = this.renderer.getJSON();
+
       data.resources.background = this.renderer.coverImage._element.src;
       let resp = await axios.post(DONATELO_API + '/update_cover', {
         group_id: state.api.group_id,

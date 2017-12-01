@@ -31,7 +31,7 @@
     },
     methods: {
       setCover(src) {
-        console.log(src);
+        this.$store.commit('setCover', src);
       }
     }
   }

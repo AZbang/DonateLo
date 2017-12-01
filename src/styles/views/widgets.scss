@@ -1,0 +1,36 @@
+.widgets-container {
+  margin: 2em;
+}
+.widgets-container__col {
+  padding: 5px 0;
+  border-radius: 10px;
+}
+.widget-card {
+  position: relative;
+  margin-bottom: 2px;
+  border-radius: 7px;
+  cursor: pointer;
+  height: 150px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0.05);
+}
+.widget-card--disable {
+  opacity: .5;
+}
+.widget-card--disable {
+  cursor: default;
+}
+.widget-card__content {
+  padding-top: 40px;
+
+  background: -webkit-linear-gradient(#5e81a8, #b660bb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.widget-card__icon {
+  background: -webkit-linear-gradient(#5e81a8, #b660bb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3em;
+}
