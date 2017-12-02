@@ -1,35 +1,24 @@
 <template>
-  <div class="editor-wrap">
-    <a @click="updateToken" class="fixed-btns btn-floating btn-large waves-effect waves-light">
-      <i class="material-icons">done</i>
-    </a>
-    <editor-forms>
-      <div class="input-field col s12">
-        <p class="flow-text">Изменить токен:</p>
-        <div class="input-wrap">
-          <input placeholder="Введите токен своей группы, как это сделать показано ниже" class="input browser-default" v-model="token">
-        </div>
-      </div>
-      <div class="container">
-        <img class="responsive-img" src="dist/assets/token.png" alt="token">
-      </div>
-    </editor-forms>
+  <div class="container settings">
+    <el-button class="settings-editor__main-btn" type="primary" @click="updateToken">Изменить токен</el-button>
+
+    <p class="settings__main-text text">Изменить токен:</p>
+    <el-input v-model="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
+
+    <div class="container">
+      <img class="responsive-img" src="dist/assets/token.png" alt="token">
+    </div>
   </div>
 </template>
 
 <script>
-  const EditorForms = require('../helpers/EditorForms.vue');
-
   module.exports = {
-    components: {
-      EditorForms
-    },
     data: {
       token: ''
     },
     methods: {
       updateToken() {
-        this.$emit('updateToken', this.token);
+        this.$store.dispatch('callApi', {method: 'editToken', token: this.token});
       }
     }
   }

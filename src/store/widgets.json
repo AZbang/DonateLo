@@ -2,45 +2,45 @@
   {
     "type": "text",
     "label": "Текст",
-    "icon": "el-icon-tickets"
+    "icon": "text_format"
   },
   {
     "type": "linear",
     "label": "Линейный бар",
-    "icon": "el-icon-menu"
+    "icon": "format_align_left"
   },
   {
     "type": "radial",
     "label": "Радиальный бар",
-    "icon": "el-icon-remove"
+    "icon": "panorama_fish_eye"
   },
   {
     "type": "image",
     "label": "Картинка",
-    "icon": "el-icon-picture"
+    "icon": "image"
   },
   {
     "type": "stickers",
     "label": "Стикеры",
     "disable": true,
-    "icon": "el-icon-star-on"
+    "icon": "tag_faces"
   },
   {
-    "type": "stickers",
-    "label": "Стикеры",
+    "type": "icons",
+    "label": "Иконки",
     "disable": true,
-    "icon": "el-icon-star-on"
+    "icon": "toll"
   },
   {
-    "type": "stickers",
-    "label": "Стикеры",
+    "type": "shape",
+    "label": "Фигура",
     "disable": true,
-    "icon": "el-icon-star-on"
+    "icon": "star"
   },
   {
-    "type": "stickers",
-    "label": "Стикеры",
+    "type": "graphic",
+    "label": "График",
     "disable": true,
-    "icon": "el-icon-star-on"
+    "icon": "timeline"
   }
 ]

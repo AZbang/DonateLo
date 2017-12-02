@@ -7,7 +7,7 @@
       <el-col class="widgets__col" :span="6" v-for="widget in widgets">
         <div class="widget-card" @click="addWidget(widget.type)" :class="widget.disable && 'widget-card--disable'">
           <div class="widget-card__content">
-            <i class="widget-card__icon" :class="widget.icon"></i>
+            <i class="widget-card__icon material-icons">{{widget.icon}}</i>
             <p class="widget-card__text">{{widget.label}}</p>
           </div>
         </div>

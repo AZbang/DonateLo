@@ -140,8 +140,8 @@ module.exports = {
       return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
     },
     async editToken({state, commit}, {token}) {
-      let resp = await axios.post(DONATELO_API + '/editToken', {
-        group_id: this.api.group_id,
+      let resp = await axios.post(DONATELO_API + '/edit_token', {
+        group_id: state.api.group_id,
         access_token: token
       });
       return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
