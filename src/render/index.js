@@ -122,7 +122,7 @@ class Render {
         this.resizeCoverToWidth();
         this.canvas.renderAll();
       }
-      img.src = src;
+      img.src = coverSrc;
     });
   }
 }

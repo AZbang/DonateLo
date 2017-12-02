@@ -83,15 +83,15 @@ module.exports = {
         commit('setEditableObject', widget);
         commit('setSection', 'WIDGET_EDITOR');
       });
-      widget.view.on('selection:cleared', () => {
+      state.render.canvas.on('selection:cleared', () => {
         commit('setEditableObject', null);
-        commit('setSection', 'WIDGET_EDITOR');
+        commit('setSection', 'WIDGETS');
       });
       widget.view.trigger('mousedown');
     },
     removeWidget({state, commit}, id) {
       commit('setSection', 'WIDGETS');
-      state.render.removeWidget(this.widget.id);
+      state.render.removeWidget(id);
     },
 
     showLog({state}, log) {

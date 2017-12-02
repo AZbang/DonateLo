@@ -3,6 +3,6 @@ module.exports = {
   // SERVICES: require('./Services.vue'),
   // SETTINGS: require('./Settings.vue'),
 
-  // WIDGET_EDITOR: require('./WidgetEditor.vue'),
+  WIDGET_EDITOR: require('./WidgetEditor.vue'),
   // SERVICE_EDITOR: require('./ServiceEditor.vue')
 }

@@ -62886,7 +62886,7 @@
 	const WIDGETS = __webpack_require__(184);
 
 	const SECTIONS = __webpack_require__(185);
-	const VIEWS = __webpack_require__(189);
+	const VIEWS = __webpack_require__(200);
 
 	module.exports = {
 	  state: {
@@ -62961,15 +62961,15 @@
 	        commit('setEditableObject', widget);
 	        commit('setSection', 'WIDGET_EDITOR');
 	      });
-	      widget.view.on('selection:cleared', () => {
+	      state.render.canvas.on('selection:cleared', () => {
 	        commit('setEditableObject', null);
-	        commit('setSection', 'WIDGET_EDITOR');
+	        commit('setSection', 'WIDGETS');
 	      });
 	      widget.view.trigger('mousedown');
 	    },
 	    removeWidget({ state, commit }, id) {
 	      commit('setSection', 'WIDGETS');
-	      state.render.removeWidget(this.widget.id);
+	      state.render.removeWidget(id);
 	    },
 
 	    showLog({ state }, log) {
@@ -64766,7 +64766,7 @@
 	        this.resizeCoverToWidth();
 	        this.canvas.renderAll();
 	      };
-	      img.src = src;
+	      img.src = coverSrc;
 	    });
 	  }
 	}
@@ -65302,11 +65302,11 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  WIDGETS: __webpack_require__(186)
+	  WIDGETS: __webpack_require__(186),
 	  // SERVICES: require('./Services.vue'),
 	  // SETTINGS: require('./Settings.vue'),
 
-	  // WIDGET_EDITOR: require('./WidgetEditor.vue'),
+	  WIDGET_EDITOR: __webpack_require__(189)
 	  // SERVICE_EDITOR: require('./ServiceEditor.vue')
 	};
 
@@ -65374,6 +65374,8 @@
 	//
 	//
 	//
+	//
+	//
 
 	module.exports = {
 	  computed: {
@@ -65394,19 +65396,21 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    staticClass: "widgets-container",
+	    staticClass: "widgets"
+	  }, [_c('el-button', {
+	    staticClass: "widgets__main-btn",
 	    attrs: {
-	      "id": "widgets"
+	      "type": "primary"
 	    }
-	  }, [_c('p', {
-	    staticClass: "text"
+	  }, [_vm._v("Сохранить обложку")]), _vm._v(" "), _c('p', {
+	    staticClass: "widgets__main-text text"
 	  }, [_vm._v("Добавить виджет:")]), _vm._v(" "), _c('el-row', {
 	    attrs: {
 	      "gutter": 10
 	    }
 	  }, _vm._l((_vm.widgets), function(widget) {
 	    return _c('el-col', {
-	      staticClass: "widgets-container__col",
+	      staticClass: "widgets__col",
 	      attrs: {
 	        "span": 6
 	      }
@@ -65423,7 +65427,9 @@
 	    }, [_c('i', {
 	      staticClass: "widget-card__icon",
 	      class: widget.icon
-	    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(widget.label))])])])])
+	    }), _vm._v(" "), _c('p', {
+	      staticClass: "widget-card__text"
+	    }, [_vm._v(_vm._s(widget.label))])])])])
 	  }))], 1)
 	},staticRenderFns: []}
 	if (false) {
@@ -65437,200 +65443,17 @@
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = {
-	  GETTING_STARTED: __webpack_require__(190),
-	  REGISTER_GROUP: __webpack_require__(193),
-	  ADMIN: __webpack_require__(196)
-	};
-
-/***/ }),
-/* 190 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
-	/* script */
-	__vue_exports__ = __webpack_require__(191)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(192)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\GettingStarted.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-a3bee55a", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-a3bee55a", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] GettingStarted.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 191 */
-/***/ (function(module, exports) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	module.exports = {
-	  computed: {
-	    addAppLink() {
-	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
-	    }
-	  },
-	  mounted() {
-	    VK.External.resizeWindow(840, 3000);
-	  }
-	};
-
-/***/ }),
-/* 192 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    attrs: {
-	      "id": "getting-started"
-	    }
-	  }, [_c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/banner.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Что такое Donatelo?")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для вашей группы или паблика.")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/screen1.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! ")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Все что вам нужно - это расставлять различные визуальные элементы на вашу обложку и изменять стилистику. ")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/screen2.png"
-	    }
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "container"
-	  }, [_c('h1', {
-	    staticClass: "label"
-	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.")]), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Если вам не хватает существующих сервисов, то специально для разработчиков Donatelo предоставляет API для интеграции ваших сервисов с нешей платформой, например вы можете интегрировать показ актуальных новостей с вашего сайта, специальные промо акции, все ограничивается лишь вашей фантазией! ")]), _vm._v(" "), _c('a', {
-	    attrs: {
-	      "target": "_blank",
-	      "href": _vm.addAppLink
-	    }
-	  }, [_c('el-button', {
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Подключить приложение")])], 1)])])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-a3bee55a", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 193 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
+	/* styles */
+	__webpack_require__(190)
 
 	/* script */
 	__vue_exports__ = __webpack_require__(194)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(195)
+	var __vue_template__ = __webpack_require__(199)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -65642,9 +65465,10 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\RegisterGroup.vue"
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\sections\\WidgetEditor.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-8da826b2"
 
 	/* hot reload */
 	if (false) {(function () {
@@ -65653,331 +65477,34 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-1e8dac54", __vue_options__)
+	    hotAPI.createRecord("data-v-8da826b2", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-1e8dac54", __vue_options__)
+	    hotAPI.reload("data-v-8da826b2", __vue_options__)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] RegisterGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	if (__vue_options__.functional) {console.error("[vue-loader] WidgetEditor.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 	module.exports = __vue_exports__
 
 
 /***/ }),
-/* 194 */
-/***/ (function(module, exports) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	module.exports = {
-	  props: ['api'],
-	  data() {
-	    return {
-	      token: ''
-	    };
-	  },
-	  methods: {
-	    submitToken(e) {
-	      this.$store.dispatch('callApi', {
-	        method: 'createGroup',
-	        token: this.token
-	      });
-	    }
-	  },
-	  mounted() {
-	    VK.External.resizeWindow(1000, 600);
-	  }
-	};
-
-/***/ }),
-/* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    attrs: {
-	      "id": "register-group"
-	    }
-	  }, [_c('div', {
-	    staticClass: "container"
-	  }, [_c('img', {
-	    staticClass: "responsive-img",
-	    attrs: {
-	      "src": "dist/assets/token.png",
-	      "alt": "token"
-	    }
-	  }), _vm._v(" "), _c('p', {
-	    staticClass: "text"
-	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('el-input', {
-	    attrs: {
-	      "placeholder": "Ваш токен",
-	      "suffix-icon": "el-icon-edit"
-	    },
-	    on: {
-	      "change": _vm.submitToken
-	    },
-	    model: {
-	      value: (_vm.token),
-	      callback: function($$v) {
-	        _vm.token = $$v
-	      },
-	      expression: "token"
-	    }
-	  })], 1)])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1e8dac54", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(197)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(208)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\AdminGroup.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-a536eab4", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-a536eab4", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] AdminGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	const CoverControl = __webpack_require__(198);
-
-	module.exports = {
-	  components: {
-	    CoverControl
-	  },
-	  computed: {
-	    viewSection() {
-	      return this.$store.state.currentSection;
-	    }
-	  },
-	  methods: {
-	    setControl(view) {
-	      this.$store.commit('setSection', view);
-	    }
-	  },
-	  mounted() {
-	    VK.External.resizeWindow(1000, Math.max(660, window.screen.availHeight - 200));
-	    this.$store.commit('initRender', 'playground');
-	  }
-	};
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(199)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(207)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\CoverControl.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-632fcf14", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-632fcf14", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] CoverControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	const UploadImage = __webpack_require__(200);
-
-	module.exports = {
-	  components: {
-	    UploadImage
-	  },
-	  computed: {
-	    isCoverEditable() {
-	      return this.$store.state.isCoverEditable;
-	    }
-	  },
-	  methods: {
-	    setCover(src) {
-	      this.$store.commit('setCover', src);
-	    }
-	  }
-	};
-
-/***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* styles */
-	__webpack_require__(201)
-
-	/* script */
-	__vue_exports__ = __webpack_require__(205)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(206)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\UploadImage.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-33a83648", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-33a83648", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] UploadImage.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ }),
-/* 201 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(202);
+	var content = __webpack_require__(191);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(204)(content, {});
+	var update = __webpack_require__(193)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue");
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-8da826b2&scoped=true!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./WidgetEditor.vue", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-8da826b2&scoped=true!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./WidgetEditor.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -65987,21 +65514,21 @@
 	}
 
 /***/ }),
-/* 202 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(203)();
+	exports = module.exports = __webpack_require__(192)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n.select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, "\n.editor-wrap[data-v-8da826b2] {\n  position: relative;\n}\n.btns-wrap[data-v-8da826b2] {\n  position: fixed;\n  right: 20px;\n  bottom: 20px;\n  z-index: 1000;\n}\na[data-v-8da826b2] {\n  margin-left: 10px;\n  width: 60px;\n  height: 60px;\n}\na i[data-v-8da826b2] {\n  line-height: 62px;\n  font-size: 35px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ }),
-/* 203 */
+/* 192 */
 /***/ (function(module, exports) {
 
 	/*
@@ -66057,7 +65584,7 @@
 
 
 /***/ }),
-/* 204 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -66279,7 +65806,921 @@
 
 
 /***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	const EDITORS = __webpack_require__(195);
+
+	module.exports = {
+	  methods: {
+	    deleteObject() {
+	      console.log(this.widget);
+	      this.$store.dispatch('removeWidget', this.widget.id);
+	    },
+	    backToMenu() {
+	      this.$store.commit('setSection', 'WIDGETS');
+	    }
+	  },
+	  computed: {
+	    widget() {
+	      return this.$store.state.editableObject;
+	    },
+	    viewEditor() {
+	      return EDITORS[this.widget.type];
+	    }
+	  }
+	};
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  text: __webpack_require__(196)
+	  // linear: require('./LinearBarEditor.vue'),
+	  // radial: require('./RadialBarEditor.vue'),
+	  // image: require('./ImageEditor.vue')
+	};
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(197)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(198)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\editors\\TextEditor.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-63860e10", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-63860e10", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] TextEditor.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  computed: {
+	    widget() {
+	      return this.$store.state.editableObject;
+	    },
+	    angle() {
+	      let deg = Math.abs(Math.round(360 - 360 - this.widget.view.angle));
+	      if (deg > 360) return Math.abs(360 - deg);else return deg;
+	    }
+	  },
+	  methods: {
+	    setFontType(v) {
+	      this.widget.setFontType(v);
+	    },
+	    setValue(v) {
+	      this.widget.setValue(v);
+	    },
+	    setSize(v) {
+	      this.widget.setSize(v);
+	    },
+	    setColor(v) {
+	      this.widget.setColor(v);
+	    },
+	    setX(v) {
+	      this.widget.setX(v);
+	    },
+	    setY(v) {
+	      this.widget.setY(v);
+	    },
+	    setAngle(v) {
+	      this.widget.setAngle(v);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "container"
+	  }, [_c('el-row', {
+	    attrs: {
+	      "gutter": 10
+	    }
+	  }, [_c('el-col', {
+	    attrs: {
+	      "span": 5
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("X:")]), _vm._v(" "), _c('el-input-number', {
+	    attrs: {
+	      "value": Math.round(_vm.widget.view.left)
+	    },
+	    on: {
+	      "change": _vm.setX
+	    }
+	  })], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 5
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Y:")]), _vm._v(" "), _c('el-input-number', {
+	    attrs: {
+	      "value": Math.round(_vm.widget.view.top)
+	    },
+	    on: {
+	      "change": _vm.setY
+	    }
+	  })], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 5
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Размер:")]), _vm._v(" "), _c('el-input-number', {
+	    attrs: {
+	      "value": _vm.widget.view.fontSize
+	    },
+	    on: {
+	      "change": _vm.setSize
+	    }
+	  })], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 5
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Угол:")]), _vm._v(" "), _c('el-input-number', {
+	    attrs: {
+	      "value": _vm.angle
+	    },
+	    on: {
+	      "change": _vm.setAngle
+	    }
+	  })], 1)], 1), _vm._v(" "), _c('el-row', {
+	    attrs: {
+	      "gutter": 10
+	    }
+	  }, [_c('el-col', {
+	    attrs: {
+	      "span": 10
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Введите текст:")]), _vm._v(" "), _c('el-input', {
+	    attrs: {
+	      "clearable": "",
+	      "value": _vm.widget.value
+	    },
+	    on: {
+	      "change": _vm.setValue
+	    }
+	  })], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 6
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Шрифт")]), _vm._v(" "), _c('el-select', {
+	    on: {
+	      "change": _vm.setFontType
+	    },
+	    model: {
+	      value: (_vm.widget.fontType),
+	      callback: function($$v) {
+	        _vm.$set(_vm.widget, "fontType", $$v)
+	      },
+	      expression: "widget.fontType"
+	    }
+	  }, _vm._l((_vm.widget.FONTS), function(font, key) {
+	    return _c('el-option', {
+	      key: key,
+	      style: ({
+	        fontFamily: font
+	      }),
+	      attrs: {
+	        "label": font,
+	        "value": key
+	      }
+	    })
+	  }))], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 2
+	    }
+	  }, [_c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Цвет")]), _vm._v(" "), _c('el-color-picker', {
+	    on: {
+	      "active-change": _vm.setColor
+	    },
+	    model: {
+	      value: (_vm.widget.color),
+	      callback: function($$v) {
+	        _vm.$set(_vm.widget, "color", $$v)
+	      },
+	      expression: "widget.color"
+	    }
+	  })], 1)], 1)], 1)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-63860e10", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "widget-editor"
+	  }, [_c('el-button', {
+	    staticClass: "widget-editor__main-btn",
+	    attrs: {
+	      "type": "danger"
+	    },
+	    on: {
+	      "click": _vm.deleteObject
+	    }
+	  }, [_vm._v("Удалить виджет")]), _vm._v(" "), _c(_vm.viewEditor, {
+	    tag: "div",
+	    staticClass: "widget-editor__content"
+	  })], 1)
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-8da826b2", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  GETTING_STARTED: __webpack_require__(201),
+	  REGISTER_GROUP: __webpack_require__(204),
+	  ADMIN: __webpack_require__(207)
+	};
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(202)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(203)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\GettingStarted.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a3bee55a", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a3bee55a", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] GettingStarted.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  computed: {
+	    addAppLink() {
+	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
+	    }
+	  },
+	  mounted() {
+	    VK.External.resizeWindow(840, 3000);
+	  }
+	};
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "getting-started"
+	    }
+	  }, [_c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/banner.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Что такое Donatelo?")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Возможно, Вы когда-нибудь задумывались о динамической обложке для своей группы, но узнав о существующих решениях поняли, что это слишком сложно и дорого.")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Спешим Вас обрадовать! Donatelo поможет вам без особого труда и затрат самостоятельно создать динамическую обложку для вашей группы или паблика.")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/screen1.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Виджеты")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Donatelo обладает множеством виджетов для реализации вашего собственного дизайна обложки! ")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Все что вам нужно - это расставлять различные визуальные элементы на вашу обложку и изменять стилистику. ")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)]), _vm._v(" "), _c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/screen2.png"
+	    }
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "container"
+	  }, [_c('h1', {
+	    staticClass: "label"
+	  }, [_vm._v("Сервисы")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Donatelo уже имеет множество различных интеграций с существующими сервисами: Последний подписчик, глосования, стастистика по сборам и многое другое. Сервисы легко подключаются в меню приложения и способны отображать необходимую информацию на обложке группы.")]), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Если вам не хватает существующих сервисов, то специально для разработчиков Donatelo предоставляет API для интеграции ваших сервисов с нешей платформой, например вы можете интегрировать показ актуальных новостей с вашего сайта, специальные промо акции, все ограничивается лишь вашей фантазией! ")]), _vm._v(" "), _c('a', {
+	    attrs: {
+	      "target": "_blank",
+	      "href": _vm.addAppLink
+	    }
+	  }, [_c('el-button', {
+	    attrs: {
+	      "type": "primary"
+	    }
+	  }, [_vm._v("Подключить приложение")])], 1)])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-a3bee55a", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(205)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(206)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\RegisterGroup.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1e8dac54", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-1e8dac54", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] RegisterGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
 /* 205 */
+/***/ (function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	module.exports = {
+	  props: ['api'],
+	  data() {
+	    return {
+	      token: ''
+	    };
+	  },
+	  methods: {
+	    submitToken(e) {
+	      this.$store.dispatch('callApi', {
+	        method: 'createGroup',
+	        token: this.token
+	      });
+	    }
+	  },
+	  mounted() {
+	    VK.External.resizeWindow(1000, 600);
+	  }
+	};
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "register-group"
+	    }
+	  }, [_c('div', {
+	    staticClass: "container"
+	  }, [_c('img', {
+	    staticClass: "responsive-img",
+	    attrs: {
+	      "src": "dist/assets/token.png",
+	      "alt": "token"
+	    }
+	  }), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("Введите API токен вашей группы:")]), _vm._v(" "), _c('el-input', {
+	    attrs: {
+	      "placeholder": "Ваш токен",
+	      "suffix-icon": "el-icon-edit"
+	    },
+	    on: {
+	      "change": _vm.submitToken
+	    },
+	    model: {
+	      value: (_vm.token),
+	      callback: function($$v) {
+	        _vm.token = $$v
+	      },
+	      expression: "token"
+	    }
+	  })], 1)])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-1e8dac54", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(208)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(217)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\views\\AdminGroup.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a536eab4", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-a536eab4", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] AdminGroup.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	const CoverControl = __webpack_require__(209);
+
+	module.exports = {
+	  components: {
+	    CoverControl
+	  },
+	  computed: {
+	    viewSection() {
+	      return this.$store.state.currentSection;
+	    }
+	  },
+	  methods: {
+	    setControl(view) {
+	      this.$store.commit('setSection', view);
+	    }
+	  },
+	  mounted() {
+	    VK.External.resizeWindow(1000, Math.max(660, window.screen.availHeight - 200));
+	    this.$store.commit('initRender', 'playground');
+	  }
+	};
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* script */
+	__vue_exports__ = __webpack_require__(210)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(216)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\CoverControl.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-632fcf14", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-632fcf14", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] CoverControl.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	const UploadImage = __webpack_require__(211);
+
+	module.exports = {
+	  components: {
+	    UploadImage
+	  },
+	  computed: {
+	    isCoverEditable() {
+	      return this.$store.state.isCoverEditable;
+	    }
+	  },
+	  methods: {
+	    setCover(src) {
+	      this.$store.commit('setCover', src);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(212)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(214)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(215)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "C:\\Users\\azbang\\Desktop\\donatelo\\src\\vue\\components\\UploadImage.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-33a83648", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-33a83648", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] UploadImage.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(213);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(193)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-33a83648!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UploadImage.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(192)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.select-image {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  left: 0;\n  top: 0;\n  opacity: 0;\n  z-index: 10000;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 214 */
 /***/ (function(module, exports) {
 
 	//
@@ -66309,7 +66750,7 @@
 	};
 
 /***/ }),
-/* 206 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66332,7 +66773,7 @@
 	}
 
 /***/ }),
-/* 207 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66397,15 +66838,15 @@
 	}
 
 /***/ }),
-/* 208 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    attrs: {
-	      "id": "admin"
-	    }
-	  }, [_c('cover-control'), _vm._v(" "), _c('div', {
+	    staticClass: "admin"
+	  }, [_c('cover-control', {
+	    staticClass: "admin__cover"
+	  }), _vm._v(" "), _c('div', {
 	    staticClass: "admin__menu"
 	  }, [_c('el-menu', {
 	    staticClass: "el-menu-demo",
@@ -66428,12 +66869,7 @@
 	    attrs: {
 	      "index": "SETTINGS"
 	    }
-	  }, [_vm._v("Настройки")])], 1), _vm._v(" "), _c('el-button', {
-	    staticClass: "admin__menu-btn-cover-save",
-	    attrs: {
-	      "type": "primary"
-	    }
-	  }, [_vm._v("Сохранить обложку")])], 1), _vm._v(" "), _c(_vm.viewSection, {
+	  }, [_vm._v("Настройки")])], 1)], 1), _vm._v(" "), _c(_vm.viewSection, {
 	    tag: "div",
 	    staticClass: "admin__section"
 	  })], 1)

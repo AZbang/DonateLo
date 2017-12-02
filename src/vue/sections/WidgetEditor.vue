@@ -1,6 +1,7 @@
 <template>
-  <div class="widget">
-    <div class="widget__editor" :is="viewEditor"></div>
+  <div class="widget-editor">
+    <el-button class="widget-editor__main-btn" type="danger" @click="deleteObject">Удалить виджет</el-button>
+    <div class="widget-editor__content" :is="viewEditor"></div>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
   module.exports = {
     methods: {
       deleteObject() {
+        console.log(this.widget);
         this.$store.dispatch('removeWidget', this.widget.id);
       },
       backToMenu() {
@@ -18,7 +20,7 @@
     },
     computed: {
       widget() {
-        return this.$store.currentObject;
+        return this.$store.state.editableObject;
       },
       viewEditor() {
         return EDITORS[this.widget.type];

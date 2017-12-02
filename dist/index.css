@@ -40285,10 +40285,10 @@
 .cover-uploader-area__text {
   color: #3d5977; }
 
-.widgets-container {
+.widgets {
   margin: 2em; }
 
-.widgets-container__col {
+.widgets__col {
   padding: 5px 0;
   border-radius: 10px; }
 
@@ -40320,12 +40320,17 @@
   -webkit-text-fill-color: transparent;
   font-size: 3em; }
 
-.admin__menu {
+.admin__section {
   position: relative; }
 
-.admin__menu-btn-cover-save {
+.widgets__main-btn {
   position: absolute;
-  bottom: 12px;
+  top: -77px;
+  right: -12px; }
+
+.widget-editor__main-btn {
+  position: absolute;
+  top: -91px;
   right: 10px; }
 
 body {

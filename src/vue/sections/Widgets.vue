@@ -1,12 +1,14 @@
 <template >
-  <div id="widgets" class="widgets-container">
-    <p class="text">Добавить виджет:</p>
+  <div class="widgets">
+    <el-button class="widgets__main-btn" type="primary">Сохранить обложку</el-button>
+
+    <p class="widgets__main-text text">Добавить виджет:</p>
     <el-row :gutter="10">
-      <el-col class="widgets-container__col" :span="6" v-for="widget in widgets">
+      <el-col class="widgets__col" :span="6" v-for="widget in widgets">
         <div class="widget-card" @click="addWidget(widget.type)" :class="widget.disable && 'widget-card--disable'">
           <div class="widget-card__content">
             <i class="widget-card__icon" :class="widget.icon"></i>
-            <p>{{widget.label}}</p>
+            <p class="widget-card__text">{{widget.label}}</p>
           </div>
         </div>
       </el-col>

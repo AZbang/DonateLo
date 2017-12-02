@@ -1,3 +1,16 @@
 @import './cover';
 @import './widgets';
-@import './admin';
+
+.admin__section {
+  position: relative;
+}
+.widgets__main-btn {
+  position: absolute;
+  top: -77px;
+  right: -12px;
+}
+.widget-editor__main-btn {
+  position: absolute;
+  top: -91px;
+  right: 10px;
+}
