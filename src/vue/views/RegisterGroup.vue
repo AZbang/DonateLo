@@ -23,9 +23,6 @@
           token: this.token
         });
       }
-    },
-    mounted() {
-      VK.External.resizeWindow(1000, 600);
     }
   }
 </script>

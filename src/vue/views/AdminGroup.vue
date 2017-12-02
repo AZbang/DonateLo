@@ -30,7 +30,6 @@
       },
     },
     mounted() {
-      VK.External.resizeWindow(1000, Math.max(660, window.screen.availHeight-200));
       this.$store.commit('initRender', 'playground');
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100vw; height: 100vh;" v-loading="loading" :is="view"></div>
+  <div style="width: 100vw;" v-loading="loading" :is="view"></div>
 </template>
 
 <script>
@@ -13,8 +13,12 @@
       }
     },
     mounted() {
+      // Похоже ВК не остовляет мне выбора... Неееееет.
+      setInterval(() => {
+        VK.External.resizeWindow(1000, document.body.clientHeight+50);
+      }, 1000);
+
       this.$store.dispatch('computedView');
-      console.log(this.$store.state.currentView)
     }
   }
 </script>

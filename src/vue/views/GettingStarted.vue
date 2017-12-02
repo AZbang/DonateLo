@@ -36,9 +36,6 @@
       addAppLink() {
         return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
       }
-    },
-    mounted() {
-      VK.External.resizeWindow(840, 3000);
     }
   }
 </script>

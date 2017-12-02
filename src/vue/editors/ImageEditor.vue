@@ -1,117 +1,76 @@
 <template>
-  <editor-forms>
-    <div class="input-field col s12 m3">
-      <p class="flow-text">X:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.left)" @change="setX">
-      </div>
-    </div>
-    <div class="input-field col s12 m3">
-      <p class="flow-text">Y:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.top)" @change="setY">
-      </div>
-    </div>
-    <div class="input-field col s12 m3">
-      <p class="flow-text">Высота:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.width)" @change="setW">
-      </div>
-    </div>
-    <div class="input-field col s12 m3">
-      <p class="flow-text">Ширина:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="Math.round(object.view.height)" @change="setH">
-      </div>
-    </div>
-    <div class="input-field col s12 m12">
-      <p class="flow-text">Значение:</p>
-      <div class="input-wrap">
-        <select class="input browser-default" v-model="object.varible" @change="setVarible">
-          <option v-for="(value, key) in varibles" :value="key">{{key}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Угол:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">°</span>
-        <input class="input browser-default" type="number" :value="angle" @change="setAngle">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Рамка:</p>
-      <div class="input-wrap">
-        <span class="input-prefix">px</span>
-        <input class="input browser-default" type="number" :value="object.borderWidth" @change="setBorderWidth">
-      </div>
-    </div>
-    <div class="input-field col s12 m4">
-      <p class="flow-text">Цвет рамки:</p>
-      <color-picker :initial="object.borderColor" :change="setBorderColor">
-        <div class="input-wrap">
-          <div class="input-color" :style="{background: object.borderColor}"></div>
-          <input class="input" :value="object.borderColor">
-        </div>
-      </color-picker>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-  </editor-forms>
+  <div class="container">
+    <el-row :gutter="10">
+      <el-col :span="5">
+        <p class="text">X:</p>
+        <el-input-number :value="Math.round(widget.view.left)" @change="setX"></el-input-number>
+      </el-col>
+      <el-col :span="5">
+        <p class="text">Y:</p>
+        <el-input-number :value="Math.round(widget.view.top)" @change="setY"></el-input-number>
+      </el-col>
+      <el-col :span="5">
+        <p class="text">Ширина:</p>
+        <el-input-number :value="Math.round(widget.view.width)" @change="setW"></el-input-number>
+      </el-col>
+      <el-col :span="5">
+        <p class="text">Высота:</p>
+        <el-input-number :value="Math.round(widget.view.height)" @change="setH"></el-input-number>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10">
+      <el-col :span="5">
+        <p class="text">Угол:</p>
+        <el-input-number :value="angle" @change="setAngle"></el-input-number>
+      </el-col>
+      <el-col :span="15">
+        <p class="text">Значение:</p>
+        <el-select style="width: 100%;" v-model="widget.varible" @change="setVarible" placeholder="Выберите переменную">
+          <el-option
+            v-for="(value, key) in varibles"
+            :key="key"
+            :label="value"
+            :value="key">
+          </el-option>
+        </el-select>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-  const EditorForms = require('../helpers/EditorForms.vue');
-  const ColorPicker = require('../helpers/ColorPicker.vue');
-  const UploadImage = require('../helpers/UploadImage.vue');
-
   module.exports = {
-    components: {
-      ColorPicker,
-      EditorForms,
-      UploadImage
-    },
-    props: ['object', 'varibles'],
     computed: {
+      widget() {
+         return this.$store.state.editableObject;
+      },
+      varibles() {
+        return this.$store.state.varibles;
+      },
       angle() {
-        let deg = Math.abs(Math.round(360-360-this.object.view.angle));
+        let deg = Math.abs(Math.round(360-360-this.widget.view.angle));
         if(deg > 360) return Math.abs(360-deg);
         else return deg;
       }
     },
     methods: {
-      setVarible(e) {
-        this.object.setVarible(e.target.value);
+      setVarible(v) {
+        this.widget.setVarible(v);
       },
-      setValue(e) {
-        this.object.setValue(e.target.value);
+      setX(v) {
+        this.widget.setX(v);
       },
-      setBorderWidth(c) {
-        this.object.setBorderWidth(c);
+      setY(v) {
+        this.widget.setY(v);
       },
-      setBorderColor(c) {
-        this.object.setBorderColor(c);
+      setW(v) {
+        this.widget.setWidth(v);
       },
-      setX(e) {
-        this.object.setX(+e.target.value);
+      setH(v) {
+        this.widget.setHeight(v);
       },
-      setY(e) {
-        this.object.setY(+e.target.value);
-      },
-      setW(e) {
-        this.object.setWidth(+e.target.value);
-      },
-      setH(e) {
-        this.object.setHeight(+e.target.value);
-      },
-      setAngle(e) {
-        this.object.setAngle(+e.target.value);
+      setAngle(v) {
+        this.widget.setAngle(v);
       }
     }
   }
