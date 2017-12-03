@@ -15,6 +15,14 @@
     "ru": "Спасибо! Группа зарегистрирована!",
     "isError": false
   },
+  "LOADED_GROUP": {
+    "ru": "Редактор загружен",
+    "isError": false
+  },
+  "UPDATED_GROUP": {
+    "ru": "Обложка сохранена",
+    "isError": false
+  },
   "CREATED_SERVICE": {
     "ru": "Сервис активирован",
     "isError": false

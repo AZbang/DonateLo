@@ -64,7 +64,7 @@ module.exports = {
     },
     setVaribles(state, vars) {
       state.varibles = vars;
-      state.renderer.setVaribles(vars);
+      state.render.setVaribles(vars);
     }
   },
   actions: {
@@ -155,16 +155,16 @@ module.exports = {
       dispatch('addWidgets', data);
 
       if(data.resources.background) {
-        dispatch('setCover', data.resources.background);
+        commit('setCover', data.resources.background);
       }
       state.render.canvas.trigger('selection:cleared');
 
-      return 'GROUP_LOADED';
+      return 'LOADED_GROUP';
     },
     async updateGroup({state, commit}) {
-      let data = this.renderer.getJSON();
+      let data = state.render.getJSON();
 
-      data.resources.background = this.renderer.coverImage._element.src;
+      data.resources.background = state.render.coverImage._element.src;
       let resp = await axios.post(DONATELO_API + '/update_cover', {
         group_id: state.api.group_id,
         ...data

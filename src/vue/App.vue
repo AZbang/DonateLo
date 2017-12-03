@@ -16,7 +16,7 @@
       // Похоже ВК не остовляет мне выбора... Неееееет.
       setInterval(() => {
         VK.External.resizeWindow(1000, document.body.clientHeight+50);
-      }, 1000);
+      }, 100);
 
       this.$store.dispatch('computedView');
     }

@@ -1,5 +1,6 @@
 @import './cover';
 @import './widgets';
+@import './service';
 
 .admin__section {
   position: relative;
@@ -8,6 +9,11 @@
   position: absolute;
   top: -77px;
   right: -12px;
+}
+.services__main-btn  {
+  position: absolute;
+  top: -90px;
+  right: -25px;
 }
 .widget-editor__main-btn {
   position: absolute;

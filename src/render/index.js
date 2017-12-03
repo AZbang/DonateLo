@@ -101,7 +101,12 @@ class Render {
     document.getElementById('cover-control').style.height = this.coverHeight*scale + 'px';
   }
   setCover(src) {
-    fabric.Image.fromURL(src, (texture) => {
+    let img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      let texture = new fabric.Image();
+
+      texture.setElement(img);
       let scale = this.coverWidth/texture.getWidth();
       let w = this.coverWidth/scale;
       let h = this.coverHeight/scale;
@@ -113,17 +118,19 @@ class Render {
         height: h
       });
 
-      let img = new Image();
-      img.onload = () => {
-        this.coverImage.setElement(img);
+      let cover = new Image();
+      img.crossOrigin = 'anonymous';
+      cover.onload = () => {
+        this.coverImage.setElement(cover);
         this.coverImage.setWidth(this.coverWidth);
         this.coverImage.setHeight(this.coverHeight);
 
         this.resizeCoverToWidth();
         this.canvas.renderAll();
       }
-      img.src = coverSrc;
-    });
+      cover.src = coverSrc;
+    }
+    img.src = src;
   }
 }
 

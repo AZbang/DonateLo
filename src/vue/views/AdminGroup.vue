@@ -31,6 +31,7 @@
     },
     mounted() {
       this.$store.commit('initRender', 'playground');
+      this.$store.dispatch('callApi', {method: 'getGroup'});
     }
   }
 </script>

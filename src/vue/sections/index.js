@@ -1,6 +1,6 @@
 module.exports = {
   WIDGETS: require('./Widgets.vue'),
-  // SERVICES: require('./Services.vue'),
+  SERVICES: require('./Services.vue'),
   SETTINGS: require('./Settings.vue'),
 
   WIDGET_EDITOR: require('./WidgetEditor.vue'),

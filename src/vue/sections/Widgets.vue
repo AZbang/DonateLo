@@ -1,6 +1,6 @@
 <template >
   <div class="widgets">
-    <el-button class="widgets__main-btn" type="primary">Сохранить обложку</el-button>
+    <el-button class="widgets__main-btn" type="primary" @click="updateGroup">Сохранить обложку</el-button>
 
     <p class="widgets__main-text text">Добавить виджет:</p>
     <el-row :gutter="10">
@@ -26,6 +26,9 @@
     methods: {
       addWidget(type) {
         this.$store.dispatch('addWidget', {type});
+      },
+      updateGroup() {
+        this.$store.dispatch('callApi', {method: 'updateGroup'});
       }
     }
   }

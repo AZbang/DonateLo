@@ -1,96 +1,62 @@
 <template>
-  <div id="services">
-    <div class="service" v-if="isOpenEditor">
-    <div class="card">
-      <i class="close-service material-icons" style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #fff;" @click="closeService">close</i>
-      <div class="card-content white-text">
-        <span class="card-title flow-text" style="font-weight: bold">
-          <i class="material-icons left" style="font-size: 1.4em; font-weight: bold;">{{service.card_style.icon}}</i>
-          {{service.name}}
-        </span>
-        <p class="flow-text">{{service.decrtiption}}
-          <a class="docs" v-show="service.docs" target="_blank" :href="service.docs">Подробнее...</a>
-        </p>
-        <br>
-        <div class="row inputs">
-          <div class="input-field col s12" v-for="(input, id) in service.inputs">
-            <p>{{input.description}}</p>
-            <input :name="id"  v-model="input.value" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}">
-          </div>
-        </div>
-      </div>
-      <div class="card-action waves-effect waves-light" style="border: none; overflow: hidden;">
-        <a href="#"  style="right: 0; color: #fff; margin-right: 0" @click="saveService">Сохранить</a>
-      </div>
-    </div>
-  </div>
+  <div class="services container">
+    <el-button class="services__main-btn" type="primary" @click="updateGroup">Сохранить обложку</el-button>
 
-    <div v-show="!isOpenEditor">
-      <p class="flow-text label">Каталог сервисов:</p>
-      <div class="row">
-        <div class="col s6 m3" v-for="(service, id) in services" @click="openService(id)">
-          <div class="mini card-panel hoverable" :id="id">
-            <div class="wrap-card-content">
-              <i class="material-icons">{{service.card_style.icon}}</i>
-              <p>{{service.name}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="flow-text label">В разработке:</p>
-      <div class="row">
-        <div class="col s6 m3" v-for="(service, id) in futureServices" v-if="!service.is_register">
-          <div class="mini card-panel" style="cursor: default; opacity: .5;":id="id">
-            <div class="wrap-card-content">
-              <i class="material-icons">{{service.icon}}</i>
-              <p>{{service.name}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="text">Каталог сервисов:</p>
+
+    <el-row :gutter="20">
+      <el-col :span="6" v-for="(service, id) in services">
+        <el-card class="service-card" :id="id">
+          <i class="material-icons service-card__icon">{{service.card_style.icon}}</i>
+          <h3 class="service-card__title">{{service.name}}</h3>
+          <p class="service-card__text">{{service.decrtiption | roundText}}</p>
+          <a class="service-card__buttom" @click="openService(id)">Подключить</a>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
   module.exports = {
-    props: ['services'],
     data() {
       return {
         service: {},
         futureServices: {
           timer: {
             name: "Таймер",
+            description: "Это лучший сервис на районе, юзай пока горячий, детка",
             icon: "timer"
           },
           votes: {
             name: "Голосования",
+            description: "Это лучший сервис на районе, юзай пока горячий, детка",
             icon: "thumbs_up_down"
           },
           qiwi: {
             name: "QIWI Кошелек",
+            description: "Это лучший сервис на районе, юзай пока горячий, детка",
             icon: "account_balance_wallet"
           }
         },
-        isOpenEditor: false
+      }
+    },
+    filters: {
+      roundText(str) {
+        if(str.length > 50) return str.slice(0, 50) + '...';
+        return str;
       }
     },
     computed: {
-      isActivationServices() {
-        for(let key in this.services) {
-          if(this.services[key].is_active) return true;
-        }
-        return false;
-      }
+      services() {
+        return this.$store.state.services;
+      },
     },
     methods: {
-      closeService() {
-        $('.btn-upload-data').show();
-        this.isOpenEditor = false;
-        this.service = null;
+      updateGroup() {
+        this.$store.dispatch('callApi', {method: 'updateGroup'});
       },
       openService(id) {
-        $('.btn-upload-data').hide();
         this.service = this.services[id];
         this.service.id = id;
         this.isOpenEditor = true;

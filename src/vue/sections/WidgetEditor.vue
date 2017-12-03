@@ -11,11 +11,7 @@
   module.exports = {
     methods: {
       deleteObject() {
-        console.log(this.widget);
         this.$store.dispatch('removeWidget', this.widget.id);
-      },
-      backToMenu() {
-        this.$store.commit('setSection', 'WIDGETS');
       }
     },
     computed: {
