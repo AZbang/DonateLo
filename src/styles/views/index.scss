@@ -1,5 +1,6 @@
 @import './cover';
 @import './widgets';
+@import './service-card';
 @import './service';
 
 .admin__section {
@@ -19,6 +20,11 @@
   position: absolute;
   top: -91px;
   right: 10px;
+}
+.service__main-btn {
+  position: absolute;
+  top: -90px;
+  right: -20px;
 }
 
 .settings-editor__main-btn {

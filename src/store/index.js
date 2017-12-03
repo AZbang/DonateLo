@@ -42,6 +42,9 @@ module.exports = {
     setEditableObject(state, widget) {
       state.editableObject = widget;
     },
+    setService(state, id) {
+      if(state.services[id]) state.currentService = state.services[id];
+    },
 
     setCover(state, src) {
       state.isCoverEditable = true;

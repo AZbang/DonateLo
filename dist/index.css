@@ -40341,7 +40341,7 @@
   box-shadow: 0 6px 18px 0 rgba(232, 237, 250, 0.5); }
 
 .service-card__icon {
-  color: #3d5977;
+  color: #5181b8;
   font-size: 6em;
   margin-top: 30px;
   margin-bottom: 20px; }
@@ -40361,7 +40361,7 @@
   height: 53px;
   line-height: 52px;
   font-size: 14px;
-  color: #409eff;
+  color: #3d5977;
   text-align: center;
   border: 0;
   border-top: 1px solid #eaeefb;
@@ -40379,7 +40379,36 @@
 
 .service-card__buttom:hover {
   color: #fff;
-  background: #409eff; }
+  background: #5181b8; }
+
+.service__title {
+  font-size: 2em;
+  padding-top: 8px;
+  color: #3d5977; }
+
+.service__icon {
+  font-weight: bold;
+  float: left;
+  margin-right: 15px;
+  font-size: 3em;
+  color: #5181b8; }
+
+.service__description {
+  font-size: 24px;
+  line-height: 1em;
+  color: #3d5977; }
+
+.service__doc {
+  color: #3d5977;
+  text-decoration: none;
+  font-size: 21px;
+  border-bottom: 1px dashed #3d5977; }
+
+.service__input {
+  margin-top: 24px; }
+
+.service__save {
+  margin-top: 25px; }
 
 .admin__section {
   position: relative; }
@@ -40398,6 +40427,11 @@
   position: absolute;
   top: -91px;
   right: 10px; }
+
+.service__main-btn {
+  position: absolute;
+  top: -90px;
+  right: -20px; }
 
 .settings-editor__main-btn {
   position: absolute;
