@@ -62955,7 +62955,7 @@
 	    }
 	  },
 	  mounted() {
-	    // Похоже ВК не остовляет мне выбора... Неееееет.
+	    // Похоже ВК не оставляет мне выбора... Неееееет.
 	    setInterval(() => {
 	      VK.External.resizeWindow(1000, document.body.clientHeight + 50);
 	    }, 100);
@@ -63059,6 +63059,7 @@
 	    setServices(state, services) {
 	      for (let key in services) {
 	        for (let input in services[key].inputs) {
+	          services[key].id = key;
 	          services[key].inputs[input].value = '';
 	        }
 	        state.services.push(services[key]);
@@ -63198,7 +63199,7 @@
 	          service_id: id,
 	          fields: form
 	        });
-	        return 'UPDATED_SERVICE';
+	        return 'CREATED_SERVICE';
 	      })();
 	    }
 	  }
@@ -65416,7 +65417,7 @@
 /* 184 */
 /***/ (function(module, exports) {
 
-	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"LOADED_GROUP":{"ru":"Редактор загружен","isError":false},"UPDATED_GROUP":{"ru":"Обложка сохранена","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
+	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"NOT_VALID_INPUT":{"ru":"Некорректно заполнены поля","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"LOADED_GROUP":{"ru":"Редактор загружен","isError":false},"UPDATED_GROUP":{"ru":"Обложка сохранена","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
 
 /***/ }),
 /* 185 */
@@ -66831,7 +66832,7 @@
 	    return _c('el-option', {
 	      key: key,
 	      attrs: {
-	        "label": value,
+	        "label": key,
 	        "value": key
 	      }
 	    })
@@ -67126,7 +67127,7 @@
 	    return _c('el-option', {
 	      key: key,
 	      attrs: {
-	        "label": value,
+	        "label": key,
 	        "value": key
 	      }
 	    })
@@ -67404,7 +67405,7 @@
 	    return _c('el-option', {
 	      key: key,
 	      attrs: {
-	        "label": value,
+	        "label": key,
 	        "value": key
 	      }
 	    })
@@ -67528,12 +67529,16 @@
 	          for (let input in this.service.inputs) {
 	            form[input] = this.service.inputs[input].value;
 	          }
-	          this.$emit('updateService', this.service.id, form);
-	        } else Materialize.toast('Неверно указаны данные!', 1000);
+	          console.log(this.service);
+	          this.$store.dispatch('callApi', {
+	            method: 'updateService',
+	            id: this.service.id, form
+	          });
+	        } else this.$store.dispatch('showLog', 'NOT_VALID_INPUT');
 	      });
 	    },
 	    closeService() {
-	      this.$emit('toggleService', this.service.id, false);
+	      this.$store.commit('setSection', 'SERVICES');
 	    }
 	  }
 	};
@@ -67553,13 +67558,13 @@
 	    on: {
 	      "click": _vm.closeService
 	    }
-	  }, [_vm._v("Вернуться назад")]), _vm._v(" "), _c('i', {
-	    staticClass: "material-icons service__icon"
-	  }, [_vm._v(_vm._s(_vm.service.card_style.icon))]), _vm._v(" "), _c('h1', {
-	    staticClass: "service__title"
-	  }, [_vm._v(_vm._s(_vm.service.name))]), _vm._v(" "), _c('p', {
-	    staticClass: "service__description"
-	  }, [_vm._v(_vm._s(_vm.service.decrtiption) + "\n    "), _c('a', {
+	  }, [_vm._v("Вернуться назад")]), _vm._v(" "), _c('el-card', [_c('div', {
+	    staticClass: "clearfix",
+	    attrs: {
+	      "slot": "header"
+	    },
+	    slot: "header"
+	  }, [_c('el-button', {
 	    directives: [{
 	      name: "show",
 	      rawName: "v-show",
@@ -67568,10 +67573,17 @@
 	    }],
 	    staticClass: "service__doc",
 	    attrs: {
+	      "type": "primary",
 	      "target": "_blank",
 	      "href": _vm.service.docs
 	    }
-	  }, [_vm._v("Подробнее...")])]), _vm._v(" "), _vm._l((_vm.service.inputs), function(input, id) {
+	  }, [_vm._v("Документация")]), _vm._v(" "), _c('i', {
+	    staticClass: "material-icons service__icon"
+	  }, [_vm._v(_vm._s(_vm.service.card_style.icon))]), _vm._v(" "), _c('span', {
+	    staticClass: "service__title"
+	  }, [_vm._v(_vm._s(_vm.service.name))])], 1), _vm._v(" "), _c('p', {
+	    staticClass: "service__description"
+	  }, [_vm._v(_vm._s(_vm.service.decrtiption))]), _vm._v(" "), _c('br'), _vm._v(" "), _vm._l((_vm.service.inputs), function(input, id) {
 	    return _c('div', {
 	      staticClass: "service__input"
 	    }, [_c('p', {
@@ -67588,6 +67600,9 @@
 	      }],
 	      attrs: {
 	        "name": id,
+	        "clearable": "",
+	        "prefix-icon": "el-icon-edit",
+	        "placeholder": "Введите данные",
 	        "data-vv-delay": "1000"
 	      },
 	      model: {
@@ -67606,7 +67621,7 @@
 	    on: {
 	      "click": _vm.saveService
 	    }
-	  }, [_vm._v("Сохранить")])], 2)
+	  }, [_vm._v("Сохранить")])], 2)], 1)
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
@@ -67999,6 +68014,10 @@
 	  mounted() {
 	    this.$store.commit('initRender', 'playground');
 	    this.$store.dispatch('callApi', { method: 'getGroup' });
+
+	    setInterval(() => {
+	      this.$store.dispatch('callApi', { method: 'loadVaribles', silent: true });
+	    }, 1000);
 	  }
 	};
 

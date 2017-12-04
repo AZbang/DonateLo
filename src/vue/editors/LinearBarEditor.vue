@@ -33,7 +33,7 @@
           <el-option
             v-for="(value, key) in varibles"
             :key="key"
-            :label="value"
+            :label="key"
             :value="key">
           </el-option>
         </el-select>

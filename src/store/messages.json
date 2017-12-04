@@ -7,6 +7,10 @@
     "ru": "Ошибка! Пожалуйста, проверьте Ваш токен.",
     "isError": true
   },
+  "NOT_VALID_INPUT": {
+    "ru": "Некорректно заполнены поля",
+    "isError": true
+  },
   "CORRECT_TOKEN": {
     "ru": "Токен загружен.",
     "isError": false

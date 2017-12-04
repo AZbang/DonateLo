@@ -60,6 +60,7 @@ module.exports = {
     setServices(state, services) {
       for(let key in services) {
         for(let input in services[key].inputs) {
+          services[key].id = key;
           services[key].inputs[input].value = '';
         }
         state.services.push(services[key]);
@@ -187,7 +188,7 @@ module.exports = {
         service_id: id,
         fields: form
       });
-      return 'UPDATED_SERVICE';
+      return 'CREATED_SERVICE';
     },
   }
 }

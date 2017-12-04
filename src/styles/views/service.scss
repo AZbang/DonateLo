@@ -1,29 +1,29 @@
 .service__title {
-  font-size: 2em;
-  padding-top: 8px;
-  color: $--text-color;
+  font-size: 19px;
+  line-height: 29px;
+  color: #1f2f3d;
 }
 .service__icon {
-  font-weight: bold;
+  color: #1f2f3d;
   float: left;
-  margin-right: 15px;
-  font-size: 3em;
-  color: $--color-primary;
+  margin-right: 7px;
+  font-size: 35px;
 }
 .service__description {
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1em;
-  color: $--text-color;
+  margin-top: 0;
+  color: #99a9bf;
 }
 .service__doc {
-  color: $--text-color;
-  text-decoration: none;
-  font-size: 21px;
-  border-bottom: 1px dashed $--text-color;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 .service__input {
-  margin-top: 24px;
-}
-.service__save {
-  margin-top: 25px;
+  margin-bottom: 25px;
+
+  .text {
+    margin-top: 0;
+  }
 }

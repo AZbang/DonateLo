@@ -13,7 +13,7 @@
       }
     },
     mounted() {
-      // Похоже ВК не остовляет мне выбора... Неееееет.
+      // Похоже ВК не оставляет мне выбора... Неееееет.
       setInterval(() => {
         VK.External.resizeWindow(1000, document.body.clientHeight+50);
       }, 100);

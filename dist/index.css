@@ -40382,33 +40382,31 @@
   background: #5181b8; }
 
 .service__title {
-  font-size: 2em;
-  padding-top: 8px;
-  color: #3d5977; }
+  font-size: 19px;
+  line-height: 29px;
+  color: #1f2f3d; }
 
 .service__icon {
-  font-weight: bold;
+  color: #1f2f3d;
   float: left;
-  margin-right: 15px;
-  font-size: 3em;
-  color: #5181b8; }
+  margin-right: 7px;
+  font-size: 35px; }
 
 .service__description {
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1em;
-  color: #3d5977; }
+  margin-top: 0;
+  color: #99a9bf; }
 
 .service__doc {
-  color: #3d5977;
-  text-decoration: none;
-  font-size: 21px;
-  border-bottom: 1px dashed #3d5977; }
+  position: absolute;
+  top: 15px;
+  right: 15px; }
 
 .service__input {
-  margin-top: 24px; }
-
-.service__save {
-  margin-top: 25px; }
+  margin-bottom: 25px; }
+  .service__input .text {
+    margin-top: 0; }
 
 .admin__section {
   position: relative; }

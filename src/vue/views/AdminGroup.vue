@@ -32,6 +32,10 @@
     mounted() {
       this.$store.commit('initRender', 'playground');
       this.$store.dispatch('callApi', {method: 'getGroup'});
+
+      setInterval(() => {
+        this.$store.dispatch('callApi', {method: 'loadVaribles', silent: true});
+      }, 1000);
     }
   }
 </script>
