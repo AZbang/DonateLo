@@ -1,0 +1,21 @@
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
+.center {
+  text-align: center;
+}
+
+.container {
+  margin: 3em;
+}
+.label {
+  color: $--text-color;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+.text {
+  color: $--text-color;
+  font-size: 1.1em;
+  font-weight: 400;
+}

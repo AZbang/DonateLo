@@ -10,8 +10,6 @@ fabric.Canvas.prototype.getItemsByAttr = function(attr, name) {
   return result;
 };
 
-
-
 fabric.Object.prototype.setOriginToCenter = function() {
   this._originalOriginX = this.originX;
   this._originalOriginY = this.originY;
