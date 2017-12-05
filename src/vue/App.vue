@@ -6,7 +6,7 @@
   module.exports = {
     computed: {
       view() {
-        return this.$store.state.currentView;
+        return this.$store.state.views.currentView;
       },
       loading() {
         return this.$store.state.loading;

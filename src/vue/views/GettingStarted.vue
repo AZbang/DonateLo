@@ -34,7 +34,7 @@
   module.exports = {
     computed: {
       addAppLink() {
-        return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
+        return 'https://vk.com/add_community_app.php?aid=' + this.$store.getters.appId;
       }
     }
   }

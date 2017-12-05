@@ -21,7 +21,7 @@
     },
     computed: {
       viewSection() {
-        return this.$store.state.currentSection;
+        return this.$store.state.views.currentSection;
       }
     },
     methods: {

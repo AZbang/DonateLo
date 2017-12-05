@@ -62948,7 +62948,7 @@
 	module.exports = {
 	  computed: {
 	    view() {
-	      return this.$store.state.currentView;
+	      return this.$store.state.views.currentView;
 	    },
 	    loading() {
 	      return this.$store.state.loading;
@@ -62993,66 +62993,74 @@
 /* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	const MESSAGES = __webpack_require__(152);
+	const helper = __webpack_require__(180);
+
+	const db = __webpack_require__(153);
+	const views = __webpack_require__(181);
+	const render = __webpack_require__(236);
+
+	module.exports = {
+	  modules: {
+	    db, views, render
+	  },
+	  state: {
+	    vkData: helper.parseLocationParams(),
+	    loading: false
+	  },
+	  getters: {
+	    lang(state) {
+	      return 'ru';
+	    },
+	    appId(state) {
+	      return state.vkData.api_id;
+	    }
+	  },
+	  mutations: {
+	    setLoading(state, v) {
+	      state.loading = !!v;
+	    }
+	  },
+	  actions: {
+	    showLog({ getters }, log) {
+	      let msg = MESSAGES[log];
+	      if (msg.isError) this._vm.$message.error(msg[getters.lang]);else this._vm.$message.success(msg[getters.lang]);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports) {
+
+	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"NOT_VALID_INPUT":{"ru":"Некорректно заполнены поля","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"LOADED_GROUP":{"ru":"Редактор загружен","isError":false},"UPDATED_GROUP":{"ru":"Обложка сохранена","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-	const axios = __webpack_require__(152);
-	const helper = __webpack_require__(178);
-	const Render = __webpack_require__(179);
-
+	const axios = __webpack_require__(154);
 	const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 
-	const MESSAGES = __webpack_require__(184);
-	const WIDGETS = __webpack_require__(185);
-
-	const SECTIONS = __webpack_require__(186);
-	const VIEWS = __webpack_require__(221);
+	/**
+	  DB Mudule Store
+	  Набор данных и методов, полученные с помощью api
+	**/
 
 	module.exports = {
 	  state: {
-	    render: null,
-
-	    lang: 'ru',
-	    api: helper.parseLocationParams(),
-
-	    loading: false,
 	    isGroupExist: false,
-	    isCoverEditable: false,
-
-	    currentSection: SECTIONS.WIDGETS,
-	    currentView: null,
-	    editableObject: null,
-
-	    widgets: WIDGETS,
+	    currentService: null,
 	    varibles: [],
-	    services: []
+	    services: [],
+
+	    resources: {}
 	  },
 	  mutations: {
-	    initRender(state, id) {
-	      state.render = new Render(id);
-	    },
-	    setSection(state, view) {
-	      if (SECTIONS[view]) state.currentSection = SECTIONS[view];
-	    },
-	    setView(state, view) {
-	      if (VIEWS[view]) state.currentView = VIEWS[view];
-	    },
-	    setEditableObject(state, widget) {
-	      state.editableObject = widget;
-	    },
-	    setService(state, id) {
-	      if (state.services[id]) state.currentService = state.services[id];
-	    },
-
-	    setCover(state, src) {
-	      state.isCoverEditable = true;
-	      state.render.setCover(src);
-	    },
-
-	    setLoading(state, v) {
-	      state.loading = !!v;
-	    },
 	    setGroupExist(state, v) {
 	      state.isGroupExist = v;
 	    },
@@ -63065,53 +63073,14 @@
 	        state.services.push(services[key]);
 	      }
 	    },
+	    setService(state, id) {
+	      if (state.services[id]) state.currentService = state.services[id];
+	    },
 	    setVaribles(state, vars) {
 	      state.varibles = vars;
-	      state.render.setVaribles(vars);
 	    }
 	  },
 	  actions: {
-	    addWidgets({ dispatch }, data) {
-	      for (let key in data.views) {
-	        let view = data.views[key];
-	        dispatch('addWidget', {
-	          type: view.type, view, res: data.resources
-	        });
-	      }
-	    },
-	    addWidget({ state, commit }, data) {
-	      let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
-
-	      widget.view.on('mousedown', () => {
-	        commit('setEditableObject', widget);
-	        commit('setSection', 'WIDGET_EDITOR');
-	      });
-	      state.render.canvas.on('selection:cleared', () => {
-	        commit('setEditableObject', null);
-	        commit('setSection', 'WIDGETS');
-	      });
-	      widget.view.trigger('mousedown');
-	    },
-	    removeWidget({ state, commit }, id) {
-	      commit('setSection', 'WIDGETS');
-	      state.render.removeWidget(id);
-	    },
-
-	    showLog({ state }, log) {
-	      let ms = MESSAGES[log];
-	      if (ms.isError) this._vm.$message.error(ms[state.lang]);else this._vm.$message.success(ms[state.lang]);
-	    },
-	    computedView({ state, commit, dispatch }) {
-	      return _asyncToGenerator(function* () {
-	        yield dispatch('callApi', {
-	          method: 'getGroupExist',
-	          silent: true
-	        });
-	        if (+state.api.viewer_type > 2 && state.api.group_id != null) {
-	          if (state.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
-	        } else commit('setView', 'GETTING_STARTED');
-	      })();
-	    },
 	    callApi({ commit, dispatch }, params) {
 	      return _asyncToGenerator(function* () {
 	        !params.silent && commit('setLoading', true);
@@ -63120,7 +63089,7 @@
 	          var log = yield dispatch(params.method, params);
 	          log && dispatch('showLog', log);
 	        } catch (e) {
-	          console.error(e);
+	          console.log(e);
 	          dispatch('showLog', 'METHOD_API_ERROR');
 	        }
 
@@ -63128,74 +63097,79 @@
 	      })();
 	    },
 
-	    getGroupExist({ state, commit }) {
+	    getGroupExist({ rootState, commit }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/group_exist', {
-	          group_id: state.api.group_id
+	          group_id: rootState.vkData.group_id
 	        });
 	        commit('setGroupExist', resp.data.result);
 	      })();
 	    },
-	    createGroup({ state, commit }, { token }) {
+	    createGroup({ rootState, commit }, { token }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/create_group', {
-	          group_id: state.api.group_id,
+	          group_id: rootState.vkData.group_id,
 	          access_token: token
 	        });
 	        resp.data.code === 'ok' && commit('setView', 'ADMIN');
 	        return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
 	      })();
 	    },
-	    editToken({ state, commit }, { token }) {
+	    editToken({ rootState, commit }, { token }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/edit_token', {
-	          group_id: state.api.group_id,
+	          group_id: rootState.vkData.group_id,
 	          access_token: token
 	        });
 	        return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
 	      })();
 	    },
-	    getGroup({ state, dispatch, commit }) {
+	    getGroup({ rootState, dispatch, commit }) {
 	      return _asyncToGenerator(function* () {
-	        let resp = yield axios.post(DONATELO_API + '/get_group', { group_id: state.api.group_id });
+	        let resp = yield axios.post(DONATELO_API + '/get_group', {
+	          group_id: rootState.vkData.group_id
+	        });
 	        let data = resp.data.result;
 
 	        commit('setServices', data.services);
 	        commit('setVaribles', data.enviroment);
+	        commit('setVariblesRender', data.enviroment);
+
 	        dispatch('addWidgets', data);
 
 	        if (data.resources.background) {
 	          commit('setCover', data.resources.background);
 	        }
-	        state.render.canvas.trigger('selection:cleared');
 
 	        return 'LOADED_GROUP';
 	      })();
 	    },
-	    updateGroup({ state, commit }) {
+	    updateGroup({ state, getters, rootState }) {
 	      return _asyncToGenerator(function* () {
-	        let data = state.render.getJSON();
+	        let data = getters.renderViews;
 
-	        data.resources.background = state.render.coverImage._element.src;
+	        if (state.setCoverEditable) data.resources.background = getters.coverImage;
+
 	        let resp = yield axios.post(DONATELO_API + '/update_cover', _extends({
-	          group_id: state.api.group_id
+	          group_id: rootState.vkData.group_id
 	        }, data));
 
 	        return 'UPDATED_GROUP';
 	      })();
 	    },
-	    loadVaribles({ commit, state }) {
+	    loadVaribles({ rootState, commit }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/get_enviroment', {
-	          group_id: state.api.group_id
+	          group_id: rootState.vkData.group_id
 	        });
 	        commit('setVaribles', resp.data.result);
+	        commit('setVariblesRender', resp.data.result);
 	      })();
 	    },
-	    updateService({ commit, state }, { id, form }) {
+	    updateService({ rootState, state }, { id, form }) {
 	      return _asyncToGenerator(function* () {
 	        let resp = yield axios.post(DONATELO_API + '/update_service', {
-	          group_id: state.api.group_id,
+	          group_id: rootState.vkData.group_id,
 	          service_id: id,
 	          fields: form
 	        });
@@ -63206,21 +63180,21 @@
 	};
 
 /***/ }),
-/* 152 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(153);
+	module.exports = __webpack_require__(155);
 
 /***/ }),
-/* 153 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
-	var bind = __webpack_require__(155);
-	var Axios = __webpack_require__(157);
-	var defaults = __webpack_require__(158);
+	var utils = __webpack_require__(156);
+	var bind = __webpack_require__(157);
+	var Axios = __webpack_require__(159);
+	var defaults = __webpack_require__(160);
 
 	/**
 	 * Create an instance of Axios
@@ -63253,15 +63227,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(175);
-	axios.CancelToken = __webpack_require__(176);
-	axios.isCancel = __webpack_require__(172);
+	axios.Cancel = __webpack_require__(177);
+	axios.CancelToken = __webpack_require__(178);
+	axios.isCancel = __webpack_require__(174);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(177);
+	axios.spread = __webpack_require__(179);
 
 	module.exports = axios;
 
@@ -63270,13 +63244,13 @@
 
 
 /***/ }),
-/* 154 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(155);
-	var isBuffer = __webpack_require__(156);
+	var bind = __webpack_require__(157);
+	var isBuffer = __webpack_require__(158);
 
 	/*global toString:true*/
 
@@ -63579,7 +63553,7 @@
 
 
 /***/ }),
-/* 155 */
+/* 157 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -63596,7 +63570,7 @@
 
 
 /***/ }),
-/* 156 */
+/* 158 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -63623,17 +63597,17 @@
 
 
 /***/ }),
-/* 157 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(158);
-	var utils = __webpack_require__(154);
-	var InterceptorManager = __webpack_require__(169);
-	var dispatchRequest = __webpack_require__(170);
-	var isAbsoluteURL = __webpack_require__(173);
-	var combineURLs = __webpack_require__(174);
+	var defaults = __webpack_require__(160);
+	var utils = __webpack_require__(156);
+	var InterceptorManager = __webpack_require__(171);
+	var dispatchRequest = __webpack_require__(172);
+	var isAbsoluteURL = __webpack_require__(175);
+	var combineURLs = __webpack_require__(176);
 
 	/**
 	 * Create a new instance of Axios
@@ -63715,13 +63689,13 @@
 
 
 /***/ }),
-/* 158 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(154);
-	var normalizeHeaderName = __webpack_require__(159);
+	var utils = __webpack_require__(156);
+	var normalizeHeaderName = __webpack_require__(161);
 
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -63737,10 +63711,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(160);
+	    adapter = __webpack_require__(162);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(160);
+	    adapter = __webpack_require__(162);
 	  }
 	  return adapter;
 	}
@@ -63814,12 +63788,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 159 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -63832,18 +63806,18 @@
 
 
 /***/ }),
-/* 160 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(154);
-	var settle = __webpack_require__(161);
-	var buildURL = __webpack_require__(164);
-	var parseHeaders = __webpack_require__(165);
-	var isURLSameOrigin = __webpack_require__(166);
-	var createError = __webpack_require__(162);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(167);
+	var utils = __webpack_require__(156);
+	var settle = __webpack_require__(163);
+	var buildURL = __webpack_require__(166);
+	var parseHeaders = __webpack_require__(167);
+	var isURLSameOrigin = __webpack_require__(168);
+	var createError = __webpack_require__(164);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(169);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -63940,7 +63914,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(168);
+	      var cookies = __webpack_require__(170);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -64019,12 +63993,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 161 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(162);
+	var createError = __webpack_require__(164);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -64051,12 +64025,12 @@
 
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(163);
+	var enhanceError = __webpack_require__(165);
 
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -64075,7 +64049,7 @@
 
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64102,12 +64076,12 @@
 
 
 /***/ }),
-/* 164 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -64176,12 +64150,12 @@
 
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	/**
 	 * Parse headers into an object
@@ -64219,12 +64193,12 @@
 
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -64293,7 +64267,7 @@
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64335,12 +64309,12 @@
 
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -64394,12 +64368,12 @@
 
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -64452,15 +64426,15 @@
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
-	var transformData = __webpack_require__(171);
-	var isCancel = __webpack_require__(172);
-	var defaults = __webpack_require__(158);
+	var utils = __webpack_require__(156);
+	var transformData = __webpack_require__(173);
+	var isCancel = __webpack_require__(174);
+	var defaults = __webpack_require__(160);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -64537,12 +64511,12 @@
 
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(154);
+	var utils = __webpack_require__(156);
 
 	/**
 	 * Transform the data for a request or a response
@@ -64563,7 +64537,7 @@
 
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64574,7 +64548,7 @@
 
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64594,7 +64568,7 @@
 
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64614,7 +64588,7 @@
 
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64639,12 +64613,12 @@
 
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(175);
+	var Cancel = __webpack_require__(177);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -64702,7 +64676,7 @@
 
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -64735,7 +64709,7 @@
 
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -64760,696 +64734,73 @@
 	};
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-	const WIDGETS = {
-	  'text': __webpack_require__(180),
-	  'linear': __webpack_require__(181),
-	  'radial': __webpack_require__(182),
-	  'image': __webpack_require__(183)
-	};
+	/**
+	  Views Mudule Store
+	  Набор переключателей компонентов
+	**/
 
-	class Render {
-	  constructor(id) {
-	    this.width = 1000;
-	    this.height = 300;
-	    this.scale = 1;
+	// Набор Vue компонентов
+	const SECTIONS = __webpack_require__(182);
+	const VIEWS = __webpack_require__(218);
 
-	    this.coverWidth = 1590;
-	    this.coverHeight = 400;
-
-	    this.canvas = new fabric.Canvas(id);
-	    this.canvas.setWidth(this.coverWidth);
-	    this.canvas.setHeight(this.coverHeight);
-
-	    this.coverImage = new fabric.Image();
-	    this.coverImage.set('selectable', false);
-	    this.canvas.add(this.coverImage);
-	    this.widgets = [];
-
-	    this.varibles = {};
-	  }
-	  getValueFromVarible(id) {
-	    return this.varibles[id] || '';
-	  }
-	  setVaribles(varibles) {
-	    this.varibles = varibles;
-	    this.widgets.forEach(w => {
-	      if (w.type === 'text') w.setValue(w.value);else w.setVarible(w.varible);
-	    });
-	  }
-
-	  addWidget(type, data = {}, res = {}) {
-	    let widget = new WIDGETS[type](this, data, res);
-
-	    widget.view.objectCaching = false;
-	    widget.view.selectable = true;
-	    widget.view.padding = 0;
-	    widget.view.cornerSize = 16;
-	    widget.view.borderColor = '#6e7bab';
-	    widget.view.cornerColor = '#6e7bab';
-	    widget.view.cornerStrokeColor = '#6e7bab';
-	    widget.view.transparentCorners = false;
-
-	    this.widgets.push(widget);
-	    this.canvas.add(widget.view);
-	    this.canvas.renderAll();
-
-	    widget.view.on({
-	      scaling: function (e) {
-	        let obj = this,
-	            w = obj.width * obj.scaleX,
-	            h = obj.height * obj.scaleY,
-	            s = obj.strokeWidth;
-	        obj.set({
-	          scaleX: 1,
-	          scaleY: 1
+	module.exports = {
+	  state: {
+	    currentSection: SECTIONS.WIDGETS,
+	    currentView: null
+	  },
+	  mutations: {
+	    setSection(state, view) {
+	      if (SECTIONS[view]) state.currentSection = SECTIONS[view];
+	    },
+	    setView(state, view) {
+	      if (VIEWS[view]) state.currentView = VIEWS[view];
+	    }
+	  },
+	  actions: {
+	    computedView({ rootState, commit, dispatch }) {
+	      return _asyncToGenerator(function* () {
+	        yield dispatch('callApi', {
+	          method: 'getGroupExist',
+	          silent: true
 	        });
-	        if (widget.setSize) widget.setSize(w);else {
-	          widget.setWidth(w);
-	          widget.setHeight(h);
-	        }
-	      }
-	    });
-
-	    return widget;
+	        if (+rootState.vkData.viewer_type > 2 && rootState.vkData.group_id != null) {
+	          if (rootState.db.isGroupExist) commit('setView', 'ADMIN');else commit('setView', 'REGISTER_TOKEN');
+	        } else commit('setView', 'GETTING_STARTED');
+	      })();
+	    }
 	  }
-	  removeWidget(id) {
-	    this.widgets.forEach((w, i) => {
-	      if (w.id == id) {
-	        this.canvas.remove(w.view);
-	        this.widgets.splice(i, 1);
-	      }
-	    });
-	  }
-	  getJSON() {
-	    let resources = {};
-	    let views = [];
-
-	    this.widgets.forEach(i => {
-	      let data = i.getJSON();
-	      resources = _extends({}, resources, data.images);
-	      views.push(data.data);
-	    });
-	    return { resources, views };
-	  }
-
-	  // Cover
-	  resizeCoverToWidth() {
-	    let scale = this.width / this.coverWidth;
-	    let container = document.getElementsByClassName('canvas-container')[0];
-	    container.style.transform = 'scale(' + scale + ')';
-	    container.style.transformOrigin = '0 0';
-	    document.getElementById('cover-control').style.height = this.coverHeight * scale + 'px';
-	  }
-	  setCover(src) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      let texture = new fabric.Image();
-
-	      texture.setElement(img);
-	      let scale = this.coverWidth / texture.getWidth();
-	      let w = this.coverWidth / scale;
-	      let h = this.coverHeight / scale;
-
-	      let coverSrc = texture.toDataURL({
-	        left: texture.getWidth() / 2 - w / 2,
-	        top: texture.getHeight() / 2 - h / 2,
-	        width: w,
-	        height: h
-	      });
-
-	      let cover = new Image();
-	      img.crossOrigin = 'anonymous';
-	      cover.onload = () => {
-	        this.coverImage.setElement(cover);
-	        this.coverImage.setWidth(this.coverWidth);
-	        this.coverImage.setHeight(this.coverHeight);
-
-	        this.resizeCoverToWidth();
-	        this.canvas.renderAll();
-	      };
-	      cover.src = coverSrc;
-	    };
-	    img.src = src;
-	  }
-	}
-
-	module.exports = Render;
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports) {
-
-	class Text {
-	  constructor(render, data) {
-
-	    this.id = data.id || '' + Date.now();
-	    this.type = 'text';
-
-	    this.view = new fabric.Text(data.value || 'Здесь ваш текст, йоу', {
-	      fontSize: data.size || 42
-	    });
-	    this.render = render;
-
-	    this.FONTS = {
-	      "BEBAS": "Bebas Neue",
-	      "ROBOTO": "Roboto"
-	    };
-
-	    this.view.setOriginToCenter();
-	    this.setValue(data.value || 'Здесь ваш текст, йоу');
-	    this.setFontType(data.font || 'BEBAS');
-	    this.setColor(data.color || '#fff');
-	    this.setSize(data.size || 42);
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setAngle(360 - data.angle || 0);
-	    this.view.fontWeight = 'bold';
-	    this.view.setControlsVisibility({
-	      mt: false,
-	      mb: false,
-	      ml: false,
-	      mr: false,
-	      bl: false,
-	      br: false,
-	      tl: false,
-	      tr: false
-	    });
-	  }
-	  getJSON() {
-	    return {
-	      data: {
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        angle: Math.round(360 - this.view.angle),
-
-	        id: this.id,
-	        type: "text",
-	        value: this.value,
-	        font: this.fontType,
-	        size: this.size,
-	        color: this.color
-	      }
-	    };
-	  }
-	  setX(x) {
-	    this.view.set('left', x);
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.set('top', y);
-	    this.render.canvas.renderAll();
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setFontType(type) {
-	    this.fontType = type;
-	    this.view.fontFamily = this.FONTS[type];
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(val) {
-	    this.value = val;
-
-	    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
-	      return this.render.getValueFromVarible(v);
-	    });
-	    this.render.canvas.renderAll();
-	  }
-	  setSize(size) {
-	    this.size = +size;
-	    this.view.fontSize = size;
-	    this.render.canvas.renderAll();
-	  }
-	  setColor(color) {
-	    this.color = color;
-	    this.view.fill = color;
-	    this.render.canvas.renderAll();
-	  }
-	}
-
-	module.exports = Text;
-
-/***/ }),
-/* 181 */
-/***/ (function(module, exports) {
-
-	class LinearBar {
-	  constructor(render, data, res) {
-	    this.render = render;
-
-	    this.type = 'linear';
-	    this.id = data.id || '' + Date.now();
-
-	    this.progressImage = new fabric.Image();
-	    this.standImage = new fabric.Image();
-
-	    this.view = new fabric.Group([this.standImage, this.progressImage]);
-	    this._saveLastBorder = 0;
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setWidth(data.w || 400);
-	    this.setHeight(data.h || 50);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue(50);
-
-	    this.setMaxValue(data.max_value || 100);
-	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
-	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
-	    this.setProgressColor(data.bar_color || '#ded2f7');
-	    this.setStandColor(data.stand_color || '#fff');
-	    this.setBorder(data.border || 0);
-	  }
-	  getJSON() {
-	    return {
-	      images: {
-	        [this.id + ':stand']: this.standImage._element.src,
-	        [this.id + ':bar']: this.progressImage._element.src
-	      },
-	      data: {
-	        id: this.id,
-	        type: "linear",
-	        value: this.varible || '',
-	        max_value: +this.maxValue + 0.0000001,
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle),
-	        stand_color: this.standColor,
-	        bar_color: this.progressColor,
-	        border: this.border
-	      }
-	    };
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setWidth(w) {
-	    this.view.setWidth(w);
-	    this.progressImage.left = -this.view.width / 2;
-	    this.standImage.left = -this.view.width / 2;
-	    this.standImage.setWidth(this.view.width);
-	    this.setValue(this.value);
-	  }
-	  setHeight(h) {
-	    this.view.setHeight(h);
-	    this.progressImage.top = -this.view.height / 2;
-	    this.progressImage.setHeight(this.view.height);
-	    this.standImage.top = -this.view.height / 2;
-	    this.standImage.setHeight(this.view.height);
-	    this.setValue(this.value);
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.progressImage.setElement(img);
-	      this.progressImage.top = -this.view.height / 2;
-	      this.progressImage.left = -this.view.width / 2;
-	      this.progressImage.setHeight(this.view.height);
-	      this.setProgressColor(this.progressColor);
-	      this.setValue(this.value);
-	    };
-	    img.src = url;
-	  }
-	  setStandImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.standImage.setElement(img);
-	      this.standImage.top = -this.view.height / 2;
-	      this.standImage.left = -this.view.width / 2;
-	      this.standImage.setHeight(this.view.height);
-	      this.standImage.setWidth(this.view.width);
-	      this.setStandColor(this.standColor);
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setValue(val) {
-	    this.value = +val;
-	    this.progressImage.width = this.view.width / this.maxValue * this.value;
-	    this.render.canvas.renderAll();
-	  }
-	  setMaxValue(max) {
-	    this.maxValue = +(+max).toFixed(5);
-	    this.progressImage.width = this.view.width / this.maxValue * this.value;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressColor(color) {
-	    this.progressColor = color;
-	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setStandColor(color) {
-	    this.standColor = color;
-	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setBorder(border) {
-	    this.border = border;
-	    this.standImage.setHeight(this.view.height + this.border * 2);
-	    this.standImage.setWidth(this.view.width + this.border * 2);
-	    this.standImage.left -= this._saveLastBorder + this.border;
-	    this.standImage.top -= this._saveLastBorder + this.border;
-	    this._saveLastBorder = this.border;
-	    this.render.canvas.renderAll();
-	  }
-	}
-
-	module.exports = LinearBar;
+	};
 
 /***/ }),
 /* 182 */
-/***/ (function(module, exports) {
-
-	class RadialBar {
-	  constructor(render, data, res) {
-	    this.render = render;
-
-	    this.type = 'radial';
-	    this.id = data.id || '' + Date.now();
-
-	    this.progressImage = new fabric.Image();
-	    this.standImage = new fabric.Image();
-	    this.progressImage.setOriginToCenter();
-
-	    this.view = new fabric.Group([this.standImage, this.progressImage]);
-	    this._saveLastBorder = 0;
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 500);
-	    this.setY(data.y || 150);
-	    this.setSize(data.w || 200);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue(25);
-
-	    this.setStartAngle(-90);
-	    this.setMaxValue(data.max_value || 100);
-	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
-	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
-	    this.setProgressColor(data.bar_color || '#ded2f7');
-	    this.setStandColor(data.stand_color || '#fff');
-	    this.setBorder(data.border || 0);
-
-	    this.view.setControlsVisibility({
-	      mt: false,
-	      mb: false,
-	      ml: false,
-	      mr: false
-	    });
-	  }
-	  getJSON() {
-	    return {
-	      images: {
-	        [this.id + ':stand']: this.standImage._element.src,
-	        [this.id + ':bar']: this.progressImage._element.src
-	      },
-	      data: {
-	        id: this.id,
-	        type: "radial",
-	        value: this.varible || '',
-	        max_value: +this.maxValue + 0.0000001,
-	        start_angle: 0,
-	        direction: 0,
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle),
-	        stand_color: this.standColor,
-	        bar_color: this.progressColor,
-	        border: this.border
-	      }
-	    };
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setSize(w) {
-	    this.view.width = w;
-	    this.view.height = w;
-	    this.progressImage.top = 0;
-	    this.progressImage.left = 0;
-	    this.progressImage.width = this.view.width;
-	    this.progressImage.height = this.view.width;
-	    this.standImage.top = -this.view.height / 2;
-	    this.standImage.left = -this.view.width / 2;
-	    this.standImage.width = this.view.width;
-	    this.standImage.height = this.view.width;
-	    this.standImage.set({
-	      clipTo: ctx => {
-	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
-	      }
-	    });
-	    this.setValue(this.value);
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.progressImage.setElement(img);
-	      this.progressImage.top = 0;
-	      this.progressImage.left = 0;
-	      this.progressImage.width = this.view.width;
-	      this.progressImage.height = this.view.width;
-	      this.setStartAngle(this.startAngle);
-	      this.setProgressColor(this.progressColor);
-	      this.setValue(this.value);
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setStandImage(url) {
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      this.standImage.setElement(img);
-	      this.standImage.top = -this.view.height / 2;
-	      this.standImage.left = -this.view.width / 2;
-	      this.standImage.width = this.view.width;
-	      this.standImage.height = this.view.width;
-
-	      this.setStandColor(this.standColor);
-	      this.standImage.set({
-	        clipTo: ctx => {
-	          ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
-	        }
-	      });
-	      this.render.canvas.renderAll();
-	    };
-	    img.src = url;
-	  }
-	  setStartAngle(angle) {
-	    this.startAngle = +angle;
-	    this.progressImage.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(v) {
-	    this.value = +v;
-	    this.progressImage.set({
-	      clipTo: ctx => {
-	        ctx.moveTo(0, 0);
-	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2 / this.maxValue * this.value, false);
-	        ctx.lineTo(0, 0);
-	        ctx.fill();
-	      }
-	    });
-	    this.render.canvas.renderAll();
-	  }
-	  setMaxValue(max) {
-	    this.maxValue = +(+max).toFixed(5);
-	    this.setValue(this.value);
-	  }
-	  setBorder(br) {
-	    this.border = +br;
-	    this.standImage.width = this.view.width + br * 2;
-	    this.standImage.height = this.view.width + br * 2;
-
-	    this.standImage.left -= this._saveLastBorder + br;
-	    this.standImage.top -= this._saveLastBorder + br;
-	    this.standImage.set({
-	      clipTo: ctx => {
-	        ctx.arc(0, 0, this.standImage.width / 2, 0, Math.PI * 2, true);
-	      }
-	    });
-	    this._saveLastBorder = br;
-	    this.render.canvas.renderAll();
-	  }
-	  setProgressColor(color) {
-	    this.progressColor = color;
-	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	  setStandColor(color) {
-	    this.standColor = color;
-	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
-	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
-	  }
-	}
-
-	module.exports = RadialBar;
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports) {
-
-	class ContructorImage {
-	  constructor(render, data) {
-	    this.render = render;
-	    this.type = 'image';
-	    this.id = data.id || '' + Date.now();
-
-	    this.view = new fabric.Image();
-
-	    this.view.setOriginToCenter();
-	    this.setX(data.x || 200);
-	    this.setY(data.y || 200);
-	    this.setWidth(data.w || 200);
-	    this.setHeight(data.h || 200);
-	    this.setAngle(360 - data.angle || 0);
-	    if (data.value) this.setVarible(data.value);else this.setValue('dist/assets/image.png');
-
-	    this.setBorderWidth(data.borderWidth || 0);
-	    this.setBorderColor(data.borderColor || '#fff');
-	  }
-	  getJSON() {
-	    return {
-	      data: {
-	        id: this.id,
-	        type: "image",
-	        value: this.varible || '',
-	        x: Math.round(this.view.left),
-	        y: Math.round(this.view.top),
-	        w: Math.round(this.view.width),
-	        h: Math.round(this.view.height),
-	        angle: Math.round(360 - this.view.angle)
-	        // border_color: obj.borderColor,
-	        // border_width: obj.borderWidth
-	      }
-	    };
-	  }
-	  setVarible(id) {
-	    this.varible = id;
-	    this.setValue(this.render.getValueFromVarible(id));
-	  }
-	  setX(x) {
-	    this.view.left = x;
-	    this.render.canvas.renderAll();
-	  }
-	  setY(y) {
-	    this.view.top = y;
-	    this.render.canvas.renderAll();
-	  }
-	  setWidth(w) {
-	    this.view.width = w;
-	    this.render.canvas.renderAll();
-	  }
-	  setHeight(h) {
-	    this.view.height = h;
-	    this.render.canvas.renderAll();
-	  }
-	  setAngle(angle) {
-	    this.view.angle = angle;
-	    this.render.canvas.renderAll();
-	  }
-	  setValue(src) {
-	    this.value = src;
-	    let img = new Image();
-	    img.crossOrigin = 'anonymous';
-	    img.onload = () => {
-	      let w = this.view.width;
-	      let h = this.view.height;
-	      this.view.setElement(img);
-	      this.setWidth(w);
-	      this.setHeight(h);
-	    };
-	    img.src = src;
-	  }
-	  setBorderWidth(width) {
-	    this.borderWidth = +width;
-	    this.view.strokeWidth = +width;
-	  }
-	  setBorderColor(color) {
-	    this.borderColor = color;
-	    this.view.stroke = color;
-	  }
-	}
-
-	module.exports = ContructorImage;
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports) {
-
-	module.exports = {"NOT_LOADED_GROUP":{"ru":"Извините, произошла ошибка, попробуйте позже.","isError":true},"NOT_CORRECT_TOKEN":{"ru":"Ошибка! Пожалуйста, проверьте Ваш токен.","isError":true},"NOT_VALID_INPUT":{"ru":"Некорректно заполнены поля","isError":true},"CORRECT_TOKEN":{"ru":"Токен загружен.","isError":false},"CREATED_GROUP":{"ru":"Спасибо! Группа зарегистрирована!","isError":false},"LOADED_GROUP":{"ru":"Редактор загружен","isError":false},"UPDATED_GROUP":{"ru":"Обложка сохранена","isError":false},"CREATED_SERVICE":{"ru":"Сервис активирован","isError":false},"METHOD_API_ERROR":{"ru":"Произошла ошибка на сервере, попробуйте позже","isError":true},"IMAGE_NOT_VALID_FORMAT":{"ru":"Неправильный формат загружаемого файла","isError":true},"IMAGE_LIMIT_SIZE":{"ru":"Превышен лимит загружаемого файла","isError":true}}
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports) {
-
-	module.exports = [{"type":"text","label":"Текст","icon":"text_format"},{"type":"linear","label":"Линейный бар","icon":"format_align_left"},{"type":"radial","label":"Радиальный бар","icon":"panorama_fish_eye"},{"type":"image","label":"Картинка","icon":"image"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"tag_faces"},{"type":"icons","label":"Иконки","disable":true,"icon":"toll"},{"type":"shape","label":"Фигура","disable":true,"icon":"star"},{"type":"graphic","label":"График","disable":true,"icon":"timeline"}]
-
-/***/ }),
-/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  WIDGETS: __webpack_require__(187),
-	  SERVICES: __webpack_require__(190),
-	  SETTINGS: __webpack_require__(193),
+	  WIDGETS: __webpack_require__(183),
+	  SERVICES: __webpack_require__(187),
+	  SETTINGS: __webpack_require__(190),
 
-	  WIDGET_EDITOR: __webpack_require__(200),
-	  SERVICE_EDITOR: __webpack_require__(218)
+	  WIDGET_EDITOR: __webpack_require__(197),
+	  SERVICE_EDITOR: __webpack_require__(215)
 	};
 
 /***/ }),
-/* 187 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(188)
+	__vue_exports__ = __webpack_require__(184)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(189)
+	var __vue_template__ = __webpack_require__(186)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -65483,8 +64834,8 @@
 
 
 /***/ }),
-/* 188 */
-/***/ (function(module, exports) {
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	//
 	//
@@ -65505,10 +64856,11 @@
 	//
 	//
 
+	const WIDGETS = __webpack_require__(185);
 	module.exports = {
 	  computed: {
 	    widgets() {
-	      return this.$store.state.widgets;
+	      return WIDGETS;
 	    }
 	  },
 	  methods: {
@@ -65522,7 +64874,13 @@
 	};
 
 /***/ }),
-/* 189 */
+/* 185 */
+/***/ (function(module, exports) {
+
+	module.exports = [{"type":"text","label":"Текст","icon":"text_format"},{"type":"linear","label":"Линейный бар","icon":"format_align_left"},{"type":"radial","label":"Радиальный бар","icon":"panorama_fish_eye"},{"type":"image","label":"Картинка","icon":"image"},{"type":"stickers","label":"Стикеры","disable":true,"icon":"tag_faces"},{"type":"icons","label":"Иконки","disable":true,"icon":"toll"},{"type":"shape","label":"Фигура","disable":true,"icon":"star"},{"type":"graphic","label":"График","disable":true,"icon":"timeline"}]
+
+/***/ }),
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65573,17 +64931,17 @@
 	}
 
 /***/ }),
-/* 190 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(191)
+	__vue_exports__ = __webpack_require__(188)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(192)
+	var __vue_template__ = __webpack_require__(189)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -65617,7 +64975,7 @@
 
 
 /***/ }),
-/* 191 */
+/* 188 */
 /***/ (function(module, exports) {
 
 	//
@@ -65648,7 +65006,7 @@
 	  },
 	  computed: {
 	    services() {
-	      return this.$store.state.services;
+	      return this.$store.state.db.services;
 	    }
 	  },
 	  methods: {
@@ -65663,7 +65021,7 @@
 	};
 
 /***/ }),
-/* 192 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -65717,20 +65075,20 @@
 	}
 
 /***/ }),
-/* 193 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* styles */
-	__webpack_require__(194)
+	__webpack_require__(191)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(198)
+	__vue_exports__ = __webpack_require__(195)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(199)
+	var __vue_template__ = __webpack_require__(196)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -65765,16 +65123,16 @@
 
 
 /***/ }),
-/* 194 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(195);
+	var content = __webpack_require__(192);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(197)(content, {});
+	var update = __webpack_require__(194)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -65791,10 +65149,10 @@
 	}
 
 /***/ }),
-/* 195 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(196)();
+	exports = module.exports = __webpack_require__(193)();
 	// imports
 
 
@@ -65805,7 +65163,7 @@
 
 
 /***/ }),
-/* 196 */
+/* 193 */
 /***/ (function(module, exports) {
 
 	/*
@@ -65861,7 +65219,7 @@
 
 
 /***/ }),
-/* 197 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -66083,7 +65441,7 @@
 
 
 /***/ }),
-/* 198 */
+/* 195 */
 /***/ (function(module, exports) {
 
 	//
@@ -66112,7 +65470,7 @@
 	};
 
 /***/ }),
-/* 199 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66160,20 +65518,20 @@
 	}
 
 /***/ }),
-/* 200 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* styles */
-	__webpack_require__(201)
+	__webpack_require__(198)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(203)
+	__vue_exports__ = __webpack_require__(200)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(217)
+	var __vue_template__ = __webpack_require__(214)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -66208,16 +65566,16 @@
 
 
 /***/ }),
-/* 201 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(202);
+	var content = __webpack_require__(199);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(197)(content, {});
+	var update = __webpack_require__(194)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -66234,10 +65592,10 @@
 	}
 
 /***/ }),
-/* 202 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(196)();
+	exports = module.exports = __webpack_require__(193)();
 	// imports
 
 
@@ -66248,7 +65606,7 @@
 
 
 /***/ }),
-/* 203 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//
@@ -66259,7 +65617,7 @@
 	//
 	//
 
-	const EDITORS = __webpack_require__(204);
+	const EDITORS = __webpack_require__(201);
 
 	module.exports = {
 	  methods: {
@@ -66269,7 +65627,7 @@
 	  },
 	  computed: {
 	    widget() {
-	      return this.$store.state.editableObject;
+	      return this.$store.state.render.editableObject;
 	    },
 	    viewEditor() {
 	      return EDITORS[this.widget.type];
@@ -66278,28 +65636,28 @@
 	};
 
 /***/ }),
-/* 204 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  text: __webpack_require__(205),
-	  linear: __webpack_require__(208),
-	  radial: __webpack_require__(211),
-	  image: __webpack_require__(214)
+	  text: __webpack_require__(202),
+	  linear: __webpack_require__(205),
+	  radial: __webpack_require__(208),
+	  image: __webpack_require__(211)
 	};
 
 /***/ }),
-/* 205 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(206)
+	__vue_exports__ = __webpack_require__(203)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(207)
+	var __vue_template__ = __webpack_require__(204)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -66333,7 +65691,7 @@
 
 
 /***/ }),
-/* 206 */
+/* 203 */
 /***/ (function(module, exports) {
 
 	//
@@ -66397,7 +65755,7 @@
 	module.exports = {
 	  computed: {
 	    widget() {
-	      return this.$store.state.editableObject;
+	      return this.$store.state.render.editableObject;
 	    },
 	    angle() {
 	      let deg = Math.abs(Math.round(360 - 360 - this.widget.view.angle));
@@ -66430,7 +65788,7 @@
 	};
 
 /***/ }),
-/* 207 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66565,17 +65923,17 @@
 	}
 
 /***/ }),
-/* 208 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(209)
+	__vue_exports__ = __webpack_require__(206)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(210)
+	var __vue_template__ = __webpack_require__(207)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -66609,7 +65967,7 @@
 
 
 /***/ }),
-/* 209 */
+/* 206 */
 /***/ (function(module, exports) {
 
 	//
@@ -66668,10 +66026,10 @@
 	module.exports = {
 	  computed: {
 	    widget() {
-	      return this.$store.state.editableObject;
+	      return this.$store.state.render.editableObject;
 	    },
 	    varibles() {
-	      return this.$store.state.varibles;
+	      return this.$store.state.db.varibles;
 	    },
 	    angle() {
 	      let deg = Math.abs(Math.round(360 - 360 - this.widget.view.angle));
@@ -66716,7 +66074,7 @@
 	};
 
 /***/ }),
-/* 210 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66880,17 +66238,17 @@
 	}
 
 /***/ }),
-/* 211 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(212)
+	__vue_exports__ = __webpack_require__(209)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(213)
+	var __vue_template__ = __webpack_require__(210)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -66924,7 +66282,7 @@
 
 
 /***/ }),
-/* 212 */
+/* 209 */
 /***/ (function(module, exports) {
 
 	//
@@ -66979,10 +66337,10 @@
 	module.exports = {
 	  computed: {
 	    widget() {
-	      return this.$store.state.editableObject;
+	      return this.$store.state.render.editableObject;
 	    },
 	    varibles() {
-	      return this.$store.state.varibles;
+	      return this.$store.state.db.varibles;
 	    },
 	    angle() {
 	      let deg = Math.abs(Math.round(360 - 360 - this.widget.view.angle));
@@ -67024,7 +66382,7 @@
 	};
 
 /***/ }),
-/* 213 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67175,17 +66533,17 @@
 	}
 
 /***/ }),
-/* 214 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(215)
+	__vue_exports__ = __webpack_require__(212)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(216)
+	var __vue_template__ = __webpack_require__(213)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -67219,7 +66577,7 @@
 
 
 /***/ }),
-/* 215 */
+/* 212 */
 /***/ (function(module, exports) {
 
 	//
@@ -67266,10 +66624,10 @@
 	module.exports = {
 	  computed: {
 	    widget() {
-	      return this.$store.state.editableObject;
+	      return this.$store.state.render.editableObject;
 	    },
 	    varibles() {
-	      return this.$store.state.varibles;
+	      return this.$store.state.db.varibles;
 	    },
 	    angle() {
 	      let deg = Math.abs(Math.round(360 - 360 - this.widget.view.angle));
@@ -67299,7 +66657,7 @@
 	};
 
 /***/ }),
-/* 216 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67419,7 +66777,7 @@
 	}
 
 /***/ }),
-/* 217 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67446,17 +66804,17 @@
 	}
 
 /***/ }),
-/* 218 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(219)
+	__vue_exports__ = __webpack_require__(216)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(220)
+	var __vue_template__ = __webpack_require__(217)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -67490,7 +66848,7 @@
 
 
 /***/ }),
-/* 219 */
+/* 216 */
 /***/ (function(module, exports) {
 
 	//
@@ -67518,7 +66876,7 @@
 	module.exports = {
 	  computed: {
 	    service() {
-	      return this.$store.state.currentService;
+	      return this.$store.state.db.currentService;
 	    }
 	  },
 	  methods: {
@@ -67529,7 +66887,6 @@
 	          for (let input in this.service.inputs) {
 	            form[input] = this.service.inputs[input].value;
 	          }
-	          console.log(this.service);
 	          this.$store.dispatch('callApi', {
 	            method: 'updateService',
 	            id: this.service.id, form
@@ -67544,7 +66901,7 @@
 	};
 
 /***/ }),
-/* 220 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67631,27 +66988,27 @@
 	}
 
 /***/ }),
-/* 221 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  GETTING_STARTED: __webpack_require__(222),
-	  REGISTER_GROUP: __webpack_require__(225),
-	  ADMIN: __webpack_require__(228)
+	  GETTING_STARTED: __webpack_require__(219),
+	  REGISTER_GROUP: __webpack_require__(222),
+	  ADMIN: __webpack_require__(225)
 	};
 
 /***/ }),
-/* 222 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(223)
+	__vue_exports__ = __webpack_require__(220)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(224)
+	var __vue_template__ = __webpack_require__(221)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -67685,7 +67042,7 @@
 
 
 /***/ }),
-/* 223 */
+/* 220 */
 /***/ (function(module, exports) {
 
 	//
@@ -67724,13 +67081,13 @@
 	module.exports = {
 	  computed: {
 	    addAppLink() {
-	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.state.api.api_id;
+	      return 'https://vk.com/add_community_app.php?aid=' + this.$store.getters.appId;
 	    }
 	  }
 	};
 
 /***/ }),
-/* 224 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67814,17 +67171,17 @@
 	}
 
 /***/ }),
-/* 225 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(226)
+	__vue_exports__ = __webpack_require__(223)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(227)
+	var __vue_template__ = __webpack_require__(224)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -67858,7 +67215,7 @@
 
 
 /***/ }),
-/* 226 */
+/* 223 */
 /***/ (function(module, exports) {
 
 	//
@@ -67890,7 +67247,7 @@
 	};
 
 /***/ }),
-/* 227 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -67933,17 +67290,17 @@
 	}
 
 /***/ }),
-/* 228 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(229)
+	__vue_exports__ = __webpack_require__(226)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(238)
+	var __vue_template__ = __webpack_require__(235)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -67977,7 +67334,7 @@
 
 
 /***/ }),
-/* 229 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//
@@ -67995,7 +67352,7 @@
 	//
 	//
 
-	const CoverControl = __webpack_require__(230);
+	const CoverControl = __webpack_require__(227);
 
 	module.exports = {
 	  components: {
@@ -68003,7 +67360,7 @@
 	  },
 	  computed: {
 	    viewSection() {
-	      return this.$store.state.currentSection;
+	      return this.$store.state.views.currentSection;
 	    }
 	  },
 	  methods: {
@@ -68022,17 +67379,17 @@
 	};
 
 /***/ }),
-/* 230 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(231)
+	__vue_exports__ = __webpack_require__(228)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(237)
+	var __vue_template__ = __webpack_require__(234)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -68066,7 +67423,7 @@
 
 
 /***/ }),
-/* 231 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//
@@ -68089,39 +67446,40 @@
 	//
 	//
 
-	const UploadImage = __webpack_require__(232);
+	const UploadImage = __webpack_require__(229);
 
 	module.exports = {
 	  components: {
 	    UploadImage
 	  },
 	  computed: {
-	    isCoverEditable() {
-	      return this.$store.state.isCoverEditable;
+	    isCoverExist() {
+	      return this.$store.state.render.isCoverExist;
 	    }
 	  },
 	  methods: {
 	    setCover(src) {
 	      this.$store.commit('setCover', src);
+	      this.$store.commit('setCoverEditable', true);
 	    }
 	  }
 	};
 
 /***/ }),
-/* 232 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* styles */
-	__webpack_require__(233)
+	__webpack_require__(230)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(235)
+	__vue_exports__ = __webpack_require__(232)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(236)
+	var __vue_template__ = __webpack_require__(233)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -68155,16 +67513,16 @@
 
 
 /***/ }),
-/* 233 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(234);
+	var content = __webpack_require__(231);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(197)(content, {});
+	var update = __webpack_require__(194)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -68181,10 +67539,10 @@
 	}
 
 /***/ }),
-/* 234 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(196)();
+	exports = module.exports = __webpack_require__(193)();
 	// imports
 
 
@@ -68195,7 +67553,7 @@
 
 
 /***/ }),
-/* 235 */
+/* 232 */
 /***/ (function(module, exports) {
 
 	//
@@ -68225,7 +67583,7 @@
 	};
 
 /***/ }),
-/* 236 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68248,7 +67606,7 @@
 	}
 
 /***/ }),
-/* 237 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68260,8 +67618,8 @@
 	    directives: [{
 	      name: "show",
 	      rawName: "v-show",
-	      value: (_vm.isCoverEditable),
-	      expression: "isCoverEditable"
+	      value: (_vm.isCoverExist),
+	      expression: "isCoverExist"
 	    }],
 	    staticStyle: {
 	      "height": "inherit"
@@ -68274,8 +67632,8 @@
 	    directives: [{
 	      name: "show",
 	      rawName: "v-show",
-	      value: (_vm.isCoverEditable),
-	      expression: "isCoverEditable"
+	      value: (_vm.isCoverExist),
+	      expression: "isCoverExist"
 	    }],
 	    staticClass: "cover-uploader-btn"
 	  }, [_c('upload-image', {
@@ -68291,8 +67649,8 @@
 	    directives: [{
 	      name: "show",
 	      rawName: "v-show",
-	      value: (!_vm.isCoverEditable),
-	      expression: "!isCoverEditable"
+	      value: (!_vm.isCoverExist),
+	      expression: "!isCoverExist"
 	    }],
 	    staticClass: "cover-uploader-area"
 	  }, [_c('upload-image', {
@@ -68313,7 +67671,7 @@
 	}
 
 /***/ }),
-/* 238 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -68355,6 +67713,735 @@
 	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-a536eab4", module.exports)
 	  }
 	}
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	  Render Mudule Store
+	  Набор реактивных свойств и методов для работы с Render API
+	**/
+
+	// Render API
+	const Render = __webpack_require__(237);
+
+	module.exports = {
+	  state: {
+	    render: null,
+	    isCoverExist: false,
+	    isCoverEditable: false,
+	    editableObject: null
+	  },
+	  mutations: {
+	    initRender(state, id) {
+	      state.render = new Render(id);
+	    },
+	    setVariblesRender(state, vars) {
+	      state.render.setVaribles(vars);
+	    },
+	    setEditableObject(state, widget) {
+	      state.editableObject = widget;
+	    },
+	    setCoverEditable(state, v) {
+	      state.isCoverEditable = !!v;
+	    },
+	    setCover(state, src) {
+	      state.isCoverExist = true;
+	      state.render.setCover(src);
+	    }
+	  },
+	  getters: {
+	    coverImage(state) {
+	      return state.render.coverImage._element.src;
+	    },
+	    renderViews(state) {
+	      return state.render.getJSON();
+	    }
+	  },
+	  actions: {
+	    addWidgets({ dispatch, state }, data) {
+	      for (let key in data.views) {
+	        let view = data.views[key];
+	        dispatch('addWidget', {
+	          type: view.type, view, res: data.resources
+	        });
+	      }
+	      state.render.canvas.trigger('selection:cleared');
+	    },
+	    addWidget({ state, commit }, data) {
+	      let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
+
+	      widget.view.on('mousedown', () => {
+	        commit('setEditableObject', widget);
+	        commit('setSection', 'WIDGET_EDITOR');
+	      });
+	      state.render.canvas.on('selection:cleared', () => {
+	        commit('setEditableObject', null);
+	        commit('setSection', 'WIDGETS');
+	      });
+	      widget.view.trigger('mousedown');
+	    },
+	    removeWidget({ state, commit }, id) {
+	      commit('setSection', 'WIDGETS');
+	      state.render.removeWidget(id);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	const WIDGETS = {
+	  'text': __webpack_require__(238),
+	  'linear': __webpack_require__(239),
+	  'radial': __webpack_require__(240),
+	  'image': __webpack_require__(241)
+	};
+
+	class Render {
+	  constructor(id) {
+	    this.width = 1000;
+	    this.height = 300;
+	    this.scale = 1;
+
+	    this.coverWidth = 1590;
+	    this.coverHeight = 400;
+
+	    this.canvas = new fabric.Canvas(id);
+	    this.canvas.setWidth(this.coverWidth);
+	    this.canvas.setHeight(this.coverHeight);
+
+	    this.coverImage = new fabric.Image();
+	    this.coverImage.set('selectable', false);
+	    this.canvas.add(this.coverImage);
+	    this.widgets = [];
+
+	    this.varibles = {};
+	  }
+	  getValueFromVarible(id) {
+	    return this.varibles[id] || '';
+	  }
+	  setVaribles(varibles) {
+	    this.varibles = varibles;
+	    this.widgets.forEach(w => {
+	      if (w.type === 'text') w.setValue(w.value);else w.setVarible(w.varible);
+	    });
+	  }
+
+	  addWidget(type, data = {}, res = {}) {
+	    let widget = new WIDGETS[type](this, data, res);
+
+	    widget.view.objectCaching = false;
+	    widget.view.selectable = true;
+	    widget.view.padding = 0;
+	    widget.view.cornerSize = 16;
+	    widget.view.borderColor = '#6e7bab';
+	    widget.view.cornerColor = '#6e7bab';
+	    widget.view.cornerStrokeColor = '#6e7bab';
+	    widget.view.transparentCorners = false;
+
+	    this.widgets.push(widget);
+	    this.canvas.add(widget.view);
+	    this.canvas.renderAll();
+
+	    widget.view.on({
+	      scaling: function (e) {
+	        let obj = this,
+	            w = obj.width * obj.scaleX,
+	            h = obj.height * obj.scaleY,
+	            s = obj.strokeWidth;
+	        obj.set({
+	          scaleX: 1,
+	          scaleY: 1
+	        });
+	        if (widget.setSize) widget.setSize(w);else {
+	          widget.setWidth(w);
+	          widget.setHeight(h);
+	        }
+	      }
+	    });
+
+	    return widget;
+	  }
+	  removeWidget(id) {
+	    this.widgets.forEach((w, i) => {
+	      if (w.id == id) {
+	        this.canvas.remove(w.view);
+	        this.widgets.splice(i, 1);
+	      }
+	    });
+	  }
+	  getJSON() {
+	    let resources = {};
+	    let views = [];
+
+	    this.widgets.forEach(i => {
+	      let data = i.getJSON();
+	      resources = _extends({}, resources, data.images);
+	      views.push(data.data);
+	    });
+	    return { resources, views };
+	  }
+
+	  // Cover
+	  resizeCoverToWidth() {
+	    let scale = this.width / this.coverWidth;
+	    let container = document.getElementsByClassName('canvas-container')[0];
+	    container.style.transform = 'scale(' + scale + ')';
+	    container.style.transformOrigin = '0 0';
+	    document.getElementById('cover-control').style.height = this.coverHeight * scale + 'px';
+	  }
+	  setCover(src) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      let texture = new fabric.Image();
+
+	      texture.setElement(img);
+	      let scale = this.coverWidth / texture.getWidth();
+	      let w = this.coverWidth / scale;
+	      let h = this.coverHeight / scale;
+
+	      let coverSrc = texture.toDataURL({
+	        left: texture.getWidth() / 2 - w / 2,
+	        top: texture.getHeight() / 2 - h / 2,
+	        width: w,
+	        height: h
+	      });
+
+	      let cover = new Image();
+	      img.crossOrigin = 'anonymous';
+	      cover.onload = () => {
+	        this.coverImage.setElement(cover);
+	        this.coverImage.setWidth(this.coverWidth);
+	        this.coverImage.setHeight(this.coverHeight);
+
+	        this.resizeCoverToWidth();
+	        this.canvas.renderAll();
+	      };
+	      cover.src = coverSrc;
+	    };
+	    img.src = src;
+	  }
+	}
+
+	module.exports = Render;
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports) {
+
+	class Text {
+	  constructor(render, data) {
+
+	    this.id = data.id || '' + Date.now();
+	    this.type = 'text';
+
+	    this.view = new fabric.Text(data.value || 'Здесь ваш текст, йоу', {
+	      fontSize: data.size || 42
+	    });
+	    this.render = render;
+
+	    this.FONTS = {
+	      "BEBAS": "Bebas Neue",
+	      "ROBOTO": "Roboto"
+	    };
+
+	    this.view.setOriginToCenter();
+	    this.setValue(data.value || 'Здесь ваш текст, йоу');
+	    this.setFontType(data.font || 'BEBAS');
+	    this.setColor(data.color || '#fff');
+	    this.setSize(data.size || 42);
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setAngle(360 - data.angle || 0);
+	    this.view.fontWeight = 'bold';
+	    this.view.setControlsVisibility({
+	      mt: false,
+	      mb: false,
+	      ml: false,
+	      mr: false,
+	      bl: false,
+	      br: false,
+	      tl: false,
+	      tr: false
+	    });
+	  }
+	  getJSON() {
+	    return {
+	      data: {
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        angle: Math.round(360 - this.view.angle),
+
+	        id: this.id,
+	        type: "text",
+	        value: this.value,
+	        font: this.fontType,
+	        size: this.size,
+	        color: this.color
+	      }
+	    };
+	  }
+	  setX(x) {
+	    this.view.set('left', x);
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.set('top', y);
+	    this.render.canvas.renderAll();
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setFontType(type) {
+	    this.fontType = type;
+	    this.view.fontFamily = this.FONTS[type];
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(val) {
+	    this.value = val;
+
+	    this.view.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
+	      return this.render.getValueFromVarible(v);
+	    });
+	    this.render.canvas.renderAll();
+	  }
+	  setSize(size) {
+	    this.size = +size;
+	    this.view.fontSize = size;
+	    this.render.canvas.renderAll();
+	  }
+	  setColor(color) {
+	    this.color = color;
+	    this.view.fill = color;
+	    this.render.canvas.renderAll();
+	  }
+	}
+
+	module.exports = Text;
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports) {
+
+	class LinearBar {
+	  constructor(render, data, res) {
+	    this.render = render;
+
+	    this.type = 'linear';
+	    this.id = data.id || '' + Date.now();
+
+	    this.progressImage = new fabric.Image();
+	    this.standImage = new fabric.Image();
+
+	    this.view = new fabric.Group([this.standImage, this.progressImage]);
+	    this._saveLastBorder = 0;
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setWidth(data.w || 400);
+	    this.setHeight(data.h || 50);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue(50);
+
+	    this.setMaxValue(data.max_value || 100);
+	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
+	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
+	    this.setProgressColor(data.bar_color || '#ded2f7');
+	    this.setStandColor(data.stand_color || '#fff');
+	    this.setBorder(data.border || 0);
+	  }
+	  getJSON() {
+	    return {
+	      images: {
+	        [this.id + ':stand']: this.standImage._element.src,
+	        [this.id + ':bar']: this.progressImage._element.src
+	      },
+	      data: {
+	        id: this.id,
+	        type: "linear",
+	        value: this.varible || '',
+	        max_value: +this.maxValue + 0.0000001,
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle),
+	        stand_color: this.standColor,
+	        bar_color: this.progressColor,
+	        border: this.border
+	      }
+	    };
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setWidth(w) {
+	    this.view.setWidth(w);
+	    this.progressImage.left = -this.view.width / 2;
+	    this.standImage.left = -this.view.width / 2;
+	    this.standImage.setWidth(this.view.width);
+	    this.setValue(this.value);
+	  }
+	  setHeight(h) {
+	    this.view.setHeight(h);
+	    this.progressImage.top = -this.view.height / 2;
+	    this.progressImage.setHeight(this.view.height);
+	    this.standImage.top = -this.view.height / 2;
+	    this.standImage.setHeight(this.view.height);
+	    this.setValue(this.value);
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.progressImage.setElement(img);
+	      this.progressImage.top = -this.view.height / 2;
+	      this.progressImage.left = -this.view.width / 2;
+	      this.progressImage.setHeight(this.view.height);
+	      this.setProgressColor(this.progressColor);
+	      this.setValue(this.value);
+	    };
+	    img.src = url;
+	  }
+	  setStandImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.standImage.setElement(img);
+	      this.standImage.top = -this.view.height / 2;
+	      this.standImage.left = -this.view.width / 2;
+	      this.standImage.setHeight(this.view.height);
+	      this.standImage.setWidth(this.view.width);
+	      this.setStandColor(this.standColor);
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setValue(val) {
+	    this.value = +val;
+	    this.progressImage.width = this.view.width / this.maxValue * this.value;
+	    this.render.canvas.renderAll();
+	  }
+	  setMaxValue(max) {
+	    this.maxValue = +(+max).toFixed(5);
+	    this.progressImage.width = this.view.width / this.maxValue * this.value;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressColor(color) {
+	    this.progressColor = color;
+	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setStandColor(color) {
+	    this.standColor = color;
+	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setBorder(border) {
+	    this.border = border;
+	    this.standImage.setHeight(this.view.height + this.border * 2);
+	    this.standImage.setWidth(this.view.width + this.border * 2);
+	    this.standImage.left -= this._saveLastBorder + this.border;
+	    this.standImage.top -= this._saveLastBorder + this.border;
+	    this._saveLastBorder = this.border;
+	    this.render.canvas.renderAll();
+	  }
+	}
+
+	module.exports = LinearBar;
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports) {
+
+	class RadialBar {
+	  constructor(render, data, res) {
+	    this.render = render;
+
+	    this.type = 'radial';
+	    this.id = data.id || '' + Date.now();
+
+	    this.progressImage = new fabric.Image();
+	    this.standImage = new fabric.Image();
+	    this.progressImage.setOriginToCenter();
+
+	    this.view = new fabric.Group([this.standImage, this.progressImage]);
+	    this._saveLastBorder = 0;
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 500);
+	    this.setY(data.y || 150);
+	    this.setSize(data.w || 200);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue(25);
+
+	    this.setStartAngle(-90);
+	    this.setMaxValue(data.max_value || 100);
+	    this.setStandImage(res[this.id + ':stand'] || 'dist/assets/white_pixel.png');
+	    this.setProgressImage(res[this.id + ':bar'] || 'dist/assets/white_pixel.png');
+	    this.setProgressColor(data.bar_color || '#ded2f7');
+	    this.setStandColor(data.stand_color || '#fff');
+	    this.setBorder(data.border || 0);
+
+	    this.view.setControlsVisibility({
+	      mt: false,
+	      mb: false,
+	      ml: false,
+	      mr: false
+	    });
+	  }
+	  getJSON() {
+	    return {
+	      images: {
+	        [this.id + ':stand']: this.standImage._element.src,
+	        [this.id + ':bar']: this.progressImage._element.src
+	      },
+	      data: {
+	        id: this.id,
+	        type: "radial",
+	        value: this.varible || '',
+	        max_value: +this.maxValue + 0.0000001,
+	        start_angle: 0,
+	        direction: 0,
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle),
+	        stand_color: this.standColor,
+	        bar_color: this.progressColor,
+	        border: this.border
+	      }
+	    };
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setSize(w) {
+	    this.view.width = w;
+	    this.view.height = w;
+	    this.progressImage.top = 0;
+	    this.progressImage.left = 0;
+	    this.progressImage.width = this.view.width;
+	    this.progressImage.height = this.view.width;
+	    this.standImage.top = -this.view.height / 2;
+	    this.standImage.left = -this.view.width / 2;
+	    this.standImage.width = this.view.width;
+	    this.standImage.height = this.view.width;
+	    this.standImage.set({
+	      clipTo: ctx => {
+	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
+	      }
+	    });
+	    this.setValue(this.value);
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.progressImage.setElement(img);
+	      this.progressImage.top = 0;
+	      this.progressImage.left = 0;
+	      this.progressImage.width = this.view.width;
+	      this.progressImage.height = this.view.width;
+	      this.setStartAngle(this.startAngle);
+	      this.setProgressColor(this.progressColor);
+	      this.setValue(this.value);
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setStandImage(url) {
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      this.standImage.setElement(img);
+	      this.standImage.top = -this.view.height / 2;
+	      this.standImage.left = -this.view.width / 2;
+	      this.standImage.width = this.view.width;
+	      this.standImage.height = this.view.width;
+
+	      this.setStandColor(this.standColor);
+	      this.standImage.set({
+	        clipTo: ctx => {
+	          ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2, true);
+	        }
+	      });
+	      this.render.canvas.renderAll();
+	    };
+	    img.src = url;
+	  }
+	  setStartAngle(angle) {
+	    this.startAngle = +angle;
+	    this.progressImage.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(v) {
+	    this.value = +v;
+	    this.progressImage.set({
+	      clipTo: ctx => {
+	        ctx.moveTo(0, 0);
+	        ctx.arc(0, 0, this.view.width / 2, 0, Math.PI * 2 / this.maxValue * this.value, false);
+	        ctx.lineTo(0, 0);
+	        ctx.fill();
+	      }
+	    });
+	    this.render.canvas.renderAll();
+	  }
+	  setMaxValue(max) {
+	    this.maxValue = +(+max).toFixed(5);
+	    this.setValue(this.value);
+	  }
+	  setBorder(br) {
+	    this.border = +br;
+	    this.standImage.width = this.view.width + br * 2;
+	    this.standImage.height = this.view.width + br * 2;
+
+	    this.standImage.left -= this._saveLastBorder + br;
+	    this.standImage.top -= this._saveLastBorder + br;
+	    this.standImage.set({
+	      clipTo: ctx => {
+	        ctx.arc(0, 0, this.standImage.width / 2, 0, Math.PI * 2, true);
+	      }
+	    });
+	    this._saveLastBorder = br;
+	    this.render.canvas.renderAll();
+	  }
+	  setProgressColor(color) {
+	    this.progressColor = color;
+	    this.progressImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	  setStandColor(color) {
+	    this.standColor = color;
+	    this.standImage.filters[0] = new fabric.Image.filters.Tint({ color });
+	    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+	  }
+	}
+
+	module.exports = RadialBar;
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports) {
+
+	class ContructorImage {
+	  constructor(render, data) {
+	    this.render = render;
+	    this.type = 'image';
+	    this.id = data.id || '' + Date.now();
+
+	    this.view = new fabric.Image();
+
+	    this.view.setOriginToCenter();
+	    this.setX(data.x || 200);
+	    this.setY(data.y || 200);
+	    this.setWidth(data.w || 200);
+	    this.setHeight(data.h || 200);
+	    this.setAngle(360 - data.angle || 0);
+	    if (data.value) this.setVarible(data.value);else this.setValue('dist/assets/image.png');
+
+	    this.setBorderWidth(data.borderWidth || 0);
+	    this.setBorderColor(data.borderColor || '#fff');
+	  }
+	  getJSON() {
+	    return {
+	      data: {
+	        id: this.id,
+	        type: "image",
+	        value: this.varible || '',
+	        x: Math.round(this.view.left),
+	        y: Math.round(this.view.top),
+	        w: Math.round(this.view.width),
+	        h: Math.round(this.view.height),
+	        angle: Math.round(360 - this.view.angle)
+	        // border_color: obj.borderColor,
+	        // border_width: obj.borderWidth
+	      }
+	    };
+	  }
+	  setVarible(id) {
+	    this.varible = id;
+	    this.setValue(this.render.getValueFromVarible(id));
+	  }
+	  setX(x) {
+	    this.view.left = x;
+	    this.render.canvas.renderAll();
+	  }
+	  setY(y) {
+	    this.view.top = y;
+	    this.render.canvas.renderAll();
+	  }
+	  setWidth(w) {
+	    this.view.width = w;
+	    this.render.canvas.renderAll();
+	  }
+	  setHeight(h) {
+	    this.view.height = h;
+	    this.render.canvas.renderAll();
+	  }
+	  setAngle(angle) {
+	    this.view.angle = angle;
+	    this.render.canvas.renderAll();
+	  }
+	  setValue(src) {
+	    this.value = src;
+	    let img = new Image();
+	    img.crossOrigin = 'anonymous';
+	    img.onload = () => {
+	      let w = this.view.width;
+	      let h = this.view.height;
+	      this.view.setElement(img);
+	      this.setWidth(w);
+	      this.setHeight(h);
+	    };
+	    img.src = src;
+	  }
+	  setBorderWidth(width) {
+	    this.borderWidth = +width;
+	    this.view.strokeWidth = +width;
+	  }
+	  setBorderColor(color) {
+	    this.borderColor = color;
+	    this.view.stroke = color;
+	  }
+	}
+
+	module.exports = ContructorImage;
 
 /***/ })
 /******/ ]);

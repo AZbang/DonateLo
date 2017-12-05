@@ -17,10 +17,11 @@
 </template>
 
 <script>
+  const WIDGETS = require('./widgets.json');
   module.exports = {
     computed: {
       widgets() {
-        return this.$store.state.widgets;
+        return WIDGETS;
       }
     },
     methods: {

@@ -59,7 +59,7 @@
   module.exports = {
     computed: {
       widget() {
-         return this.$store.state.editableObject;
+         return this.$store.state.render.editableObject;
       },
       angle() {
         let deg = Math.abs(Math.round(360-360-this.widget.view.angle));

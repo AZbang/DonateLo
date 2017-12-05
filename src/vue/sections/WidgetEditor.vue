@@ -16,7 +16,7 @@
     },
     computed: {
       widget() {
-        return this.$store.state.editableObject;
+        return this.$store.state.render.editableObject;
       },
       viewEditor() {
         return EDITORS[this.widget.type];

@@ -23,7 +23,7 @@
   module.exports = {
     computed: {
       service() {
-        return this.$store.state.currentService;
+        return this.$store.state.db.currentService;
       }
     },
     methods: {
@@ -34,7 +34,6 @@
             for(let input in this.service.inputs) {
                form[input] = this.service.inputs[input].value;
             }
-            console.log(this.service);
             this.$store.dispatch('callApi', {
               method: 'updateService',
               id: this.service.id, form

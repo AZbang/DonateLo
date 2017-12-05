@@ -26,7 +26,7 @@
     },
     computed: {
       services() {
-        return this.$store.state.services;
+        return this.$store.state.db.services;
       },
     },
     methods: {
