@@ -9,13 +9,11 @@ class LinearBar  {
     this.standImage = new fabric.Image();
 
     this.view = new fabric.Group([this.standImage, this.progressImage]);
-    this._saveLastBorder = 0;
-
+    
     this.view.setOriginToCenter();
     this.setX(data.x || 500);
     this.setY(data.y || 150);
-    this.setWidth(data.w || 400);
-    this.setHeight(data.h || 50);
+    this.setSize(data.w || 400, data.h || 50);
     this.setAngle(360-data.angle || 0);
     if(data.value) this.setVarible(data.value);
     else this.setValue(50);
@@ -64,8 +62,10 @@ class LinearBar  {
   setWidth(w) {
     this.view.setWidth(w);
     this.progressImage.left = -this.view.width/2;
+    this.progressImage.setWidth(this.view.width);
     this.standImage.left = -this.view.width/2;
     this.standImage.setWidth(this.view.width);
+    this.setBorder(this.border);
     this.setValue(this.value);
   }
   setHeight(h) {
@@ -74,6 +74,24 @@ class LinearBar  {
     this.progressImage.setHeight(this.view.height);
     this.standImage.top = -this.view.height/2;
     this.standImage.setHeight(this.view.height);
+
+    this.setBorder(this.border);
+    this.setValue(this.value);
+  }
+  setSize(w, h) {
+    this.view.setHeight(h);
+    this.view.setWidth(w);
+    this.progressImage.top = -this.view.height/2;
+    this.progressImage.left = -this.view.width/2;
+    this.progressImage.setWidth(this.view.width);
+    this.progressImage.setHeight(this.view.height);
+
+    this.standImage.top = -this.view.height/2;
+    this.standImage.left = -this.view.width/2;
+    this.standImage.setWidth(this.view.width);
+    this.standImage.setHeight(this.view.height);
+
+    this.setBorder(this.border);
     this.setValue(this.value);
   }
   setAngle(angle) {
@@ -85,9 +103,7 @@ class LinearBar  {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.progressImage.setElement(img);
-      this.progressImage.top = -this.view.height/2;
-      this.progressImage.left = -this.view.width/2;
-      this.progressImage.setHeight(this.view.height);
+      this.setSize(this.view.width, this.view.height);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
     }
@@ -98,10 +114,7 @@ class LinearBar  {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.standImage.setElement(img);
-      this.standImage.top = -this.view.height/2;
-      this.standImage.left = -this.view.width/2;
-      this.standImage.setHeight(this.view.height);
-      this.standImage.setWidth(this.view.width);
+      this.setSize(this.view.width, this.view.height);
       this.setStandColor(this.standColor);
       this.render.canvas.renderAll();
     }
@@ -127,13 +140,12 @@ class LinearBar  {
     this.standImage.filters[0] = new fabric.Image.filters.Tint({color});
     this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
   }
-  setBorder(border) {
-    this.border = border;
-    this.standImage.setHeight(this.view.height+this.border*2);
-    this.standImage.setWidth(this.view.width+this.border*2);
-    this.standImage.left -= this._saveLastBorder+this.border;
-    this.standImage.top -= this._saveLastBorder+this.border;
-    this._saveLastBorder = this.border;
+  setBorder(br) {
+    this.border = +br;
+    this.standImage.width = this.view.width+br*2;
+    this.standImage.height = this.view.height+br*2;
+    this.standImage.left = -this.view.width/2-br;
+    this.standImage.top = -this.view.height/2-br;
     this.render.canvas.renderAll();
   }
 }

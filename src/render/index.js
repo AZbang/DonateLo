@@ -62,11 +62,7 @@ class Render {
           scaleX: 1,
           scaleY: 1
         });
-        if(widget.setSize) widget.setSize(w);
-        else {
-          widget.setWidth(w);
-          widget.setHeight(h);
-        }
+        widget.setSize(w, h);
       }
     });
 

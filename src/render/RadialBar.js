@@ -10,7 +10,6 @@ class RadialBar  {
     this.progressImage.setOriginToCenter();
 
     this.view = new fabric.Group([this.standImage, this.progressImage]);
-    this._saveLastBorder = 0;
 
     this.view.setOriginToCenter();
     this.setX(data.x || 500);
@@ -74,15 +73,7 @@ class RadialBar  {
     this.progressImage.left = 0;
     this.progressImage.width = this.view.width;
     this.progressImage.height = this.view.width;
-    this.standImage.top = -this.view.height/2;
-    this.standImage.left = -this.view.width/2;
-    this.standImage.width = this.view.width;
-    this.standImage.height = this.view.width;
-    this.standImage.set({
-      clipTo: (ctx) => {
-        ctx.arc(0, 0, this.view.width/2, 0, Math.PI*2, true);
-      }
-    });
+    this.setBorder(this.border);
     this.setValue(this.value);
   }
   setVarible(id) {
@@ -98,10 +89,7 @@ class RadialBar  {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.progressImage.setElement(img);
-      this.progressImage.top = 0;
-      this.progressImage.left = 0;
-      this.progressImage.width = this.view.width;
-      this.progressImage.height = this.view.width;
+      this.setSize(this.view.width);
       this.setStartAngle(this.startAngle);
       this.setProgressColor(this.progressColor);
       this.setValue(this.value);
@@ -114,17 +102,8 @@ class RadialBar  {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.standImage.setElement(img);
-      this.standImage.top = -this.view.height/2;
-      this.standImage.left = -this.view.width/2;
-      this.standImage.width = this.view.width;
-      this.standImage.height = this.view.width;
-
+      this.setSize(this.view.width);
       this.setStandColor(this.standColor);
-      this.standImage.set({
-        clipTo: (ctx) => {
-          ctx.arc(0, 0, this.view.width/2, 0, Math.PI*2, true);
-        }
-      });
       this.render.canvas.renderAll();
     }
     img.src = url;
@@ -155,14 +134,13 @@ class RadialBar  {
     this.standImage.width = this.view.width+br*2;
     this.standImage.height = this.view.width+br*2;
 
-    this.standImage.left -= this._saveLastBorder+br;
-    this.standImage.top -= this._saveLastBorder+br;
+    this.standImage.left = -this.view.width/2-br;
+    this.standImage.top = -this.view.height/2-br;
     this.standImage.set({
       clipTo: (ctx) => {
         ctx.arc(0, 0, this.standImage.width/2, 0, Math.PI*2, true);
       }
     });
-    this._saveLastBorder = br;
     this.render.canvas.renderAll();
   }
   setProgressColor(color) {

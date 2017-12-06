@@ -23,6 +23,10 @@
         <p class="text">Рамка:</p>
         <el-input-number :value="widget.border" @change="setBorder"></el-input-number>
       </el-col>
+      <el-col :span="5">
+        <p class="text">Максимум:</p>
+        <el-input-number :value="widget.maxValue" @change="setMaxValue"></el-input-number>
+      </el-col>
       <el-col :span="6">
         <p class="text">Значение:</p>
         <el-select v-model="widget.varible" @change="setVarible" placeholder="Выберите переменную">
@@ -34,6 +38,8 @@
           </el-option>
         </el-select>
       </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="2">
         <p class="text">Цвет:</p>
         <el-color-picker v-model="widget.progressColor" @active-change="setProgressColor"></el-color-picker>

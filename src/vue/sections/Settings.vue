@@ -3,7 +3,7 @@
     <el-button class="settings-editor__main-btn" type="primary" @click="updateToken">Изменить токен</el-button>
 
     <p class="settings__main-text text">Изменить токен:</p>
-    <el-input v-model="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
+    <el-input :value="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
 
     <div class="container">
       <img class="responsive-img" src="assets/token.png" alt="token">
@@ -13,8 +13,10 @@
 
 <script>
   module.exports = {
-    data: {
-      token: ''
+    data() {
+      return {
+        token: ''
+      }
     },
     methods: {
       updateToken() {

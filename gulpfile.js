@@ -41,9 +41,9 @@ gulp.task('js', () => {
     .pipe(webpack(require('./webpack.config.js')))
 		.pipe(gulpIf(!isDev, rev()))
     .pipe(gulp.dest('dist'))
+		.pipe(connect.reload())
 		.pipe(rev.manifest('dist/rev-manifest.json', {merge: true, base: 'dist'}))
-		.pipe(gulp.dest('dist'))
-    .pipe(connect.reload());
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('styles', () => {
@@ -55,9 +55,9 @@ gulp.task('styles', () => {
 		.pipe(gulpIf(isDev, sourcemaps.write()))
 		.pipe(gulpIf(!isDev, rev()))
     .pipe(gulp.dest('dist'))
+		.pipe(connect.reload())
 		.pipe(rev.manifest('dist/rev-manifest.json', {merge: true, base: 'dist'}))
-		.pipe(gulp.dest('dist'))
-		.pipe(connect.reload());
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', () => {
@@ -72,7 +72,7 @@ gulp.task('rev-html', ['styles', 'js'], () => {
 		}))
 		.pipe(gulp.dest('dist'));
 });
-gulp.task('copy-html', () => {
+gulp.task('copy-html', ['clean'], () => {
   return gulp.src('src/index.html')
 		.pipe(gulp.dest('dist'));
 });
@@ -81,5 +81,5 @@ gulp.task('watch', () => {
 	gulp.watch('src/styles/**/*.*', ['styles']);
 });
 
-gulp.task('dev', ['clean', 'server', 'watch', 'copy-html', 'styles', 'js']);
+gulp.task('dev', ['clean', 'copy-html', 'styles', 'js', 'server', 'watch']);
 gulp.task('build', ['clean', 'js', 'styles', 'rev-html']);
