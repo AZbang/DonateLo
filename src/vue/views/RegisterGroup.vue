@@ -1,7 +1,7 @@
 <template>
   <div id="register-group">
     <div class="container">
-      <img class="responsive-img" src="dist/assets/token.png" alt="token">
+      <img class="responsive-img" src="assets/token.png" alt="token">
       <p class="text">Введите API токен вашей группы:</p>
       <el-input @change="submitToken" placeholder="Ваш токен" suffix-icon="el-icon-edit" v-model="token"></el-input>
     </div>

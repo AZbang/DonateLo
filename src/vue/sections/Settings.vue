@@ -6,7 +6,7 @@
     <el-input v-model="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
 
     <div class="container">
-      <img class="responsive-img" src="dist/assets/token.png" alt="token">
+      <img class="responsive-img" src="assets/token.png" alt="token">
     </div>
   </div>
 </template>
