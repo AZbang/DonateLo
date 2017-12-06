@@ -1,0 +1,34 @@
+@import './cover';
+@import './widgets';
+@import './service-card';
+@import './service';
+
+.admin__section {
+  position: relative;
+}
+.widgets__main-btn {
+  position: absolute;
+  top: -77px;
+  right: -12px;
+}
+.services__main-btn  {
+  position: absolute;
+  top: -90px;
+  right: -25px;
+}
+.widget-editor__main-btn {
+  position: absolute;
+  top: -91px;
+  right: 10px;
+}
+.service__main-btn {
+  position: absolute;
+  top: -90px;
+  right: -20px;
+}
+
+.settings-editor__main-btn {
+  position: absolute;
+  top: -91px;
+  right: -24px;
+}

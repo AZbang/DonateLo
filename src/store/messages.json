@@ -1,0 +1,46 @@
+{
+  "NOT_LOADED_GROUP": {
+    "ru": "Извините, произошла ошибка, попробуйте позже.",
+    "isError": true
+  },
+  "NOT_CORRECT_TOKEN": {
+    "ru": "Ошибка! Пожалуйста, проверьте Ваш токен.",
+    "isError": true
+  },
+  "NOT_VALID_INPUT": {
+    "ru": "Некорректно заполнены поля",
+    "isError": true
+  },
+  "CORRECT_TOKEN": {
+    "ru": "Токен загружен.",
+    "isError": false
+  },
+  "CREATED_GROUP": {
+    "ru": "Спасибо! Группа зарегистрирована!",
+    "isError": false
+  },
+  "LOADED_GROUP": {
+    "ru": "Редактор загружен",
+    "isError": false
+  },
+  "UPDATED_GROUP": {
+    "ru": "Обложка сохранена",
+    "isError": false
+  },
+  "CREATED_SERVICE": {
+    "ru": "Сервис активирован",
+    "isError": false
+  },
+  "METHOD_API_ERROR": {
+    "ru": "Произошла ошибка на сервере, попробуйте позже",
+    "isError": true
+  },
+  "IMAGE_NOT_VALID_FORMAT": {
+    "ru": "Неправильный формат загружаемого файла",
+    "isError": true
+  },
+  "IMAGE_LIMIT_SIZE": {
+    "ru": "Превышен лимит загружаемого файла",
+    "isError": true
+  }
+}

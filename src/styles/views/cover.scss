@@ -1,0 +1,36 @@
+.cover-uploader-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  button {
+    background: #2D2F33;
+    border-color: #2D2F33;
+    opacity: .7;
+    width: 40px;
+    height: 40px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+.cover-uploader-area {
+  height: 300px;
+  width: 100%;
+
+  border: 3px dashed $--color-primary;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.cover-uploader-area__icon {
+  font-size: 5em;
+  color: #8c939d;
+  margin-top: 10%;
+}
+.cover-uploader-area__text {
+  color: $--text-color;
+}

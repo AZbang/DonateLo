@@ -1,0 +1,29 @@
+.service__title {
+  font-size: 19px;
+  line-height: 29px;
+  color: #1f2f3d;
+}
+.service__icon {
+  color: #1f2f3d;
+  float: left;
+  margin-right: 7px;
+  font-size: 35px;
+}
+.service__description {
+  font-size: 16px;
+  line-height: 1em;
+  margin-top: 0;
+  color: #99a9bf;
+}
+.service__doc {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.service__input {
+  margin-bottom: 25px;
+
+  .text {
+    margin-top: 0;
+  }
+}

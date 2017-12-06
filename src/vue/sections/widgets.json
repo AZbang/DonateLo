@@ -1,0 +1,46 @@
+[
+  {
+    "type": "text",
+    "label": "Текст",
+    "icon": "text_format"
+  },
+  {
+    "type": "linear",
+    "label": "Линейный бар",
+    "icon": "format_align_left"
+  },
+  {
+    "type": "radial",
+    "label": "Радиальный бар",
+    "icon": "panorama_fish_eye"
+  },
+  {
+    "type": "image",
+    "label": "Картинка",
+    "icon": "image"
+  },
+  {
+    "type": "stickers",
+    "label": "Стикеры",
+    "disable": true,
+    "icon": "tag_faces"
+  },
+  {
+    "type": "icons",
+    "label": "Иконки",
+    "disable": true,
+    "icon": "toll"
+  },
+  {
+    "type": "shape",
+    "label": "Фигура",
+    "disable": true,
+    "icon": "star"
+  },
+  {
+    "type": "graphic",
+    "label": "График",
+    "disable": true,
+    "icon": "timeline"
+  }
+]
