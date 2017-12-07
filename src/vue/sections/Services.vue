@@ -1,7 +1,5 @@
 <template>
-  <div class="services container">
-    <el-button class="services__main-btn" type="primary" @click="updateGroup">Сохранить обложку</el-button>
-
+  <div class="services">
     <p class="text">Каталог сервисов:</p>
     <el-row :gutter="20">
       <el-col :span="6" v-for="(service, id) in services">

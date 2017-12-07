@@ -1,4 +1,5 @@
 const axios = require('axios');
+const loadImages = require('image-promise');
 const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 
 /**
@@ -77,6 +78,10 @@ module.exports = {
       });
       let data = resp.data.result;
 
+      let imgs = [];
+      for(let key in data.resources) imgs.push(axios.get(data.resources[key], {headers: {'Access-Control-Allow-Origin': '*'}}));
+      await axios.all(imgs);
+
       commit('setServices', data.services);
       commit('setVaribles', data.enviroment);
       commit('setVariblesRender', data.enviroment);
@@ -92,7 +97,7 @@ module.exports = {
     async updateGroup({state, getters, rootState}) {
       let data = getters.renderViews;
 
-      if(state.setCoverEditable)
+      if(rootState.render.isCoverEditable)
         data.resources.background = getters.coverImage;
 
       let resp = await axios.post(DONATELO_API + '/update_cover', {

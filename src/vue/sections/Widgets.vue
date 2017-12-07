@@ -1,8 +1,6 @@
-<template >
+<template>
   <div class="widgets">
-    <el-button class="widgets__main-btn" type="primary" @click="updateGroup">Сохранить обложку</el-button>
-
-    <p class="widgets__main-text text">Добавить виджет:</p>
+    <p class="text">Добавить виджет:</p>
     <el-row :gutter="10">
       <el-col class="widgets__col" :span="6" v-for="widget in widgets">
         <div class="widget-card" @click="addWidget(widget.type)" :class="widget.disable && 'widget-card--disable'">
@@ -27,9 +25,6 @@
     methods: {
       addWidget(type) {
         this.$store.dispatch('addWidget', {type});
-      },
-      updateGroup() {
-        this.$store.dispatch('callApi', {method: 'updateGroup'});
       }
     }
   }

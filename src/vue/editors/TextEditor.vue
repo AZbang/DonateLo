@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <el-row :gutter="10">
       <el-col :span="5">
         <p class="text">X:</p>

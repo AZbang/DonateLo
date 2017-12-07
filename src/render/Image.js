@@ -46,6 +46,11 @@ class ContructorImage {
     this.view.top = y;
     this.render.canvas.renderAll();
   }
+  setSize(w, h) {
+    this.view.width = w;
+    this.view.height = h;
+    this.render.canvas.renderAll();
+  }
   setWidth(w) {
     this.view.width = w;
     this.render.canvas.renderAll();

@@ -1,9 +1,15 @@
 <template>
-  <div class="container settings">
-    <el-button class="settings-editor__main-btn" type="primary" @click="updateToken">Изменить токен</el-button>
+  <div class="settings">
+    <p class="text">Изменить токен:</p>
 
-    <p class="settings__main-text text">Изменить токен:</p>
-    <el-input :value="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
+    <el-row :gutter="20">
+      <el-col :span="20">
+        <el-input :value="token" placeholder="Введите токен своей группы, как это сделать показано ниже" suffix-icon="el-icon-edit"></el-input>
+      </el-col>
+      <el-col :span="4">
+        <el-button type="primary" @click="updateToken">Изменить токен</el-button>
+      </el-col>
+    </el-row>
 
     <div class="container">
       <img class="responsive-img" src="assets/token.png" alt="token">

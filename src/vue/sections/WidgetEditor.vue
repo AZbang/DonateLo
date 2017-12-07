@@ -1,6 +1,6 @@
 <template>
   <div class="widget-editor">
-    <el-button class="widget-editor__main-btn" type="danger" @click="deleteObject">Удалить виджет</el-button>
+    <el-button class="widget-editor__delete" type="danger" @click="deleteObject">Удалить виджет</el-button>
     <div class="widget-editor__content" :is="viewEditor"></div>
   </div>
 </template>
