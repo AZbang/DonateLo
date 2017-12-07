@@ -13,6 +13,7 @@
         <el-input :name="id" clearable prefix-icon="el-icon-edit" v-model="input.value" placeholder="Введите данные" data-vv-delay="1000" v-validate="{required: true, regex: input.regexp}"></el-input>
       </div>
       <el-button class="service__save" type="primary" @click="saveService">Сохранить</el-button>
+      <el-button class="service__close" type="primary" @click="closeService">Закрыть</el-button>
     </el-card>
   </div>
 </template>
