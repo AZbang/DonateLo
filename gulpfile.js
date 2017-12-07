@@ -51,7 +51,9 @@ gulp.task('styles', () => {
 		.pipe(errorMessage())
 		.pipe(gulpIf(isDev, sourcemaps.init()))
     .pipe(sass().on('error', sass.logError))
-		.pipe(gulpIf(!isDev, cssnano()))
+		.pipe(gulpIf(!isDev, cssnano({
+			discardUnused: false
+		})))
 		.pipe(gulpIf(isDev, sourcemaps.write()))
 		.pipe(gulpIf(!isDev, rev()))
     .pipe(gulp.dest('dist'))
