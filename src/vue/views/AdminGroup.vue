@@ -8,7 +8,10 @@
         <el-menu-item index="SETTINGS">Настройки</el-menu-item>
       </el-menu>
     </div>
-    <div class="admin__section" :is="viewSection"></div>
+    <div class="admin__section">
+      <el-button class="admin__save" type="primary" @click="updateGroup">Сохранить обложку</el-button>
+      <div :is="viewSection"></div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,9 @@
       setControl(view) {
         this.$store.commit('setSection', view);
       },
+      updateGroup() {
+        this.$store.dispatch('callApi', {method: 'updateGroup'});
+      }
     },
     mounted() {
       this.$store.commit('initRender', 'playground');

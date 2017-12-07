@@ -1,7 +1,5 @@
 <template>
-  <div class="service container">
-    <el-button class="service__main-btn" type="primary" @click="closeService">Вернуться назад</el-button>
-
+  <div class="service">
     <el-card>
       <div slot="header" class="clearfix">
         <el-button class="service__doc" type="primary" v-show="service.docs" target="_blank" :href="service.docs">Документация</el-button>

@@ -5,30 +5,19 @@
 
 .admin__section {
   position: relative;
+  & > div {
+    margin: 2em;
+  }
 }
-.widgets__main-btn {
+.admin__save {
   position: absolute;
   top: -77px;
-  right: -12px;
-}
-.services__main-btn  {
-  position: absolute;
-  top: -90px;
-  right: -25px;
-}
-.widget-editor__main-btn {
-  position: absolute;
-  top: -91px;
   right: 10px;
 }
-.service__main-btn {
-  position: absolute;
-  top: -90px;
-  right: -20px;
-}
 
-.settings-editor__main-btn {
+
+.widget-editor__delete {
   position: absolute;
-  top: -91px;
-  right: -24px;
+  right: 190px;
+  top: -77px;
 }
