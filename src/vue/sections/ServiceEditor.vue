@@ -2,7 +2,9 @@
   <div class="service">
     <el-card>
       <div slot="header" class="clearfix">
-        <el-button class="service__doc" type="primary" v-show="service.docs" target="_blank" :href="service.docs">Документация</el-button>
+        <a target="_blank" :href="service.docs" v-show="service.docs">
+          <el-button class="service__doc" type="primary">Документация</el-button>
+        </a>
         <i class="material-icons service__icon">{{service.card_style.icon}}</i>
         <span class="service__title">{{service.name}}</span>
       </div>
