@@ -1,6 +1,3 @@
-const axios = require('axios');
-const loadImages = require('image-promise');
-const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 
 /**
   DB Mudule Store
@@ -11,10 +8,11 @@ module.exports = {
   state: {
     isGroupExist: false,
     currentService: null,
+
+    views: [],
     varibles: [],
     services: [],
-
-    resources: {}
+    resources: {},
   },
   mutations: {
     setGroupExist(state, v) {
@@ -51,48 +49,24 @@ module.exports = {
       !params.silent && commit('setLoading', false);
     },
 
-    async getGroupExist({rootState, commit}) {
-      let resp = await axios.post(DONATELO_API + '/group_exist', {
-        group_id: rootState.vkData.group_id
-      });
-      commit('setGroupExist', resp.data.result);
+    async getGroupExist({rootState, getters, commit}) {
+      let data = api.getGroupExist(getters.groupID);
+      commit('setGroupExist', data);
     },
-    async createGroup({rootState, commit}, {token}) {
-      let resp = await axios.post(DONATELO_API + '/create_group', {
-        group_id: rootState.vkData.group_id,
-        access_token: token
-      });
-      resp.data.code === 'ok' && commit('setView', 'ADMIN');
-      return resp.data.code === 'ok' ? 'CREATED_GROUP' : 'NOT_CORRECT_TOKEN';
+    async createGroup({rootState, getters, commit}, {token}) {
+      let data = api.createGroup(getters.groupID, token);
+      return data.status;
     },
-    async editToken({rootState, commit}, {token}) {
-      let resp = await axios.post(DONATELO_API + '/edit_token', {
-        group_id: rootState.vkData.group_id,
-        access_token: token
-      });
-      return resp.data.code === 'ok' ? 'CORRECT_TOKEN' : 'NOT_CORRECT_TOKEN';
+    async editToken({rootState, getters, commit}, {token}) {
+      api.editToken(getters.groupID, token);
     },
-    async getGroup({rootState, dispatch, commit}) {
-      let resp = await axios.post(DONATELO_API + '/get_group', {
-        group_id: rootState.vkData.group_id
-      });
-      let data = resp.data.result;
-
-      let imgs = [];
-      for(let key in data.resources) imgs.push(axios.get(data.resources[key], {headers: {'Access-Control-Allow-Origin': '*'}}));
-      await axios.all(imgs);
+    async getGroup({rootState, getters, dispatch, commit}) {
+      let data = api.getGroup(rgetters.groupID);
 
       commit('setServices', data.services);
       commit('setVaribles', data.enviroment);
-      commit('setVariblesRender', data.enviroment);
-
-      dispatch('addWidgets', data);
-
-      if(data.resources.background) {
-        commit('setCover', data.resources.background);
-      }
-
-      return 'LOADED_GROUP';
+      commit('setResources', data.resources);
+      commit('setWidgets', data.views);
     },
     async updateGroup({state, getters, rootState}) {
       let data = getters.renderViews;
@@ -100,27 +74,14 @@ module.exports = {
       if(rootState.render.isCoverEditable)
         data.resources.background = getters.coverImage;
 
-      let resp = await axios.post(DONATELO_API + '/update_cover', {
-        group_id: rootState.vkData.group_id,
-        ...data
-      });
-
-      return 'UPDATED_GROUP';
+      let data = api.updateGroup(getters.groupID, data);
     },
     async loadVaribles({rootState, commit}) {
-      let resp = await axios.post(DONATELO_API + '/get_enviroment', {
-        group_id: rootState.vkData.group_id
-      });
-      commit('setVaribles', resp.data.result);
-      commit('setVariblesRender', resp.data.result);
+      let data = api.loadVaribles(rootState.vkData.group_id);
+      commit('setVaribles', data);
     },
     async updateService({rootState, state}, {id, form}) {
-      let resp = await axios.post(DONATELO_API + '/update_service', {
-        group_id: rootState.vkData.group_id,
-        service_id: id,
-        fields: form
-      });
-      return 'CREATED_SERVICE';
+      let data = api.updateService(rootState.vkData.group_id, id, form);
     }
   }
 }

@@ -1,5 +1,3 @@
-require('./fabricExtensions');
-
 const Vue = require('vue');
 const Vuex = require('vuex');
 const VeeValidate = require('vee-validate');

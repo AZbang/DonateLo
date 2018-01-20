@@ -17,6 +17,9 @@ module.exports = {
     lang(state) {
       return 'ru';
     },
+    groupID(state) {
+      return state.vkData.group_id;
+    }
     appId(state) {
       return state.vkData.api_id;
     }

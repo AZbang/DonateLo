@@ -1,8 +1,6 @@
 <template>
   <div id="cover-control">
-    <div style="height: inherit;" v-show="isCoverExist">
-      <canvas id="playground"></canvas>
-    </div>
+    <render v-show="isCoverExist"></render>
 
     <div class="cover-uploader-btn" v-show="isCoverExist">
       <upload-image @upload="setCover"></upload-image>

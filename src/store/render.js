@@ -26,10 +26,9 @@ module.exports = {
     setCoverEditable(state, v) {
       state.isCoverEditable = !!v;
     },
-    setCover(state, src) {
-      state.isCoverExist = true;
-      state.render.setCover(src);
-    },
+    setCoverExist(state, v) {
+      state.isCoverExist = !!v;
+    }
   },
   getters: {
     coverImage(state) {
@@ -40,6 +39,10 @@ module.exports = {
     }
   },
   actions: {
+    async setCover({commit, state}, src) {
+      commit('setCoverExist');
+      await state.render.coverImage.setCover(src);
+    },
     addWidgets({dispatch, state}, data) {
       for(let key in data.views) {
         let view = data.views[key];
@@ -47,7 +50,7 @@ module.exports = {
           type: view.type, view, res: data.resources
         });
       }
-      state.render.canvas.trigger('selection:cleared');
+      state.render.trigger('selection:cleared');
     },
     addWidget({state, commit}, data) {
       let widget = state.render.addWidget(data.type, data.view || [], data.res || {});
@@ -56,7 +59,7 @@ module.exports = {
         commit('setEditableObject', widget);
         commit('setSection', 'WIDGET_EDITOR');
       });
-      state.render.canvas.on('selection:cleared', () => {
+      state.render.on('selection:cleared', () => {
         commit('setEditableObject', null);
         commit('setSection', 'WIDGETS');
       });

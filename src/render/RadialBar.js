@@ -1,32 +1,28 @@
-class RadialBar  {
-  constructor(render, data, res) {
-    this.render = render;
+const Widget = require('./Widget');
 
+class RadialBar extends mix(fabric.Group).with(Widget) {
+  constructor(render, data, res) {
+    super(render, data, res);
     this.type = 'radial';
-    this.id = data.id || '' + Date.now();
 
     this.progressImage = new fabric.Image();
     this.standImage = new fabric.Image();
     this.progressImage.setOriginToCenter();
+    this.add([this.standImage, this.progressImage]);
 
-    this.view = new fabric.Group([this.standImage, this.progressImage]);
-
-    this.view.setOriginToCenter();
-    this.setX(data.x || 500);
-    this.setY(data.y || 150);
-    this.setSize(data.w || 200);
-    this.setAngle(360-data.angle || 0);
     if(data.value) this.setVarible(data.value);
     else this.setValue(25);
 
     this.setStartAngle(-90);
     this.setMaxValue(data.max_value || 100);
-    this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
+
     this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
     this.setProgressColor(data.bar_color || '#ded2f7');
-    this.setStandColor(data.stand_color || '#fff');
-    this.setBorder(data.border || 0);
 
+    this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
+    this.setStandColor(data.stand_color || '#fff');
+
+    this.setBorder(data.border_size || 0, data.border_color || '#fff');
     this.view.setControlsVisibility({
        mt: false,
        mb: false,
@@ -34,46 +30,33 @@ class RadialBar  {
        mr: false
     });
   }
-  getJSON() {
+  getData() {
     return {
       images: {
         [this.id + ':stand']: this.standImage._element.src,
         [this.id + ':bar']: this.progressImage._element.src
       },
       data: {
-        id: this.id,
-        type: "radial",
+        ...this.getBasicData(),
         value: this.varible || '',
         max_value: +this.maxValue + 0.0000001,
         start_angle: 0,
         direction: 0,
-        x: Math.round(this.view.left),
-        y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
-        angle: Math.round(360-this.view.angle),
         stand_color: this.standColor,
         bar_color: this.progressColor,
-        border: this.border
+        border_size: this.borderSize,
+        border_color: this.borderColor
       }
     }
   }
-  setX(x) {
-    this.view.left = x;
-    this.render.canvas.renderAll();
-  }
-  setY(y) {
-    this.view.top = y;
-    this.render.canvas.renderAll();
-  }
   setSize(w) {
-    this.view.width = w;
-    this.view.height = w;
+    this.width = w;
+    this.height = w;
     this.progressImage.top = 0;
     this.progressImage.left = 0;
-    this.progressImage.width = this.view.width;
-    this.progressImage.height = this.view.width;
-    this.setBorder(this.border);
+    this.progressImage.width = this.width;
+    this.progressImage.height = this.width;
+    this.setBorder(this.borderSize, this.borderColor);
     this.setValue(this.value);
   }
   setVarible(id) {
@@ -84,37 +67,27 @@ class RadialBar  {
     this.view.angle = angle;
     this.render.canvas.renderAll();
   }
-  setProgressImage(url) {
-    let img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      this.progressImage.setElement(img);
-      this.setSize(this.view.width);
-      this.setStartAngle(this.startAngle);
-      this.setProgressColor(this.progressColor);
-      this.setValue(this.value);
-      this.render.canvas.renderAll();
-    }
-    img.src = url;
+  setProgressImage(img) {
+    this.progressImage.setElement(img);
+    this.setSize(this.width);
+    this.setStartAngle(this.startAngle);
+    this.setProgressColor(this.progressColor);
+    this.setValue(this.value);
+    this.render.renderAll();
   }
-  setStandImage(url) {
-    let img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      this.standImage.setElement(img);
-      this.setSize(this.view.width);
-      this.setStandColor(this.standColor);
-      this.render.canvas.renderAll();
-    }
-    img.src = url;
+  setStandImage(img) {
+    this.standImage.setElement(img);
+    this.setSize(this.width);
+    this.setStandColor(this.standColor);
+    this.render.renderAll();
   }
   setStartAngle(angle) {
-    this.startAngle = +angle;
+    this.startAngle = angle;
     this.progressImage.angle = angle;
-    this.render.canvas.renderAll();
+    this.render.renderAll();
   }
   setValue(v) {
-    this.value = +v;
+    this.value = v;
     this.progressImage.set({
       clipTo: (ctx) => {
         ctx.moveTo(0, 0);
@@ -123,35 +96,40 @@ class RadialBar  {
         ctx.fill();
       }
     });
-    this.render.canvas.renderAll();
+    this.render.renderAll();
   }
   setMaxValue(max) {
-    this.maxValue = +(+max).toFixed(5);
+    this.maxValue = max;
     this.setValue(this.value);
   }
-  setBorder(br) {
-    this.border = +br;
-    this.standImage.width = this.view.width+br*2;
-    this.standImage.height = this.view.width+br*2;
+  setBorderColor(color) {
+    this.setBorder(this.borderSize, color);
+  }
+  setBorderWidth(size) {
+    this.setBorder(size, this.borderColor);
+  }
+  setBorder(size, color) {
+    this.borderSize = size;
+    this.borderColor = color;
 
-    this.standImage.left = -this.view.width/2-br;
-    this.standImage.top = -this.view.height/2-br;
-    this.standImage.set({
-      clipTo: (ctx) => {
-        ctx.arc(0, 0, this.standImage.width/2, 0, Math.PI*2, true);
+    this.set({
+      stroke: color,
+      strokeWidth: size,
+      clipTo(ctx) {
+        ctx.arc(0, 0, this.width/2, 0, Math.PI*2, true);
       }
     });
-    this.render.canvas.renderAll();
+    this.render.renderAll();
   }
   setProgressColor(color) {
     this.progressColor = color;
     this.progressImage.filters[0] = new fabric.Image.filters.Tint({color});
-    this.progressImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+    this.progressImage.applyFilters(() => this.render.renderAll());
   }
   setStandColor(color) {
     this.standColor = color;
     this.standImage.filters[0] = new fabric.Image.filters.Tint({color});
-    this.standImage.applyFilters(this.render.canvas.renderAll.bind(this.render.canvas));
+    this.standImage.applyFilters(() => this.render.renderAll());
   }
 }
 
