@@ -4,10 +4,9 @@ const FONTS = {
   "ROBOTO": "Roboto"
 }
 
-class Text extends fabric.Text {
+class Text extends mix(fabric.Text).with(Widget) {
   constructor(render, data) {
-    super();
-    mixis([Widget], this);
+    super(render, data);
 
     this.type = 'text';
     this.setValue(data.value || 'Ваш текстовый элемент...');
@@ -55,7 +54,6 @@ class Text extends fabric.Text {
     this.render.renderAll();
   }
   setColor(color) {
-    this.color = color;
     this.fill = color;
     this.render.renderAll();
   }

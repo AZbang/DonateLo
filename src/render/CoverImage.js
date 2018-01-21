@@ -6,13 +6,6 @@ class CoverImage extends fabric.Image {
     this.coverHeight = 400;
     this.set('selectable', false);
   }
-  resizeToWidth() {
-    let scale = this.render.width/this.coverWidth;
-    let container = document.getElementsByClassName('canvas-container')[0];
-    container.style.transform = 'scale(' + scale + ')';
-    container.style.transformOrigin = '0 0';
-    document.getElementById('cover-control').style.height = this.coverHeight*scale + 'px';
-  }
   loadTexture(img) {
     let texture = new fabric.Image();
 
@@ -39,7 +32,7 @@ class CoverImage extends fabric.Image {
     this.setElement(cover);
     this.setWidth(this.coverWidth);
     this.setHeight(this.coverHeight);
-    this.resizeToWidth();
+    this.render.resizeToWidth();
     this.render.renderAll();
   }
 }

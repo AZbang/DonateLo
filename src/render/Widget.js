@@ -39,7 +39,9 @@ class Widget {
       type: this.type,
       x: Math.round(this.left),
       y: Math.round(this.top),
-      angle: Math.round(360-this.angle)
+      angle: Math.round(360-this.angle),
+      border_size: this.borderSize,
+      border_color: this.borderColor
     }
   }
   setX(x) {
@@ -65,6 +67,22 @@ class Widget {
   }
   setAngle(angle) {
     this.angle = angle;
+    this.render.renderAll();
+  }
+  setBorderColor(color) {
+    this.setBorder(this.borderSize, color);
+  }
+  setBorderWidth(size) {
+    this.setBorder(size, this.borderColor);
+  }
+  setBorder(size, color) {
+    this.borderSize = size;
+    this.borderColor = color;
+
+    this.set({
+      stroke: color,
+      strokeWidth: size
+    });
     this.render.renderAll();
   }
 }

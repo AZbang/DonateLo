@@ -2,7 +2,7 @@ const Widget = require('./Widget');
 
 class RadialBar extends mix(fabric.Group).with(Widget) {
   constructor(render, data, res) {
-    super(render, data, res);
+    super(render, data);
     this.type = 'radial';
 
     this.progressImage = new fabric.Image();
@@ -23,7 +23,7 @@ class RadialBar extends mix(fabric.Group).with(Widget) {
     this.setStandColor(data.stand_color || '#fff');
 
     this.setBorder(data.border_size || 0, data.border_color || '#fff');
-    this.view.setControlsVisibility({
+    this.setControlsVisibility({
        mt: false,
        mb: false,
        ml: false,
@@ -43,9 +43,7 @@ class RadialBar extends mix(fabric.Group).with(Widget) {
         start_angle: 0,
         direction: 0,
         stand_color: this.standColor,
-        bar_color: this.progressColor,
-        border_size: this.borderSize,
-        border_color: this.borderColor
+        bar_color: this.progressColor
       }
     }
   }
@@ -101,25 +99,6 @@ class RadialBar extends mix(fabric.Group).with(Widget) {
   setMaxValue(max) {
     this.maxValue = max;
     this.setValue(this.value);
-  }
-  setBorderColor(color) {
-    this.setBorder(this.borderSize, color);
-  }
-  setBorderWidth(size) {
-    this.setBorder(size, this.borderColor);
-  }
-  setBorder(size, color) {
-    this.borderSize = size;
-    this.borderColor = color;
-
-    this.set({
-      stroke: color,
-      strokeWidth: size,
-      clipTo(ctx) {
-        ctx.arc(0, 0, this.width/2, 0, Math.PI*2, true);
-      }
-    });
-    this.render.renderAll();
   }
   setProgressColor(color) {
     this.progressColor = color;

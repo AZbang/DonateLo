@@ -2,15 +2,15 @@
   <div class="admin">
     <cover-control class="admin__cover"></cover-control>
     <div class="admin__menu">
-      <el-menu :default-active="'WIDGETS'" class="el-menu-demo" mode="horizontal" @select="setControl">
+      <el-menu :default-active="sectionName" class="el-menu-demo" mode="horizontal" @select="setControl">
         <el-menu-item index="WIDGETS">Виджеты</el-menu-item>
         <el-menu-item index="SERVICES">Сервисы</el-menu-item>
         <el-menu-item index="SETTINGS">Настройки</el-menu-item>
       </el-menu>
     </div>
     <div class="admin__section">
-      <el-button class="admin__save" type="primary" @click="updateGroup">Сохранить обложку</el-button>
-      <div :is="viewSection"></div>
+      <el-button class="admin__save" type="primary" @click="updateViews">Сохранить обложку</el-button>
+      <div :is="currentSection"></div>
     </div>
   </div>
 </template>
@@ -23,24 +23,25 @@
       CoverControl
     },
     computed: {
-      viewSection() {
-        return this.$store.state.views.currentSection;
+      sectionName() {
+        return this.$store.state.sectionName;
+      },
+      currentSection() {
+        return this.$store.getters.section;
       }
     },
     methods: {
       setControl(view) {
         this.$store.commit('setSection', view);
       },
-      updateGroup() {
-        this.$store.dispatch('callApi', {method: 'updateGroup'});
+      updateViews() {
+        this.$store.dispatch('updateViews');
       }
     },
     mounted() {
-      this.$store.commit('initRender', 'playground');
-      this.$store.dispatch('callApi', {method: 'getGroup'});
-
+      this.$store.dispatch('loadGroup');
       setInterval(() => {
-        this.$store.dispatch('callApi', {method: 'loadVaribles', silent: true});
+        this.$store.dispatch('loadVaribles');
       }, 1000);
     }
   }

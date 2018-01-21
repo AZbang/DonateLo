@@ -1,5 +1,8 @@
-class ImageWidget extends fabric.Image {
+const Widget = require('./Widget');
+
+class ImageWidget extends mix(fabric.Image).with(Widget) {
   constructor(render, data) {
+    super(render, data);
     this.type = 'image';
 
     if(data.value) this.setVarible(data.value);
@@ -8,16 +11,8 @@ class ImageWidget extends fabric.Image {
   getJSON() {
     return {
       data: {
-        id: this.id,
-        type: "image",
+        ...this.getBasicData(),
         value: this.varible || '',
-        x: Math.round(this.view.left),
-        y: Math.round(this.view.top),
-        w: Math.round(this.view.width),
-        h: Math.round(this.view.height),
-        angle: Math.round(360-this.view.angle),
-        // border_color: obj.borderColor,
-        // border_width: obj.borderWidth
       }
     }
   }

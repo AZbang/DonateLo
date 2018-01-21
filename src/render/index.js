@@ -16,38 +16,44 @@ class Render extends fabric.Canvas {
     this.height = 300;
     this.scale = 1;
 
-    this.setWidth(this.coverWidth);
-    this.setHeight(this.coverHeight);
-
     this.coverImage = new CoverImage();
+    this.setWidth(this.coverImage.coverWidth);
+    this.setHeight(this.coverImage.coverHeight);
     this.add(this.coverImage);
 
     this.widgets = [];
     this.varibles = {};
+  }
+  resizeToWidth() {
+    let scale = this.render.width/this.coverWidth;
+    let container = document.getElementsByClassName('canvas-container')[0];
+    container.style.transform = 'scale(' + scale + ')';
+    container.style.transformOrigin = '0 0';
+    document.getElementById('cover-control').style.height = this.coverHeight*scale + 'px';
   }
   getValueFromVarible(id) {
     return this.varibles[id] || '';
   }
   setVaribles(varibles) {
     this.varibles = varibles;
-    this.widgets.forEach((w) => {
-      if(w.type === 'text') w.setValue(w.value);
-      else w.setVarible(w.varible);
+    this.widgets.forEach((widget) => {
+      if(widget.type === 'text') widget.setValue(widget.value);
+      else widget.setVarible(widget.varible);
     });
   }
 
   addWidget(type, data={}, res={}) {
     let widget = new WIDGETS[type](this, data, res);
     this.widgets.push(widget);
-    this.add(widget.view);
+    this.add(widget);
     this.renderAll();
 
     return widget;
   }
   removeWidget(id) {
-    this.widgets.forEach((w, i) => {
-      if(w.id == id) {
-        this.remove(w.view);
+    this.widgets.forEach((widget, i) => {
+      if(widget.id == id) {
+        this.remove(widget);
         this.widgets.splice(i, 1);
       }
     });
@@ -57,7 +63,7 @@ class Render extends fabric.Canvas {
     let views = [];
 
     this.widgets.forEach((i) => {
-      let data = i.getJSON();
+      let data = i.getData();
       resources = {...resources, ...data.images};
       views.push(data.data);
     });

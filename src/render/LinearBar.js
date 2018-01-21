@@ -2,7 +2,7 @@ const Widget = require('./Widget');
 
 class LinearBar extends mix(fabric.Group).with(Widget) {
   constructor(render, data, res) {
-    super(render, data, res);
+    super(render, data);
     this.type = 'linear';
 
     this.progressImage = new fabric.Image();
@@ -31,9 +31,7 @@ class LinearBar extends mix(fabric.Group).with(Widget) {
         value: this.varible || '',
         max_value: this.maxValue,
         stand_color: this.standColor,
-        bar_color: this.progressColor,
-        border_size: this.borderSize,
-        border_color: this.borderColor
+        bar_color: this.progressColor
       }
     }
   }
@@ -98,22 +96,6 @@ class LinearBar extends mix(fabric.Group).with(Widget) {
     this.standColor = color;
     this.standImage.filters[0] = new fabric.Image.filters.Tint({color});
     this.standImage.applyFilters(() => this.render.renderAll());
-  }
-  setBorderColor(color) {
-    this.setBorder(this.borderSize, color);
-  }
-  setBorderWidth(size) {
-    this.setBorder(size, this.borderColor);
-  }
-  setBorder(size, color) {
-    this.borderSize = size;
-    this.borderColor = color;
-
-    this.set({
-      stroke: color,
-      strokeWidth: size
-    });
-    this.render.renderAll();
   }
 }
 
