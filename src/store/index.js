@@ -1,3 +1,6 @@
+const helper = require('../helper');
+const Render = require('../render');
+
 module.exports = {
   state: {
     loading: true,
@@ -5,11 +8,15 @@ module.exports = {
     viewName: 'GETTING_STARTED',
     vkData: helper.parseLocationParams(),
 
-    views: [],
     services: [],
     resources: {},
     varibles: [],
     activeService: null,
+
+    isCoverExist: false,
+    isCoverEditable: false, 
+    render: new Render(),
+    editableObject: null
   },
   getters: require('./getters'),
   mutations: require('./mutations'),

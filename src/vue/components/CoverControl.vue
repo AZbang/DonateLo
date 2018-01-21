@@ -1,6 +1,6 @@
 <template>
   <div id="cover-control">
-    <render v-show="isCoverExist"></render>
+    <div v-html="canvas" v-show="isCoverExist" style="height: inherit;"></div>
 
     <div class="cover-uploader-btn" v-show="isCoverExist">
       <upload-image @upload="setCover"></upload-image>
@@ -22,15 +22,34 @@
     components: {
       UploadImage
     },
+    data() {
+      return {
+        width: 1000,
+        height: 300
+      }
+    }
     computed: {
       isCoverExist() {
-        return this.$store.state.render.isCoverExist;
+        return this.$store.state.isCoverExist;
+      },
+      coverImage() {
+        return this.$store.state.coverImage;
+      },
+      render() {
+        return this.$store.state.render;
       }
     },
     methods: {
-      setCover(src) {
-        this.$store.commit('setCover', src);
+      setCover(img) {
+        this.$store.commit('setCover', img);
         this.$store.commit('setCoverEditable', true);
+      },
+      resizeToWidth() {
+        let scale = this.width/this.coverImage.coverWidth;
+        let container = document.getElementsByClassName('canvas-container')[0];
+        this.canvas.style.transform = 'scale(' + scale + ')';
+        this.canvas.style.transformOrigin = '0 0';
+        this.canvas.parentNode.style.height = this.coverImage.coverHeight*scale + 'px';
       }
     }
   }

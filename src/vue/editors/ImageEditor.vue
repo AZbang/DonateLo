@@ -3,19 +3,19 @@
     <el-row :gutter="10">
       <el-col :span="5">
         <p class="text">X:</p>
-        <el-input-number :value="Math.round(widget.view.left)" @change="setX"></el-input-number>
+        <el-input-number :value="Math.round(widget.left)" @change="setX"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Y:</p>
-        <el-input-number :value="Math.round(widget.view.top)" @change="setY"></el-input-number>
+        <el-input-number :value="Math.round(widget.top)" @change="setY"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Ширина:</p>
-        <el-input-number :value="Math.round(widget.view.width)" @change="setW"></el-input-number>
+        <el-input-number :value="Math.round(widget.width)" @change="setW"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Высота:</p>
-        <el-input-number :value="Math.round(widget.view.height)" @change="setH"></el-input-number>
+        <el-input-number :value="Math.round(widget.height)" @change="setH"></el-input-number>
       </el-col>
     </el-row>
     <el-row :gutter="10">
@@ -42,13 +42,13 @@
   module.exports = {
     computed: {
       widget() {
-         return this.$store.state.render.editableObject;
+         return this.$store.state.editableObject;
       },
       varibles() {
-        return this.$store.state.db.varibles;
+        return this.$store.state.varibles;
       },
       angle() {
-        let deg = Math.abs(Math.round(360-360-this.widget.view.angle));
+        let deg = Math.abs(Math.round(360-360-this.widget.angle));
         if(deg > 360) return Math.abs(360-deg);
         else return deg;
       }

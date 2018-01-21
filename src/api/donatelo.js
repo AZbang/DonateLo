@@ -7,10 +7,10 @@ const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 module.exports = {
   get apiUrl() {
     return DONATELO_API;
-  }
+  },
 
   // Возращает bool проверку на существование группы в базе донателло
-  async getGroupExist(groupID) {
+  async isGroupExist(groupID) {
     let resp = await axios.post(DONATELO_API + '/group_exist', {
       group_id: groupID
     });
@@ -38,7 +38,7 @@ module.exports = {
   // Получает объект данных для обложки группы
   async getViews(groupID) {
     let resp = await axios.post(DONATELO_API + '/get_views', {
-      group_id: groupID;
+      group_id: groupID
     });
     // Загружаем ресурсы в <img>
     let data = resp.data.result;

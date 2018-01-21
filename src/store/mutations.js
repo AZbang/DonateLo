@@ -1,6 +1,16 @@
 module.exports = {
+  setView(state, view) {
+    state.viewName = view;
+  },
+
+  setLoading(state, isLoading) {
+    state.loading = isLoading;
+  },
   setVaribles(state, vars) {
     state.varibles = vars;
+    state.widgets.forEach((widget) => {
+      widget.setValue(widget.value);
+    });
   },
   setViews(state, views) {
     state.views = views;

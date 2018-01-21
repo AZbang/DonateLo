@@ -6,19 +6,17 @@
   module.exports = {
     computed: {
       view() {
-        return this.$store.state.views.currentView;
+        return this.$store.state.getters.view;
       },
       loading() {
         return this.$store.state.loading;
       }
     },
     mounted() {
-      // Похоже ВК не оставляет мне выбора... Неееееет.
+      this.$store.dispatch('computedView');
       setInterval(() => {
         VK.External.resizeWindow(1000, document.body.clientHeight+50);
       }, 100);
-
-      this.$store.dispatch('computedView');
     }
   }
 </script>

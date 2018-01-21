@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  const utils = require('../../api/utils');
+
   module.exports = {
     methods: {
       uploadImage(e) {
@@ -17,7 +19,10 @@
 
         if(isFormat && isLt2M) {
           let reader = new FileReader();
-          reader.onload = (e) => this.$emit('upload', e.target.result);
+          reader.onload = async (e) => {
+            let img = await utils.loadResource(e.target.result);
+            this.$emit('upload', img);
+          }
           reader.readAsDataURL(files[0]);
         }
       }

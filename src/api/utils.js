@@ -10,7 +10,8 @@ module.exports = {
       img.src = url;
       img.id = id;
     })
-  }
+  },
+  
   // Генерируем из объекта ресурсов {id: 'url', ...} объект {id: <img src='url'>, ...}
   loadResources(res) {
     // Список промисов

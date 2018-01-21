@@ -26,7 +26,7 @@
     },
     methods: {
       updateToken() {
-        this.$store.dispatch('callApi', {method: 'editToken', token: this.token});
+        this.$store.dispatch('editToken', this.token);
       }
     }
   }
