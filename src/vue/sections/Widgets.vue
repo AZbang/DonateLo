@@ -15,11 +15,10 @@
 </template>
 
 <script>
-  const WIDGETS = require('./widgets.json');
   module.exports = {
-    computed: {
-      widgets() {
-        return WIDGETS;
+    data() {
+      return {
+        widgets: require('../../lang/widgets.json')
       }
     },
     methods: {

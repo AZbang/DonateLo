@@ -1,5 +1,4 @@
 const helper = require('../helper');
-const Render = require('../render');
 
 module.exports = {
   state: {
@@ -9,15 +8,9 @@ module.exports = {
     vkData: helper.parseLocationParams(),
 
     services: [],
-    resources: {},
-    varibles: [],
     activeService: null,
-
-    isCoverExist: false,
-    isCoverEditable: false, 
-    render: new Render(),
-    editableObject: null
   },
+  plugins: [require('./render')],
   getters: require('./getters'),
   mutations: require('./mutations'),
   actions: require('./actions')

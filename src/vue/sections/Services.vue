@@ -24,16 +24,13 @@
     },
     computed: {
       services() {
-        return this.$store.state.db.services;
-      },
+        return this.$store.state.services;
+      }
     },
     methods: {
       selectService(id) {
-        this.$store.commit('setService', id);
+        this.$store.commit('setActiveService', id);
         this.$store.commit('setSection', 'SERVICE_EDITOR');
-      },
-      updateGroup() {
-        this.$store.dispatch('callApi', {method: 'updateGroup'});
       }
     }
   }

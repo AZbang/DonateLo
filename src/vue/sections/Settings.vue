@@ -31,19 +31,3 @@
     }
   }
 </script>
-
-<style scoped>
-a.fixed-btns {
-  position: fixed;
-  bottom: 20px;
-  z-index: 100000;
-  right: 20px;
-  width: 60px;
-  background: #6e7bab;
-  height: 60px;
-}
-a.fixed-btns i {
-  line-height: 62px;
-  font-size: 35px;
-}
-</style>

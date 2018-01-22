@@ -1,7 +1,7 @@
 const Widget = require('./Widget');
 
 class RadialBar extends mix(fabric.Group).with(Widget) {
-  constructor(render, data, res) {
+  constructor(render, data) {
     super(render, data);
     this.type = 'radial';
 
@@ -10,40 +10,38 @@ class RadialBar extends mix(fabric.Group).with(Widget) {
     this.progressImage.setOriginToCenter();
     this.add([this.standImage, this.progressImage]);
 
-    if(data.value) this.setVarible(data.value);
-    else this.setValue(25);
-
-    this.setStartAngle(-90);
-    this.setMaxValue(data.max_value || 100);
-
-    this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.bar_color || '#ded2f7');
-
-    this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
-    this.setStandColor(data.stand_color || '#fff');
-
-    this.setBorder(data.border_size || 0, data.border_color || '#fff');
     this.setControlsVisibility({
        mt: false,
        mb: false,
        ml: false,
        mr: false
     });
+    this.updateParams(data);
+  }
+  updateParams(data) {
+    this.updateBasicParams(data);
+
+    if(data.value) this.setVarible(data.value);
+    else this.setValue(25);
+    this.setStartAngle(-90);
+    this.setMaxValue(data.max_value || 100);
+    this.setProgressImage(this.resources[data.progress_image] || this.resources.WHITE);
+    this.setStandImage(this.resources[data.stand_image] || this.resources.WHITE);
+
+    this.setBorder(data.border_size || 0, data.border_color || '#fff');
+    this.setProgressColor(data.bar_color || '#ded2f7');
+    this.setStandColor(data.stand_color || '#fff');
   }
   getData() {
     return {
-      images: {
-        [this.id + ':stand']: this.standImage._element.src,
-        [this.id + ':bar']: this.progressImage._element.src
-      },
       data: {
         ...this.getBasicData(),
         value: this.varible || '',
-        max_value: +this.maxValue + 0.0000001,
+        max_value: this.maxValue,
+        stand_color: this.standColor,
+        bar_color: this.progressColor,
         start_angle: 0,
         direction: 0,
-        stand_color: this.standColor,
-        bar_color: this.progressColor
       }
     }
   }

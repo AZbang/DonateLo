@@ -16,7 +16,7 @@
     },
     computed: {
       widget() {
-        return this.$store.state.render.editableObject;
+        return this.$store.state.editableObject;
       },
       viewEditor() {
         return EDITORS[this.widget.type];
@@ -24,24 +24,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .editor-wrap {
-    position: relative;
-  }
-  .btns-wrap {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1000;
-  }
-  a {
-    margin-left: 10px;
-    width: 60px;
-    height: 60px;
-  }
-  a i {
-    line-height: 62px;
-    font-size: 35px;
-  }
-</style>

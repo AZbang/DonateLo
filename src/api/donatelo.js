@@ -40,11 +40,7 @@ module.exports = {
     let resp = await axios.post(DONATELO_API + '/get_views', {
       group_id: groupID
     });
-    // Загружаем ресурсы в <img>
-    let data = resp.data.result;
-    data.resources = await utils.loadResources(data.resources);
-
-    return data;
+    return resp.data.result;
   },
 
   // Обновляет данные обложки группы

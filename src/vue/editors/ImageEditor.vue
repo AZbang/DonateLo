@@ -3,29 +3,29 @@
     <el-row :gutter="10">
       <el-col :span="5">
         <p class="text">X:</p>
-        <el-input-number :value="Math.round(widget.left)" @change="setX"></el-input-number>
+        <el-input-number :value="Math.round(widget.left)" @change="setProp('x', $event)"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Y:</p>
-        <el-input-number :value="Math.round(widget.top)" @change="setY"></el-input-number>
+        <el-input-number :value="Math.round(widget.top)" @change="setProp('y', $event)"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Ширина:</p>
-        <el-input-number :value="Math.round(widget.width)" @change="setW"></el-input-number>
+        <el-input-number :value="Math.round(widget.width)" @change="setProp('width', $event)"></el-input-number>
       </el-col>
       <el-col :span="5">
         <p class="text">Высота:</p>
-        <el-input-number :value="Math.round(widget.height)" @change="setH"></el-input-number>
+        <el-input-number :value="Math.round(widget.height)" @change="setProp('height', $event)"></el-input-number>
       </el-col>
     </el-row>
     <el-row :gutter="10">
       <el-col :span="5">
         <p class="text">Угол:</p>
-        <el-input-number :value="angle" @change="setAngle"></el-input-number>
+        <el-input-number :value="angle" @change="setProp('angle', $event)"></el-input-number>
       </el-col>
       <el-col :span="15">
         <p class="text">Значение:</p>
-        <el-select style="width: 100%;" v-model="widget.varible" @change="setVarible" placeholder="Выберите переменную">
+        <el-select style="width: 100%;" v-model="widget.varible" @change="setProp('value', $event)" placeholder="Выберите переменную">
           <el-option
             v-for="(value, key) in varibles"
             :key="key"
@@ -54,23 +54,8 @@
       }
     },
     methods: {
-      setVarible(v) {
-        this.widget.setVarible(v);
-      },
-      setX(v) {
-        this.widget.setX(v);
-      },
-      setY(v) {
-        this.widget.setY(v);
-      },
-      setW(v) {
-        this.widget.setWidth(v);
-      },
-      setH(v) {
-        this.widget.setHeight(v);
-      },
-      setAngle(v) {
-        this.widget.setAngle(v);
+      setProp(prop, v) {
+        this.$store.commit('setWidgetProp')
       }
     }
   }

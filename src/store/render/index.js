@@ -1,10 +1,15 @@
-let canvas = document.createElement('canvas');
-let render = new fabric.Canvas('canvas');
-let coverImage = new CoverImage();
-render.setWidth(coverImage.coverWidth);
-render.setHeight(coverImage.coverHeight);
-render.add(coverImage);
-
 module.exports = {
-  render, coverImage
+  states: {
+    widgets: [].
+    resources: {},
+    varibles: [],
+
+    cover: null,
+    isCoverExist: false,
+    isCoverEditable: false,
+    editableWidget: null
+  },
+  mutations: require('./mutations'),
+  getters: require('./getters'),
+  actions: require('./actions'),
 }

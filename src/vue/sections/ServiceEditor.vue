@@ -24,7 +24,7 @@
   module.exports = {
     computed: {
       service() {
-        return this.$store.state.db.currentService;
+        return this.$store.state.activeService;
       }
     },
     methods: {
@@ -35,11 +35,8 @@
             for(let input in this.service.inputs) {
                form[input] = this.service.inputs[input].value;
             }
-            this.$store.dispatch('callApi', {
-              method: 'updateService',
-              id: this.service.id, form
-            });
-          } else this.$store.dispatch('showLog', 'NOT_VALID_INPUT');
+            this.$store.dispatch('updateService');
+          } else this.$store.dispatch('showMessage', 'NOT_VALID_INPUT');
         });
       },
       closeService() {

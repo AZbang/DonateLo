@@ -32,7 +32,6 @@ class CoverImage extends fabric.Image {
     this.setElement(cover);
     this.setWidth(this.coverWidth);
     this.setHeight(this.coverHeight);
-    this.render.resizeToWidth();
     this.render.renderAll();
   }
 }

@@ -7,28 +7,13 @@ module.exports = {
     if(msg.isError) this._vm.$message.error(msg[getters.lang]);
     else this._vm.$message.success(msg[getters.lang]);
   },
-
+  
   async createGroup({dispatch, getters}, token) {
     commit('setLoading', true);
     await api.createGroup(getters.groupID, token);
     commit('setView', 'ADMIN');
     commit('setLoading', false);
     dispatch('showMessage', 'GROUP_CREATED');
-  },
-
-  async loadGroup({commit, getters, dispatch}) {
-    commit('setLoading', true);
-
-    let data = await api.getViews(getters.groupID);
-    let varibles = await api.getVaribles(getters.groupID);
-    let services = await api.getServices(getters.groupID);
-
-    commit('setLoading', false);
-    commit('setResources', data.resources);
-    commit('setViews', data.views);
-    commit('setVaribles', varibles);
-    commit('setServices', services);
-    dispatch('showMessage', 'GROUP_LOADED');
   },
 
   async computedView({state, commit, getters}) {
@@ -44,9 +29,29 @@ module.exports = {
     commit('setLoading', false);
   },
 
+  async loadGroup({commit, getters, dispatch}) {
+    commit('setLoading', true);
+
+    let data = await api.getViews(getters.groupID);
+    let varibles = await api.getVaribles(getters.groupID);
+    let services = await api.getServices(getters.groupID);
+    let res = await dispatch('loadResources', data.resources);
+
+    commit('addWidgets', data.views);
+    commit('addResources', res);
+    commit('setVaribles', varibles);
+    commit('setServices', services);
+    commit('setLoading', false);
+
+    dispatch('showMessage', 'GROUP_LOADED');
+  },
+
   async updateViews({state, getters, dispatch}, data) {
     commit('setLoading', true);
-    await api.updateViews(getters.groupID, data);
+
+    await api.updateViews(getters.groupID, {
+      views: state.widgets, resources: getters.resourcesData
+    });
     commit('setLoading', false);
     dispatch('showMessage', 'VIEWS_UPDATED');
   },
