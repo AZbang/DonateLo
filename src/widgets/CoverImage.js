@@ -6,7 +6,7 @@ class CoverImage extends fabric.Image {
     this.coverHeight = 400;
     this.set('selectable', false);
   }
-  loadTexture(img) {
+  generateCover(img) {
     let texture = new fabric.Image();
 
     texture.setElement(img);
@@ -24,7 +24,7 @@ class CoverImage extends fabric.Image {
     return coverSrc;
   }
   async setCover(img) {
-    let texture = await this.loadTexture(img);
+    let texture = await this.generateCover(img);
     let cover = new Image();
     cover.crossOrigin = 'anonymous';
     cover.src = texture;

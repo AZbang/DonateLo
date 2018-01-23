@@ -17,27 +17,23 @@ class Render extends fabric.Canvas {
     this.scale = 1;
 
     this.coverImage = new CoverImage();
-    this.setWidth(this.coverImage.coverWidth);
-    this.setHeight(this.coverImage.coverHeight);
     this.add(this.coverImage);
 
     this.widgets = [];
     this.resources = {};
     this.varibles = {};
+
+    this.resizeToWidth();
   }
   resizeToWidth() {
-    let scale = this.render.width/this.coverWidth;
+    this.setWidth(this.coverImage.coverWidth);
+    this.setHeight(this.coverImage.coverHeight);
+
+    let scale = this.render.width/this.coverImage.coverWidth;
     let container = document.getElementsByClassName('canvas-container')[0];
     container.style.transform = 'scale(' + scale + ')';
     container.style.transformOrigin = '0 0';
-    document.getElementById('cover-control').style.height = this.coverHeight*scale + 'px';
-  }
-  setCover(img) {
-    this.coverImage.setCover(img);
-    this.resizeToWidth();
-  }
-  getValueFromVarible(id) {
-    return this.varibles[id];
+    document.getElementById('cover-control').style.height = this.coverImage.coverHeight*scale + 'px';
   }
   updateVaribles(varibles) {
     this.varibles = varibles;
@@ -47,6 +43,7 @@ class Render extends fabric.Canvas {
   }
   updateResouces(res) {
     this.resources = res;
+    this.coverImage.setCover(this.resources.background);
     this.widgets.forEach((widget) => {
       widget.updateParams();
     });

@@ -9,38 +9,24 @@ class LinearBar extends mix(fabric.Group).with(Widget) {
     this.standImage = new fabric.Image();
     this.progressImage.setOriginToCenter();
     this.add([this.standImage, this.progressImage]);
-
-    if(data.value) this.setVarible(data.value);
-    else this.setValue(50);
-
-    this.setMaxValue(data.max_value || 100);
-    this.setStandImage(res[this.id + ':stand'] || 'assets/white_pixel.png');
-    this.setProgressImage(res[this.id + ':bar'] || 'assets/white_pixel.png');
-    this.setProgressColor(data.bar_color || '#ded2f7');
-    this.setStandColor(data.stand_color || '#fff');
-    this.setBorder(data.borderSize || 0, this.borderColor || '#fff');
   }
-  getJSON() {
-    return {
-      images: {
-        [this.id + ':stand']: this.standImage._element.src,
-        [this.id + ':bar']: this.progressImage._element.src
-      },
-      data: {
-        ...getBasicData(),
-        value: this.varible || '',
-        max_value: this.maxValue,
-        stand_color: this.standColor,
-        bar_color: this.progressColor
-      }
-    }
+
+  updateData(data) {
+    this.updateBasicParams(data);
+    this.setValue(data.value || this.value);
+    this.setStartAngle(data.start_angle || this.startAngle);
+    this.setMaxValue(data.max_value || this.maxValue);
+    this.setProgressImage(this.resources[this.id + ':bar'] || this.resources.WHITE);
+    this.setStandImage(this.resources[this.id + ':stand'] || this.resources.WHITE);
+    this.setProgressColor(data.bar_color || this.progressColor);
+    this.setStandColor(data.stand_color || this.standColor);
   }
-  setVarible(id) {
-    this.varible = id;
-    this.setValue(this.render.getValueFromVarible(id));
+  setValue(v) {
+    this.value = typeof v === Number ? v : this.render.varibles[v];
+    this.progressImage.width = this.width/this.maxValue*this.value;
+    this.render.renderAll();
   }
   setWidth(w) {
-    this.view.setWidth(w);
     this.progressImage.left = -this.width/2;
     this.progressImage.setWidth(this.width);
 
@@ -49,7 +35,6 @@ class LinearBar extends mix(fabric.Group).with(Widget) {
     this.setValue(this.value);
   }
   setHeight(h) {
-    this.view.setHeight(h);
     this.progressImage.top = -this.height/2;
     this.progressImage.setHeight(this.height);
 
@@ -75,11 +60,6 @@ class LinearBar extends mix(fabric.Group).with(Widget) {
     this.standImage.setElement(img);
     this.setSize(this.width, this.height);
     this.setStandColor(this.standColor);
-    this.render.renderAll();
-  }
-  setValue(val) {
-    this.value = val;
-    this.progressImage.width = this.width/this.maxValue*this.value;
     this.render.renderAll();
   }
   setMaxValue(max) {

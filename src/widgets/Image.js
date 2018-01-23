@@ -4,24 +4,15 @@ class ImageWidget extends mix(fabric.Image).with(Widget) {
   constructor(render, data) {
     super(render, data);
     this.type = 'image';
-
-    if(data.value) this.setVarible(data.value);
-    else this.setValue('assets/image.png');
+    this.value = null;
   }
-  getJSON() {
-    return {
-      data: {
-        ...this.getBasicData(),
-        value: this.varible || '',
-      }
-    }
-  }
-  setVarible(id) {
-    this.varible = id;
-    this.setValue(this.render.getValueFromVarible(id));
+  updateData(data) {
+    this.updateBasicData(data);
+    this.setValue(data.value || this.value);
   }
   setValue(img) {
-    this.view.setElement(img);
+    this.value = typeof v === Number ? v : this.render.varibles[v];
+    this.setElement(this.resources[this.value  this.resources.IMAGE);
     this.setWidth(img.width);
     this.setHeight(img.height);
   }

@@ -9,10 +9,10 @@ class Text extends mix(fabric.Text).with(Widget) {
     super(render, data);
 
     this.type = 'text';
-    this.setValue(data.value || 'Ваш текстовый элемент...');
-    this.setFontType(data.font || 'BEBAS');
-    this.setColor(data.color || '#fff');
-    this.setSize(data.size || 42);
+    this.value = 'Ваш текстовый элемент...';
+    this.fontType = 'BEBAS';
+    this.fill = '#fff';
+    this.fontSize = 42;
 
     this.setControlsVisibility({
       mt: false,
@@ -25,16 +25,12 @@ class Text extends mix(fabric.Text).with(Widget) {
       tr: false
     });
   }
-  getData() {
-    return {
-      data: {
-        ...this.getBasicData(),
-        value: this.value,
-        font: this.fontType,
-        size: this.fontSize,
-        color: this.fill
-      }
-    }
+  updateData(data) {
+    this.updateBasicData(data);
+    this.setValue(data.value || this.value);
+    this.setFontType(data.font || this.fontType);
+    this.setColor(data.color || this.fill);
+    this.setSize(data.size || this.fontSize);
   }
   setFontType(type) {
     this.fontType = type;
@@ -43,9 +39,8 @@ class Text extends mix(fabric.Text).with(Widget) {
   }
   setValue(val) {
     this.value = val;
-
     this.text = val.replace(/\{\{([a-zA-Z_]+)\}\}/g, (str, v) => {
-      return this.render.getValueFromVarible(v);
+      return this.render.varibles[v];
     });
     this.render.renderAll();
   }
