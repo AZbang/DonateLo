@@ -1,16 +1,17 @@
 module.exports = {
-  setCoverEditable(state, isEditable) {
-    state.isCoverEditable = isEditable;
-  }
-  setCover(state, img) {
-    state.cover = img;
-    state.isCoverExist = true;
-  },
   addWidgets(state, widgets) {
-    state.widgets.concat(widgets);
+    console.log('addWidgets');
+    state.widgets = state.widgets.concat(widgets);
   },
   addWidget(state, data) {
-    state.widgets.push(data);
+    state.widgets.push(Object.assign({
+      id: Date.now(),
+      angle: 0,
+      x: 200,
+      y: 200,
+      w: 200,
+      h: 200
+    }, data));
   },
   removeWidget(state, id) {
     state.widgets.forEach((w, i) => {
@@ -20,27 +21,25 @@ module.exports = {
 
   setVaribles(state, vars) {
     state.varibles = vars;
-    state.widgets.forEach((widget) => {
-      widget.setValue(widget.value);
-    });
   },
 
   setEditableWidget(state, id) {
     state.editableWidget = id;
   },
-  setWidgetProps(state, {id, props}) {
+  setWidgetProps(state, {id, data}) {
     state.widgets.forEach((w, i) => {
-      if(w.id === id) Vue.set(state.widgets, i, Object.assign(w, props));
+      if(w.id === id) Vue.set(state.widgets, i, Object.assign(w, data));
     });
   },
 
   addResources(state, res) {
-    this.resources = Object.assign({}, this.resources, res);
+    console.log('addResources');
+    state.resources = Object.assign({}, state.resources, res);
   },
-  addResource(state, {img) {
-    Vue.set(this.resources, )
+  addResource(state, {key, img}) {
+    Vue.set(state.resources, key, img);
   },
   removeResource(state, id) {
-    Vue.delete(this.resources, id);
+    Vue.delete(state.resources, id);
   }
 }

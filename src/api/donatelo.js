@@ -1,7 +1,6 @@
 // Библиотека для работы с Donatelo APP API
 
 const axios = require('axios');
-const utils = require('./utils');
 const DONATELO_API = 'https://app-donatelo.herokuapp.com';
 
 module.exports = {
@@ -37,15 +36,23 @@ module.exports = {
 
   // Получает объект данных для обложки группы
   async getViews(groupID) {
-    let resp = await axios.post(DONATELO_API + '/get_views', {
+    let resp = await axios.post(DONATELO_API + '/get_group', {
       group_id: groupID
     });
     return resp.data.result;
   },
 
+  // Получает объект сервисов
+  async getServices(groupID) {
+    let resp = await axios.post(DONATELO_API + '/get_group', {
+      group_id: groupID
+    });
+    return resp.data.result.services;
+  },
+
   // Обновляет данные обложки группы
   async updateViews(groupID, data) {
-    let resp = await axios.post(DONATELO_API + '/update_views', {
+    let resp = await axios.post(DONATELO_API + '/update_group', {
       group_id: groupID,
       ...data
     });
@@ -53,7 +60,7 @@ module.exports = {
   },
 
   // Загружает переменные сервисов
-  async loadVaribles(groupID) {
+  async getVaribles(groupID) {
     let resp = await axios.post(DONATELO_API + '/get_enviroment', {
       group_id: groupID
     });

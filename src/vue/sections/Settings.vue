@@ -12,7 +12,7 @@
     </el-row>
 
     <div class="container">
-      <img class="responsive-img" src="assets/token.png" alt="token">
+      <img class="responsive-img" src="assets/views/token.png" alt="token">
     </div>
   </div>
 </template>

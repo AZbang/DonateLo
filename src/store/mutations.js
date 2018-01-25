@@ -5,6 +5,9 @@ module.exports = {
   setView(state, view) {
     state.viewName = view;
   },
+  setSection(state, section) {
+    state.sectionName = section;
+  },
 
   setServices(state, services) {
     for(let key in services) {
@@ -15,7 +18,7 @@ module.exports = {
       state.services.push(services[key]);
     }
   },
-  activeService(state, id) {
+  setActiveService(state, id) {
     if(state.services[id])
       state.activeService = state.services[id];
   }

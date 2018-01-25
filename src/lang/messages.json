@@ -11,23 +11,23 @@
     "ru": "Некорректно заполнены поля",
     "isError": true
   },
-  "CORRECT_TOKEN": {
+  "TOKEN_UPDATED": {
     "ru": "Токен загружен.",
     "isError": false
   },
-  "CREATED_GROUP": {
+  "GROUP_CREATED": {
     "ru": "Спасибо! Группа зарегистрирована!",
     "isError": false
   },
-  "LOADED_GROUP": {
+  "GROUP_LOADED": {
     "ru": "Редактор загружен",
     "isError": false
   },
-  "UPDATED_GROUP": {
+  "VIEWS_UPDATED": {
     "ru": "Обложка сохранена",
     "isError": false
   },
-  "CREATED_SERVICE": {
+  "SERVICE_UPDATED": {
     "ru": "Сервис активирован",
     "isError": false
   },

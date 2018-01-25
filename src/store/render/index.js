@@ -1,11 +1,8 @@
 module.exports = {
-  states: {
-    widgets: [].
+  state: {
+    widgets: [],
     resources: {},
     varibles: [],
-
-    cover: null,
-    isCoverExist: false,
     isCoverEditable: false,
     editableWidget: null
   },

@@ -14,6 +14,7 @@ const revReplace = require('gulp-rev-replace');
 const sourcemaps = require('gulp-sourcemaps');
 const cssnano = require('gulp-cssnano');
 const clean = require('gulp-clean');
+
 const isDev = process.env.DEV !== 'production';
 
 var errorMessage = () => {
@@ -24,6 +25,7 @@ var errorMessage = () => {
 		}
 	})})
 }
+
 
 gulp.task('server', () => {
 	return connect.server({

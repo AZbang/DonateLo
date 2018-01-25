@@ -4,5 +4,8 @@ module.exports = {
     for(let key in state.resources) {
       res[key] = state.resources[key].src;
     }
+  },
+  isBackgrounExist(state) {
+    return !state.background;
   }
 }

@@ -3,14 +3,16 @@ const helper = require('../helper');
 module.exports = {
   state: {
     loading: true,
-    sectionName: 'WIDGET',
-    viewName: 'GETTING_STARTED',
+    sectionName: 'WIDGETS',
+    viewName: null,
     vkData: helper.parseLocationParams(),
 
     services: [],
     activeService: null,
   },
-  plugins: [require('./render')],
+  modules: {
+    render: require('./render/index')
+  },
   getters: require('./getters'),
   mutations: require('./mutations'),
   actions: require('./actions')

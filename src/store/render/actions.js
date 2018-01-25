@@ -1,30 +1,16 @@
-module.exports = {
-  // Генерируем img
-  loadResource(id, url) {
-    return new Promise((resolve, reject) => {
-      let img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = url;
-      img.id = id;
-    })
-  },
+const helper = require('../../helper');
 
+module.exports = {
   // Генерируем из объекта ресурсов {id: 'url', ...} объект {id: <img src='url'>, ...}
-  loadResources(res) {
+  loadResources({commit}, res) {
     // Список промисов
     let imgs = [];
-    for(let key in res) {
-      imgs.push(loadResource(key, res[key]));
-    }
+    for(let key in res) imgs.push(helper.loadImage(key, res[key]));
 
-    return Promise.all(imgs)
-      .then((imgs) => {
-        // Генерируем объек картинок
-        imgs.forEach((img) => {
-          res[img.id] = img;
-        })
-        return res;
-      })
+    // Ждем загрузки всех картинок и генерируем объект ресурсов
+    return Promise.all(imgs).then((imgs) => {
+      imgs.forEach((img) => res[img.id] = img);
+      commit('addResources', res);
+    })
   }
 }

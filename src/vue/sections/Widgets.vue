@@ -23,7 +23,7 @@
     },
     methods: {
       addWidget(type) {
-        this.$store.dispatch('addWidget', {type});
+        this.$store.commit('addWidget', {type});
       }
     }
   }

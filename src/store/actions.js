@@ -3,11 +3,12 @@ const api = require('../api/donatelo');
 
 module.exports = {
   showMessage({state, getters}, log) {
+    console.log(log);
     let msg = MESSAGES[log];
     if(msg.isError) this._vm.$message.error(msg[getters.lang]);
     else this._vm.$message.success(msg[getters.lang]);
   },
-  
+
   async createGroup({dispatch, getters}, token) {
     commit('setLoading', true);
     await api.createGroup(getters.groupID, token);
@@ -29,21 +30,27 @@ module.exports = {
     commit('setLoading', false);
   },
 
-  async loadGroup({commit, getters, dispatch}) {
+  async loadGroup({state, commit, getters, dispatch}) {
     commit('setLoading', true);
 
     let data = await api.getViews(getters.groupID);
     let varibles = await api.getVaribles(getters.groupID);
     let services = await api.getServices(getters.groupID);
-    let res = await dispatch('loadResources', data.resources);
+
+    await dispatch('loadResources', Object.assign(data.resources, {
+      WHITE: 'assets/widgets/white_pixel.png',
+      IMAGE: 'assets/widgets/image.png'
+    }));
 
     commit('addWidgets', data.views);
-    commit('addResources', res);
     commit('setVaribles', varibles);
     commit('setServices', services);
     commit('setLoading', false);
 
     dispatch('showMessage', 'GROUP_LOADED');
+
+    console.log("STATE", state);
+
   },
 
   async updateViews({state, getters, dispatch}, data) {
@@ -70,8 +77,8 @@ module.exports = {
     dispatch('showMessage', 'TOKEN_UPDATED');
   },
 
-  async loadVaribles({state, getters}) {
-    let services = await api.getVaribles(getters.groupID);
-    commit('setVaribles', varibles);
+  async loadVaribles({commit, getters}) {
+    let vars = await api.getVaribles(getters.groupID);
+    commit('setVaribles', vars);
   }
 }

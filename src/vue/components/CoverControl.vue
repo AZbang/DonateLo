@@ -1,13 +1,13 @@
 <template>
   <div id="cover-control">
-    <render v-show="isCoverExist"></render>
+    <render v-show="isBackgrounExist"></render>
 
-    <div class="cover-uploader-btn" v-show="isCoverExist">
+    <div class="cover-uploader-btn" v-show="isBackgrounExist">
       <upload-image @upload="setCover"></upload-image>
       <el-button type="info" icon="el-icon-edit"></el-button>
     </div>
 
-    <div class="cover-uploader-area" v-show="!isCoverExist">
+    <div class="cover-uploader-area" v-show="!isBackgrounExist">
       <upload-image @upload="setCover"></upload-image>
       <i class="el-icon-picture cover-uploader-area__icon"></i>
       <p class="cover-uploader-area__text">Загрузите обложку для редактирования</p>
@@ -17,6 +17,7 @@
 
 <script>
   const UploadImage = require('./UploadImage.vue');
+  const Render = require('./Render.vue');
 
   module.exports = {
     components: {
@@ -24,8 +25,8 @@
       Render
     },
     computed: {
-      isCoverExist() {
-        return this.$store.state.isCoverExist;
+      isBackgrounExist() {
+        return this.$store.getters.isBackgrounExist;
       }
     },
     methods: {

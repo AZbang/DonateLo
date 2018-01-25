@@ -1,36 +1,32 @@
 <template>
   <div style="height: inherit;">
-    <canvas id="playground"></canvas>
+    <div ref="wrapRender" :varibles="varibles" :widgets="widgets" :resources="resources"></div>
   </div>
 </template>
 
 <script>
-  const { mapState } = require('vuex');
   const Render = require('../../render');
 
   module.exports = {
-    computed: mapState([
-      'cover',
-      'varibles',
-      'widgets',
-      'resources'
-    ]),
-    watch() {
-      cover(img) {
-        this.render.setCover(img);
+    data() {
+      return {
+        render: new Render('playground')
       }
-      varibles(vars) {
-        this.render.updateVaribles(vars);
-      }
-      widgets(widgets) {
-        this.render.updateWidgets(widgets);
-      }
-      resources(res) {
-        this.render.updateResouces(res);
+    },
+    computed: {
+      widgets() {
+        return this.render.updateWidgets(this.$store.state.render.widgets);
+      },
+      // varibles() {
+      //   return this.render.updateVaribles(this.$store.state.render.varibles);
+      // },
+      resources() {
+        return this.render.updateResouces(this.$store.state.render.resources);
       }
     },
     mounted() {
-      this.render = new Render('playground');
+      console.log(this.$refs);
+      this.$refs.wrapRender.appendChild(this.render.wrapperEl);
     }
   }
 </script>

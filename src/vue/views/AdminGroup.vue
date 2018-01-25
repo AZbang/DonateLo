@@ -40,6 +40,7 @@
     },
     mounted() {
       this.$store.dispatch('loadGroup');
+
       setInterval(() => {
         this.$store.dispatch('loadVaribles');
       }, 1000);
