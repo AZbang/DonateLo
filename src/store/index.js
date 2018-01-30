@@ -1,19 +1,32 @@
 const helper = require('../helper');
 
 module.exports = {
+  strict: process.env.NODE_ENV !== 'production',
+
   state: {
     loading: true,
-    sectionName: 'WIDGETS',
-    viewName: null,
+    section: 'WIDGETS',
+    view: null,
     vkData: helper.parseLocationParams(),
 
+    widgets: [],
+    resources: {},
+    varibles: [],
     services: [],
     activeService: null,
+    isCoverEditable: false,
+    editableWidget: null
   },
-  modules: {
-    render: require('./render/index')
+  getters: {
+    ...require('./basic/getters'),
+    ...require('./render/getters')
   },
-  getters: require('./getters'),
-  mutations: require('./mutations'),
-  actions: require('./actions')
+  mutations: {
+    ...require('./basic/mutations'),
+    ...require('./render/mutations')
+  },
+  actions: {
+    ...require('./basic/actions'),
+    ...require('./render/actions')
+  }
 }

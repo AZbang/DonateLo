@@ -1,6 +1,5 @@
 module.exports = {
   addWidgets(state, widgets) {
-    console.log('addWidgets');
     state.widgets = state.widgets.concat(widgets);
   },
   addWidget(state, data) {
@@ -33,7 +32,6 @@ module.exports = {
   },
 
   addResources(state, res) {
-    console.log('addResources');
     state.resources = Object.assign({}, state.resources, res);
   },
   addResource(state, {key, img}) {
